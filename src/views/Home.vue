@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="homeWrap">
     <NavBar logged-in/>
     <div class="homeBg">
       <div class="homeSection">
@@ -13,14 +13,16 @@
       </div>
       <img src="../assets/hero.svg" alt="Training">
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import NavBar from "../components/NavBar";
+import Footer from "@/components/Footer";
 export default {
   name: "Home",
-  components: {NavBar}
+  components: {Footer, NavBar}
 }
 </script>
 
@@ -34,7 +36,6 @@ export default {
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
-  height:70vh;
 }
 h1{
   font-size: 48px;
@@ -60,5 +61,10 @@ img{
   width: 35vw;
   -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
   filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.4));
+}
+.homeWrap{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 </style>
