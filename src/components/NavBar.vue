@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <h1>Fithub</h1>
+    <router-link to="/"><h1>Fithub</h1></router-link>
     <div class="butContainer">
-      <button v-show="loggedIn" class="rgtbtn">Registrarse</button>
-      <button v-show="loggedIn" class="loginbtn">Ingresar</button>
+      <router-link to="/register"><button v-show="loggedIn" class="rgtbtn">Registrarse</button></router-link>
+      <router-link to="/login"><button v-show="loggedIn" class="loginbtn">Ingresar</button></router-link>
     </div>
   </nav>
 </template>
@@ -44,6 +44,7 @@ h1{
   font-size: 24px;
   font-weight: 400;
   text-decoration: none;
+  outline: none;
 }
 
 .rgtbtn:hover {
@@ -62,11 +63,16 @@ h1{
   font-size: 24px;
   font-weight: 400;
   text-decoration: none;
+  outline: none;
 }
 
 .loginbtn:hover{
   transition: 0.3s ease-in-out;
   background-color: #0a2118;
+}
+
+a{
+  text-decoration: none;
 }
 
 </style>

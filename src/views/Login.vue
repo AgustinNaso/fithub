@@ -1,0 +1,52 @@
+<template>
+  <div class="outer">
+    <NavBar></NavBar>
+    <div class="loginBg">
+      <h1>Ingresar</h1>
+      <form>
+        <Input type="text" name="email" label="Email"/>
+        <Input type="password" name="password" label="Contraseña"/>
+        <FormBtn text="Ingresar"/>
+        <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
+      </form>
+    </div>
+    <Footer/>
+  </div>
+</template>
+
+<script>
+import Input from "../components/formComponents/Input";
+import FormBtn from "../components/formComponents/FormBtn";
+import AltLink from "../components/formComponents/AltLink";
+import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
+
+export default {
+  name: "Login",
+  components: {NavBar,Footer, FormBtn, Input,AltLink}
+}
+</script>
+
+<style scoped>
+.outer{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.loginBg{
+  padding: 100px;
+  flex:1;
+  background-color: #030b10;
+  display: flex;
+  color: #42b983;
+  align-items: center;
+  flex-direction: column;
+}
+form{
+  padding: 30px 35px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+</style>
