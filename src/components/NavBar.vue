@@ -25,9 +25,10 @@ nav{
   color: #42b983;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5vh 0 10vh;
+  padding: 10px 0 0 5vw;
 }
 h1{
+  height: 100%;
   font-family: "Spartan", sans-serif;
   font-size: 48px;
   font-weight: 700;
