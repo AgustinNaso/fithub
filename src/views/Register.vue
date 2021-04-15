@@ -34,6 +34,7 @@ export default {
 
 <style scoped>
 .outer{
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
