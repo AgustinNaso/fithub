@@ -22,7 +22,7 @@ import NavBar from "../components/NavBar";
 import Footer from "@/components/Footer";
 export default {
   name: "Home",
-  components: {Footer, NavBar}
+  components: { Footer, NavBar}
 }
 </script>
 
