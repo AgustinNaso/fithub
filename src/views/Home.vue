@@ -11,7 +11,6 @@
           <b>Entrenamiento de persona a persona, sin intermediario.</b>
         </p>
       </div>
-      <RoutineBlock excercise-name="Salto con Soga" reps="50"></RoutineBlock>
       <img src="../assets/hero.svg" alt="Training">
     </div>
     <Footer/>
@@ -21,10 +20,9 @@
 <script>
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import RoutineBlock from "../components/RoutineBlock";
 export default {
   name: "Home",
-  components: {RoutineBlock, Footer, NavBar}
+  components: {Footer, NavBar}
 }
 </script>
 
