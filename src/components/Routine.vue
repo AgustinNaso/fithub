@@ -1,11 +1,16 @@
 <template>
   <div class="routineBg">
-    <h3>Pecho Intenso</h3>
-    <p class="description">Una rutina perfecta para trabajar
-      el tren superior!</p>
+    <div class="routineHead">
+      <h3>{{title}}</h3>
+      <img class="shareBtn" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
+    </div>
+    <p class="description">{{description}}</p>
     <div class="ownerContainer">
       <div class="ownerImg" style="background-image:url('https://i.pinimg.com/originals/94/6e/82/946e829a135f68d7a041e3a83b445f55.jpg')"></div>
-      <p class="owner">Pedro Gonzalez</p>
+      <p class="owner">{{owner}}</p>
+    </div>
+    <div class="playBtn">
+      <div class="triangle"/>
     </div>
     <div class="ratingWrap">
       <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
@@ -40,9 +45,9 @@ export default {
   justify-content: flex-start;
 }
 h3{
-  margin: 18px 0 0 95px;
+  width: 80%;
+  flex: 1;
   text-align: left;
-  width: 100%;
   font-size: 32px;
   color: white;
   text-shadow: #030b10 3px 2px 7px;
@@ -82,12 +87,44 @@ h3{
 }
 
 .star{
-  width: 32px;
+  width: 40px;
   filter: drop-shadow(0.1rem 0.2rem 0.25rem rgba(0, 0, 0, 0.5));
 }
 .ratingWrap{
   display: flex;
   justify-content: space-evenly;
   width: 45%;
+}
+.playBtn{
+  border-radius: 50%;
+  height: 65px;
+  width: 65px;
+  background-color: rgba(255, 255, 255, 0.50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid white;
+}
+.triangle{
+  width: 0;
+  height: 0;
+  margin-left: 10px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 32px solid rgba(255, 255, 255, 0.80);
+}
+
+.routineHead{
+  margin: 24px 30px 0 20px;
+  display: flex;
+  width: 85%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.shareBtn{
+  margin-left: 12px;
+  width: 50px;
+
 }
 </style>

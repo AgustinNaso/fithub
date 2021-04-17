@@ -11,7 +11,7 @@
           <b>Entrenamiento de persona a persona, sin intermediario.</b>
         </p>
       </div>
-      <img src="../assets/hero.svg" alt="Training">
+      <img src="../assets/hero.svg" alt="Training"/>
     </div>
     <Footer/>
   </div>
@@ -22,7 +22,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 export default {
   name: "Home",
-  components: {Footer, NavBar}
+  components: { Footer, NavBar}
 }
 </script>
 
