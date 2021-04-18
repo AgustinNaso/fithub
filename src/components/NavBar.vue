@@ -5,7 +5,7 @@
       <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
       <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
     </div>
-    <ProfileNav :v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"></ProfileNav>
+    <ProfileNav v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"/>
   </nav>
 </template>
 
