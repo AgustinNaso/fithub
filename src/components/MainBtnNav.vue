@@ -1,5 +1,5 @@
 <template>
-  <button v-bind:class="{mainBtn:true, selected: selected}">{{ text }}</button>
+  <button :class="{mainBtn:true, selected: selected}">{{ text }}</button>
 </template>
 
 <script>

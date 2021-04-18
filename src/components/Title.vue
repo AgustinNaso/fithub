@@ -2,7 +2,7 @@
   <div class="titleContainer">
     <div class="createBox">
       <router-link :to="to" v-show="to"><img class="backArrow" src="../assets/chevron_left_grey.png" alt="backArrow"/></router-link>
-      <h1>{{ titleName }}</h1>
+      <h1 :class="{withArrow:to}">{{ titleName }}</h1>
     </div>
     <div class="underline"/>
   </div>
@@ -47,6 +47,9 @@ h1 {
   color: #42b983;
   font-weight: 700;
 }
+.withArrow{
+  margin:0;
+}
 
 .underline {
   padding-top: 0;
@@ -56,5 +59,6 @@ h1 {
   width: 30%;
   background-color: #707070;
 }
+
 
 </style>
