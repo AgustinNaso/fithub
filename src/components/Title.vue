@@ -1,7 +1,7 @@
 <template>
   <div class="titleContainer">
     <div class="createBox">
-      <img class="backArrow" src="https://cdn.discordapp.com/attachments/819676698919305216/832336576129662986/imageedit_7_8358263029.png" alt="backArrow"/>
+      <img class="backArrow" src="../assets/chevron_left_grey.png" alt="backArrow"/>
       <p>{{ titleName }}</p>
     </div>
     <div class="underline"/>
