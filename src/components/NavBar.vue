@@ -56,6 +56,7 @@ h1{
   font-weight: 400;
   text-decoration: none;
   outline: none;
+  cursor: pointer;
 }
 
 .rgtbtn:hover {
@@ -75,6 +76,7 @@ h1{
   font-weight: 400;
   text-decoration: none;
   outline: none;
+  cursor: pointer;
 }
 
 .loginbtn:hover{
