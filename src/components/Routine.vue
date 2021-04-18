@@ -6,7 +6,7 @@
     </div>
     <p class="description">{{description}}</p>
     <div class="ownerContainer">
-      <div class="ownerImg" style="background-image:url('https://i.pinimg.com/originals/94/6e/82/946e829a135f68d7a041e3a83b445f55.jpg')"></div>
+      <img class="ownerImg" :src="ownerImg" :alt="owner"/>
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playBtn">
@@ -72,9 +72,7 @@ h3{
 .ownerImg{
   height: 48px;
   width: 48px;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  object-fit:cover;
   border-radius: 50%;
   border: 2px solid white;
 }

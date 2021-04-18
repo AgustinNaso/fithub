@@ -1,16 +1,19 @@
 <template>
   <nav>
     <router-link to="/"><h1>Fithub</h1></router-link>
-    <div class="butContainer">
-      <router-link to="/register"><button v-show="loggedIn" class="rgtbtn">Registrarse</button></router-link>
-      <router-link to="/login"><button v-show="loggedIn" class="loginbtn">Ingresar</button></router-link>
+    <div class="butContainer" v-show="!loggedIn">
+      <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
+      <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
     </div>
+    <ProfileNav :v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"></ProfileNav>
   </nav>
 </template>
 
 <script>
+import ProfileNav from "@/components/ProfileNav";
 export default {
   name: "NavBar",
+  components: {ProfileNav},
   props: {
     loggedIn:Boolean
   }
@@ -25,7 +28,7 @@ nav{
   color: #42b983;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0 0 5vw;
+  padding: 10px 5vw 0 5vw;
 }
 h1{
   height: 100%;
