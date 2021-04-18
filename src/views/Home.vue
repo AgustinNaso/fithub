@@ -5,11 +5,15 @@
       <div class="homeSection">
         <h1>Entrena gratis, en cualquier lado.</h1>
         <p>
-          Con <b>Healthify</b> podes conectarte con otros xxxx de tu xxxx que
+          Con <b>FitHub</b> podes conectarte con otros xxxx de tu xxxx que
           no se que escribir aca! <br />
           <br />
           <b>Entrenamiento de persona a persona, sin intermediario.</b>
         </p>
+        <div class="butContainer">
+          <router-link to="/"><button class="explorebtn">Explorar Rutinas</button></router-link>
+          <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
+        </div>
       </div>
       <img src="../assets/hero.svg" alt="Training"/>
     </div>
@@ -47,14 +51,14 @@ h1{
   margin-left: 0;
   display: flex;
   flex-direction: column;
-  width: 35vw;
+  width: 40vw;
   align-items: center;
   justify-content: center;
 }
 p{
   font-size: 20px;
   color: #030b10;
-  margin-left: 80px;
+  margin:0 30px 0 40px;
   text-align: right;
 }
 img{
@@ -67,4 +71,53 @@ img{
   flex-direction: column;
   min-height: 100vh;
 }
+
+.rgtbtn{
+  color: #030b10;
+  margin-right: 10px;
+  text-align: center;
+  border: 4px solid #42b983;
+  padding: 8px 35px 8px 35px;
+  background-color: #42b983;
+  border-radius: 25px;
+  font-size: 26px;
+  font-weight: bold;
+  text-decoration: none;
+  outline: none;
+  transition: 0.3s ease-in-out;
+}
+
+.explorebtn {
+  color: #35a371;
+  margin-right: 10px;
+  text-align: center;
+  padding: 8px 35px 8px 35px;
+  background-color: inherit;
+  border: 4px solid #42b983;
+  border-radius: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  text-decoration: none;
+  outline: none;
+  transition: 0.3s ease-in-out;
+
+}
+
+.rgtbtn:hover {
+  transition: 0.3s ease-in-out;
+  background-color: #77c6a2;
+  border-color: #77c6a2;
+}
+
+.explorebtn:hover {
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
+}
+
+.butContainer {
+  margin-top: 30px;
+  align-self: flex-end;
+}
+
 </style>
