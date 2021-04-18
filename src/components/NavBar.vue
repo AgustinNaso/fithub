@@ -5,7 +5,7 @@
       <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
       <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
     </div>
-    <div class="navContainer">
+    <div class="navContainer" v-show="loggedIn">
       <MainBtnNav text="Explorar" :selected="selected === 1"/>
       <MainBtnNav text="Mis Rutinas" :selected="selected === 2"/>
       <MainBtnNav text="Crear Rutina" :selected="selected === 3"/>
