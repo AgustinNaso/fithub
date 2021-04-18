@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar logged-in :selected="3"/>
-    <Title title-name="Crear Rutina"></Title>
+    <Title title-name="Crear Rutina" to="/"/>
   </div>
 </template>
 

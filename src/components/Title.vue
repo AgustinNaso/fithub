@@ -1,8 +1,8 @@
 <template>
   <div class="titleContainer">
     <div class="createBox">
-      <img class="backArrow" src="../assets/chevron_left_grey.png" alt="backArrow"/>
-      <p>{{ titleName }}</p>
+      <router-link :to="to" v-show="to"><img class="backArrow" src="../assets/chevron_left_grey.png" alt="backArrow"/></router-link>
+      <h1>{{ titleName }}</h1>
     </div>
     <div class="underline"/>
   </div>
@@ -12,7 +12,8 @@
 export default {
   name: "Title",
   props: {
-    titleName:String
+    titleName:String,
+    to:String
   }
 }
 </script>
@@ -38,10 +39,10 @@ export default {
   height: 56px;
 }
 
-p {
+h1 {
+  margin-left: 55px;
   font-size: 35px;
   line-height: 1;
-  margin: 0;
   padding: 10px 0 10px 0;
   color: #42b983;
   font-weight: 700;
