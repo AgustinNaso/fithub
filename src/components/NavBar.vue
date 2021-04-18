@@ -5,17 +5,24 @@
       <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
       <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
     </div>
+    <div class="navContainer">
+      <MainBtnNav text="Explorar" :selected="selected === 1"/>
+      <MainBtnNav text="Mis Rutinas" :selected="selected === 2"/>
+      <MainBtnNav text="Crear Rutina" :selected="selected === 3"/>
+    </div>
     <ProfileNav v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"/>
   </nav>
 </template>
 
 <script>
 import ProfileNav from "@/components/ProfileNav";
+import MainBtnNav from "./MainBtnNav";
 export default {
   name: "NavBar",
-  components: {ProfileNav},
+  components: {MainBtnNav, ProfileNav},
   props: {
-    loggedIn:Boolean
+    loggedIn:Boolean,
+    selected:Number
   }
 }
 </script>
@@ -77,6 +84,11 @@ h1{
 
 a{
   text-decoration: none;
+}
+
+.navContainer {
+  height: 100%;
+  display: flex;
 }
 
 </style>

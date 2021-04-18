@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar/>
+    <NavBar logged-in :selected="3"/>
     <Title title-name="Crear Rutina"></Title>
   </div>
 </template>
