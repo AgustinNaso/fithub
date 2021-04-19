@@ -5,6 +5,7 @@ import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register";
 import CreateRoutine from "./views/CreateRoutine";
+import Main from "./views/Main";
 
 Vue.use(VueRouter)
 
@@ -25,9 +26,14 @@ const routes = [
         component: Register
     },
     {
-        path:"/createRoutine",
+        path: "/createRoutine",
         name: "createRoutine",
         component: CreateRoutine
+    },
+    {
+        path: "/main",
+        name:"main",
+        component: Main
     }
 ];
 

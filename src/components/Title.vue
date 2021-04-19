@@ -24,8 +24,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 80px;
   margin-top: 10px;
+  height: 80px;
 }
 
 .createBox {
@@ -37,6 +37,7 @@ export default {
 
 .backArrow {
   height: 56px;
+  margin-top: 11px;
 }
 
 h1 {
@@ -48,16 +49,15 @@ h1 {
   font-weight: 700;
 }
 .withArrow{
-  margin:0;
+  margin: 0;
 }
 
 .underline {
-  padding-top: 0;
   margin-top: 5px;
   margin-left: 50px;
   height: 5px;
-  width: 30%;
   background-color: #707070;
+  width: 500px
 }
 
 

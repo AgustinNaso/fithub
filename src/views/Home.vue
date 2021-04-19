@@ -11,7 +11,7 @@
           <b>Entrenamiento de persona a persona, sin intermediario.</b>
         </p>
         <div class="butContainer">
-          <router-link to="/"><button class="explorebtn">Explorar Rutinas</button></router-link>
+          <router-link to="/main"><button class="explorebtn">Explorar Rutinas</button></router-link>
           <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
         </div>
       </div>
@@ -100,6 +100,7 @@ img{
   text-decoration: none;
   outline: none;
   transition: 0.3s ease-in-out;
+  margin-bottom: 10px;
 
 }
 
