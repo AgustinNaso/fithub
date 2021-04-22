@@ -6,6 +6,7 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register";
 import CreateRoutine from "./views/CreateRoutine";
 import Main from "./views/Main";
+import UserProfile from "./views/UserProfile";
 
 Vue.use(VueRouter)
 
@@ -34,7 +35,13 @@ const routes = [
         path: "/main",
         name:"main",
         component: Main
+    },
+    {
+        path: "/userProfile",
+        name:"userProfile",
+        component: UserProfile
     }
+
 ];
 
 const router = new VueRouter({
