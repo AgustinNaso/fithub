@@ -15,7 +15,7 @@
           <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
         </div>
       </div>
-      <img src="../assets/hero.svg" alt="Training"/>
+      <router-link to="/userProfile"><img src="../assets/hero.svg" alt="Training"/></router-link>
     </div>
     <Footer/>
   </div>
