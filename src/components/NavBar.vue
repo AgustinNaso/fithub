@@ -1,28 +1,18 @@
 <template>
   <nav>
     <router-link to="/"><h1>Fithub</h1></router-link>
-    <div class="butContainer" v-show="!loggedIn">
-      <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
-      <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
+    <div class="butContainer">
+      <router-link to="/register"><button v-show="loggedIn" class="rgtbtn">Registrarse</button></router-link>
+      <router-link to="/login"><button v-show="loggedIn" class="loginbtn">Ingresar</button></router-link>
     </div>
-    <div class="navContainer" v-show="loggedIn">
-      <router-link to="/"><MainBtnNav text="Explorar" :selected="selected === 1"/></router-link>
-      <router-link to="/"><MainBtnNav text="Mis Rutinas" :selected="selected === 2"/></router-link>
-      <router-link to="/createRoutine"><MainBtnNav text="Crear Rutina" :selected="selected === 3"/></router-link>
-    </div>
-    <ProfileNav v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"/>
   </nav>
 </template>
 
 <script>
-import ProfileNav from "@/components/ProfileNav";
-import MainBtnNav from "./MainBtnNav";
 export default {
   name: "NavBar",
-  components: {MainBtnNav, ProfileNav},
   props: {
-    loggedIn:Boolean,
-    selected:Number
+    loggedIn:Boolean
   }
 }
 </script>
@@ -35,7 +25,7 @@ nav{
   color: #42b983;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 5vw 0 5vw;
+  padding: 10px 0 0 5vw;
 }
 h1{
   height: 100%;
@@ -56,7 +46,6 @@ h1{
   font-weight: 400;
   text-decoration: none;
   outline: none;
-  cursor: pointer;
 }
 
 .rgtbtn:hover {
@@ -76,7 +65,6 @@ h1{
   font-weight: 400;
   text-decoration: none;
   outline: none;
-  cursor: pointer;
 }
 
 .loginbtn:hover{
@@ -86,11 +74,6 @@ h1{
 
 a{
   text-decoration: none;
-}
-
-.navContainer {
-  height: 100%;
-  display: flex;
 }
 
 </style>
