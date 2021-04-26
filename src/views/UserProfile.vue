@@ -12,7 +12,7 @@
           <div class="infoUnderline"/>
         </div>
         <div class="userProf">
-          <img class="imgContainer" src = "../assets/logo.png" alt="user image">
+          <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
           <div class="nameContainer">John Doe</div>
         </div>
       </div>
@@ -108,9 +108,11 @@ export default {
   cursor: pointer;
   text-align: center;
   padding-top : 12px;
+  transition: 0.2s ease-in-out;
+
 }
 .editButton:hover{
-  background-color: #51cd94;
+  background-color: rgba(64, 193, 139, 0.4);
   transition: 0.2s ease-in-out;
 }
 
@@ -126,6 +128,8 @@ export default {
   cursor: pointer;
   text-align: center;
   padding-top: 12px;
+  transition: 0.2s ease-in-out;
+
 }
 .pwdButton:hover{
   background-color: #f7a6a6;
