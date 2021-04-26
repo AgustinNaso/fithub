@@ -45,7 +45,7 @@ export default {
 .infoUnderline{
   height: 2px;
   background-color: #707070;
-  width: 650px
+  width: 50vw;
 }
 
 .userContainer {
@@ -59,7 +59,7 @@ export default {
 .userProf {
   display: flex;
   flex-direction: column;
-  width: 30vw;
+  width: 27vw;
   height: 450px;
   align-items: center;
   background: linear-gradient(0, rgba(36, 56, 48, 0.53), rgba(46, 173, 120, 0.56));
@@ -98,15 +98,16 @@ export default {
 
 .editButton{
   width: 35%;
-  height: 50px;
-  border-radius: 12px;
-  border: 3px solid #0a2118;
+  height: 55px;
+  border-radius: 40px;
+  border: 3px solid #707070;
   background: transparent;
   font-size: 30px;
-  font-weight: 400;
-  color: #0a2118;
+  font-weight: 550;
+  color: #707070;
   cursor: pointer;
   text-align: center;
+  padding-top : 12px;
 }
 .editButton:hover{
   background-color: #51cd94;
@@ -115,15 +116,16 @@ export default {
 
 .pwdButton{
   width: 50%;
-  height: 50px;
-  border-radius: 12px;
-  border: 3px solid #ba281e;
+  height: 55px;
+  border-radius: 40px;
+  border: 3px solid #d01212;
   background: transparent;
   font-size: 30px;
-  font-weight: 400;
-  color: #ba281e;
+  font-weight: 550;
+  color: #d01212;
   cursor: pointer;
   text-align: center;
+  padding-top: 12px;
 }
 .pwdButton:hover{
   background-color: #f7a6a6;
