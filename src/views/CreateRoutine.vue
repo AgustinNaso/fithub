@@ -43,8 +43,10 @@ export default {
 <style scoped>
 
 .bodyContainer {
+
   display: flex;
-  margin: 0 25px;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .completeInfo {
@@ -69,6 +71,7 @@ form {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 textarea {
@@ -160,8 +163,7 @@ input[type="radio"]:checked + *::before {
 }
 
 img {
-  width: 500px;
-  height: 500px;
+  width: 450px;
   margin-left: 50px;
 }
 
