@@ -1,49 +1,73 @@
 <template>
   <div class="mainContainer">
     <NavBar logged-in :selected="3"/>
-    <Title title-name="Crear Rutina" to="/main"/>
     <div class="bodyContainer">
-      <div class="completeInfo">
-        <form>
-          <h2>Nombre</h2>
-          <textarea class="nameBox" cols="30" rows="1"></textarea>
-          <h2>Descripción</h2>
-          <textarea class="descBox" cols="30" rows="8"></textarea>
-          <div class="checkbox">
-            <div class="pBox">
-              <input class="checkBtn" type="radio" id="public" name="security">
-              <label for="public">Pública</label>
+    <Title title-name="Crear Rutina" to="/main"/>
+      <div class="content">
+        <div class="completeInfo">
+          <form>
+            <h2>Nombre</h2>
+            <textarea class="nameBox" cols="30" rows="1"></textarea>
+            <h2>Descripción</h2>
+            <textarea class="descBox" cols="30" rows="8"></textarea>
+            <div class="checkbox">
+              <div class="pBox">
+                <input class="checkBtn" type="radio" id="public" name="security">
+                <label for="public">Pública</label>
+              </div>
+              <div class="pBox">
+                <input class="checkBtn" type="radio" id="private" name="security">
+                <label for="private">Privada</label>
+              </div>
             </div>
-            <div class="pBox">
-              <input class="checkBtn" type="radio" id="private" name="security">
-              <label for="private">Privada</label>
-            </div>
-          </div>
-          <button class="createbtn">Crear Rutina</button>
-        </form>
+            <button class="createbtn">Crear Rutina</button>
+          </form>
+        </div>
+        <div class="insertImg">
+          <img src="../assets/imageicon.png" alt="imageIcon"/>
+          <h2>Elegir imagen</h2>
+        </div>
+        <img src="../assets/activity_tracker.svg" alt="activityTracker"/>
       </div>
-      <div class="insertImg">
-        <img src="../assets/imageicon.png" alt="imageIcon"/>
-        <h2>Elegir imagen</h2>
-      </div>
-      <img src="../assets/activity_tracker.svg" alt="activityTracker"/>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import NavBar from "../components/NavBar";
 import Title from "../components/Title";
+import Footer from "@/components/Footer";
 export default {
   name: "CreateRoutine",
-  components: {NavBar, Title}
+  components: {Footer, NavBar, Title}
 }
 </script>
 
 <style scoped>
 
-.bodyContainer {
+div{
+  overflow-x: hidden
+}
 
+.mainContainer{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  max-width: 100vw;
+}
+
+.bodyContainer {
+  flex: 1;
+  background-color: #f3f9f9;
+  padding: 30px 35px 90px 35px;
+  display: flex;
+  color: #42b983;
+  width: auto;
+  flex-direction: column;
+}
+
+.content{
   display: flex;
   width: 100%;
   justify-content: space-around;
