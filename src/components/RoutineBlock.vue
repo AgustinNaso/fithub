@@ -22,8 +22,8 @@ export default {
 
 <style scoped>
 .blockBg{
-  height: 160px;
-  width: 320px;
+  height: 150px;
+  width: 255px;
   border-radius: 68px;
   background: rgb(207,198,177);
   background: linear-gradient(rgba(207,198,177,1) 0%, rgba(173,168,156,1) 100%);
@@ -35,6 +35,8 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 18px;
+  margin-right: 35px;
+  margin-bottom:30px;
 }
 
 h4{

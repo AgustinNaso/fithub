@@ -7,6 +7,7 @@ import Register from "./views/Register";
 import CreateRoutine from "./views/CreateRoutine";
 import Main from "./views/Main";
 import UserProfile from "./views/UserProfile";
+import RoutineView from "./views/RoutineView";
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
         path: "/userProfile",
         name:"userProfile",
         component: UserProfile
+    },
+    {
+        path: "/routine",
+        name:"routine",
+        component: RoutineView
     }
 
 ];
