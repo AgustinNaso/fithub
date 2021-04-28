@@ -6,9 +6,9 @@
       <div class="content">
         <div class="completeInfo">
           <form>
-            <h2>Nombre</h2>
-            <textarea class="nameBox" cols="30" rows="1"></textarea>
-            <h2>Descripción</h2>
+            <label class="textLabel">Nombre</label>
+            <input class="textInput" type="text" name="name">
+            <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="8"></textarea>
             <div class="checkbox">
               <div class="pBox">
@@ -77,18 +77,16 @@ div{
   width: 30vw;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   align-items: center;
   text-align: left;
 }
 
-h2 {
+.textLabel {
   color: #42b983;
   font-size: 25px;
   font-weight: 700;
   width: 100%;
-  margin-left: 25px;
-  margin-top: 5px;
+  margin: 5px 0 8px 25px;
 }
 
 form {
@@ -98,14 +96,17 @@ form {
   margin-top: 20px;
 }
 
+.textInput,
 textarea {
+  width: 100%;
   margin-left: 10px;
   border: solid 3px #42b983;
   border-radius: 20px;
   font-size: 20px;
-  padding: 5px;
+  padding: 10px;
   resize: none;
   outline: none;
+  color: #42b983;
 }
 
 .checkbox {
