@@ -13,7 +13,7 @@
             :rating="3"
             owner="Juan Oriana"
             owner-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg/1200px-John_Doe%2C_born_John_Nommensen_Duchac.jpg"
-            description="Esta rutina es increible. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            description="Esta rutina es increible. "
         />
       </div>
     </div>

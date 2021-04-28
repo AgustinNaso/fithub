@@ -15,8 +15,14 @@
         <div class="triangle"/>
       </div>
     </div>
-    <div class="ratingWrap">
-      <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
+    <div class="routineEnd">
+      <div class="ratingWrap">
+        <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
+      </div>
+      <div v-show="isMine" class="editing">
+        <p>Editar</p>
+        <p style="color:#FF3344">Eliminar</p>
+      </div>
     </div>
   </div>
 </template>
@@ -61,7 +67,7 @@ h3{
   margin: 20px 0 0 0;
   padding-bottom: 8px;
   text-align: left;
-  max-width: 84%;
+  width: 84%;
   font-size: 20px;
   color: white;
   text-shadow: #030303 3px 2px 7px;
@@ -148,5 +154,25 @@ h3{
 
 .purple{
   background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
+}
+
+.editing{
+  color:black;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  font-weight: 700;
+  font-size: 19px;
+  opacity: 95%;
+  margin-top:18px
+
+}
+.routineEnd{
+  margin-top:auto;
+  margin-bottom:30px;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
