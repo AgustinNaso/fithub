@@ -23,6 +23,7 @@
         </form>
       </div>
       <div class="insertImg">
+        <img src="../assets/imageicon.png" alt="imageIcon"/>
         <h2>Elegir imagen</h2>
       </div>
       <img src="../assets/activity_tracker.svg" alt="activityTracker"/>
@@ -141,6 +142,12 @@ input[type="radio"]:checked + *::before {
   margin-left: 25px;
   position: relative;
   background:  rgba(66, 185, 131, 0.25);
+  justify-content: center;
+}
+
+.insertImg img {
+  height: 200px;
+  width: 200px;
 }
 
 .insertImg h2 {
