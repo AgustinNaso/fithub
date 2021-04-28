@@ -9,8 +9,11 @@
       <img class="ownerImg" :src="ownerImg" :alt="owner"/>
       <p class="owner">{{owner}}</p>
     </div>
-    <div class="playBtn">
-      <div class="triangle"/>
+    <div class="playContainer">
+      <p>Adepto - 60'</p>
+      <div class="playBtn">
+        <div class="triangle"/>
+      </div>
     </div>
     <div class="ratingWrap">
       <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
@@ -36,8 +39,8 @@ export default {
 .routineBg{
   background: rgb(160,128,224);
   background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
-  height: 540px;
-  width: 440px;
+  height: 480px;
+  width: 380px;
   border-radius: 58px;
   display: flex;
   flex-direction: column;
@@ -53,14 +56,15 @@ h3{
   text-shadow: #030b10 3px 2px 7px;
 }
 .description{
-  margin: 35px 0 0 0;
+  margin: 20px 0 0 0;
   padding-bottom: 8px;
   text-align: left;
-  width: 84%;
-  font-size: 18px;
+  max-width: 84%;
+  font-size: 20px;
   color: white;
   text-shadow: #030303 3px 2px 7px;
   border-bottom: white solid 3px;
+  word-wrap: break-word;
 }
 .owner{
   margin-left: 10px;
@@ -78,7 +82,7 @@ h3{
 }
 .ownerContainer{
   margin-top: 14px;
-  padding-left: 110px;
+  padding-left: 80px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -92,6 +96,7 @@ h3{
   display: flex;
   justify-content: space-evenly;
   width: 45%;
+
 }
 .playBtn{
   border-radius: 50%;
@@ -123,6 +128,15 @@ h3{
 .shareBtn{
   margin-left: 12px;
   width: 50px;
+}
 
+.playContainer{
+  color:white;
+  font-size:24px;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items:center;
+  margin-top:20px
 }
 </style>

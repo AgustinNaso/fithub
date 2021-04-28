@@ -7,12 +7,13 @@
     <div class="routineContainer">
       <Routine
           class="routine"
-          v-for="i in 4"
+          v-for="i in 6"
           :key="i"
           title="Brazos"
           :rating="3"
           owner="Juan Oriana"
-          description="Esta rutina es increible"
+          owner-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg/1200px-John_Doe%2C_born_John_Nommensen_Duchac.jpg"
+          description="Esta rutina es increible. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       />
     </div>
   </div>
@@ -54,7 +55,7 @@ div{
 .routineContainer{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 20px;
   padding: 0 15px 0 15px;
 }
