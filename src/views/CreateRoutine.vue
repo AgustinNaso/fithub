@@ -24,10 +24,10 @@
           </form>
         </div>
         <div class="insertImg">
-          <img src="../assets/imageicon.png" alt="imageIcon"/>
-          <h2>Elegir imagen</h2>
+          <img class="imgPic" src="../assets/imageicon.png" alt="imageIcon"/>
+          <h3 class="imgh2" >Elegir imagen</h3>
         </div>
-        <img src="../assets/activity_tracker.svg" alt="activityTracker"/>
+        <img class="mainImg" src="../assets/activity_tracker.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -164,15 +164,13 @@ input[type="radio"]:checked + *::before {
   flex-direction: column;
   height: 300px;
   width: 300px;
-  border-color: #42b983;
-  border-style: solid;
+  border: #42b983 5px solid;
   border-radius: 30px;
-  margin-top: 70px;
-  border-width: 5px;
-  margin-left: 25px;
+  margin: 70px 0 0 25px;
   position: relative;
   background:  rgba(66, 185, 131, 0.25);
   justify-content: center;
+  align-items: center;
 }
 
 .insertImg img {
@@ -180,15 +178,18 @@ input[type="radio"]:checked + *::before {
   width: 200px;
 }
 
-.insertImg h2 {
+.imgh2 {
   color: #030303;
-  width: 250px;
+  width: 100%;
   text-align: center;
+  font-size: 25px;
 }
 
-img {
+.mainImg {
   width: 450px;
-  margin-left: 50px;
 }
+
+
+
 
 </style>
