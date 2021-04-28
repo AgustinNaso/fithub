@@ -2,7 +2,15 @@
 <div class="profileContainer">
   <img class="userImg" :src="userImg" :alt="userName">
   <p>{{userName}}</p>
-  <img class="arrow" src="../assets/chevron_down_green.png" alt="arrow">
+  <img  @click="isOpen = !isOpen" class="arrow" src="../assets/chevron_down_green.png" alt="arrow">
+  <transition name="fade" appear>
+    <div v-if="isOpen" class="dropdown">
+      <ul>
+        <router-link to="/userProfile"><li>Mi Cuenta</li></router-link>
+        <li class="signOut">Cerrar Sesion</li>
+      </ul>
+    </div>
+  </transition>
 
 </div>
 </template>
@@ -13,7 +21,8 @@ export default {
   props:{
     userName: String,
     userImg: String
-  }
+  },
+  data(){ return {isOpen: false}}
 }
 </script>
 
@@ -21,6 +30,7 @@ export default {
 .profileContainer{
   display: flex;
   align-items: center;
+  position: relative;
 }
 .userImg{
   border-radius: 50%;
@@ -35,5 +45,48 @@ p{
 }
 .arrow{
   height: 50px;
+}
+
+.dropdown{
+  position: absolute;
+  background-color: #77c6a2;
+  top: calc(100%  + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  border-radius: 0 0 16px 16px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li{
+  color:white;
+  font-size: 21px;
+  padding: 3px 3px 3px 12px;
+  border-bottom: #5d6165 2px solid;
+  max-width: 100%;
+  text-shadow: 1px 1px 2px #111;
+}
+
+.signOut{
+  color:black;
+  border:none;
+  text-shadow: none;
+}
+
+.fade-enter-active,
+.fade-leave-to{
+  transition: all 0.2s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to{
+  opacity: 0;
+}
+
+a{
+  text-decoration: none;
 }
 </style>
