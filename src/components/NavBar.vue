@@ -7,7 +7,7 @@
     </div>
     <div class="navContainer" v-show="loggedIn">
       <router-link to="/"><MainBtnNav text="Explorar" :selected="selected === 1"/></router-link>
-      <router-link to="/"><MainBtnNav text="Mis Rutinas" :selected="selected === 2"/></router-link>
+      <router-link to="/myroutines"><MainBtnNav text="Mis Rutinas" :selected="selected === 2"/></router-link>
       <router-link to="/createRoutine"><MainBtnNav text="Crear Rutina" :selected="selected === 3"/></router-link>
     </div>
     <ProfileNav v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"/>

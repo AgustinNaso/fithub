@@ -12,7 +12,7 @@
           <div class="infoUnderline"/>
         </div>
         <div class="userProf">
-          <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
+            <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
           <div class="nameContainer">John Doe</div>
         </div>
       </div>
