@@ -1,6 +1,6 @@
 <template>
   <div class="homeWrap">
-    <NavBar />
+    <NavBar not-logged-in />
     <div class="homeBg">
       <div class="homeSection">
         <h1>Entrena gratis, en cualquier lado.</h1>
