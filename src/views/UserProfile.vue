@@ -1,6 +1,6 @@
 <template>
   <div class="mainContainer">
-    <NavBar/>
+    <NavBar logged-in/>
       <Title title-name="Mi cuenta" to="./main"/>
       <div class="userContainer">
         <div class="userData">

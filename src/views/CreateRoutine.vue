@@ -1,7 +1,7 @@
 <template>
   <div class="mainContainer">
     <NavBar logged-in :selected="3"/>
-    <Title title-name="Crear Rutina" to="/"/>
+    <Title title-name="Crear Rutina" to="/main"/>
     <div class="bodyContainer">
       <div class="completeInfo">
         <form>
