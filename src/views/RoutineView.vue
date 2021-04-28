@@ -95,6 +95,8 @@ export default {
   margin-bottom: 30px;
   display:flex;
   flex-wrap:wrap;
+  align-items: center;
+
 }
 
 .routineIntro{
@@ -149,4 +151,5 @@ export default {
   text-align: right;
   border-bottom: #030b10 3px solid;
 }
+
 </style>

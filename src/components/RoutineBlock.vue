@@ -1,9 +1,12 @@
 <template>
+  <div class="blockContainer">
 <div class="blockBg" :class="{orange:orange, blue:blue, green:green}">
   <h4>{{excerciseName}}</h4>
   <p v-show="reps">{{reps}} repeticiones</p>
   <p v-show="secs">{{secs}} segundos</p>
 </div>
+    <img class="routineDiv" src = "../assets/right-arrow.png" alt="blockDiv"/>
+  </div>
 </template>
 
 <script>
@@ -62,5 +65,16 @@ p{
 .green{
   background: rgb(65,214,152);
   background: linear-gradient(rgba(65,214,152,1) 0%, rgba(54,158,115,1) 100%);
+}
+
+.routineDiv {
+  height: 140px;
+  width: 50px;
+  margin: 0 10px 30px -30px;
+}
+
+.blockContainer {
+  display: flex;
+  align-items: center;
 }
 </style>
