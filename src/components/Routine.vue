@@ -1,5 +1,5 @@
 <template>
-  <div class="routineBg">
+  <div :class="{routineBg:true, green:isMine, purple:isFeatured}">
     <div class="routineHead">
       <h3>{{title}}</h3>
       <img class="shareBtn" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
@@ -30,7 +30,9 @@ export default {
     owner: String,
     ownerImg:String,
     rating:Number,
-    routineImg:String
+    routineImg:String,
+    isMine:Boolean,
+    isFeatured:Boolean
   }
 }
 </script>
@@ -38,7 +40,7 @@ export default {
 <style scoped>
 .routineBg{
   background: rgb(160,128,224);
-  background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
+  background: linear-gradient(180deg, rgba(224,138,128,1) 0%, rgba(183,178,106,1) 100%);
   height: 480px;
   width: 380px;
   border-radius: 58px;
@@ -138,5 +140,13 @@ h3{
   justify-content: space-evenly;
   align-items:center;
   margin-top:20px
+}
+
+.green{
+  background: linear-gradient(180deg, rgba(72,169,128,1) 0%, rgba(101,230,176,1) 100%);
+}
+
+.purple{
+  background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
 }
 </style>
