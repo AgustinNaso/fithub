@@ -2,36 +2,36 @@
   <div class="outer">
     <NavBar logged-in/>
     <div class="mainBg">
-    <Title title-name="Mi cuenta" to="./main"/>
+      <Title title-name="Mi cuenta" to="./main"/>
       <div class="userContainer">
         <div class="userData">
           <div class="dataContainer">
             <p class="dataType">Email</p>
-            <p class="dataInfo">facha@mail.com</p>
+            <input class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
           <div class="dataContainer">
             <p class="dataType">Fecha de nacimiento</p>
-            <p class="dataInfo">11/11/1984</p>
+            <input class="dataInfo" type="date">
           </div>
           <div class="infoUnderline"/>
           <div class="dataContainer">
             <p class="dataType">País o Región</p>
-            <p class="dataInfo">Buenos Aires</p>
+            <input class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
 
         </div>
         <div class="userProf">
-            <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
+          <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
           <div class="nameContainer">John Doe</div>
         </div>
       </div>
-    <div class="buttonContainer">
-      <button  type="button" class="editButton">Editar Perfil</button>
-      <button type="button" class="pwdButton">Cambiar Contraseña</button>
+      <div class="buttonContainer">
+        <button  type="button" class="confirmButton">Confirmar Cambios</button>
+        <button type="button" class="cancelButton">Cancelar</button>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -39,22 +39,28 @@
 import Title from "../components/Title";
 import NavBar from "../components/NavBar";
 export default {
-  name: "UserProfile",
+  name: "EditProfile",
   components: {Title,NavBar}
 }
 </script>
 
 <style scoped>
 
-.dataInfo {
-  color: black;
-  font-size: 25px;
-}
-
-.dataType {
+.dataType{
   color: #31ae7a;
   font-weight: 700;
   font-size: 25px;
+}
+.dataInfo {
+  color: black;
+  background: none;
+  height: 35px;
+  font-size: 25px;
+  border: #5d6165 2px solid;
+  border-radius: 12px;
+  padding: 3px;
+  outline: none;
+  width: 300px;
 }
 
 .infoUnderline{
@@ -102,62 +108,6 @@ export default {
   height: 50vh;
 }
 
-.buttonContainer{
-  width: 50vw;
-  height: 50vh;
-  margin-top: -100px;
-  margin-left: 50px;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.editButton{
-  width: 35%;
-  max-height: 60px;
-  border-radius: 40px;
-  border: 3px solid #707070;
-  background: transparent;
-  font-size: 30px;
-  font-weight: 550;
-  color: #707070;
-  cursor: pointer;
-  text-align: center;
-  transition: 0.2s ease-in-out;
-
-}
-.editButton:hover{
-  background-color: rgba(158, 168, 163, 0.4);
-  transition: 0.2s ease-in-out;
-}
-
-.editButton:active {
-  background: transparent;
-}
-
-
-.pwdButton{
-  width: 50%;
-  max-height: 60px;
-  border-radius: 40px;
-  border: 3px solid #d01212;
-  background: transparent;
-  font-size: 30px;
-  font-weight: 550;
-  color: #d01212;
-  cursor: pointer;
-  text-align: center;
-  transition: 0.2s ease-in-out;
-
-}
-.pwdButton:hover{
-  background-color: #f7a6a6;
-  transition: 0.2s ease-in-out;
-}
-
-.pwdButton:active {
-  background: transparent;
-}
-
 
 .mainBg{
   flex: 1;
@@ -175,5 +125,61 @@ export default {
   padding-top: 45px;
   padding-bottom: 15px;
   padding-left: 15px;
+}
+
+.buttonContainer{
+  width: 50vw;
+  height: 50vh;
+  margin-top: -100px;
+  margin-left: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+.confirmButton{
+  width: 50%;
+  max-height: 60px;
+  border-radius: 40px;
+  border: 3px solid #707070;
+  background: transparent;
+  font-size: 30px;
+  font-weight: 550;
+  color: #707070;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s ease-in-out;
+
+}
+.confirmButton:hover{
+  background-color: rgba(158, 168, 163, 0.4);
+  transition: 0.2s ease-in-out;
+}
+
+.confirmButton:active {
+  background: transparent;
+}
+
+.cancelButton{
+  width: 35%;
+  border-radius: 40px;
+  max-height: 60px;
+  border: 3px solid #d01212;
+  background: transparent;
+  font-size: 30px;
+  font-weight: 550;
+  color: #d01212;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s ease-in-out;
+
+}
+.cancelButton:hover{
+  background-color: #f7a6a6;
+  transition: 0.2s ease-in-out;
+}
+
+.cancelButton:active {
+  background: transparent;
 }
 </style>
