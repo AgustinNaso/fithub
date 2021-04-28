@@ -1,25 +1,37 @@
 <template>
-  <div class="mainContainer">
+  <div class="outer">
     <NavBar logged-in/>
-      <Title title-name="Mi cuenta" to="./main"/>
+    <div class="mainBg">
+    <Title title-name="Mi cuenta" to="./main"/>
       <div class="userContainer">
         <div class="userData">
-          <div class="dataInfo">Email</div>
+          <div class="dataContainer">
+            <p class="dataType">Email</p>
+            <p class="dataInfo">facha@mail.com</p>
+          </div>
           <div class="infoUnderline"/>
-          <div class="dataInfo">Fecha de Nacimiento</div>
+          <div class="dataContainer">
+            <p class="dataType">Fecha de nacimiento</p>
+            <p class="dataInfo">11/11/1984</p>
+          </div>
           <div class="infoUnderline"/>
-          <div class="dataInfo">País o Región</div>
+          <div class="dataContainer">
+            <p class="dataType">País o Región</p>
+            <p class="dataInfo">Buenos Aires</p>
+          </div>
           <div class="infoUnderline"/>
+
         </div>
         <div class="userProf">
-          <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
+            <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
           <div class="nameContainer">John Doe</div>
         </div>
       </div>
     <div class="buttonContainer">
-      <div class="editButton">Editar Perfil</div>
-      <div class="pwdButton">Cambiar Contraseña</div>
+      <button  type="button" class="editButton">Editar Perfil</button>
+      <button type="button" class="pwdButton">Cambiar Contraseña</button>
     </div>
+  </div>
   </div>
 </template>
 
@@ -34,12 +46,19 @@ export default {
 
 <style scoped>
 
-.dataInfo{
+.dataType, .dataInfo{
   padding-top: 45px;
   padding-bottom: 15px;
   padding-left: 15px;
   font-size: 25px;
-  color: #39a375;
+}
+.dataInfo {
+  color: black;
+}
+
+.dataType {
+  color: #31ae7a;
+  font-weight: 700;
 }
 
 .infoUnderline{
@@ -107,14 +126,18 @@ export default {
   color: #707070;
   cursor: pointer;
   text-align: center;
-  padding-top : 12px;
   transition: 0.2s ease-in-out;
 
 }
 .editButton:hover{
-  background-color: rgba(64, 193, 139, 0.4);
+  background-color: rgba(158, 168, 163, 0.4);
   transition: 0.2s ease-in-out;
 }
+
+.editButton:active {
+  background: transparent;
+}
+
 
 .pwdButton{
   width: 50%;
@@ -127,12 +150,30 @@ export default {
   color: #d01212;
   cursor: pointer;
   text-align: center;
-  padding-top: 12px;
   transition: 0.2s ease-in-out;
 
 }
 .pwdButton:hover{
   background-color: #f7a6a6;
   transition: 0.2s ease-in-out;
+}
+
+.pwdButton:active {
+  background: transparent;
+}
+
+
+.mainBg{
+  flex: 1;
+  background-color: #f3f9f9;
+  padding: 30px 35px 90px 35px;
+  display: flex;
+  flex-direction: column;
+  color: #42b983;
+}
+
+.dataContainer{
+  display: flex;
+  justify-content: space-between;
 }
 </style>
