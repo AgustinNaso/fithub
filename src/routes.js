@@ -7,6 +7,9 @@ import Register from "./views/Register";
 import CreateRoutine from "./views/CreateRoutine";
 import Main from "./views/Main";
 import UserProfile from "./views/UserProfile";
+import RoutineView from "./views/RoutineView";
+import MyRoutines from "@/views/MyRoutines";
+import MissingPage from "@/views/MissingPage";
 
 Vue.use(VueRouter)
 
@@ -40,7 +43,23 @@ const routes = [
         path: "/userProfile",
         name:"userProfile",
         component: UserProfile
+    },
+    {
+        path: "/routine",
+        name:"routine",
+        component: RoutineView
+    },
+    {
+        path: "/myroutines",
+        name:"myroutines",
+        component: MyRoutines
+    },
+    {
+        path: "*",
+        name: "notFound",
+        component: MissingPage
     }
+
 
 ];
 

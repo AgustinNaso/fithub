@@ -1,5 +1,5 @@
 <template>
-  <div class="routineBg">
+  <div :class="{routineBg:true, green:isMine, purple:isFeatured}">
     <div class="routineHead">
       <h3>{{title}}</h3>
       <img class="shareBtn" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
@@ -9,11 +9,20 @@
       <img class="ownerImg" :src="ownerImg" :alt="owner"/>
       <p class="owner">{{owner}}</p>
     </div>
-    <div class="playBtn">
-      <div class="triangle"/>
+    <div class="playContainer">
+      <p>Adepto - 60'</p>
+      <div class="playBtn">
+        <div class="triangle"/>
+      </div>
     </div>
-    <div class="ratingWrap">
-      <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
+    <div class="routineEnd">
+      <div class="ratingWrap">
+        <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
+      </div>
+      <div v-show="isMine" class="editing">
+        <p>Editar</p>
+        <p style="color:#FF3344">Eliminar</p>
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +36,9 @@ export default {
     owner: String,
     ownerImg:String,
     rating:Number,
-    routineImg:String
+    routineImg:String,
+    isMine:Boolean,
+    isFeatured:Boolean
   }
 }
 </script>
@@ -35,9 +46,9 @@ export default {
 <style scoped>
 .routineBg{
   background: rgb(160,128,224);
-  background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
-  height: 540px;
-  width: 440px;
+  background: linear-gradient(180deg, rgba(224,138,128,1) 0%, rgba(183,178,106,1) 100%);
+  height: 480px;
+  width: 380px;
   border-radius: 58px;
   display: flex;
   flex-direction: column;
@@ -53,14 +64,15 @@ h3{
   text-shadow: #030b10 3px 2px 7px;
 }
 .description{
-  margin: 35px 0 0 0;
+  margin: 20px 0 0 0;
   padding-bottom: 8px;
   text-align: left;
   width: 84%;
-  font-size: 18px;
+  font-size: 20px;
   color: white;
   text-shadow: #030303 3px 2px 7px;
   border-bottom: white solid 3px;
+  word-wrap: break-word;
 }
 .owner{
   margin-left: 10px;
@@ -78,7 +90,7 @@ h3{
 }
 .ownerContainer{
   margin-top: 14px;
-  padding-left: 110px;
+  padding-left: 80px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -92,6 +104,7 @@ h3{
   display: flex;
   justify-content: space-evenly;
   width: 45%;
+
 }
 .playBtn{
   border-radius: 50%;
@@ -123,6 +136,43 @@ h3{
 .shareBtn{
   margin-left: 12px;
   width: 50px;
+}
 
+.playContainer{
+  color:white;
+  font-size:24px;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items:center;
+  margin-top:20px
+}
+
+.green{
+  background: linear-gradient(180deg, rgba(72,169,128,1) 0%, rgba(101,230,176,1) 100%);
+}
+
+.purple{
+  background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
+}
+
+.editing{
+  color:black;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  font-weight: 700;
+  font-size: 19px;
+  opacity: 95%;
+  margin-top:18px
+
+}
+.routineEnd{
+  margin-top:auto;
+  margin-bottom:30px;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
