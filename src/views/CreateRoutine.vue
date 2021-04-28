@@ -6,9 +6,9 @@
       <div class="completeInfo">
         <form>
           <h2>Nombre</h2>
-          <textarea style="resize:none" class="nameBox" cols="30" rows="1"></textarea>
+          <textarea class="nameBox" cols="30" rows="1"></textarea>
           <h2>Descripción</h2>
-          <textarea style="resize:none" class="descBox" cols="30" rows="10"></textarea>
+          <textarea class="descBox" cols="30" rows="8"></textarea>
           <div class="checkbox">
             <div class="pBox">
               <input class="checkBtn" type="radio" id="public" name="security">
@@ -77,6 +77,8 @@ textarea {
   border-radius: 20px;
   font-size: 20px;
   padding: 5px;
+  resize: none;
+  outline: none;
 }
 
 .checkbox {
@@ -127,6 +129,7 @@ input[type="radio"]:checked + *::before {
   outline: none;
   width: 230px;
   height: 40px;
+  cursor: pointer;
 }
 
 .insertImg {
