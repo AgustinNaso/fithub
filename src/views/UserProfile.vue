@@ -1,50 +1,60 @@
 <template>
   <div class="outer">
     <NavBar logged-in/>
-    <div class="mainBg">
-    <Title title-name="Mi cuenta" to="./main"/>
-      <div class="userContainer">
-        <div class="userData">
-          <div class="dataContainer">
-            <p class="dataType">Email</p>
-            <p class="dataInfo">facha@mail.com</p>
-          </div>
-          <div class="infoUnderline"/>
-          <div class="dataContainer">
-            <p class="dataType">Fecha de nacimiento</p>
-            <p class="dataInfo">11/11/1984</p>
-          </div>
-          <div class="infoUnderline"/>
-          <div class="dataContainer">
-            <p class="dataType">País o Región</p>
-            <p class="dataInfo">Buenos Aires</p>
-          </div>
-          <div class="infoUnderline"/>
+      <div class="mainBg">
+      <Title title-name="Mi cuenta" to="./main"/>
+        <div class="userContainer">
+          <div class="userData">
+            <div class="dataContainer">
+              <p class="dataType">Email</p>
+              <p class="dataInfo">facha@mail.com</p>
+            </div>
+            <div class="infoUnderline"/>
+            <div class="dataContainer">
+              <p class="dataType">Fecha de nacimiento</p>
+              <p class="dataInfo">11/11/1984</p>
+            </div>
+            <div class="infoUnderline"/>
+            <div class="dataContainer">
+              <p class="dataType">País o Región</p>
+              <p class="dataInfo">Buenos Aires</p>
+            </div>
+            <div class="infoUnderline"/>
 
+            <div class="buttonContainer">
+              <button  type="button" class="editButton">Editar Perfil</button>
+              <button type="button" class="pwdButton">Cambiar Contraseña</button>
+            </div>
+
+          </div>
+          <div class="userProf">
+              <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
+            <div class="nameContainer">John Doe</div>
+          </div>
         </div>
-        <div class="userProf">
-            <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
-          <div class="nameContainer">John Doe</div>
-        </div>
-      </div>
-    <div class="buttonContainer">
-      <button  type="button" class="editButton">Editar Perfil</button>
-      <button type="button" class="pwdButton">Cambiar Contraseña</button>
     </div>
-  </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Title from "../components/Title";
 import NavBar from "../components/NavBar";
+import Footer from "@/components/Footer";
 export default {
   name: "UserProfile",
-  components: {Title,NavBar}
+  components: {Footer, Title,NavBar}
 }
 </script>
 
 <style scoped>
+
+.outer{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  max-width: 100vw;
+}
 
 .dataInfo {
   color: black;
@@ -60,14 +70,14 @@ export default {
 .infoUnderline{
   height: 2px;
   background-color: #707070;
-  width: 50vw;
+  width: 100%;
 }
 
 .userContainer {
   display: flex;
   justify-content: space-evenly;
   height: 90%;
-  margin-top: -35px;
+  margin-top: -10px;
   margin-left: -20px;
 }
 
@@ -87,6 +97,7 @@ export default {
   width: 300px;
   box-shadow: 4px 10px 20px rgba(0,0,0,0.57);
   border-radius: 50%;
+  object-fit:cover;
 }
 
 .nameContainer {
@@ -103,9 +114,7 @@ export default {
 }
 
 .buttonContainer{
-  width: 50vw;
-  height: 50vh;
-  margin-top: -100px;
+  margin-top: 50px;
   margin-left: 50px;
   display: flex;
   justify-content: space-evenly;
@@ -113,8 +122,8 @@ export default {
 
 .editButton{
   width: 35%;
-  max-height: 60px;
   border-radius: 40px;
+  padding:10px;
   border: 3px solid #707070;
   background: transparent;
   font-size: 30px;
@@ -137,7 +146,6 @@ export default {
 
 .pwdButton{
   width: 50%;
-  max-height: 60px;
   border-radius: 40px;
   border: 3px solid #d01212;
   background: transparent;
@@ -147,6 +155,9 @@ export default {
   cursor: pointer;
   text-align: center;
   transition: 0.2s ease-in-out;
+  padding:10px;
+
+
 
 }
 .pwdButton:hover{
@@ -175,5 +186,33 @@ export default {
   padding-top: 45px;
   padding-bottom: 15px;
   padding-left: 15px;
+}
+
+@media (max-width: 1200px) {
+
+  .userContainer{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .userProf{
+    width: 80%;
+    height: 340px;
+    margin-top: 30px;
+    justify-content: center;
+  }
+
+  .imgContainer{
+    width: 200px;
+    height: 200px;
+  }
+  .userData{
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+  }
+  
 }
 </style>

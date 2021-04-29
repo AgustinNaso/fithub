@@ -20,31 +20,39 @@
             <input class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
-
+          <div class="buttonContainer">
+            <button  type="button" class="confirmButton">Confirmar Cambios</button>
+            <button type="button" class="cancelButton">Cancelar</button>
+          </div>
         </div>
         <div class="userProf">
           <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
           <div class="nameContainer">John Doe</div>
         </div>
       </div>
-      <div class="buttonContainer">
-        <button  type="button" class="confirmButton">Confirmar Cambios</button>
-        <button type="button" class="cancelButton">Cancelar</button>
-      </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Title from "../components/Title";
 import NavBar from "../components/NavBar";
+import Footer from "@/components/Footer";
 export default {
   name: "EditProfile",
-  components: {Title,NavBar}
+  components: {Footer, Title,NavBar}
 }
 </script>
 
 <style scoped>
+
+.outer{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  max-width: 100vw;
+}
 
 .dataType{
   color: #31ae7a;
@@ -66,14 +74,14 @@ export default {
 .infoUnderline{
   height: 2px;
   background-color: #707070;
-  width: 50vw;
+  width: 100%;
 }
 
 .userContainer {
   display: flex;
   justify-content: space-evenly;
   height: 90%;
-  margin-top: -35px;
+  margin-top: -10px;
   margin-left: -20px;
 }
 
@@ -93,6 +101,7 @@ export default {
   width: 300px;
   box-shadow: 4px 10px 20px rgba(0,0,0,0.57);
   border-radius: 50%;
+  object-fit:cover;
 }
 
 .nameContainer {
@@ -128,9 +137,7 @@ export default {
 }
 
 .buttonContainer{
-  width: 50vw;
-  height: 50vh;
-  margin-top: -100px;
+  margin-top: 50px;
   margin-left: 50px;
   display: flex;
   justify-content: space-evenly;
@@ -141,6 +148,7 @@ export default {
   width: 50%;
   max-height: 60px;
   border-radius: 40px;
+  padding:10px;
   border: 3px solid #707070;
   background: transparent;
   font-size: 30px;
@@ -164,6 +172,7 @@ export default {
   width: 35%;
   border-radius: 40px;
   max-height: 60px;
+  padding: 10px;
   border: 3px solid #d01212;
   background: transparent;
   font-size: 30px;
@@ -181,5 +190,33 @@ export default {
 
 .cancelButton:active {
   background: transparent;
+}
+
+@media (max-width: 1200px) {
+
+  .userContainer{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .userProf{
+    width: 80%;
+    height: 340px;
+    margin-top: 30px;
+    justify-content: center;
+  }
+
+  .imgContainer{
+    width: 200px;
+    height: 200px;
+  }
+  .userData{
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
 </style>

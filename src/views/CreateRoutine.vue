@@ -74,7 +74,7 @@ div{
 }
 
 .completeInfo {
-  width: 30vw;
+  width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -187,9 +187,14 @@ input[type="radio"]:checked + *::before {
 }
 
 .mainImg {
-  width: 450px;
+  width: 400px;
 }
 
+@media (max-width: 1200px) {
+  .mainImg{
+    display: none;
+  }
+}
 
 
 
