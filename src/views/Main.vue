@@ -1,8 +1,7 @@
 <template>
 <div class="mainContainer">
-  <NavBar/>
+  <NavBar logged-in/>
   <div class="mainBg">
-    <h1>Hola, Usuario!</h1>
     <Title title-name="Rutinas Recomendadas"/>
     <div class="routineContainer">
       <Routine
