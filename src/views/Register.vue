@@ -1,6 +1,6 @@
 <template>
   <div class="outer">
-    <NavBar></NavBar>
+    <NavBar logging></NavBar>
     <div class="loginBg">
       <h1>Registrarse</h1>
       <form>

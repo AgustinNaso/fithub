@@ -38,7 +38,7 @@
 <script>
 import Title from "../components/Title";
 import NavBar from "../components/NavBar";
-import Footer from "@/components/Footer";
+import Footer from "../components/Footer";
 export default {
   name: "EditProfile",
   components: {Footer, Title,NavBar}
@@ -146,7 +146,6 @@ export default {
 
 .confirmButton{
   width: 50%;
-  max-height: 60px;
   border-radius: 40px;
   padding:10px;
   border: 3px solid #707070;
@@ -171,7 +170,6 @@ export default {
 .cancelButton{
   width: 35%;
   border-radius: 40px;
-  max-height: 60px;
   padding: 10px;
   border: 3px solid #d01212;
   background: transparent;
