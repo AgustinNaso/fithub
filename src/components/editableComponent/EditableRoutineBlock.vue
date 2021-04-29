@@ -1,21 +1,19 @@
 <template>
   <div class="blockContainer">
     <div class="blockBg" :class="{orange:orange, blue:blue, green:green}">
-      <h4>{{excerciseName}}</h4>
-      <p v-show="reps">{{reps}} repeticiones</p>
+      <input class="routineInput" type="text" name="routineName">
+      <div class="valueFill"><input type="number" class="numInput" name="reps"><p> repeticiones</p></div>
+      <div class="valueFill"><input type="number" class="numInput" name="secs"><p> segundos</p></div>
       <p v-show="secs">{{secs}} segundos</p>
     </div>
-    <img class="routineDiv" src = "../assets/right-arrow.png" alt="blockDiv"/>
+    <img class="routineDiv" src = "../../assets/right-arrow.png" alt="blockDiv"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "RoutineBlock",
+  name: "EditableRoutineBlock",
   props:{
-    excerciseName:String,
-    reps:Number,
-    secs:Number,
     orange: Boolean,
     blue: Boolean,
     green: Boolean
@@ -24,6 +22,7 @@ export default {
 </script>
 
 <style scoped>
+
 .blockBg{
   height: 150px;
   width: 255px;
@@ -40,16 +39,6 @@ export default {
   font-size: 18px;
   margin-right: 35px;
   margin-bottom:30px;
-}
-
-h4{
-  width: 80%;
-  font-weight: 700;
-  font-size: 26px;
-  margin-bottom: 5px;
-}
-p{
-  width: 90%;
 }
 
 .orange{
@@ -76,5 +65,35 @@ p{
 .blockContainer {
   display: flex;
   align-items: center;
+}
+
+.routineInput{
+  background: none;
+  border: grey 1px solid;
+  outline: none;
+  width: 80%;
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 5px;
+  border-radius: 30px;
+  padding:2px;
+}
+
+.valueFill{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.numInput{
+  width: 45px;
+  font-size: 16px;
+  margin-right: 10px;
+  background: none;
+  border: black 1px solid;
+  border-radius: 10px;
+  outline: none;
+  padding: 3px;
 }
 </style>

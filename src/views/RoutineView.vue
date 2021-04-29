@@ -17,28 +17,17 @@
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
         <div class="routineBlockDiv">
-          <RoutineBlock orange excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock excercise-name="Descanso"></RoutineBlock>
-          <RoutineBlock orange excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock orange excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock orange excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock orange excercise-name="Salto con soga"></RoutineBlock>
+          <RoutineBlock v-for="(rout,idx) in warmUp" :key="idx" :orange="rout.name != 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />
         </div>
 
         <h2 class="sectionTitle" style="color: #42b983">Ciclo de Ejercitacion A</h2>
         <div class="routineBlockDiv">
-          <RoutineBlock green excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock green excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock green excercise-name="Salto con soga"></RoutineBlock>
-          <RoutineBlock green excercise-name="Salto con soga"></RoutineBlock>
+          <RoutineBlock v-for="(rout,idx) in cycle" :key="idx" :green="rout.name != 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />
         </div>
 
         <h2 class="sectionTitle" style="color: #4D6DEB">Entrada en Calor</h2>
         <div class="routineBlockDiv">
-          <RoutineBlock blue excercise-name="Elongar"></RoutineBlock>
-          <RoutineBlock  excercise-name="Descanso"></RoutineBlock>
-          <RoutineBlock blue excercise-name="Elongar"></RoutineBlock>
-          <RoutineBlock  excercise-name="Descanso"></RoutineBlock>
+          <RoutineBlock v-for="(rout,idx) in cooldown" :key="idx" :blue="rout.name != 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />
         </div>
       </div>
       <div class="finalSection">
@@ -60,8 +49,38 @@ import RoutineBlock from "@/components/RoutineBlock";
 
 export default {
   name: "RoutineView",
-  components: {RoutineBlock, Title, Footer, NavBar},
-  data() {return {routineName:"Rutina", description:"Mi rutina para entrenar brazos"}}
+  components: { RoutineBlock, Title, Footer, NavBar},
+  data() {return {
+    routineName: "Rutina",
+    description: "Mi rutina para entrenar brazos",
+    warmUp: [{name: "Salto con Soga",
+      reps: 10,
+      secs: 0},{
+      name: "Salto con Soga",
+      reps: 10,
+      secs: 0
+    }, {name: "Descanso",
+      reps: 10,
+      secs: 0}],
+    cycle: [{name: "Salto con Soga",
+      reps: 10,
+      secs: 0},{
+      name: "Salto con Soga",
+      reps: 10,
+      secs: 0
+    }, {name: "Descanso",
+      reps: 10,
+      secs: 0}],
+    cooldown: [{name: "Salto con Soga",
+      reps: 10,
+      secs: 0},{
+      name: "Salto con Soga",
+      reps: 10,
+      secs: 0
+    }, {name: "Descanso",
+      reps: 10,
+      secs: 0}],
+  }}
 }
 </script>
 
