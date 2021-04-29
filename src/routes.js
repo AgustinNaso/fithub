@@ -11,6 +11,7 @@ import RoutineView from "./views/RoutineView";
 import MyRoutines from "@/views/MyRoutines";
 import MissingPage from "@/views/MissingPage";
 import EditProfile from "./views/EditProfile";
+import EditRoutine from "@/views/EditRoutine";
 
 Vue.use(VueRouter)
 
@@ -56,15 +57,20 @@ const routes = [
         component: MyRoutines
     },
     {
+        path: "/editProfile",
+        name: "editProfile",
+        component: EditProfile
+    },
+    {
+        path: "/editRoutine",
+        name: "editRoutine",
+        component: EditRoutine
+    },
+    {
         path: "*",
         name: "notFound",
         component: MissingPage
     },
-    {
-        path: "/editProfile",
-        name: "editProfile",
-        component: EditProfile
-    }
 ];
 
 const router = new VueRouter({
