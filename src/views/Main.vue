@@ -38,6 +38,10 @@
       />
     </div>
 
+    <div class="paging">
+      <p class="pageNumber">Página {{$route.params.id > 0 ? $route.params.id : 1 }}</p>
+    </div>
+
   </div>
   <Footer/>
 </div>
@@ -129,4 +133,18 @@ h1{
   background-color: #42c18c;
   transition: 0.2s ease-in-out;
 }
+
+.paging{
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pageNumber{
+  color: black;
+  font-size: 32px;
+  font-weight: 700;
+}
+
 </style>

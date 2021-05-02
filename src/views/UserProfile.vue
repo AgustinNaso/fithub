@@ -22,7 +22,7 @@
             <div class="infoUnderline"/>
 
             <div class="buttonContainer">
-              <button  type="button" class="editButton">Editar Perfil</button>
+              <router-link to="/editProfile"><button  type="button" class="editButton">Editar Perfil</button></router-link>
               <button type="button" class="pwdButton">Cambiar Contraseña</button>
             </div>
 
@@ -121,7 +121,7 @@ export default {
 }
 
 .editButton{
-  width: 35%;
+  width: 270px;
   border-radius: 40px;
   padding:10px;
   border: 3px solid #707070;
@@ -145,7 +145,7 @@ export default {
 
 
 .pwdButton{
-  width: 50%;
+  width: 360px;
   border-radius: 40px;
   border: 3px solid #d01212;
   background: transparent;
@@ -213,6 +213,6 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  
+
 }
 </style>

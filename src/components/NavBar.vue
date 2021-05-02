@@ -6,7 +6,7 @@
       <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
     </div>
     <div class="navContainer" v-show="loggedIn && !logging">
-      <router-link to="/explore"><MainBtnNav text="Explorar" :selected="selected === 1"/></router-link>
+      <router-link to="/explore/1"><MainBtnNav text="Explorar" :selected="selected === 1"/></router-link>
       <router-link to="/myroutines"><MainBtnNav text="Mis Rutinas" :selected="selected === 2"/></router-link>
       <router-link to="/createRoutine"><MainBtnNav text="Crear Rutina" :selected="selected === 3"/></router-link>
     </div>
