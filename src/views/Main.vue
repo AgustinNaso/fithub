@@ -1,6 +1,6 @@
 <template>
 <div class="mainContainer">
-  <NavBar logged-in/>
+  <NavBar logged-in :selected="1"/>
   <div class="mainBg">
     <div v-show="featured">
       <Title title-name="Rutinas Recomendadas"/>
