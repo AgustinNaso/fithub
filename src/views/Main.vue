@@ -39,9 +39,9 @@
     </div>
 
     <div class="paging">
-      <router-link :to="{path: '/explore/' + (parseInt($route.params.id) - 1)}" v-show="$route.params.id > 1"><img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/></router-link>
-      <p class="pageNumber">Página {{$route.params.id > 0 ? $route.params.id : 1 }}</p>
-      <router-link :to="{path: '/explore/' + (parseInt($route.params.id) + 1)}"><img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/></router-link>
+      <router-link :to="{path: '/explore/' + (pageNumber - 1)}" v-show="$route.params.id > 1"><img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/></router-link>
+      <p class="pageNumber">Página {{pageNumber}}</p>
+      <router-link :to="{path: '/explore/' + (pageNumber + 1)}"><img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/></router-link>
     </div>
 
   </div>
@@ -59,6 +59,14 @@ export default {
   components: { Routine, Title, Footer, NavBar},
   props:{
     featured:Boolean
+  },
+  data() {
+    return {
+      pageNumber: parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1
+    }
+  },
+  updated(){
+    this.pageNumber = parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1;
   }
 }
 </script>
