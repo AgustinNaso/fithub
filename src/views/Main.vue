@@ -65,8 +65,10 @@ export default {
       pageNumber: parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1
     }
   },
-  updated(){
-    this.pageNumber = parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1;
+  watch:{
+    $route () {
+      this.pageNumber = parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1;
+    }
   }
 }
 </script>
@@ -164,3 +166,4 @@ h1{
 }
 
 </style>
+
