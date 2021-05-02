@@ -39,7 +39,18 @@ const routes = [
     {
         path: "/main",
         name:"main",
-        component: Main
+        component: Main,
+        props:{
+            featured:true
+        }
+    },
+    {
+        path: "/explore",
+        name:"explore",
+        component: Main,
+        props:{
+            featured:false
+        }
     },
     {
         path: "/userProfile",
