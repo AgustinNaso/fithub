@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <router-link to="/"><h1>Fithub</h1></router-link>
+    <router-link to="/main"><h1>Fithub</h1></router-link>
     <div class="butContainer" v-show="!loggedIn && !logging">
       <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
       <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>

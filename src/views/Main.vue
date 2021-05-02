@@ -39,9 +39,9 @@
     </div>
 
     <div class="paging">
-      <img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/>
+      <router-link :to="{path: '/explore/' + (parseInt($route.params.id) - 1)}" v-show="$route.params.id > 1"><img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/></router-link>
       <p class="pageNumber">Página {{$route.params.id > 0 ? $route.params.id : 1 }}</p>
-      <img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/>
+      <router-link :to="{path: '/explore/' + (parseInt($route.params.id) + 1)}"><img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/></router-link>
     </div>
 
   </div>
@@ -151,8 +151,7 @@ h1{
 
 .pageArrow {
   height: 32px;
-  width: auto;
-  margin: 10px;
+  margin: 6px 15px 0 15px;
 
 }
 
