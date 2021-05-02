@@ -20,7 +20,7 @@
     </div>
     <Title title-name="Explorar Rutinas"/>
     <div class="searchBar">
-      <div searchBox>
+      <div class="searchBox">
         <input name="search" type="text" class="searchInput"/>
         <button name="search" class="searchBtn">Buscar!</button>
       </div>
@@ -39,7 +39,9 @@
     </div>
 
     <div class="paging">
+      <img src="../assets/left-rounded-arrow.png" alt="página anterior"/>
       <p class="pageNumber">Página {{$route.params.id > 0 ? $route.params.id : 1 }}</p>
+      <img src="../assets/right-rounded-arrow.png" alt="página siguiente"/>
     </div>
 
   </div>
