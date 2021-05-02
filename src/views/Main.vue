@@ -39,9 +39,9 @@
     </div>
 
     <div class="paging">
-      <img src="../assets/left-rounded-arrow.png" alt="página anterior"/>
+      <img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/>
       <p class="pageNumber">Página {{$route.params.id > 0 ? $route.params.id : 1 }}</p>
-      <img src="../assets/right-rounded-arrow.png" alt="página siguiente"/>
+      <img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/>
     </div>
 
   </div>
@@ -147,6 +147,13 @@ h1{
   color: black;
   font-size: 32px;
   font-weight: 700;
+}
+
+.pageArrow {
+  height: 32px;
+  width: auto;
+  margin: 10px;
+
 }
 
 </style>
