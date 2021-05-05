@@ -13,7 +13,7 @@ class UserApi {
     }
 
     static async logout(controller) {
-        await Api.post(`${UserApi.url}/logout`, true, controller);
+        Api.post(`${UserApi.url}/logout`, true,null, controller).then();
         Api.token = undefined;
     }
 }

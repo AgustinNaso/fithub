@@ -29,13 +29,13 @@ class Api {
       const result = text ? (JSON).parse(text) : {};
       if (result.code)
         throw result;
+
       return result;
     } catch (error) {
-      let errorNew;
       if (!error.code) {
-        errorNew = { "code": 99, "description": error.message.toLowerCase() };
+        error = { "code": 99, "description": error.message.toLowerCase() };
       }
-      throw errorNew;
+      throw error;
     } finally {
       clearTimeout(timer);
     }

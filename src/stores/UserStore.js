@@ -6,6 +6,7 @@ const UserStore= {
         try {
             await UserApi.login(creds);
         }catch (error){
+            alert(error.description);
             return false;
         }
         localStorage.setItem("loggedIn","true");
