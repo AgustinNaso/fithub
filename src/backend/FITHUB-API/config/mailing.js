@@ -36,7 +36,7 @@ module.exports = {
                    El Equipo de Fithub.
                 </p>
             </div>`,
-        confirmationLink: 'http://localhost:8080/verification?user=<%USER_ID%>&code=<%CODE%>',
+        confirmationLink: 'http://localhost:4000/verify?email=<%USER_ID%>&code=<%CODE%>',
         codeExpirationInterval: 24 * 60 * 60 * 1000
     }
 }
