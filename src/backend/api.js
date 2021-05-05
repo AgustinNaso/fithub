@@ -31,11 +31,11 @@ class Api {
         throw result;
 
       return result;
-    } catch (error) {
-      if (!error.code) {
-        error = { "code": 99, "description": error.message.toLowerCase() };
-      }
-      throw error;
+    //} catch (error) {
+      //if (!error.code) {
+        //error = { "code": 99, "description": error.message.toLowerCase() };
+      //}
+      //throw error;
     } finally {
       clearTimeout(timer);
     }

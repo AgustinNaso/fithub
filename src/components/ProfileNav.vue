@@ -7,7 +7,7 @@
     <div v-if="isOpen" class="dropdown">
       <ul>
         <router-link to="/userProfile"><li>Mi Cuenta</li></router-link>
-        <li @click="logOut" class="signOut">Cerrar Sesion</li>
+        <li @click="logOut" class="signOut">Cerrar Sesión</li>
       </ul>
     </div>
   </transition>
