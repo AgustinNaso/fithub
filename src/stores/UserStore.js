@@ -8,8 +8,8 @@ const UserStore= {
         this.loggedIn = false;
         this.setState();
     },
-    isLoggedIn(){
-        return localStorage.getItem("loggedIn");
+    isLoggedIn() {
+        return this.loggedIn;
     },
     setState(){
         localStorage.setItem("loggedIn",this.loggedIn);

@@ -29,9 +29,6 @@ export default {
     return {
       store: UserStore
     }
-  },
-  created() {
-    this.store.getState();
   }
 }
 </script>

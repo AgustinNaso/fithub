@@ -36,7 +36,6 @@ export default {
     }
   },
   created() {
-    this.store.getState();
     if (this.store.isLoggedIn()){
       router.push("main");
     }
