@@ -13,10 +13,10 @@ export default {
       verified:false
     }
   },
-  created() {
+  async created() {
     try {
-      const emailVerif = new EmailVerifier(this.$route.params.email,this.$route.params.code);
-      UserApi.verifyEmail(emailVerif);
+      const emailVerif = new EmailVerifier(this.$route.query.email,this.$route.query.code);
+      await UserApi.verifyEmail(emailVerif);
     }catch (e){
       router.push("/error")
       return;

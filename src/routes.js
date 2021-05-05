@@ -85,7 +85,7 @@ const routes = [
         component: PermissionDenied
     },
     {
-        path: "/verify/:email/:id",
+        path: "/verify",
         name: "verify",
         component: Verify
     },
