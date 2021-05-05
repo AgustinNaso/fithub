@@ -2,8 +2,8 @@
   <div class="blockContainer">
     <div class="blockBg" :class="{orange:orange, blue:blue, green:green}">
       <h4>{{excerciseName}}</h4>
-      <p v-show="reps">{{reps}} repeticiones</p>
-      <p v-show="secs">{{secs}} segundos</p>
+      <p v-show="reps">{{reps?reps:0}} repeticiones</p>
+      <p v-show="secs">{{secs?secs:0}} segundos</p>
     </div>
     <img class="routineDiv" src = "../assets/right-arrow.png" alt="blockDiv"/>
   </div>

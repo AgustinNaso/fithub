@@ -36,7 +36,7 @@ export default {
     }
   },
   created() {
-    RoutineApi.getRoutines().then((value) => {
+    RoutineApi.getUserRoutines().then((value) => {
       this.routines = value.content;
     });
   }

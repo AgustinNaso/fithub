@@ -5,7 +5,7 @@
     <div class="routineBg">
       <div class="routineIntro">
         <div class="titleDiv">
-          <Title :title-name="routineName"/>
+          <Title to="" :title-name="routineName"/>
           <textarea class="subtitle"></textarea>
         </div>
 

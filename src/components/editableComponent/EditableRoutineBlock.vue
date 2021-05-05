@@ -4,7 +4,6 @@
       <input class="routineInput" type="text" name="routineName">
       <div class="valueFill"><input type="number" class="numInput" name="reps"><p> repeticiones</p></div>
       <div class="valueFill"><input type="number" class="numInput" name="secs"><p> segundos</p></div>
-      <p v-show="secs">{{secs}} segundos</p>
     </div>
     <img class="routineDiv" src = "../../assets/right-arrow.png" alt="blockDiv"/>
   </div>

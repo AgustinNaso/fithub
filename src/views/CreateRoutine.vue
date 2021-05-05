@@ -29,7 +29,7 @@
                 <label for="private">Privada</label>
               </div>
             </div>
-            <button class="createbtn">Crear Rutina</button>
+            <div  class="clicker" @click="createRoutine"><button class="createbtn">Crear Rutina</button></div>
           </form>
         </div>
         <img class="mainImg" src="../assets/activity_tracker.svg" alt="activityTracker"/>
@@ -43,6 +43,8 @@
 import NavBar from "../components/NavBar";
 import Title from "../components/Title";
 import Footer from "@/components/Footer";
+import {RoutineBase, RoutineApi} from "@/backend/routines"
+import router from "@/routes";
 export default {
   name: "CreateRoutine",
   components: {Footer, NavBar, Title},
@@ -52,6 +54,17 @@ export default {
       descripcion:"",
       dificultad:"beginner",
       visibilidad:"public"
+    }
+  },
+  methods:{
+    async createRoutine(){
+      const routineBase = new RoutineBase(this.nombre,this.descripcion,this.visibilidad === 'public',this.dificultad);
+      try{
+        await RoutineApi.createRoutine(routineBase);
+      }catch (e) {
+        console.log(e);
+      }
+      await router.push("/editRoutine");
     }
   }
 }
@@ -178,6 +191,7 @@ input[type="radio"]:checked + *::before {
 .mainImg {
   width: 400px;
 }
+
 
 @media (max-width: 1200px) {
   .mainImg{
