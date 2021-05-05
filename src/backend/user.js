@@ -24,6 +24,11 @@ class UserApi {
     static async verifyEmail(emailVerifier,controller){
         await  Api.post(`${UserApi.url}/verify_email`,false,emailVerifier,controller)
     }
+
+    static async getCurrentUser(controller) {
+        return await Api.get(`${UserApi.url}/current`, false, controller);
+    }
+
 }
 
 class Credentials {

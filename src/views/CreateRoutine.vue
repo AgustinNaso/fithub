@@ -62,7 +62,7 @@ export default {
       try{
         await RoutineApi.createRoutine(routineBase);
       }catch (e) {
-        console.log(e);
+        await alert(e);
       }
       await router.push("/editRoutine");
     }

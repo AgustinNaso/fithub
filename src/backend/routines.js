@@ -12,11 +12,11 @@ class RoutineApi {
     }
 
     static async getUserRoutines(controller) {
-        return await Api.get(`${RoutineApi.url}?page=0&size=9&orderBy=date&direction=asc`, true, controller);
+        return await Api.get(`${RoutineApi.url}?page=0&size=9&orderBy=date&direction=asc`, false, controller);
     }
 
     static async createRoutine(routineBase,controller) {
-        await Api.post(`${RoutineApi.url}`, true, routineBase, controller);
+        await Api.post(`${RoutineApi.url}`, false, routineBase, controller);
     }
 
 
