@@ -13,8 +13,8 @@ const UserStore= {
         return true;
     },
     async logOut(){
-        await UserApi.logout();
         localStorage.setItem("loggedIn", "false");
+        await UserApi.logout();
     },
     isLoggedIn() {
         return localStorage.getItem("loggedIn") === 'true';
