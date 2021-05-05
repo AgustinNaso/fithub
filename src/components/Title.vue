@@ -1,7 +1,7 @@
 <template>
   <div class="titleContainer">
     <div class="createBox">
-      <router-link :to="to" v-show="to"><img class="backArrow" src="../assets/chevron_left_grey.png" alt="backArrow"/></router-link>
+      <router-link :to="to" v-show="to!==''"><img class="backArrow" src="../assets/chevron_left_grey.png" alt="backArrow"/></router-link>
       <h1 :class="{withArrow:to}">{{ titleName }}</h1>
     </div>
     <div class="underline"/>
@@ -14,6 +14,11 @@ export default {
   props: {
     titleName:String,
     to:String
+  },
+  methods:{
+    getDir(){
+      return this.to?this.to:'/';
+    }
   }
 }
 </script>

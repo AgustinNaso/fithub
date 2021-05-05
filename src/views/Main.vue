@@ -3,7 +3,7 @@
   <NavBar :selected="featured?0:1"/>
   <div class="mainBg">
     <div v-show="featured">
-      <Title title-name="Rutinas Recomendadas"/>
+      <Title to="" title-name="Rutinas Recomendadas"/>
       <div class="routineContainer">
         <Routine
             class="routine"
@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <Title title-name="Explorar Rutinas"/>
+    <Title to="" title-name="Explorar Rutinas"/>
     <div class="searchBar">
       <div class="searchBox">
         <input name="search" type="text" class="searchInput"/>

@@ -11,7 +11,8 @@ const UserStore= {
         localStorage.setItem("loggedIn","true");
         return true;
     },
-    logOut(){
+    async logOut(){
+        await UserApi.logout();
         localStorage.setItem("loggedIn", "false");
     },
     isLoggedIn() {
