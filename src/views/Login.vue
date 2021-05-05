@@ -34,8 +34,8 @@ export default {
     }
   },
   methods:{
-    logIn() {
-      this.store.logIn(this.name,this.password);
+    async logIn() {
+      await this.store.logIn(this.name,this.password);
     }
   },
   created() {
