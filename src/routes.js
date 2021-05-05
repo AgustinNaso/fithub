@@ -13,6 +13,7 @@ import MissingPage from "@/views/MissingPage";
 import EditProfile from "./views/EditProfile";
 import EditRoutine from "@/views/EditRoutine";
 import PermissionDenied from "./views/PermissionDenied";
+import Verify from "@/views/Verify";
 
 Vue.use(VueRouter)
 
@@ -82,6 +83,11 @@ const routes = [
         path: "/permissionDenied",
         name: "permissionDenied",
         component: PermissionDenied
+    },
+    {
+        path: "/verify/:email/:id",
+        name: "verify",
+        component: Verify
     },
     {
         path: "*",
