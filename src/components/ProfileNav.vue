@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import router from "@/routes";
+
 export default {
   name: "ProfileNav",
   props:{
@@ -27,6 +29,7 @@ export default {
   methods: {
     logOut(){
       this.userStore.logOut();
+      router.push("/");
     }
   }
 }

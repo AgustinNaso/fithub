@@ -1,18 +1,12 @@
 const UserStore= {
-    loggedIn : true,
     logIn(){
-        this.loggedIn = true
-        this.setState();
+        localStorage.setItem("loggedIn","true");
     },
     logOut(){
-        this.loggedIn = false;
-        this.setState();
+        localStorage.setItem("loggedIn", "false");
     },
     isLoggedIn() {
-        return this.loggedIn;
-    },
-    setState(){
-        localStorage.setItem("loggedIn",this.loggedIn);
+        return localStorage.getItem("loggedIn") === 'true';
     }
 }
 export default UserStore

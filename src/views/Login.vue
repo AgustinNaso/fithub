@@ -2,11 +2,11 @@
   <div class="outer">
     <NavBar logging></NavBar>
     <div class="loginBg">
-      <h1>Ingresar</h1>
+      <h1 >Ingresar</h1>
       <form>
         <Input type="text" name="email" label="Email"/>
         <Input type="password" name="password" label="Contraseña"/>
-        <FormBtn @click="logIn" text="Ingresar"/>
+        <div  class="clicker" @click="logIn"><FormBtn @click="logIn" text="Ingresar"/></div>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
     </div>
@@ -65,5 +65,9 @@ form{
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+}
+
+.clicker{
+  width: 100%;
 }
 </style>
