@@ -12,6 +12,7 @@ import MyRoutines from "@/views/MyRoutines";
 import MissingPage from "@/views/MissingPage";
 import EditProfile from "./views/EditProfile";
 import EditRoutine from "@/views/EditRoutine";
+import Verify from "@/views/Verify";
 
 Vue.use(VueRouter)
 
@@ -76,6 +77,11 @@ const routes = [
         path: "/editRoutine",
         name: "editRoutine",
         component: EditRoutine
+    },
+    {
+        path: "/verify/:email/:id",
+        name: "verify",
+        component: Verify
     },
     {
         path: "*",
