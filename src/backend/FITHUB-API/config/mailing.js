@@ -11,7 +11,7 @@ module.exports = {
         from: 'Exercise <noreply@exercise.com>',
         subject: 'Confirmación de Cuenta Fithub',
         htmlBodyTemplate:
-            `<div>
+                `<div>
                 <h1 style="text-align: center;">
                     <strong>Bienvenido a <span style="color: #42b983;">FitHub</span></strong>
                 </h1>
@@ -24,8 +24,18 @@ module.exports = {
                     <span>Valido hasta <%EXPIRATION_DATE%></span>
                 </p>
                 <div>
-                    <button>
-                    <a href="<%CONFIRM_LINK%>">VERIFIQUE SU EMAIL</a>
+                    <button   style=
+                              "width: 50%;
+                              padding:10px;
+                              border: 3px solid #707070;
+                              background-color: #42b983;
+                              font-size: 30px;
+                              font-weight: 550;
+                              color: black;
+                              color: black;
+                              cursor: pointer;
+                              text-align: center;">
+                    <a href="<%CONFIRM_LINK%>" style="color: #0a2118; text-underline: none">VERIFIQUE SU EMAIL</a>
                     </button>
                 <div>
                 <h1 style="text-align: center;">
@@ -40,3 +50,4 @@ module.exports = {
         codeExpirationInterval: 24 * 60 * 60 * 1000
     }
 }
+
