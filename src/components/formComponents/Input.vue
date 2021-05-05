@@ -1,7 +1,9 @@
 <template>
 <div :class="{inputContainer: true, small: small}">
   <label :class="{light:light}">{{label}}</label>
-  <input :type="type" :name="name" :class="{light:light, error:error}"/>
+  <input :type="type" :name="name" :class="{light:light, error:error}"
+         :value="modelValue"
+         @input="$emit('input', $event.target.value)"/>
 </div>
 </template>
 
@@ -15,7 +17,8 @@ export default {
     name:String,
     label:String,
     error:Boolean,
-    light:Boolean
+    light:Boolean,
+    modelValue: String
   }
 }
 </script>

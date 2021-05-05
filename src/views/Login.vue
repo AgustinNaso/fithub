@@ -4,8 +4,8 @@
     <div class="loginBg">
       <h1 >Ingresar</h1>
       <form>
-        <Input type="text" name="email" label="Email"/>
-        <Input type="password" name="password" label="Contraseña"/>
+        <Input  v-model="name" type="text" name="email" label="Email"/>
+        <Input  v-model="password" type="password" name="password" label="Contraseña"/>
         <div  class="clicker" @click="logIn"><FormBtn @click="logIn" text="Ingresar"/></div>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
@@ -28,12 +28,14 @@ export default {
   components: {NavBar,Footer, FormBtn, Input,AltLink},
   data(){
     return{
-      store: UserStore
+      store: UserStore,
+      name:'',
+      password:'',
     }
   },
   methods:{
     logIn() {
-      this.store.logIn();
+      this.store.logIn(this.name,this.password);
     }
   },
   created() {

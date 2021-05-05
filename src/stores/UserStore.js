@@ -1,6 +1,15 @@
+import {UserApi,Credentials} from "@/backend/user";
+
 const UserStore= {
-    logIn(){
+    async logIn(username,password){
+        const creds = new Credentials(username,password);
+        try {
+            await UserApi.login(creds);
+        }catch (error){
+            return false;
+        }
         localStorage.setItem("loggedIn","true");
+        return true;
     },
     logOut(){
         localStorage.setItem("loggedIn", "false");
