@@ -6,7 +6,7 @@
       <form>
         <Input  v-model="name" type="text" name="email" label="Email"/>
         <Input  v-model="password" type="password" name="password" label="Contraseña"/>
-        <div  class="clicker" @click="logIn"><FormBtn @click="logIn" text="Ingresar"/></div>
+        <div  class="clicker" @click="logIn"><FormBtn text="Ingresar"/></div>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
     </div>

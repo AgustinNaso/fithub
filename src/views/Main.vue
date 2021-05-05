@@ -54,6 +54,8 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Title from "@/components/Title";
 import Routine from "@/components/Routine";
+import {RoutineApi} from "@/backend/routines"
+
 export default {
   name: "Main",
   components: { Routine, Title, Footer, NavBar},
@@ -69,6 +71,9 @@ export default {
     $route () {
       this.pageNumber = parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1;
     }
+  },
+  created() {
+    RoutineApi.getRoutines().then((value) => console.log(value));
   }
 }
 </script>
