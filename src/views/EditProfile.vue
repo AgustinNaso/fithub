@@ -1,6 +1,6 @@
 <template>
   <div class="outer">
-    <NavBar logged-in/>
+    <NavBar/>
     <div class="mainBg">
       <Title title-name="Mi cuenta" to="./userProfile"/>
       <div class="userContainer">

@@ -1,29 +1,37 @@
 <template>
   <nav>
     <router-link to="/main"><h1>Fithub</h1></router-link>
-    <div class="butContainer" v-show="!loggedIn && !logging">
+    <div class="butContainer" v-show="!store.isLoggedIn() && !logging">
       <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
       <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
     </div>
-    <div class="navContainer" v-show="loggedIn && !logging">
+    <div class="navContainer" v-show="store.isLoggedIn() && !logging">
       <router-link to="/explore/1"><MainBtnNav text="Explorar" :selected="selected === 1"/></router-link>
       <router-link to="/myroutines"><MainBtnNav text="Mis Rutinas" :selected="selected === 2"/></router-link>
       <router-link to="/createRoutine"><MainBtnNav text="Crear Rutina" :selected="selected === 3"/></router-link>
     </div>
-    <ProfileNav v-show="loggedIn" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"/>
+    <ProfileNav :userStore="store" v-show="store.isLoggedIn()" user-img="https://static1.bigstockphoto.com/1/7/2/large1500/27169880.jpg" user-name="Juan Doe"/>
   </nav>
 </template>
 
 <script>
 import ProfileNav from "@/components/ProfileNav";
 import MainBtnNav from "./MainBtnNav";
+import UserStore from "../stores/UserStore";
 export default {
   name: "NavBar",
   components: {MainBtnNav, ProfileNav},
   props: {
-    loggedIn:Boolean,
     selected:Number,
     logging:Boolean
+  },
+  data() {
+    return {
+      store: UserStore
+    }
+  },
+  created() {
+    this.store.getState();
   }
 }
 </script>

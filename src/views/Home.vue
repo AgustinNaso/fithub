@@ -1,6 +1,6 @@
 <template>
   <div class="homeWrap">
-    <NavBar not-logged-in />
+    <NavBar />
     <div class="homeBg">
       <div class="homeSection">
         <h1>Entrena gratis, en cualquier lado.</h1>
@@ -25,9 +25,22 @@
 <script>
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import router from "@/routes";
+import UserStore from "@/stores/UserStore";
 export default {
   name: "Home",
-  components: { Footer, NavBar}
+  components: { Footer, NavBar},
+  data(){
+    return{
+      store: UserStore
+    }
+  },
+  created() {
+    this.store.getState();
+    if (this.store.isLoggedIn()){
+      router.push("main");
+    }
+  }
 }
 </script>
 

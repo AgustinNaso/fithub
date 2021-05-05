@@ -1,6 +1,6 @@
 <template>
   <div class="mainContainer">
-    <NavBar logged-in :selected="3"/>
+    <NavBar :selected="3"/>
     <div class="bodyContainer">
     <Title title-name="Crear Rutina" to="/main"/>
       <div class="content">

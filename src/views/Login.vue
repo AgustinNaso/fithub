@@ -6,7 +6,7 @@
       <form>
         <Input type="text" name="email" label="Email"/>
         <Input type="password" name="password" label="Contraseña"/>
-        <FormBtn text="Ingresar"/>
+        <FormBtn @click="logIn" text="Ingresar"/>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
     </div>
@@ -20,10 +20,28 @@ import FormBtn from "../components/formComponents/FormBtn";
 import AltLink from "../components/formComponents/AltLink";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import UserStore from "../stores/UserStore";
+import router from "../routes";
 
 export default {
   name: "Login",
-  components: {NavBar,Footer, FormBtn, Input,AltLink}
+  components: {NavBar,Footer, FormBtn, Input,AltLink},
+  data(){
+    return{
+      store: UserStore
+    }
+  },
+  methods:{
+    logIn() {
+      this.store.logIn();
+    }
+  },
+  created() {
+    this.store.getState();
+    if (this.store.isLoggedIn()){
+      router.push("main");
+    }
+  }
 }
 </script>
 

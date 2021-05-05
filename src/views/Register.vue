@@ -25,10 +25,23 @@ import FormBtn from "../components/formComponents/FormBtn";
 import AltLink from "../components/formComponents/AltLink";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import UserStore from "@/stores/UserStore";
+import router from "@/routes";
 
 export default {
   name: "Login",
-  components: {NavBar,Footer, FormBtn, Input,AltLink}
+  components: {NavBar,Footer, FormBtn, Input,AltLink},
+  data(){
+    return{
+      store: UserStore
+    }
+  },
+  created() {
+    this.store.getState();
+    if (this.store.isLoggedIn()){
+      router.push("main");
+    }
+  }
 }
 </script>
 

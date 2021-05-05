@@ -7,7 +7,7 @@
     <div v-if="isOpen" class="dropdown">
       <ul>
         <router-link to="/userProfile"><li>Mi Cuenta</li></router-link>
-        <li class="signOut">Cerrar Sesion</li>
+        <li @click="logOut" class="signOut">Cerrar Sesion</li>
       </ul>
     </div>
   </transition>
@@ -20,9 +20,15 @@ export default {
   name: "ProfileNav",
   props:{
     userName: String,
-    userImg: String
+    userImg: String,
+    userStore: Object
   },
-  data(){ return {isOpen: false}}
+  data(){ return {isOpen: false}},
+  methods: {
+    logOut(){
+      this.userStore.logOut();
+    }
+  }
 }
 </script>
 
@@ -74,6 +80,7 @@ li{
   color:black;
   border:none;
   text-shadow: none;
+  cursor: pointer;
 }
 
 .fade-enter-active,
