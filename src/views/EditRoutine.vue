@@ -1,6 +1,6 @@
 <template>
   <div class="generalContainer">
-    <NavBar/>
+    <NavBar logged-in/>
 
     <div class="routineBg">
       <div class="routineIntro">
