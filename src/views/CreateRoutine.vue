@@ -7,25 +7,30 @@
         <div class="completeInfo">
           <form>
             <label class="textLabel">Nombre</label>
-            <input class="textInput" type="text" name="name">
+            <input class="textInput" type="text" name="name" v-model="nombre">
             <label class="textLabel">Descripción</label>
-            <textarea class="descBox" cols="30" rows="8"></textarea>
+            <textarea class="descBox" cols="30" rows="4" v-model="descripcion"></textarea>
+            <label class="textLabel">Dificultad</label>
+            <select class="textInput" v-model="dificultad">
+              <option disabled value="" >Seleccione una dificultad</option>
+              <option>rookie</option>
+              <option>beginner</option>
+              <option>intermediate</option>
+              <option>advanced</option>
+              <option>expert</option>
+            </select>
             <div class="checkbox">
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="public" name="security">
+                <input class="checkBtn" type="radio" id="public" value="public" v-model="visibilidad">
                 <label for="public">Pública</label>
               </div>
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="private" name="security">
+                <input class="checkBtn" type="radio" id="private" value="private" v-model="visibilidad">
                 <label for="private">Privada</label>
               </div>
             </div>
             <button class="createbtn">Crear Rutina</button>
           </form>
-        </div>
-        <div class="insertImg">
-          <img class="imgPic" src="../assets/imageicon.png" alt="imageIcon"/>
-          <h3 class="imgh2" >Elegir imagen</h3>
         </div>
         <img class="mainImg" src="../assets/activity_tracker.svg" alt="activityTracker"/>
       </div>
@@ -40,7 +45,15 @@ import Title from "../components/Title";
 import Footer from "@/components/Footer";
 export default {
   name: "CreateRoutine",
-  components: {Footer, NavBar, Title}
+  components: {Footer, NavBar, Title},
+  data(){
+    return{
+      nombre:"",
+      descripcion:"",
+      dificultad:"beginner",
+      visibilidad:"public"
+    }
+  }
 }
 </script>
 
@@ -160,31 +173,7 @@ input[type="radio"]:checked + *::before {
   cursor: pointer;
 }
 
-.insertImg {
-  display: flex;
-  flex-direction: column;
-  height: 300px;
-  width: 300px;
-  border: #42b983 5px solid;
-  border-radius: 30px;
-  margin: 70px 0 0 25px;
-  position: relative;
-  background:  rgba(66, 185, 131, 0.25);
-  justify-content: center;
-  align-items: center;
-}
 
-.insertImg img {
-  height: 200px;
-  width: 200px;
-}
-
-.imgh2 {
-  color: #030303;
-  width: 100%;
-  text-align: center;
-  font-size: 25px;
-}
 
 .mainImg {
   width: 400px;
