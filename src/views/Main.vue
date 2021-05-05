@@ -28,13 +28,13 @@
     <div class="routineContainer">
       <Routine
           class="routine"
-          v-for="i in 9"
+          v-for="(routine,i) in routines"
           :key="i"
-          title="Brazos"
-          :rating="3"
-          owner="Juan Oriana"
-          owner-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg/1200px-John_Doe%2C_born_John_Nommensen_Duchac.jpg"
-          description="Esta rutina es increible. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          :title="routine.name"
+          :rating="routine.averageRating"
+          :owner="routine.user.username"
+          :owner-img="routine.user.avatarUrl"
+          :description="routine.detail"
       />
     </div>
 
@@ -65,7 +65,8 @@ export default {
   data() {
     return {
       pageNumber: parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1,
-      lastPage: false
+      lastPage: false,
+      routines: undefined
     }
   },
   watch:{
@@ -75,7 +76,7 @@ export default {
   },
   created() {
     RoutineApi.getRoutines().then((value) => {
-      console.log(value);
+      this.routines = value.content;
       this.lastPage = value.isLastPage;
     });
   }
