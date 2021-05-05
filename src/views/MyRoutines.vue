@@ -7,13 +7,13 @@
         <Routine
             is-mine
             class="routine"
-            v-for="i in 6"
+            v-for="(routine,i) in routines"
             :key="i"
-            title="Brazos"
-            :rating="3"
-            owner="Juan Oriana"
-            owner-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg/1200px-John_Doe%2C_born_John_Nommensen_Duchac.jpg"
-            description="Esta rutina es increible. "
+            :title="routine.name"
+            :rating="routine.averageRating"
+            :owner="routine.user.username"
+            :owner-img="routine.user.avatarUrl"
+            :description="routine.detail"
         />
       </div>
     </div>
@@ -26,9 +26,21 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Title from "@/components/Title";
 import Routine from "@/components/Routine";
+import {RoutineApi} from "@/backend/routines";
 export default {
   name: "MyRoutines",
-  components: {Routine, Title, Footer, NavBar}
+  components: {Routine, Title, Footer, NavBar},
+  data() {
+    return {
+      routines: undefined
+    }
+  },
+  created() {
+    RoutineApi.getRoutines().then((value) => {
+      this.routines = value.content;
+    });
+  }
+
 
 }
 </script>

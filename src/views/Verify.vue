@@ -18,8 +18,7 @@ export default {
       const emailVerif = new EmailVerifier(this.$route.query.email,this.$route.query.code);
       await UserApi.verifyEmail(emailVerif);
     }catch (e){
-      router.push("/error")
-      return;
+      router.push("/permissionDenied");
     }
     this.verified= true;
   }
