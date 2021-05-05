@@ -5,13 +5,13 @@
       <h1>Registrarse</h1>
       <form>
         <div class="nameBox">
-          <Input type="text" name="name" label="Nombre" small/>
-          <Input type="text" name="surname" label="Apellido" small/>
+          <Input v-model="name" type="text" name="name" label="Nombre" small/>
+          <Input v-model="surname" type="text" name="surname" label="Apellido" small/>
         </div>
-        <Input type="email" name="email" label="Email"/>
-        <Input type="password" name="password" label="Contraseña"/>
-        <Input type="password" name="passwordConf" label="Confrimar contraseña"/>
-        <FormBtn text="Registrarse"/>
+        <Input v-model="email" type="email" name="email" label="Email"/>
+        <Input v-model="password" type="password" name="password" label="Contraseña"/>
+        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confrimar contraseña"/>
+        <div  class="clicker" @click="register"><FormBtn text="Registrarse"/></div>
         <AltLink to="/login" text="Ya tienes una cuenta? Ingresar"/>
       </form>
     </div>
@@ -27,13 +27,31 @@ import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import UserStore from "@/stores/UserStore";
 import router from "@/routes";
+import {RegisterCredentials, UserApi} from "@/backend/user";
 
 export default {
   name: "Login",
   components: {NavBar,Footer, FormBtn, Input,AltLink},
   data(){
     return{
-      store: UserStore
+      store: UserStore,
+      name:"",
+      surname:"",
+      password:"",
+      passwordConf:"",
+      email:"",
+    }
+  },
+  methods: {
+    register(){
+      let registerCred;
+      try {
+        registerCred = new RegisterCredentials(this.name, this.surname, this.password, this.email)
+      }
+      catch (e){
+        alert(e.message);
+      }
+      UserApi.register(registerCred);
     }
   },
   created() {
@@ -72,4 +90,8 @@ form{
   width: 100%;
   justify-content: space-between;
 }
+.clicker{
+  width: 100%;
+}
+
 </style>
