@@ -6,18 +6,18 @@
         <div class="userContainer">
           <div class="userData">
             <div class="dataContainer">
+              <p class="dataType">Nombre</p>
+              <p class="dataInfo">{{ userData.firstName }}</p>
+            </div>
+            <div class="infoUnderline"/>
+            <div class="dataContainer">
+              <p class="dataType">Apellido</p>
+              <p class="dataInfo">{{ userData.lastName }}</p>
+            </div>
+            <div class="infoUnderline"/>
+            <div class="dataContainer">
               <p class="dataType">Email</p>
-              <p class="dataInfo">facha@mail.com</p>
-            </div>
-            <div class="infoUnderline"/>
-            <div class="dataContainer">
-              <p class="dataType">Fecha de nacimiento</p>
-              <p class="dataInfo">11/11/1984</p>
-            </div>
-            <div class="infoUnderline"/>
-            <div class="dataContainer">
-              <p class="dataType">País o Región</p>
-              <p class="dataInfo">Buenos Aires</p>
+              <p class="dataInfo">{{ userData.email }}</p>
             </div>
             <div class="infoUnderline"/>
 
@@ -28,8 +28,8 @@
 
           </div>
           <div class="userProf">
-              <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
-            <div class="nameContainer">John Doe</div>
+              <img class="imgContainer" :src = "store.getImg()" alt="user image">
+            <div class="nameContainer">{{ store.getName() }}</div>
           </div>
         </div>
     </div>
@@ -43,18 +43,22 @@ import NavBar from "../components/NavBar";
 import Footer from "@/components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
+import {UserApi} from "@/backend/user";
+
 export default {
   name: "UserProfile",
   components: {Footer, Title,NavBar},
   data(){
     return{
       store: UserStore,
+      userData: {email:"",firstName:"",lastName:""}
     }
   },
-  created() {
+  async created() {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
     }
+    this.userData =  await UserApi.getCurrentUser();
   }
 }
 </script>
