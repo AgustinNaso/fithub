@@ -14,6 +14,7 @@
             :owner="routine.user.username"
             :owner-img="routine.user.avatarUrl"
             :description="routine.detail"
+            :difficulty="routine.difficulty"
         />
       </div>
     </div>

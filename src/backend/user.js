@@ -26,7 +26,7 @@ class UserApi {
     }
 
     static async getCurrentUser(controller) {
-        return await Api.get(`${UserApi.url}/current`, false, controller);
+        return await Api.get(`${UserApi.url}/current`, true, controller);
     }
 
 }

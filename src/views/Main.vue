@@ -15,6 +15,7 @@
             owner="Juan Oriana"
             owner-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg/1200px-John_Doe%2C_born_John_Nommensen_Duchac.jpg"
             description="Esta rutina es increible. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            difficulty="beginner"
         />
       </div>
     </div>
@@ -35,6 +36,7 @@
           :owner="routine.user.username"
           :owner-img="routine.user.avatarUrl"
           :description="routine.detail"
+          :difficulty="routine.difficulty"
       />
     </div>
 

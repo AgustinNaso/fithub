@@ -10,7 +10,7 @@
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playContainer">
-      <p>Adepto - 60'</p>
+      <p>{{difficulty}}</p>
       <div class="playBtn">
         <div class="triangle"/>
       </div>
@@ -38,7 +38,8 @@ export default {
     rating:Number,
     routineImg:String,
     isMine:Boolean,
-    isFeatured:Boolean
+    isFeatured:Boolean,
+    difficulty:String
   }
 }
 </script>

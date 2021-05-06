@@ -8,15 +8,15 @@ class RoutineApi {
     }
 
     static async getRoutines(controller) {
-        return await Api.get(`${RoutineApi.url}?page=0&size=20&orderBy=date&direction=asc`, true, controller);
+        return await Api.get(`${RoutineApi.url}?page=0&size=20&orderBy=date&direction=asc`, false, controller);
     }
 
     static async getUserRoutines(controller) {
-        return await Api.get(`${RoutineApi.url}?page=0&size=9&orderBy=date&direction=asc`, false, controller);
+        return await Api.get(`${RoutineApi.url}?page=0&size=9&orderBy=date&direction=asc`, true, controller);
     }
 
     static async createRoutine(routineBase,controller) {
-        await Api.post(`${RoutineApi.url}`, false, routineBase, controller);
+        await Api.post(`${RoutineApi.url}`, true, routineBase, controller);
     }
 
 
