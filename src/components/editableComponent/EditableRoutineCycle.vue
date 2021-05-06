@@ -3,6 +3,7 @@
     <h2 class="sectionTitle" style="color: #42b983"> Ciclo de Ejercitación {{nroDeCiclo + 1}}</h2>
     <button @click="addExcercise()">Agg ejercicio</button>
     <button @click="removeExcercise()">Rem ejercicio</button>
+
     <div class="routineBlockDiv">
       <div v-for="excercise in excercises" :key="excercise">
         <span><EditableRoutineBlock green/></span>
