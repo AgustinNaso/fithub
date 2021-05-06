@@ -22,7 +22,7 @@
           <div class="infoUnderline"/>
           <div class="buttonContainer">
             <button  type="button" class="confirmButton">Confirmar Cambios</button>
-            <button type="button" class="cancelButton">Cancelar</button>
+            <router-link to="/userProfile"><button type="button" class="cancelButton">Cancelar</button></router-link>
           </div>
         </div>
         <div class="userProf">
@@ -150,14 +150,14 @@ export default {
 
 .buttonContainer{
   margin-top: 50px;
-  margin-left: 50px;
+  margin-left: 20px;
   display: flex;
   justify-content: space-evenly;
 }
 
 
 .confirmButton{
-  width: 50%;
+  width: 350px;
   border-radius: 40px;
   padding:10px;
   border: 3px solid #707070;
@@ -180,7 +180,7 @@ export default {
 }
 
 .cancelButton{
-  width: 35%;
+  width: 200px;
   border-radius: 40px;
   padding: 10px;
   border: 3px solid #d01212;

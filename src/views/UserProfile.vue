@@ -23,7 +23,6 @@
 
             <div class="buttonContainer">
               <router-link to="/editProfile"><button  type="button" class="editButton">Editar Perfil</button></router-link>
-              <button type="button" class="pwdButton">Cambiar Contraseña</button>
             </div>
 
           </div>
@@ -148,7 +147,6 @@ export default {
   cursor: pointer;
   text-align: center;
   transition: 0.2s ease-in-out;
-
 }
 .editButton:hover{
   background-color: rgba(158, 168, 163, 0.4);
@@ -158,33 +156,6 @@ export default {
 .editButton:active {
   background: transparent;
 }
-
-
-.pwdButton{
-  width: 360px;
-  border-radius: 40px;
-  border: 3px solid #d01212;
-  background: transparent;
-  font-size: 30px;
-  font-weight: 550;
-  color: #d01212;
-  cursor: pointer;
-  text-align: center;
-  transition: 0.2s ease-in-out;
-  padding:10px;
-
-
-
-}
-.pwdButton:hover{
-  background-color: #f7a6a6;
-  transition: 0.2s ease-in-out;
-}
-
-.pwdButton:active {
-  background: transparent;
-}
-
 
 .mainBg{
   flex: 1;
