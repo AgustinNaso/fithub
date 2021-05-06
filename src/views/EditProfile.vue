@@ -16,7 +16,7 @@
           </div>
           <div class="infoUnderline"/>
           <div class="buttonContainer">
-            <button  type="button" class="confirmButton">Confirmar Cambios</button>
+            <button @click="saveEdit" type="button" class="confirmButton">Confirmar Cambios</button>
             <router-link to="/userProfile"><button type="button" class="cancelButton">Cancelar</button></router-link>
           </div>
         </div>
@@ -37,6 +37,7 @@ import Footer from "../components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
 import {UserApi} from "@/backend/user";
+import {EditCredentials} from "../backend/user";
 
 export default {
   name: "EditProfile",
@@ -45,6 +46,18 @@ export default {
     return {
       store: UserStore,
       userData: {firstName:"",lastName:""}
+    }
+  },
+  methods: {
+    saveEdit(){
+      let editCred;
+      try {
+        editCred = new EditCredentials(this.userData.firstName, this.userData.lastName);
+      }
+      catch (e){
+        alert(e.message);
+      }
+      UserApi.saveEdits(editCred);
     }
   },
   async created() {
