@@ -35,7 +35,7 @@
               <div v-for="ex in cycles[index]" :key="ex">
                 <span><EditableRoutineBlock green/></span>
               </div>
-              <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('routine',index)" alt=""/>
+              <img class="addButton" src="../assets/add-button-green.png" @click="addExcercise('routine',index)" alt=""/>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <div v-for="exc in coolDown" :key="exc">
             <EditableRoutineBlock green/>
           </div>
-          <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('coolDown',index)" alt=""/>
+          <img class="addButton" src="../assets/add-button-green.png" @click="addExcercise('coolDown',index)" alt=""/>
 
         </div>
       </div>
@@ -230,6 +230,6 @@ export default {
 
 .addButton {
   height: 150px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 </style>
