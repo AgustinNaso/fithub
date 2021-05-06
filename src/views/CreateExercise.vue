@@ -13,15 +13,15 @@
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="active" value="active" v-model="actividad">
-                <label for="active">Actividad</label>
+                <input class="checkBtn" type="radio" id="exercise" value="exercise" v-model="actividad">
+                <label for="exercise">Actividad</label>
               </div>
               <div class="pBox">
                 <input class="checkBtn" type="radio" id="rest" value="rest" v-model="actividad">
                 <label for="rest">Descanso</label>
               </div>
             </div>
-            <div  class="clicker"><button class="createbtn">Crear Ejercicio</button></div>
+            <div class="clicker" @click="createExercise"><button class="createbtn">Crear Ejercicio</button></div>
           </form>
         </div>
       </div>
@@ -36,6 +36,8 @@ import Title from "../components/Title";
 import Footer from "@/components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
+import {ExerciseApi,Exercise} from "@/backend/exercises";
+
 export default {
   name: "CreateExercise",
   components: {Footer, NavBar, Title},
@@ -43,8 +45,19 @@ export default {
     return{
       nombre:"",
       descripcion:"",
-      actividad:"active",
+      actividad:"exercise",
       store: UserStore
+    }
+  },
+  methods:{
+    async createExercise(){
+      const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
+      try{
+        await ExerciseApi.addExercise(exercise);
+      }catch (e) {
+        await alert(e);
+      }
+      await router.push("/");
     }
   },
   created() {

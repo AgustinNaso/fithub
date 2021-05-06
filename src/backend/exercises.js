@@ -15,8 +15,6 @@ class ExerciseApi {
         await Api.post(`${ExerciseApi.url}`, true, exercise, controller);
     }
 
-
-
 }
 
 class Exercise {
