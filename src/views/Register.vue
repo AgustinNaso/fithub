@@ -46,12 +46,13 @@ export default {
     register(){
       let registerCred;
       try {
-        registerCred = new RegisterCredentials(this.name, this.surname, this.password, this.email)
+        registerCred = new RegisterCredentials(this.name, this.surname, this.password, this.email);
+        UserApi.register(registerCred);
+
       }
       catch (e){
         alert(e.message);
       }
-      UserApi.register(registerCred);
     }
   },
   created() {
