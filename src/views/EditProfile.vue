@@ -22,7 +22,7 @@
         </div>
         <div class="userProf">
           <img class="imgContainer" :src = "store.getImg()" alt="add image">
-          <img class="editImage" src="../assets/edit_picture.svg">
+          <img class="editImage" src="../assets/edit_picture.svg" alt="user image">
         </div>
       </div>
     </div>
@@ -49,15 +49,17 @@ export default {
     }
   },
   methods: {
-    saveEdit(){
+    async saveEdit(){
       let editCred;
       try {
         editCred = new EditCredentials(this.userData.firstName, this.userData.lastName);
+        await UserApi.saveEdits(editCred);
       }
       catch (e){
         alert(e.message);
       }
-      UserApi.saveEdits(editCred);
+      await this.store.saveName(this.userData.firstName,this.userData.lastName);
+      await router.push('/userProfile');
     }
   },
   async created() {
