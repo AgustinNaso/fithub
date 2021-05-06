@@ -15,8 +15,8 @@ export default {
 p{
   font-size: 12px;
   color: red;
-  margin: -32px 0 20px 20px;
-  text-align: center;
+  margin: 4px 0 20px 20px;
+  text-align: left;
   padding: 0;
 }
 </style>

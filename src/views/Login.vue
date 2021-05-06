@@ -4,8 +4,8 @@
     <div class="loginBg">
       <h1 >Ingresar</h1>
       <form @submit.prevent>
-        <Input  v-model="name" type="text" name="email" label="Email"/>
-        <Input  v-model="password" type="password" name="password" label="Contraseña"/>
+        <Input  v-model="name" type="text" name="email" label="Email*" :error="nameErr" :error-msg="nameErrMsg"/>
+        <Input  v-model="password" type="password" name="password" label="Contraseña*" :error="passErr" :error-msg="passErrMsg"/>
         <button class="clicker" @click="logIn">Ingresar</button>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
@@ -21,6 +21,7 @@ import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import UserStore from "../stores/UserStore";
 import router from "../routes";
+import {isEmpty,validateEmail} from "@/backend/checks";
 
 export default {
   name: "Login",
@@ -30,14 +31,38 @@ export default {
       store: UserStore,
       name:'',
       password:'',
+      nameErr:false,
+      passErr:false,
+      nameErrMsg:"",
+      passErrMsg:"",
     }
   },
   methods:{
     async logIn() {
       //chequeos login
+      this.passErr = false;
+      this.nameErr = false;
+
+      if (!validateEmail(this.name) || isEmpty(this.name)){
+        this.nameErr = true;
+        this.nameErrMsg = "El email ingresado no es valido.";
+      }
+      if (isEmpty(this.password)){
+        this.passErr = true;
+        this.passErrMsg = "Debe ingresar una contraseña";
+      }
+
+      if (this.nameErr || this.passErr){
+        return;
+      }
+
       await this.store.logIn(this.name,this.password);
       if(this.store.isLoggedIn()){
         await router.push("main");
+      }else{
+        this.nameErr = true;
+        this.passErr = true;
+        this.nameErrMsg = "No se encontro una cuenta con estas credenciales";
       }
     }
   },
