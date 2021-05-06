@@ -22,13 +22,12 @@
           <div v-for="exc in warmUp" :key="exc">
             <EditableRoutineBlock orange/>
           </div>
-          <img class="addButton" src="../assets/add-button.png" @click="addExcercise('warmUp',index)" alt=""/>
+          <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('warmUp',index)" alt=""/>
         </div>
         <div v-for="(cyc,index) in cycles" :key="cyc">
           <div class="cycleContainer">
             <h2 class="sectionTitle" style="color: #42b983"> Ciclo de Ejercitación {{index + 1}}</h2>
             <div class="buttonContainer">
-              <button @click="addExcercise('routine',index)">Agg ejercicio</button>
               <button @click="removeExcercise('routine',index)">Rem ejercicio</button>
               <button @click="removeCycle('routine',index)">Rem ciclo</button>
             </div>
@@ -36,17 +35,19 @@
               <div v-for="ex in cycles[index]" :key="ex">
                 <span><EditableRoutineBlock green/></span>
               </div>
+              <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('routine',index)" alt=""/>
             </div>
           </div>
         </div>
 
         <h2 class="sectionTitle" style="color: #DC9F28">Enfriamiento </h2>
-        <button @click="addExcercise('coolDown',index)">Agg ejercicio</button>
         <button @click="removeExcercise('coolDown',index)">Rem ejercicio</button>
         <div class="routineBlockDiv">
           <div v-for="exc in coolDown" :key="exc">
             <EditableRoutineBlock green/>
           </div>
+          <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('coolDown',index)" alt=""/>
+
         </div>
       </div>
       <div class="finalSection">
