@@ -5,7 +5,7 @@
     <Title title-name="Crear Rutina" to="/main"/>
       <div class="content">
         <div class="completeInfo">
-          <form>
+          <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre">
             <label class="textLabel">Descripción</label>

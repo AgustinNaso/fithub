@@ -3,7 +3,7 @@
     <NavBar logging></NavBar>
     <div class="loginBg">
       <h1>Registrarse</h1>
-      <form>
+      <form @submit.prevent>
         <div class="nameBox">
           <Input v-model="name" type="text" name="name" label="Nombre" small/>
           <Input v-model="surname" type="text" name="surname" label="Apellido" small/>

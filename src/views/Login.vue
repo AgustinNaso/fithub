@@ -3,10 +3,10 @@
     <NavBar logging></NavBar>
     <div class="loginBg">
       <h1 >Ingresar</h1>
-      <form>
+      <form @submit.prevent>
         <Input  v-model="name" type="text" name="email" label="Email"/>
         <Input  v-model="password" type="password" name="password" label="Contraseña"/>
-        <div  class="clicker" @click="logIn"><FormBtn text="Ingresar"/></div>
+        <button class="clicker" @click="logIn">Ingresar</button>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
     </div>
@@ -16,7 +16,6 @@
 
 <script>
 import Input from "../components/formComponents/Input";
-import FormBtn from "../components/formComponents/FormBtn";
 import AltLink from "../components/formComponents/AltLink";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
@@ -25,7 +24,7 @@ import router from "../routes";
 
 export default {
   name: "Login",
-  components: {NavBar,Footer, FormBtn, Input,AltLink},
+  components: {NavBar,Footer, Input,AltLink},
   data(){
     return{
       store: UserStore,
@@ -71,5 +70,22 @@ form{
 
 .clicker{
   width: 100%;
+}
+
+button{
+  width: 100%;
+  height: 45px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 400;
+  background: #42b983;
+  color: #030b10;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+button:hover{
+  background-color: #51cd94;
+  transition: 0.2s ease-in-out;
 }
 </style>
