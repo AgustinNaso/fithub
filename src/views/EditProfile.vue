@@ -6,18 +6,13 @@
       <div class="userContainer">
         <div class="userData">
           <div class="dataContainer">
-            <p class="dataType">Email</p>
-            <input class="dataInfo" type="text">
+            <p class="dataType">Nombre</p>
+            <input v-model="userData.firstName" class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
           <div class="dataContainer">
-            <p class="dataType">Fecha de nacimiento</p>
-            <input class="dataInfo" type="date">
-          </div>
-          <div class="infoUnderline"/>
-          <div class="dataContainer">
-            <p class="dataType">País o Región</p>
-            <input class="dataInfo" type="text">
+            <p class="dataType">Apellido</p>
+            <input v-model="userData.lastName" class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
           <div class="buttonContainer">
@@ -26,8 +21,8 @@
           </div>
         </div>
         <div class="userProf">
-          <img class="imgContainer" src = "../assets/johndoe.png" alt="user image">
-          <div class="nameContainer">John Doe</div>
+          <img class="imgContainer" :src = "store.getImg()" alt="add image">
+          <img class="editImage" src="../assets/edit_picture.svg">
         </div>
       </div>
     </div>
@@ -41,18 +36,22 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
+import {UserApi} from "@/backend/user";
+
 export default {
   name: "EditProfile",
   components: {Footer, Title,NavBar},
   data(){
     return {
-      store: UserStore
+      store: UserStore,
+      userData: {firstName:"",lastName:""}
     }
   },
-  created() {
+  async created() {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
     }
+    this.userData =  await UserApi.getCurrentUser();
   }
 }
 </script>
@@ -116,12 +115,9 @@ export default {
   object-fit:cover;
 }
 
-.nameContainer {
-  font-size: 52px;
-  text-align: center;
-  color: whitesmoke;
-  text-shadow: 0 3px 6px rgba(0,0,0,0.57);
-
+.editImage {
+  height: 50px;
+  width: auto;
 }
 
 .userData {
@@ -222,6 +218,13 @@ export default {
     width: 200px;
     height: 200px;
   }
+
+  .editImage {
+    height: 40px;
+    width: auto;
+    margin-top: 20px;
+  }
+
   .userData{
     width: 80%;
     align-items: center;
