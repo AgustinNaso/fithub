@@ -15,23 +15,39 @@
           Duracion 30'
         </div>
       </div>
-      <div v-for="(cyc,index) in cycles" :key="cyc">
-          <span><EditableRoutineCycle :nro-de-ciclo="index"/></span>
-      </div>
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
-        <button>Agg ejercicio</button>
+        <button @click="removeExcercise('warmUp',index)">Rem ejercicio</button>
         <div class="routineBlockDiv">
-          <EditableRoutineBlock orange/>
-          <EditableRoutineBlock green/>
+          <div v-for="exc in warmUp" :key="exc">
+            <EditableRoutineBlock orange/>
+          </div>
+          <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('warmUp',index)" alt=""/>
+        </div>
+        <div v-for="(cyc,index) in cycles" :key="cyc">
+          <div class="cycleContainer">
+            <h2 class="sectionTitle" style="color: #42b983"> Ciclo de Ejercitación {{index + 1}}</h2>
+            <div class="buttonContainer">
+              <button @click="removeExcercise('routine',index)">Rem ejercicio</button>
+              <button @click="removeCycle('routine',index)">Rem ciclo</button>
+            </div>
+            <div class="routineBlockDiv">
+              <div v-for="ex in cycles[index]" :key="ex">
+                <span><EditableRoutineBlock green/></span>
+              </div>
+              <img class="addButton" src="../assets/add-button-green.png" @click="addExcercise('routine',index)" alt=""/>
+            </div>
+          </div>
         </div>
 
-        <h2 class="sectionTitle" style="color: #42b983">Ciclo de Ejercitacion A</h2>
+        <h2 class="sectionTitle" style="color: #DC9F28">Enfriamiento </h2>
+        <button @click="removeExcercise('coolDown',index)">Rem ejercicio</button>
         <div class="routineBlockDiv">
-        </div>
+          <div v-for="exc in coolDown" :key="exc">
+            <EditableRoutineBlock green/>
+          </div>
+          <img class="addButton" src="../assets/add-button-green.png" @click="addExcercise('coolDown',index)" alt=""/>
 
-        <h2 class="sectionTitle" style="color: #4D6DEB">Entrada en Calor</h2>
-        <div class="routineBlockDiv">
         </div>
       </div>
       <div class="finalSection">
@@ -48,27 +64,60 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Title from "../components/Title";
 import EditableRoutineBlock from "../components/editableComponent/EditableRoutineBlock";
-import EditableRoutineCycle from "../components/editableComponent/EditableRoutineCycle";
 import UserStore from "@/stores/UserStore";
 import router from "../routes";
 export default {
   name: "EditRoutine",
-  components: { EditableRoutineBlock, Title, Footer, NavBar,EditableRoutineCycle},
+  components: { EditableRoutineBlock, Title, Footer, NavBar},
   data() {
     return {
       store: UserStore,
       routineName: "Rutina",
       description: "Mi rutina para entrenar brazos",
+      warmUp: [{ej:"facha"}],
+      coolDown: [{ej:"fachero"}],
       cycles: [],
-      warmUp: [],
-      coolDown: [],
       cycleIdx: 0,
     }
   },
   methods: {
     addCycle() {
-      this.cycles.push(this.cycleIdx);
+      this.cycles.push([]);
       this.cycleIdx++;
+    },
+    addExcercise(cycle,idx) {
+      switch (cycle){
+        case "routine":
+          this.cycles[idx].push({nombre: "Flexiones", reps: 10, secs: 30});
+          break
+        case "coolDown":
+          this.coolDown.push("ES INCREIBLE");
+          break;
+        case "warmUp":
+          this.warmUp.push("ES INCREIBLE");
+          break;
+        default:
+          break;
+      }
+    },
+    removeExcercise(cycle,idx) {
+      switch (cycle) {
+        case "routine":
+          this.cycles[idx].pop();
+          break
+        case "coolDown":
+          this.coolDown.pop();
+          break;
+        case "warmUp":
+          this.warmUp.pop();
+          break;
+        default:
+          break;
+      }
+    },
+    removeCycle(idx){
+      this.cycles.splice(idx,1);
+
     }
   },
   created() {
@@ -113,7 +162,6 @@ export default {
   display:flex;
   flex-wrap:wrap;
   align-items: center;
-  border: 2px solid black;
 
 }
 
@@ -146,6 +194,7 @@ export default {
 
 }
 
+
 .acceptBtn,
 .cancelBtn{
   background: none;
@@ -177,5 +226,10 @@ export default {
 .cancelBtn:hover{
   background: #d45561;
   transition: 0.3s ease-in-out;
+}
+
+.addButton {
+  height: 150px;
+  margin-bottom: 25px;
 }
 </style>

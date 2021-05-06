@@ -10,7 +10,7 @@
         </div>
         <Input v-model="email" type="email" name="email" label="Email*"/>
         <Input v-model="password" type="password" name="password" label="Contraseña*"/>
-        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confrimar contraseña*"/>
+        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confirmar contraseña*"/>
         <div  class="clicker" @click="register"><FormBtn text="Registrarse"/></div>
         <AltLink to="/login" text="Ya tienes una cuenta? Ingresar"/>
       </form>

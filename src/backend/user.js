@@ -1,6 +1,6 @@
 import { Api } from './api.js';
 
-export { UserApi, Credentials, RegisterCredentials, EmailVerifier };
+export { UserApi, Credentials, RegisterCredentials, EmailVerifier, EditCredentials };
 
 class UserApi {
     static get url() {
@@ -30,6 +30,10 @@ class UserApi {
         return await Api.get(`${UserApi.url}/current`, true, controller);
     }
 
+    static async saveEdits(editCredentials, controller) {
+        await Api.put(`${UserApi.url}/current`, true, editCredentials, controller);
+    }
+
 }
 
 class Credentials {
@@ -47,6 +51,13 @@ class RegisterCredentials {
         this.email = email;
         this.avatarUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTap79kn13Sgurfpg09M7HmNKOeD-KXh2c-qsaJ15lI3K4-LlZM0SQxJKocKembu_N1tEA&usqp=CAU';
         this.username = email;
+    }
+}
+
+class EditCredentials {
+    constructor(firstName,lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }
 
