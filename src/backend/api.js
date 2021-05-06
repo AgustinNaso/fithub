@@ -12,6 +12,9 @@ class Api {
   }
 
   static async fetch(url, secure, init = {}, controller) {
+    if (!Api.token){
+      Api.token = localStorage.getItem("token");
+    }
     if (secure && Api.token) {
       if (!init.headers)
         init.headers = {};

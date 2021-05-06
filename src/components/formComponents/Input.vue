@@ -4,13 +4,16 @@
   <input :type="type" :name="name" :class="{light:light, error:error}"
          :value="modelValue"
          @input="$emit('input', $event.target.value)"/>
+  <ErrorMsg v-show="error" :text="errorMsg"/>
 </div>
 </template>
 
 <script>
 
+import ErrorMsg from "@/components/formComponents/ErrorMsg";
 export default {
   name: "Input",
+  components: {ErrorMsg},
   props:{
     type:String,
     small:Boolean,
@@ -18,7 +21,8 @@ export default {
     label:String,
     error:Boolean,
     light:Boolean,
-    modelValue: String
+    modelValue: String,
+    errorMsg:String,
   }
 }
 </script>
@@ -28,8 +32,9 @@ export default {
   width: 400px;
   color: #42b983;
   height: 45px;
-  margin-bottom: 36px;
+  margin-bottom: 45px;
   display: flex;
+  flex-direction: column;
 }
 
 label{
@@ -40,7 +45,7 @@ label{
   margin: -8px 0 0 25px;
 }
 input {
-  width: 100%;
+  width: 340px;
   background: #030b10;
   font-size: 18px;
   border: solid 2px #333;
@@ -64,6 +69,10 @@ input:focus {
 }
 .small{
   width:185px;
+}
+
+.small input{
+  width: 120px;
 }
 .error{
   border:solid 2px red;

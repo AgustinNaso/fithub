@@ -9,6 +9,7 @@ class UserApi {
 
     static async login(credentials, controller) {
         const result = await Api.post(`${UserApi.url}/login`, false, credentials, controller);
+        await localStorage.setItem("token",result.token);
         Api.token = result.token;
     }
 
