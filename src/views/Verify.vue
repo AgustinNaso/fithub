@@ -13,9 +13,8 @@
 </template>
 
 <script>
-//import router from "@/routes";
-//import {UserApi,EmailVerifier} from "@/backend/user";
-
+import router from "@/routes";
+import {UserApi,EmailVerifier} from "@/backend/user";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
@@ -28,12 +27,12 @@ export default {
     }
   },
   async created() {
-    //try {
-      //const emailVerif = new EmailVerifier(this.$route.query.email,this.$route.query.code);
-     // await UserApi.verifyEmail(emailVerif);
-    //}catch (e){
-     // router.push("/permissionDenied");
-   // }
+    try {
+      const emailVerif = new EmailVerifier(this.$route.query.email,this.$route.query.code);
+      await UserApi.verifyEmail(emailVerif);
+    }catch (e){
+      router.push("/permissionDenied");
+    }
     this.verified= true;
   }
 }
