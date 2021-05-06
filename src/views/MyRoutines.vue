@@ -18,6 +18,8 @@
             :owner-img="store.getImg()"
             :description="routine.detail"
             :difficulty="routine.difficulty"
+            :id="routine.id"
+            @deleteRoutine="deleteRoutine($event)"
         />
       </div>
     </div>
@@ -49,6 +51,16 @@ export default {
     RoutineApi.getUserRoutines().then((value) => {
       this.routines = value.content;
     });
+  },
+  methods:{
+    deleteRoutine: async function(id){
+      try{
+        await RoutineApi.deleteRoutine(id)
+      }catch (e){
+        alert(e);
+      }
+      window.location.reload();
+    }
   }
 
 
