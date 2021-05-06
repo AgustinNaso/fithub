@@ -21,7 +21,7 @@
       </div>
       <div v-show="isMine" class="editing">
         <p>Editar</p>
-        <p style="color:#FF3344">Eliminar</p>
+        <p @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
       </div>
     </div>
   </div>
@@ -39,7 +39,8 @@ export default {
     routineImg:String,
     isMine:Boolean,
     isFeatured:Boolean,
-    difficulty:String
+    difficulty:String,
+    id:Number
   }
 }
 </script>
@@ -175,5 +176,9 @@ h3{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+p{
+  cursor: pointer;
 }
 </style>

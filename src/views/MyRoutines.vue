@@ -2,7 +2,10 @@
   <div class="mainContainer">
     <NavBar :selected="2"/>
     <div class="mainBg">
-      <Title title-name="Mis Rutinas" to="/main"/>
+      <div class="titleContainer">
+        <Title title-name="Mis Rutinas" to="/main"/>
+        <router-link to="createRoutine"><button>Crear Rutina</button></router-link>
+      </div>
       <div class="routineContainer">
         <Routine
             is-mine
@@ -15,6 +18,8 @@
             :owner-img="store.getImg()"
             :description="routine.detail"
             :difficulty="routine.difficulty"
+            :id="routine.id"
+            @deleteRoutine="deleteRoutine($event)"
         />
       </div>
     </div>
@@ -46,6 +51,16 @@ export default {
     RoutineApi.getUserRoutines().then((value) => {
       this.routines = value.content;
     });
+  },
+  methods:{
+    deleteRoutine: async function(id){
+      try{
+        await RoutineApi.deleteRoutine(id)
+      }catch (e){
+        alert(e);
+      }
+      window.location.reload();
+    }
   }
 
 
@@ -86,4 +101,30 @@ div{
   margin-bottom: 30px;
 }
 
+.titleContainer{
+  display: flex;
+  width: 100%;
+}
+
+button{
+  width: 320px;
+  height: 80px;
+  border-radius: 12px;
+  font-size: 32px;
+  font-weight: 400;
+  background: #42b983;
+  color: #030b10;
+  outline: none;
+  cursor: pointer;
+  margin-right: 30px;
+  border: black 3px solid;
+}
+button:hover{
+  background-color: #51cd94;
+  transition: 0.2s ease-in-out;
+}
+
+a{
+  width: 320px;
+}
 </style>

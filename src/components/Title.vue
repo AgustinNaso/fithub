@@ -37,7 +37,7 @@ export default {
   height: 50px;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 60%;
 }
 
 .backArrow {

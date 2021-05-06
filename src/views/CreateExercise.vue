@@ -1,38 +1,29 @@
 <template>
   <div class="mainContainer">
-    <NavBar :selected="3"/>
+    <NavBar/>
     <div class="bodyContainer">
-    <Title title-name="Crear Rutina" to="/main"/>
+      <Title title-name="Crear Ejercicio" to="/main"/>
       <div class="content">
+        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
         <div class="completeInfo">
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
-            <label class="textLabel">Dificultad</label>
-            <select class="textInput" v-model="dificultad">
-              <option disabled value="" >Seleccione una dificultad</option>
-              <option>rookie</option>
-              <option>beginner</option>
-              <option>intermediate</option>
-              <option>advanced</option>
-              <option>expert</option>
-            </select>
             <div class="checkbox">
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="public" value="public" v-model="visibilidad">
-                <label for="public">Pública</label>
+                <input class="checkBtn" type="radio" id="exercise" value="exercise" v-model="actividad">
+                <label for="exercise">Actividad</label>
               </div>
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="private" value="private" v-model="visibilidad">
-                <label for="private">Privada</label>
+                <input class="checkBtn" type="radio" id="rest" value="rest" v-model="actividad">
+                <label for="rest">Descanso</label>
               </div>
             </div>
-            <div  class="clicker" @click="createRoutine"><button class="createbtn">Crear Rutina</button></div>
+            <div class="clicker" @click="createExercise"><button class="createbtn">Crear Ejercicio</button></div>
           </form>
         </div>
-        <img class="mainImg" src="../assets/activity_tracker.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -43,30 +34,30 @@
 import NavBar from "../components/NavBar";
 import Title from "../components/Title";
 import Footer from "@/components/Footer";
-import {RoutineBase, RoutineApi} from "@/backend/routines"
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
+import {ExerciseApi,Exercise} from "@/backend/exercises";
+
 export default {
-  name: "CreateRoutine",
+  name: "CreateExercise",
   components: {Footer, NavBar, Title},
   data(){
     return{
       nombre:"",
       descripcion:"",
-      dificultad:"beginner",
-      visibilidad:"public",
+      actividad:"exercise",
       store: UserStore
     }
   },
   methods:{
-    async createRoutine(){
-      const routineBase = new RoutineBase(this.nombre,this.descripcion,this.visibilidad === 'public',this.dificultad);
+    async createExercise(){
+      const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
       try{
-        await RoutineApi.createRoutine(routineBase);
+        await ExerciseApi.addExercise(exercise);
       }catch (e) {
         await alert(e);
       }
-      await router.push("/editRoutine");
+      await router.push("/");
     }
   },
   created() {
