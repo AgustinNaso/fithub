@@ -8,9 +8,9 @@
         <div class="completeInfo">
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
-            <input class="textInput" type="text" name="name" v-model="nombre">
+            <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
             <label class="textLabel">Descripción</label>
-            <textarea class="descBox" cols="30" rows="4" v-model="descripcion"></textarea>
+            <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
               <div class="pBox">
                 <input class="checkBtn" type="radio" id="active" value="active" v-model="actividad">

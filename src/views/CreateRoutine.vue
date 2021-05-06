@@ -7,9 +7,9 @@
         <div class="completeInfo">
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
-            <input class="textInput" type="text" name="name" v-model="nombre">
+            <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
             <label class="textLabel">Descripción</label>
-            <textarea class="descBox" cols="30" rows="4" v-model="descripcion"></textarea>
+            <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <label class="textLabel">Dificultad</label>
             <select class="textInput" v-model="dificultad">
               <option disabled value="" >Seleccione una dificultad</option>
