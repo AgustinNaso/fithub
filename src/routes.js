@@ -14,6 +14,7 @@ import EditProfile from "./views/EditProfile";
 import EditRoutine from "@/views/EditRoutine";
 import PermissionDenied from "./views/PermissionDenied";
 import Verify from "@/views/Verify";
+import CreateExercise from "@/views/CreateExercise";
 
 Vue.use(VueRouter)
 
@@ -88,6 +89,11 @@ const routes = [
         path: "/verify",
         name: "verify",
         component: Verify
+    },
+    {
+        path: "/createExercise",
+        name: "createExercise",
+        component: CreateExercise
     },
     {
         path: "*",
