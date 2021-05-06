@@ -7,6 +7,7 @@
         <div class="titleDiv">
           <Title to="" :title-name="routineName"/>
           <textarea class="subtitle"></textarea>
+          <button @click="addCycle()">Agg ciclo</button>
         </div>
 
         <div class="dataDiv">
@@ -14,11 +15,15 @@
           Duracion 30'
         </div>
       </div>
+      <div v-for="(cyc,index) in cycles" :key="cyc">
+          <span><EditableRoutineCycle :nro-de-ciclo="index"/></span>
+      </div>
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
+        <button>Agg ejercicio</button>
         <div class="routineBlockDiv">
           <EditableRoutineBlock orange/>
-          <EditableRoutineBlock orange/>
+          <EditableRoutineBlock green/>
         </div>
 
         <h2 class="sectionTitle" style="color: #42b983">Ciclo de Ejercitacion A</h2>
@@ -43,16 +48,27 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Title from "../components/Title";
 import EditableRoutineBlock from "../components/editableComponent/EditableRoutineBlock";
+import EditableRoutineCycle from "../components/editableComponent/EditableRoutineCycle";
 import UserStore from "@/stores/UserStore";
-import router from "@/routes";
+import router from "../routes";
 export default {
   name: "EditRoutine",
-  components: { EditableRoutineBlock, Title, Footer, NavBar},
+  components: { EditableRoutineBlock, Title, Footer, NavBar,EditableRoutineCycle},
   data() {
     return {
       store: UserStore,
       routineName: "Rutina",
       description: "Mi rutina para entrenar brazos",
+      cycles: [],
+      warmUp: [],
+      coolDown: [],
+      cycleIdx: 0,
+    }
+  },
+  methods: {
+    addCycle() {
+      this.cycles.push(this.cycleIdx);
+      this.cycleIdx++;
     }
   },
   created() {
@@ -97,6 +113,7 @@ export default {
   display:flex;
   flex-wrap:wrap;
   align-items: center;
+  border: 2px solid black;
 
 }
 
