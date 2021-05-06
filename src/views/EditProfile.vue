@@ -16,8 +16,8 @@
           </div>
           <div class="infoUnderline"/>
           <div class="buttonContainer">
-            <button @click="saveEdit" type="button" class="confirmButton">Confirmar Cambios</button>
             <router-link to="/userProfile"><button type="button" class="cancelButton">Cancelar</button></router-link>
+            <button @click="saveEdit" type="button" class="confirmButton">Confirmar Cambios</button>
           </div>
         </div>
         <div class="userProf">
@@ -166,24 +166,25 @@ export default {
   justify-content: space-evenly;
 }
 
-
 .confirmButton{
   width: 350px;
-  border-radius: 40px;
+  border-radius: 25px;
   padding:10px;
-  border: 3px solid #707070;
+  border: 4px solid #42b983;
   background: transparent;
-  font-size: 30px;
-  font-weight: 550;
-  color: #707070;
+  font-size: 26px;
+  font-weight: 700;
+  color: #42b983;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s ease-in-out;
-
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
 }
 .confirmButton:hover{
-  background-color: rgba(158, 168, 163, 0.4);
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
 }
 
 .confirmButton:active {
@@ -192,21 +193,23 @@ export default {
 
 .cancelButton{
   width: 200px;
-  border-radius: 40px;
+  border-radius: 25px;
   padding: 10px;
-  border: 3px solid #d01212;
+  border: 4px solid #d01212;
   background: transparent;
-  font-size: 30px;
-  font-weight: 550;
+  font-size: 26px;
+  font-weight: 700;
   color: #d01212;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s ease-in-out;
-
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
 }
 .cancelButton:hover{
   background-color: #f7a6a6;
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
+  color: #950707;
 }
 
 .cancelButton:active {

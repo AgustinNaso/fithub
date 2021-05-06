@@ -107,21 +107,25 @@ div{
 }
 
 button{
-  width: 320px;
-  height: 80px;
-  border-radius: 12px;
-  font-size: 32px;
-  font-weight: 400;
-  background: #42b983;
-  color: #030b10;
+  color: #35a371;
+  margin-right: 10px;
+  text-align: center;
+  padding: 8px 35px 8px 35px;
+  background-color: inherit;
+  border: 4px solid #42b983;
+  border-radius: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  text-decoration: none;
   outline: none;
+  transition: 0.3s ease-in-out;
+  margin-bottom: 10px;
   cursor: pointer;
-  margin-right: 30px;
-  border: black 3px solid;
 }
 button:hover{
-  background-color: #51cd94;
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
 }
 
 a{
