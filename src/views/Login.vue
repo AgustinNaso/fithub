@@ -34,7 +34,11 @@ export default {
   },
   methods:{
     async logIn() {
+      //chequeos login
       await this.store.logIn(this.name,this.password);
+      if(this.store.isLoggedIn()){
+        await router.push("main");
+      }
     }
   },
   created() {

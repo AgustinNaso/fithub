@@ -39,9 +39,21 @@
 import Title from "../components/Title";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import router from "@/routes";
+import UserStore from "@/stores/UserStore";
 export default {
   name: "EditProfile",
-  components: {Footer, Title,NavBar}
+  components: {Footer, Title,NavBar},
+  data(){
+    return {
+      store: UserStore
+    }
+  },
+  created() {
+    if (!this.store.isLoggedIn()) {
+      router.push("/permissionDenied");
+    }
+  }
 }
 </script>
 

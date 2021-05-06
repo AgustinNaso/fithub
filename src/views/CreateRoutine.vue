@@ -45,6 +45,7 @@ import Title from "../components/Title";
 import Footer from "@/components/Footer";
 import {RoutineBase, RoutineApi} from "@/backend/routines"
 import router from "@/routes";
+import UserStore from "@/stores/UserStore";
 export default {
   name: "CreateRoutine",
   components: {Footer, NavBar, Title},
@@ -53,7 +54,8 @@ export default {
       nombre:"",
       descripcion:"",
       dificultad:"beginner",
-      visibilidad:"public"
+      visibilidad:"public",
+      store: UserStore
     }
   },
   methods:{
@@ -65,6 +67,11 @@ export default {
         await alert(e);
       }
       await router.push("/editRoutine");
+    }
+  },
+  created() {
+    if (!this.store.isLoggedIn()) {
+      router.push("/permissionDenied");
     }
   }
 }

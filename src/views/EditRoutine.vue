@@ -43,13 +43,21 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Title from "../components/Title";
 import EditableRoutineBlock from "../components/editableComponent/EditableRoutineBlock";
+import UserStore from "@/stores/UserStore";
+import router from "@/routes";
 export default {
   name: "EditRoutine",
   components: { EditableRoutineBlock, Title, Footer, NavBar},
   data() {
     return {
+      store: UserStore,
       routineName: "Rutina",
       description: "Mi rutina para entrenar brazos",
+    }
+  },
+  created() {
+    if (!this.store.isLoggedIn()) {
+      router.push("/permissionDenied");
     }
   }
 }

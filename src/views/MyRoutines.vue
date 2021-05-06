@@ -11,8 +11,8 @@
             :key="i"
             :title="routine.name"
             :rating="routine.averageRating"
-            :owner="routine.user.username"
-            :owner-img="routine.user.avatarUrl"
+            :owner="store.getName()"
+            :owner-img="store.getImg()"
             :description="routine.detail"
             :difficulty="routine.difficulty"
         />
@@ -28,15 +28,21 @@ import Footer from "@/components/Footer";
 import Title from "@/components/Title";
 import Routine from "@/components/Routine";
 import {RoutineApi} from "@/backend/routines";
+import UserStore from "@/stores/UserStore";
+import router from "@/routes";
 export default {
   name: "MyRoutines",
   components: {Routine, Title, Footer, NavBar},
   data() {
     return {
+      store: UserStore,
       routines: undefined
     }
   },
   created() {
+      if (!this.store.isLoggedIn()) {
+        router.push("/permissionDenied");
+      }
     RoutineApi.getUserRoutines().then((value) => {
       this.routines = value.content;
     });

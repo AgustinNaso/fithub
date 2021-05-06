@@ -46,11 +46,19 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Title from "../components/Title";
 import RoutineBlock from "@/components/RoutineBlock";
+import UserStore from "@/stores/UserStore";
+import router from "@/routes";
 
 export default {
   name: "RoutineView",
   components: { RoutineBlock, Title, Footer, NavBar},
+  created() {
+    if (!this.store.isLoggedIn()) {
+      router.push("/permissionDenied");
+    }
+  },
   data() {return {
+    store: UserStore,
     routineName: "Rutina",
     description: "Mi rutina para entrenar brazos",
     warmUp: [{name: "Salto con Soga",
