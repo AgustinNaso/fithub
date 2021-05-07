@@ -12,8 +12,9 @@
     <div class="routineContainer">
       <Routine
           class="routine"
-          v-for="(routine,i) in routines"
-          :key="i"
+          v-for="(routine) in routines"
+          :key="routine.id"
+          :id="routine.id"
           :title="routine.name"
           :rating="routine.averageRating"
           :owner="routine.user.username"
