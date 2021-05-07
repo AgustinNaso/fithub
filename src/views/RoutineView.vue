@@ -15,19 +15,21 @@
         </div>
       </div>
       <div class="mainSection">
-        <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
+        <h2 class="sectionTitle" style="color: #DC9F28">{{warmUp.name}} </h2>
         <div class="routineBlockDiv">
-          <RoutineBlock v-for="(rout,idx) in warmUp" :key="idx" :orange="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />
+<!--          <RoutineBlock v-for="(rout,idx) in warmUp" :key="idx" :orange="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />-->
         </div>
 
-        <h2 class="sectionTitle" style="color: #42b983">Ciclo de Ejercitacion A</h2>
-        <div class="routineBlockDiv">
-          <RoutineBlock v-for="(rout,idx) in cycle" :key="idx" :green="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />
+        <div v-for="cycle in cycles" :key="cycle.id">
+          <h2 class="sectionTitle" style="color: #42b983">{{ cycle.name }}</h2>
+          <div class="routineBlockDiv">
+  <!--          <RoutineBlock v-for="(rout,idx) in cycle" :key="idx" :green="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />-->
+          </div>
         </div>
 
-        <h2 class="sectionTitle" style="color: #4D6DEB">Entrada en Calor</h2>
+        <h2 class="sectionTitle" style="color: #4D6DEB">{{ cooldown.name }}</h2>
         <div class="routineBlockDiv">
-          <RoutineBlock v-for="(rout,idx) in cooldown" :key="idx" :blue="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />
+<!--          <RoutineBlock v-for="(rout,idx) in cooldown" :key="idx" :blue="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />-->
         </div>
       </div>
       <div class="finalSection">
@@ -45,50 +47,40 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Title from "../components/Title";
-import RoutineBlock from "@/components/RoutineBlock";
 import UserStore from "@/stores/UserStore";
 import router from "@/routes";
+import {RoutineApi} from "@/backend/routines";
+import {CycleApi} from "@/backend/cycles";
 
 export default {
   name: "RoutineView",
-  components: { RoutineBlock, Title, Footer, NavBar},
-  created() {
+  components: {  Title, Footer, NavBar},
+  async created() {
     if (!this.store.isLoggedIn()) {
-      router.push("/permissionDenied");
+      await router.push("/permissionDenied");
+    }
+    try{
+      const data = await RoutineApi.getCycles(this.$route.params.id);
+      data.content.forEach((cycle) =>{
+        switch (cycle.type){
+          case 'warmup': this.warmUp = cycle; break;
+          case 'cooldown': this.cooldown = cycle;break;
+          case 'exercise': this.cycles.push(cycle);break;
+        }
+        console.log(CycleApi.getCycleExercises(cycle.id));
+      })
+    }catch (e){
+      await router.push("/error");
     }
   },
   data() {return {
     store: UserStore,
     routineName: "Rutina",
     description: "Mi rutina para entrenar brazos",
-    warmUp: [{name: "Salto con Soga",
-      reps: 10,
-      secs: 0},{
-      name: "Salto con Soga",
-      reps: 10,
-      secs: 0
-    }, {name: "Descanso",
-      reps: 10,
-      secs: 0}],
-    cycle: [{name: "Salto con Soga",
-      reps: 10,
-      secs: 0},{
-      name: "Salto con Soga",
-      reps: 10,
-      secs: 0
-    }, {name: "Descanso",
-      reps: 10,
-      secs: 0}],
-    cooldown: [{name: "Salto con Soga",
-      reps: 10,
-      secs: 0},{
-      name: "Salto con Soga",
-      reps: 10,
-      secs: 0
-    }, {name: "Descanso",
-      reps: 10,
-      secs: 0}],
-  }}
+    warmUp: {},
+    cooldown: {},
+    cycles: []
+  }},
 }
 </script>
 
