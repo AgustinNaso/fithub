@@ -26,9 +26,9 @@
 
         <div v-for="(el,index) in cycles" :key="index">
           <div class="cycleContainer">
+            <div class="cycleHeader">
             <h2 class="sectionTitle" style="color: #42b983"> Ciclo de Ejercitación {{index + 1}}</h2>
-            <div class="buttonContainer">
-              <button @click="removeCycle('routine',0)">Rem ciclo</button>
+              <button class="removeCycleButton" @click="removeCycle(index)">Remover ciclo</button>
             </div>
             <div class="routineBlockDiv">
               <div v-for="el in cycles[index]" :key="el.uuid">
@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)">Enfriamiento </h2>
+        <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> Enfriamiento </h2>
         <div class="routineBlockDiv">
           <div v-for="el in coolDown" :key="el.uuid">
             <EditableRoutineBlock blue :id="el.uuid" @removeExercise="removeExercise(coolDown,el.uuid)"/>
@@ -173,61 +173,86 @@ export default {
   justify-content: space-evenly;
 
 }
-
-
-.cycleButton{
+.cycleButton,.acceptBtn{
   align-self: center;
-  width: 300px;
   color: #35a371;
-  margin-right: 10px;
   text-align: center;
-  padding: 8px 35px 8px 35px;
   background-color: inherit;
   border: 4px solid #42b983;
   border-radius: 25px;
-  font-size: 26px;
   font-weight: 700;
   text-decoration: none;
   outline: none;
   transition: 0.3s ease-in-out;
+}
+
+.cycleButton{
+  width: 300px;
+  font-size: 26px;
+  padding: 8px 35px 8px 35px;
+  margin-right: 10px;
   margin-bottom: 10px;
+
 }
 
 .acceptBtn,
 .cancelBtn{
-  background: none;
   width: 300px;
   padding: 12px;
   font-size: 20px;
-  font-weight: 700;
-  border-radius: 30px;
-  border: black 5px solid;
   cursor: pointer;
 }
 
 .acceptBtn{
   color: #31ae7a;
+  background-color: inherit;
   border-color: #31ae7a ;
-}
-
-.cancelBtn{
-  color: black;
-  background: #FF3344;
-  border-color: #d01212 ;
-}
-
-.acceptBtn:hover{
-  background: #d3efe4;
-  transition: 0.5s ease-in-out;
-}
-
-.cancelBtn:hover{
-  background: #d45561;
   transition: 0.3s ease-in-out;
 }
+
 
 .addButton {
   height: 150px;
   margin-bottom: 25px;
 }
+
+.removeCycleButton, .cancelBtn{
+  border: 4px solid #d01212;
+  background: transparent;
+  border-radius: 25px;
+  font-weight: 700;
+  color: #d01212;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
+}
+
+.removeCycleButton{
+  font-size: 20px;
+  background-color: inherit;
+  margin: 1px 0 0 15px;
+  border-radius: 50px;
+  border-width: medium;
+  padding: 2px 5px 2px 5px;
+  height: 40px;
+}
+.removeCycleButton:hover, .cancelBtn:hover{
+  background-color: #f7a6a6;
+  transition: 0.3s ease-in-out;
+  color: #950707;
+}
+
+.acceptBtn:hover,.cycleButton:hover{
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
+}
+
+.cycleHeader{
+  display: flex;
+  align-items: center;
+}
+
 </style>
