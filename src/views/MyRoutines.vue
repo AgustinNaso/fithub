@@ -73,6 +73,7 @@ export default {
 div{
   overflow-x: hidden
 }
+
 .mainContainer{
   display: flex;
   min-height: 100vh;
