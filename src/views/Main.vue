@@ -8,23 +8,25 @@
         <input name="search" type="text" class="searchInput"/>
         <button name="search" class="searchBtn">Buscar!</button>
       </div>
-      <div class="orderElement">
-        <label class="textLabel">Ordenar por</label>
-        <select class="textInput" v-model="ordenarPor">
-          <option disabled value="" >Seleccione un criterio de ordenamiento</option>
-          <option value="averageRating">Puntuación</option>
-          <option value="difficulty">Dificultad</option>
-          <option value="name">Nombre</option>
-          <option value="date">Fecha De Creación</option>
-        </select>
-      </div>
-      <div class="orderElement">
-        <label class="textLabel">Visualizar de forma</label>
-        <select class="textInput" v-model="orden">
-          <option disabled value="" >Seleccione una forma de visualización</option>
-          <option value="asc">Ascendente</option>
-          <option value="desc">Descendente</option>
-        </select>
+      <div class="ordering">
+        <div class="orderElement">
+          <label class="textLabel">Ordenar por</label>
+          <select class="textInput" v-model="ordenarPor">
+            <option disabled value="" >Seleccione un criterio de ordenamiento</option>
+            <option value="averageRating">Puntuación</option>
+            <option value="difficulty">Dificultad</option>
+            <option value="name">Nombre</option>
+            <option value="date">Fecha De Creación</option>
+          </select>
+        </div>
+        <div class="orderElement">
+          <label class="textLabel">Visualizar de forma</label>
+          <select class="textInput" v-model="orden">
+            <option disabled value="" >Seleccione una forma de visualización</option>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -129,14 +131,24 @@ h1{
 }
 
 .searchBar{
-  width: 100%;
+  padding-left: 100px;
   display: flex;
   justify-content: space-evenly;
-  padding: 15px;
+  margin: -2px 0 10px 0;
+  align-items: flex-end;
+}
+
+@media (max-width: 1200px){
+  .searchBar{
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
 }
 
 .searchInput{
-  width: 400px;
+  width: 460px;
   font-size: 24px;
   padding: 5px;
   border-radius: 12px 0 0 12px;
@@ -147,9 +159,10 @@ h1{
 
 .searchBtn{
   height: 100%;
+
   font-size: 24px;
   border-radius: 0 12px 12px 0;
-  padding: 7px;
+  padding: 7px 22px 7px 7px;
   background: #31ae7a;
   border:none;
   cursor: pointer;
@@ -202,12 +215,19 @@ h1{
 .orderElement{
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 }
 
 .searchBox{
   display: flex;
   height: 40px;
+  margin-bottom: 6px;
 }
 
+.ordering{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 
