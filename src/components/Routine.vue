@@ -20,8 +20,8 @@
         <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
       </div>
       <div v-show="isMine" class="editing">
-        <p>Editar</p>
         <p @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
+        <p>Editar</p>
       </div>
     </div>
   </div>
