@@ -15,6 +15,10 @@ class ExerciseApi {
         await Api.post(`${ExerciseApi.url}`, true, exercise, controller);
     }
 
+    static async deleteExercise(exerciseId,controller){
+        await Api.delete(`${ExerciseApi.url}/${exerciseId}`,true,controller);
+    }
+
 }
 
 class Exercise {

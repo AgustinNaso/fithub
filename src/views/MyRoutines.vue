@@ -10,8 +10,8 @@
         <Routine
             is-mine
             class="routine"
-            v-for="(routine,i) in routines"
-            :key="i"
+            v-for="(routine) in routines"
+            :key="routine.id"
             :title="routine.name"
             :rating="routine.averageRating"
             :owner="store.getName()"
