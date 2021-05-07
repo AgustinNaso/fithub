@@ -2,19 +2,22 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="mainBg">
-      <Title :title-name="routineName" to="/routine"/>
+      <Title :title-name="routineName"></Title>
       <div class="executionContainer">
-        <div class="btnContainer">
+        <div class="exerciseContainer">
           <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft">
-          <img class="pauseBtn" src="../assets/pauseIcon.png" alt="pauseIcon">
+          <ExerciseExecution
+              cycle
+              seconds
+              title="Salto con Soga"
+              duration="10"
+          />
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight">
         </div>
-        <ExerciseExecution
-            cycle
-            seconds
-            title="Salto con Soga"
-            duration="10"
-        />
+        <div class="buttonContainer">
+          <button type="button" class="pauseButton">Pausar</button>
+          <router-link to="/routine"><button type="button" class="finishButton">Terminar</button></router-link>
+        </div>
       </div>
     </div>
     <Footer/>
@@ -24,11 +27,11 @@
 <script>
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import Title from "@/components/Title";
 import ExerciseExecution from "../components/ExerciseExecution";
+import Title from "../components/Title";
 export default {
   name: "RoutineExecution",
-  components: {ExerciseExecution, Title, Footer, NavBar},
+  components: {Title, ExerciseExecution, Footer, NavBar},
   data() {
     return {
       routineName: "Rutina"
@@ -60,27 +63,80 @@ div{
 
 .executionContainer{
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  margin-top: 20px;
+  flex-direction: column;
 }
 
-.btnContainer{
+.exerciseContainer{
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: space-around;
-  height: 400px;
+  width: 100%;
 }
 
 .arrowBtn{
   height: 100px;
   width: 100px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
-.pauseBtn {
-  height: 125px;
-  width: 150px;
-  margin-bottom: 5px;
+
+.buttonContainer{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 600px;
+}
+
+.pauseButton{
+  width: 200px;
+  border-radius: 25px;
+  padding:10px;
+  border: 4px solid #42b983;
+  background: transparent;
+  font-size: 26px;
+  font-weight: 700;
+  color: #42b983;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
+}
+.pauseButton:hover{
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
+}
+
+.pauseButton:active {
+  background: transparent;
+}
+
+.finishButton{
+  width: 200px;
+  border-radius: 25px;
+  padding: 10px;
+  border: 4px solid #d01212;
+  background: transparent;
+  font-size: 26px;
+  font-weight: 700;
+  color: #d01212;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
+}
+
+.finishButton:hover{
+  background-color: #f7a6a6;
+  transition: 0.3s ease-in-out;
+  color: #950707;
+}
+
+.finishButton:active {
+  background: transparent;
 }
 </style>
