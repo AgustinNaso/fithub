@@ -13,7 +13,6 @@
           Duracion 30'
         </div>
       </div>
-      <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
 
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
@@ -38,6 +37,8 @@
             </div>
           </div>
         </div>
+        <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
+
 
         <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> Enfriamiento </h2>
         <div class="routineBlockDiv">
@@ -197,7 +198,7 @@ export default {
   padding: 8px 35px 8px 35px;
   margin-right: 10px;
   margin-bottom: 10px;
-
+  margin-left: 35vw;
 }
 
 .acceptBtn,
