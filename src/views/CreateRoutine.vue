@@ -179,20 +179,27 @@ input[type="radio"]:checked + *::before {
 }
 
 .createbtn {
-  color: white;
-  border: none;
+  color: #35a371;
+  margin-right: 10px;
   text-align: center;
-  background-color: #42b983;
+  padding: 8px 35px 8px 35px;
+  background-color: inherit;
+  border: 4px solid #42b983;
   border-radius: 25px;
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 26px;
+  font-weight: 700;
   text-decoration: none;
   outline: none;
-  width: 230px;
-  height: 40px;
+  transition: 0.3s ease-in-out;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
+.createbtn:hover {
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
+}
 
 
 .mainImg {

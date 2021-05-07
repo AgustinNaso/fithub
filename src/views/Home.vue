@@ -12,8 +12,6 @@
         </p>
         <div class="butContainer">
           <router-link to="/main"><button class="explorebtn">Explorar Rutinas</button></router-link>
-          <router-link to="/login"><button class="loginbtn">Ingresar</button></router-link>
-          <router-link to="/register"><button class="rgtbtn">Registrarse</button></router-link>
         </div>
       </div>
       <router-link to="/userProfile"><img src="../assets/hero.svg" alt="Training"/></router-link>
@@ -85,51 +83,6 @@ img{
   min-height: 100vh;
 }
 
-.loginbtn{
-  color: #35a371;
-  margin-right: 10px;
-  text-align: center;
-  padding: 8px 35px 8px 35px;
-  background-color: inherit;
-  border: 4px solid #42b983;
-  border-radius: 25px;
-  font-size: 26px;
-  font-weight: 700;
-  text-decoration: none;
-  outline: none;
-  transition: 0.3s ease-in-out;
-  margin-bottom: 10px;
-
-}
-.loginbtn:hover {
-  transition: 0.3s ease-in-out;
-  background-color: #dbefe7;
-  color: #156844;
-}
-
-.rgtbtn{
-  color: #030b10;
-  margin-right: 10px;
-  text-align: center;
-  border: 4px solid #42b983;
-  padding: 8px 35px 8px 35px;
-  background-color: #42b983;
-  border-radius: 25px;
-  font-size: 26px;
-  font-weight: bold;
-  text-decoration: none;
-  outline: none;
-  transition: 0.3s ease-in-out;
-}
-
-
-
-.rgtbtn:hover {
-  transition: 0.3s ease-in-out;
-  background-color: #77c6a2;
-  border-color: #77c6a2;
-}
-
 .explorebtn {
   color: #35a371;
   margin-right: 10px;
@@ -144,13 +97,7 @@ img{
   outline: none;
   transition: 0.3s ease-in-out;
   margin-bottom: 10px;
-
-}
-
-.rgtbtn:hover {
-  transition: 0.3s ease-in-out;
-  background-color: #77c6a2;
-  border-color: #77c6a2;
+  cursor: pointer;
 }
 
 .explorebtn:hover {
@@ -161,7 +108,7 @@ img{
 
 .butContainer {
   margin-top: 30px;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 </style>

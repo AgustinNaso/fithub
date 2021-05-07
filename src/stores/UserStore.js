@@ -11,7 +11,7 @@ const UserStore= {
         }
         await localStorage.setItem("loggedIn","true");
         const data =  await UserApi.getCurrentUser();
-        await localStorage.setItem("fullName", data.firstName + " " + data.lastName);
+        this.saveName(data.firstName,data.lastName);
         await localStorage.setItem("img", data.avatarUrl);
         return true;
     },
@@ -27,6 +27,10 @@ const UserStore= {
     },
     getImg(){
         return localStorage.getItem("img");
+    },
+
+    async saveName(firstName,lastName){
+        await localStorage.setItem("fullName", firstName + " " + lastName);
     }
 }
 export default UserStore
