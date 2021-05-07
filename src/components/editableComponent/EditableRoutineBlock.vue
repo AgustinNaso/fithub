@@ -1,6 +1,7 @@
 <template>
   <div class="blockContainer">
     <div class="blockBg" :class="{orange:orange, blue:blue, green:green}">
+      <button @click="$emit('removeExercise',id)" >X</button>
       <input class="routineInput" type="text" name="routineName">
       <div class="valueFill"><input type="number" class="numInput" name="reps"><p> repeticiones</p></div>
       <div class="valueFill"><input type="number" class="numInput" name="secs"><p> segundos</p></div>
@@ -15,7 +16,8 @@ export default {
   props:{
     orange: Boolean,
     blue: Boolean,
-    green: Boolean
+    green: Boolean,
+    id: Number,
   }
 }
 </script>

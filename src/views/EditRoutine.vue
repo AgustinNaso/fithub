@@ -7,51 +7,53 @@
         <div class="titleDiv">
           <Title to="" :title-name="routineName"/>
           <textarea class="subtitle"></textarea>
-          <button @click="addCycle()">Agg ciclo</button>
         </div>
-
         <div class="dataDiv">
           Dificultad:Dificil<br>
           Duracion 30'
         </div>
       </div>
+      <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
+
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
-        <button @click="removeExcercise('warmUp',index)">Rem ejercicio</button>
+        <button @click="removeExercise('warmUp',0)">Rem ejercicio</button>
         <div class="routineBlockDiv">
-          <div v-for="exc in warmUp" :key="exc">
-            <EditableRoutineBlock orange/>
+          <div v-for="(el,idx) in warmUp" :key="idx">
+            <EditableRoutineBlock orange :id="idx"/>
           </div>
-          <img class="addButton" src="../assets/add-button-yellow.png" @click="addExcercise('warmUp',index)" alt=""/>
+<!--          @click="addExercise('warmUp',idx)"-->
+          <img class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise('warmUp',0)" alt=""/>
         </div>
-        <div v-for="(cyc,index) in cycles" :key="cyc">
+
+        <div v-for="(el,index) in cycles" :key="index">
           <div class="cycleContainer">
             <h2 class="sectionTitle" style="color: #42b983"> Ciclo de Ejercitación {{index + 1}}</h2>
             <div class="buttonContainer">
-              <button @click="removeExcercise('routine',index)">Rem ejercicio</button>
-              <button @click="removeCycle('routine',index)">Rem ciclo</button>
+              <button @click="removeExercise('routine',0)">Rem ejercicio</button>
+              <button @click="removeCycle('routine',0)">Rem ciclo</button>
             </div>
             <div class="routineBlockDiv">
-              <div v-for="ex in cycles[index]" :key="ex">
-                <span><EditableRoutineBlock green/></span>
+              <div v-for="(ex,idx) in cycles[index]" :key="idx">
+                <span><EditableRoutineBlock green :id="idx"/> </span>
               </div>
-              <img class="addButton" src="../assets/add-button-green.png" @click="addExcercise('routine',index)" alt=""/>
+              <img class="addButton" src="../assets/add-button-green.png" @click="addExercise('routine',0)"  alt=""/>
+
             </div>
           </div>
         </div>
 
-        <h2 class="sectionTitle" style="color: #DC9F28">Enfriamiento </h2>
-        <button @click="removeExcercise('coolDown',index)">Rem ejercicio</button>
+        <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)">Enfriamiento </h2>
+        <button @click="removeExercise('coolDown',0)">Remover ejercicio</button>
         <div class="routineBlockDiv">
-          <div v-for="exc in coolDown" :key="exc">
-            <EditableRoutineBlock green/>
+          <div v-for="(el,idx) in coolDown" :key="idx">
+            <EditableRoutineBlock blue/>
           </div>
-          <img class="addButton" src="../assets/add-button-green.png" @click="addExcercise('coolDown',index)" alt=""/>
-
+          <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise('coolDown',0)" alt=""/>
         </div>
       </div>
       <div class="finalSection">
-        <button class="acceptBtn"> Registrar Cambios</button>
+        <button class="acceptBtn"> Registrar Cambios</button>s
         <button class="cancelBtn"> Cancelar Cambios</button>
       </div>
     </div>
@@ -65,7 +67,7 @@ import Footer from "../components/Footer";
 import Title from "../components/Title";
 import EditableRoutineBlock from "../components/editableComponent/EditableRoutineBlock";
 import UserStore from "@/stores/UserStore";
-import router from "../routes";
+ import router from "../routes";
 export default {
   name: "EditRoutine",
   components: { EditableRoutineBlock, Title, Footer, NavBar},
@@ -85,7 +87,7 @@ export default {
       this.cycles.push([]);
       this.cycleIdx++;
     },
-    addExcercise(cycle,idx) {
+    addExercise(cycle,idx) {
       switch (cycle){
         case "routine":
           this.cycles[idx].push({nombre: "Flexiones", reps: 10, secs: 30});
@@ -100,15 +102,15 @@ export default {
           break;
       }
     },
-    removeExcercise(cycle,idx) {
+    removeExercise(cycle,idx) {
       switch (cycle) {
-        case "routine":
+        case 'routine':
           this.cycles[idx].pop();
           break
-        case "coolDown":
+        case 'coolDown':
           this.coolDown.pop();
           break;
-        case "warmUp":
+        case 'warmUp':
           this.warmUp.pop();
           break;
         default:
@@ -117,7 +119,6 @@ export default {
     },
     removeCycle(idx){
       this.cycles.splice(idx,1);
-
     }
   },
   created() {
@@ -194,6 +195,24 @@ export default {
 
 }
 
+
+.cycleButton{
+  align-self: center;
+  width: 300px;
+  color: #35a371;
+  margin-right: 10px;
+  text-align: center;
+  padding: 8px 35px 8px 35px;
+  background-color: inherit;
+  border: 4px solid #42b983;
+  border-radius: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  text-decoration: none;
+  outline: none;
+  transition: 0.3s ease-in-out;
+  margin-bottom: 10px;
+}
 
 .acceptBtn,
 .cancelBtn{
