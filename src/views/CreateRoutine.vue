@@ -13,11 +13,11 @@
             <label class="textLabel">Dificultad</label>
             <select class="textInput" v-model="dificultad">
               <option disabled value="" >Seleccione una dificultad</option>
-              <option>rookie</option>
-              <option>beginner</option>
-              <option>intermediate</option>
-              <option>advanced</option>
-              <option>expert</option>
+              <option value="rookie">Novato</option>
+              <option value="beginner">Principiante</option>
+              <option value="intermediate">Intermedio</option>
+              <option value="advanced">Avanzado</option>
+              <option value="expert">Experto</option>
             </select>
             <div class="checkbox">
               <div class="pBox">
