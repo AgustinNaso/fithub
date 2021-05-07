@@ -17,6 +17,7 @@ import Verify from "@/views/Verify";
 import CreateExercise from "@/views/CreateExercise";
 import MyExercises from "@/views/MyExercises";
 import EditExercise from "@/views/EditExercise";
+import RoutineExecution from "./views/RoutineExecution";
 
 Vue.use(VueRouter)
 
@@ -106,6 +107,11 @@ const routes = [
         path: "/myexercises",
         name:"myexercises",
         component: MyExercises
+    },
+    {
+        path: "/routineExecution",
+        name:"routineExecution",
+        component: RoutineExecution
     },
     {
         path: "*",

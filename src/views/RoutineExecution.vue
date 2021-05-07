@@ -10,7 +10,7 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight">
         </div>
         <ExerciseExecution
-            cooldown
+            cycle
             seconds
             title="Salto con Soga"
             duration="10"
