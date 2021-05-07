@@ -1,12 +1,12 @@
 <template>
-  <div :class="{exerciseBox:true, green:isActivity, blue:isRest}">
+  <div :class="{exerciseBox:true, green:isActivity, blue:!isActivity}">
     <div class="textContainer">
       <h3>{{title}}</h3>
       <p class="description">{{description}}</p>
     </div>
     <div class="buttonContainer">
       <img class="edit" src="../assets/editicon.png" alt="editicon"/>
-      <img class="trash" src="../assets/basuraicon.png" alt="trashicon"/>
+      <img @click="$emit('deleteExercise',id)" class="trash" src="../assets/basuraicon.png" alt="trashicon"/>
     </div>
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
     title:String,
     description:String,
     isActivity:Boolean,
-    isRest:Boolean
+    isRest:Boolean,
+    id:Number
   }
 }
 </script>
@@ -39,8 +40,8 @@ export default {
 }
 
 .blue{
-  background: rgb(133,158,255);
-  background: linear-gradient( rgba(133,158,255,1) 0%, rgba(78,100,188,1) 100%);
+  background: rgb(207,198,177);
+  background: linear-gradient(rgba(207,198,177,1) 0%, rgba(173,168,156,1) 100%);
 }
 
 .textContainer{

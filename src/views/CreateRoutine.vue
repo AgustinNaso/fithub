@@ -1,8 +1,8 @@
 <template>
   <div class="mainContainer">
-    <NavBar :selected="3"/>
+    <NavBar/>
     <div class="bodyContainer">
-    <Title title-name="Crear Rutina" to="/main"/>
+    <Title title-name="Crear Rutina" to="/myroutines"/>
       <div class="content">
         <div class="completeInfo">
           <form @submit.prevent>

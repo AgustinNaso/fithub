@@ -2,7 +2,7 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="bodyContainer">
-      <Title title-name="Crear Ejercicio" to="/main"/>
+      <Title title-name="Crear Ejercicio" to="/myexercises"/>
       <div class="content">
         <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
         <div class="completeInfo">
@@ -57,7 +57,7 @@ export default {
       }catch (e) {
         await alert(e);
       }
-      await router.push("/");
+      await router.push("/myexercises");
     }
   },
   created() {
