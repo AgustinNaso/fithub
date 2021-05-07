@@ -16,8 +16,12 @@
         <p v-show="isEditing || secs"> segundo/s</p>
       </div>
       <div class="icons">
-        <img @click="$emit('removeExercise',id)" class="trash" src="../../assets/basuraicon.png" alt="trashicon"/>
-        <img @click="handleEdit" class="edit" src="../../assets/editicon.png" alt="editicon"/>
+        <img v-show="!isEditing" @click="$emit('removeExercise',id)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
+        <img v-show="!isEditing" @click="handleEdit" class="edit" src="../../assets/editicon.png" alt="edit"/>
+        <div class="confirmChanges" v-show="isEditing"  @click="handleEdit">
+          <p>Confirmar cambios</p>
+          <img class="edit" src="../../assets/tick.png" alt="confirm"/>
+        </div>
       </div>
     </div>
     <img class="routineDiv" src = "../../assets/right-arrow.png" alt="blockDiv"/>
@@ -39,7 +43,7 @@ export default {
       currentEx : this.exercises[0],
       reps: 0,
       secs: 0,
-      isEditing: false
+      isEditing: true
     }
   },
   methods:{
@@ -153,5 +157,16 @@ h4{
 
 .realVal{
   margin-right: 8px;
+}
+
+.confirmChanges{
+  background-color: rgba(128, 128, 128, 0.36);
+  border: 1px dotted black;
+  border-radius: 12px;
+  padding: 0 6px 0 6px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 </style>

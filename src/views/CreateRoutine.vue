@@ -43,7 +43,7 @@
 import NavBar from "../components/NavBar";
 import Title from "../components/Title";
 import Footer from "@/components/Footer";
-import {RoutineBase, RoutineApi} from "@/backend/routines"
+import {RoutineBase, RoutineApi, Cycle} from "@/backend/routines"
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
 export default {
@@ -62,7 +62,13 @@ export default {
     async createRoutine(){
       const routineBase = new RoutineBase(this.nombre,this.descripcion,this.visibilidad === 'public',this.dificultad);
       try{
-        await RoutineApi.createRoutine(routineBase);
+        const data = await RoutineApi.createRoutine(routineBase);
+        const warmUp = new Cycle("Entrada en Calor",'warmup',1,1);
+        const coolDown = new Cycle("Enfriamiento",'exercise',2,1);
+        const training = new Cycle("Ciclo de Ejercitacion",'exercise',3,1);
+        await RoutineApi.addCycle(data.id,warmUp);
+        await RoutineApi.addCycle(data.id,coolDown);
+        await RoutineApi.addCycle(data.id,training);
       }catch (e) {
         await alert(e);
       }

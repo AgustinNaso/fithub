@@ -16,7 +16,7 @@ class RoutineApi {
     }
 
     static async createRoutine(routineBase,controller) {
-        await Api.post(`${RoutineApi.url}`, true, routineBase, controller);
+        return await Api.post(`${RoutineApi.url}`, true, routineBase, controller);
     }
 
     static async addCycle(routineId,cycle,controller) {
@@ -57,5 +57,6 @@ class Cycle{
         this.type = type;
         this.order = order;
         this.repetitions = repetitions;
+        this.detail = "";
     }
 }
