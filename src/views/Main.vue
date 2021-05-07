@@ -25,7 +25,26 @@
         <input name="search" type="text" class="searchInput"/>
         <button name="search" class="searchBtn">Buscar!</button>
       </div>
+      <div class="orderElement">
+        <label class="textLabel">Ordenar por</label>
+        <select class="textInput" v-model="ordenarPor">
+          <option disabled value="" >Seleccione un criterio de ordenamiento</option>
+          <option value="averageRating">Puntuación</option>
+          <option value="difficulty">Dificultad</option>
+          <option value="name">Nombre</option>
+          <option value="date">Fecha De Creación</option>
+        </select>
+      </div>
+      <div class="orderElement">
+        <label class="textLabel">Visualizar de forma</label>
+        <select class="textInput" v-model="orden">
+          <option disabled value="" >Seleccione una forma de visualización</option>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
+        </select>
+      </div>
     </div>
+
     <div class="routineContainer">
       <Routine
           class="routine"
@@ -67,6 +86,8 @@ export default {
   data() {
     return {
       pageNumber: parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1,
+      ordenarPor:"averageRating",
+      orden:"desc",
       lastPage: false,
       routines: undefined
     }
@@ -126,8 +147,7 @@ h1{
 .searchBar{
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 15px;
 }
 
@@ -175,6 +195,34 @@ h1{
   height: 32px;
   margin: 6px 15px 0 15px;
 
+}
+
+.textInput{
+  border: solid 3px #42b983;
+  border-radius: 20px;
+  font-size: 18px;
+  padding: 10px;
+  resize: none;
+  outline: none;
+  color: #42b983;
+  width: 210px;
+}
+
+.textLabel {
+  color: #42b983;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 12px;
+}
+
+.orderElement{
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBox{
+  display: flex;
+  height: 40px;
 }
 
 </style>
