@@ -47,8 +47,6 @@ export default {
     }
     ExerciseApi.getExercises().then((value) => {
       this.exercises = value.content;
-      console.log("hola");
-      console.log(this.exercises);
     });
   },
   methods:{

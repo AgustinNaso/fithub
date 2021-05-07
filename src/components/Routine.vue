@@ -11,9 +11,11 @@
     </div>
     <div class="playContainer">
       <p>{{difficulty}}</p>
-      <div class="playBtn">
-        <div class="triangle"/>
-      </div>
+      <router-link :to="{ name: 'routine', params: {id: id } }">
+        <div class="playBtn">
+          <div class="triangle"/>
+        </div>
+      </router-link>
     </div>
     <div class="routineEnd">
       <div class="ratingWrap">
@@ -117,6 +119,7 @@ h3{
   justify-content: center;
   align-items: center;
   border: 4px solid white;
+  cursor: pointer;
 }
 .triangle{
   width: 0;

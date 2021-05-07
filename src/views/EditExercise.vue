@@ -2,37 +2,28 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="bodyContainer">
-    <Title title-name="Crear Rutina" to="/myroutines"/>
+      <Title title-name="Editar Ejercicio" to="/myexercises"/>
       <div class="content">
+        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
         <div class="completeInfo">
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
-            <label class="textLabel">Dificultad</label>
-            <select class="textInput" v-model="dificultad">
-              <option disabled value="" >Seleccione una dificultad</option>
-              <option value="rookie">Novato</option>
-              <option value="beginner">Principiante</option>
-              <option value="intermediate">Intermedio</option>
-              <option value="advanced">Avanzado</option>
-              <option value="expert">Experto</option>
-            </select>
             <div class="checkbox">
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="public" value="public" v-model="visibilidad">
-                <label for="public">Pública</label>
+                <input class="checkBtn" type="radio" id="exercise" value="exercise" v-model="actividad">
+                <label for="exercise">Actividad</label>
               </div>
               <div class="pBox">
-                <input class="checkBtn" type="radio" id="private" value="private" v-model="visibilidad">
-                <label for="private">Privada</label>
+                <input class="checkBtn" type="radio" id="rest" value="rest" v-model="actividad">
+                <label for="rest">Descanso</label>
               </div>
             </div>
-            <div  class="clicker" @click="createRoutine"><button class="createbtn">Crear Rutina</button></div>
+            <div class="clicker" @click="editExercise"><button class="createbtn">Confirmar cambios</button></div>
           </form>
         </div>
-        <img class="mainImg" src="../assets/activity_tracker.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -43,41 +34,43 @@
 import NavBar from "../components/NavBar";
 import Title from "../components/Title";
 import Footer from "@/components/Footer";
-import {RoutineBase, RoutineApi, Cycle} from "@/backend/routines"
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
+import {ExerciseApi, Exercise} from "@/backend/exercises";
+
 export default {
-  name: "CreateRoutine",
+  name: "EditExercise",
   components: {Footer, NavBar, Title},
   data(){
     return{
       nombre:"",
       descripcion:"",
-      dificultad:"beginner",
-      visibilidad:"public",
+      actividad:"",
       store: UserStore
     }
   },
   methods:{
-    async createRoutine(){
-      const routineBase = new RoutineBase(this.nombre,this.descripcion,this.visibilidad === 'public',this.dificultad);
+    async editExercise(){
+      const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
       try{
-        const data = await RoutineApi.createRoutine(routineBase);
-        const warmUp = new Cycle("Entrada en Calor",'warmup',1,1);
-        const coolDown = new Cycle("Enfriamiento",'cooldown',2,1);
-        const training = new Cycle("Ciclo de Ejercitacion",'exercise',3,1);
-        await RoutineApi.addCycle(data.id,warmUp);
-        await RoutineApi.addCycle(data.id,coolDown);
-        await RoutineApi.addCycle(data.id,training);
+        await ExerciseApi.editExercise(exercise,this.$route.params.id);
       }catch (e) {
         await alert(e);
       }
-      await router.push("/editRoutine");
+      await router.push("/myexercises");
     }
   },
-  created() {
+  async created() {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
+    }
+    try {
+      const data = await ExerciseApi.getExerciseById(this.$route.params.id);
+      this.nombre = data.name;
+      this.descripcion = data.detail;
+      this.actividad = data.type;
+    }catch (e){
+      await router.push("/error");
     }
   }
 }
@@ -199,17 +192,15 @@ input[type="radio"]:checked + *::before {
   cursor: pointer;
 }
 
+
+
 .mainImg {
   width: 400px;
 }
-
-
 @media (max-width: 1200px) {
   .mainImg{
     display: none;
   }
 }
-
-
 
 </style>

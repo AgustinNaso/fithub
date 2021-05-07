@@ -1,10 +1,28 @@
 <template>
   <div class="blockContainer">
-    <div class="blockBg" :class="{orange:orange, blue:blue, green:green}">
-      <button @click="$emit('removeExercise',id)" >X</button>
-      <input class="routineInput" type="text" name="routineName">
-      <div class="valueFill"><input type="number" class="numInput" name="reps"><p> repeticiones</p></div>
-      <div class="valueFill"><input type="number" class="numInput" name="secs"><p> segundos</p></div>
+    <div class="blockBg" :class="{orange:orange && currentEx.type === 'exercise', blue:blue && currentEx.type === 'exercise', green:green && currentEx.type === 'exercise'}">
+      <select v-show="isEditing" class="routineInput" v-model="currentEx">
+        <option v-for="exercise in exercises" :value="exercise" :key="exercise.id">{{exercise.name}}</option>
+      </select>
+      <h4 v-show="!isEditing">{{currentEx.name}}</h4>
+      <div class="valueFill">
+        <input  v-show="isEditing" type="number" class="numInput" name="reps" v-model.number="reps">
+        <p class="realVal" v-show="!isEditing && reps">{{reps}}</p>
+        <p v-show="isEditing || reps"> repetición/es</p>
+      </div>
+      <div class="valueFill">
+        <input v-show="isEditing" type="number" class="numInput" name="secs" v-model.number="secs">
+        <p class="realVal" v-show="!isEditing && secs">{{secs}}</p>
+        <p v-show="isEditing || secs"> segundo/s</p>
+      </div>
+      <div class="icons">
+        <img v-show="!isEditing" @click="$emit('removeExercise',id)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
+        <img v-show="!isEditing" @click="handleEdit" class="edit" src="../../assets/editicon.png" alt="edit"/>
+        <div class="confirmChanges" v-show="isEditing"  @click="handleEdit">
+          <p>Confirmar cambios</p>
+          <img class="edit" src="../../assets/tick.png" alt="confirm"/>
+        </div>
+      </div>
     </div>
     <img class="routineDiv" src = "../../assets/right-arrow.png" alt="blockDiv"/>
   </div>
@@ -18,6 +36,20 @@ export default {
     blue: Boolean,
     green: Boolean,
     id: Number,
+    exercises: Array
+  },
+  data(){
+    return {
+      currentEx : this.exercises[0],
+      reps: 0,
+      secs: 0,
+      isEditing: true
+    }
+  },
+  methods:{
+    handleEdit: function (){
+      this.isEditing = !this.isEditing;
+    }
   }
 }
 </script>
@@ -25,8 +57,8 @@ export default {
 <style scoped>
 
 .blockBg{
-  height: 150px;
-  width: 255px;
+  height: 180px;
+  width: 300px;
   border-radius: 68px;
   background: rgb(207,198,177);
   background: linear-gradient(rgba(207,198,177,1) 0%, rgba(173,168,156,1) 100%);
@@ -68,9 +100,18 @@ export default {
   align-items: center;
 }
 
+h4{
+  width: 90%;
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 5px;
+  border-radius: 30px;
+  padding:2px;
+}
+
 .routineInput{
   background: none;
-  border: grey 1px solid;
+  border: black 1px solid;
   outline: none;
   width: 80%;
   font-weight: 700;
@@ -91,10 +132,41 @@ export default {
   width: 45px;
   font-size: 16px;
   margin-right: 10px;
+  margin-bottom: 3px;
   background: none;
   border: black 1px solid;
   border-radius: 10px;
   outline: none;
   padding: 3px;
+}
+.icons{
+  margin-top:10px;
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+}
+.trash{
+  height: 28px;
+  cursor: pointer;
+}
+
+.edit{
+  height: 28px;
+  cursor: pointer;
+}
+
+.realVal{
+  margin-right: 8px;
+}
+
+.confirmChanges{
+  background-color: rgba(128, 128, 128, 0.36);
+  border: 1px dotted black;
+  border-radius: 12px;
+  padding: 0 6px 0 6px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 </style>

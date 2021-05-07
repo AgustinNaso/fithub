@@ -2,23 +2,6 @@
 <div class="mainContainer">
   <NavBar :selected="featured?0:1"/>
   <div class="mainBg">
-    <div v-show="featured">
-      <Title to="" title-name="Rutinas Recomendadas"/>
-      <div class="routineContainer">
-        <Routine
-            class="routine"
-            is-featured
-            v-for="i in 6"
-            :key="i"
-            title="Brazos"
-            :rating="3"
-            owner="Juan Oriana"
-            owner-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg/1200px-John_Doe%2C_born_John_Nommensen_Duchac.jpg"
-            description="Esta rutina es increible. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-            difficulty="beginner"
-        />
-      </div>
-    </div>
     <Title to="" title-name="Explorar Rutinas"/>
     <div class="searchBar">
       <div class="searchBox">
@@ -48,8 +31,9 @@
     <div class="routineContainer">
       <Routine
           class="routine"
-          v-for="(routine,i) in routines"
-          :key="i"
+          v-for="(routine) in routines"
+          :key="routine.id"
+          :id="routine.id"
           :title="routine.name"
           :rating="routine.averageRating"
           :owner="routine.user.username"

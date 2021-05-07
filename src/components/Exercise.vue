@@ -5,7 +5,7 @@
       <p class="description">{{description}}</p>
     </div>
     <div class="buttonContainer">
-      <img class="edit" src="../assets/editicon.png" alt="editicon"/>
+      <router-link :to="{ name: 'editExercise', params: {id: id } }"><img class="edit" src="../assets/editicon.png" alt="editicon"/></router-link>
       <img @click="$emit('deleteExercise',id)" class="trash" src="../assets/basuraicon.png" alt="trashicon"/>
     </div>
   </div>

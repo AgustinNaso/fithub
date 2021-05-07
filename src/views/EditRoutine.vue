@@ -13,13 +13,12 @@
           Duracion 30'
         </div>
       </div>
-      <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
 
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">Entrada en Calor </h2>
         <div class="routineBlockDiv">
           <div v-for="el in warmUp" :key="el.uuid">
-            <EditableRoutineBlock orange :id="el.uuid" @removeExercise="removeExercise(warmUp,el.uuid)"/>
+            <EditableRoutineBlock orange :id="el.uuid" @removeExercise="removeExercise(warmUp,el.uuid)" :exercises="exercises"/>
           </div>
           <img class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
         </div>
@@ -32,17 +31,19 @@
             </div>
             <div class="routineBlockDiv">
               <div v-for="el in cycles[index]" :key="el.uuid">
-                <EditableRoutineBlock green :id="el.uuid" @removeExercise="removeExercise(cycles[index],el.uuid)"/>
+                <EditableRoutineBlock green :id="el.uuid" @removeExercise="removeExercise(cycles[index],el.uuid)" :exercises="exercises"/>
               </div>
               <img class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
           </div>
         </div>
+        <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
+
 
         <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> Enfriamiento </h2>
         <div class="routineBlockDiv">
           <div v-for="el in coolDown" :key="el.uuid">
-            <EditableRoutineBlock blue :id="el.uuid" @removeExercise="removeExercise(coolDown,el.uuid)"/>
+            <EditableRoutineBlock blue :id="el.uuid" @removeExercise="removeExercise(coolDown,el.uuid)" :exercises="exercises"/>
           </div>
           <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(coolDown)" alt=""/>
         </div>
@@ -63,6 +64,8 @@ import Title from "../components/Title";
 import EditableRoutineBlock from "../components/editableComponent/EditableRoutineBlock";
 import UserStore from "@/stores/UserStore";
 import router from "../routes";
+import {ExerciseApi} from "@/backend/exercises";
+
 export default {
   name: "EditRoutine",
   components: { EditableRoutineBlock, Title, Footer, NavBar},
@@ -71,9 +74,10 @@ export default {
       store: UserStore,
       routineName: "Rutina",
       description: "Mi rutina para entrenar brazos",
-      warmUp: [{nombre: "Flexiones", reps: 10, secs: 30, uuid: new  Date().getTime()}],
-      coolDown: [{nombre: "Flexiones", reps: 10, secs: 30, uuid: new  Date().getTime()}],
+      warmUp: [],
+      coolDown: [],
       cycles: [],
+      exercises: [],
       cycleIdx: 0,
     }
   },
@@ -95,10 +99,12 @@ export default {
       return new  Date().getTime();
     }
   },
-  created() {
+  async created() {
     if (!this.store.isLoggedIn()) {
-      router.push("/permissionDenied");
+      await router.push("/permissionDenied");
     }
+    const data = await ExerciseApi.getExercises();
+    this.exercises = data.content;
   }
 }
 </script>
@@ -192,7 +198,7 @@ export default {
   padding: 8px 35px 8px 35px;
   margin-right: 10px;
   margin-bottom: 10px;
-
+  margin-left: 35vw;
 }
 
 .acceptBtn,

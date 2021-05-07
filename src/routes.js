@@ -16,6 +16,7 @@ import PermissionDenied from "./views/PermissionDenied";
 import Verify from "@/views/Verify";
 import CreateExercise from "@/views/CreateExercise";
 import MyExercises from "@/views/MyExercises";
+import EditExercise from "@/views/EditExercise";
 
 Vue.use(VueRouter)
 
@@ -62,7 +63,7 @@ const routes = [
         component: UserProfile
     },
     {
-        path: "/routine",
+        path: "/routine/:id",
         name:"routine",
         component: RoutineView
     },
@@ -95,6 +96,11 @@ const routes = [
         path: "/createExercise",
         name: "createExercise",
         component: CreateExercise
+    },
+    {
+        path: "/editExercise/:id",
+        name: "editExercise",
+        component: EditExercise
     },
     {
         path: "/myexercises",
