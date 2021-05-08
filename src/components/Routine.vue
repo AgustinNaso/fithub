@@ -1,8 +1,10 @@
 <template>
-  <div :class="{routineBg:true, green:isMine, purple:isFeatured}">
+  <div :class="{routineBg:true, green:isMine, purple:isFaved}">
     <div class="routineHead">
       <h3>{{title}}</h3>
-      <img class="shareBtn" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
+      <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="fav"/>
+      <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="share"/>
+      <img class="buttonUpper" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
     </div>
     <p class="description">{{description}}</p>
     <div class="ownerContainer">
@@ -30,6 +32,8 @@
 </template>
 
 <script>
+import {FavouritesApi} from "@/backend/favourites";
+
 export default {
   name: "Routine",
   props:{
@@ -42,7 +46,32 @@ export default {
     isMine:Boolean,
     isFeatured:Boolean,
     difficulty:String,
-    id:Number
+    id:Number,
+  },
+  data(){
+    return{
+      isFaved:false
+    }
+  },
+  async created() {
+    if (this.isMine){
+      const data = await FavouritesApi.getFavourites();
+      data.content.forEach(element =>{
+        if (element.id === this.id)
+          this.isFaved = true;
+      })
+    }
+  },
+  methods:{
+    changeFavedState(){
+      if (!this.isFaved){
+        FavouritesApi.setFavourite(this.id);
+        this.isFaved = true;
+      }else{
+        FavouritesApi.deleteFavourite(this.id);
+        this.isFaved = false;
+      }
+    }
   }
 }
 </script>
@@ -138,9 +167,10 @@ h3{
   align-items: flex-start;
 }
 
-.shareBtn{
+.buttonUpper{
   margin-left: 12px;
   width: 50px;
+  cursor: pointer;
 }
 
 .playContainer{
