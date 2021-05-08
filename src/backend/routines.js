@@ -35,6 +35,14 @@ class RoutineApi {
         await Api.delete(`${RoutineApi.url}/${routineId}`,true,controller);
     }
 
+    static async getRoutineById(routineId,controller){
+        return await Api.get(`${RoutineApi.url}/${routineId}`, true, controller);
+    }
+
+    static async editRoutine(routineId,routine,controller){
+        return await Api.put(`${RoutineApi.url}/${routineId}`,true, routine, controller);
+    }
+
 
 }
 

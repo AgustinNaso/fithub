@@ -61,8 +61,9 @@ export default {
   methods:{
     async createRoutine(){
       const routineBase = new RoutineBase(this.nombre,this.descripcion,this.visibilidad === 'public',this.dificultad);
+      let data;
       try{
-        const data = await RoutineApi.createRoutine(routineBase);
+        data = await RoutineApi.createRoutine(routineBase);
         const warmUp = new Cycle("Entrada en Calor",'warmup',1,1);
         const coolDown = new Cycle("Enfriamiento",'cooldown',2,1);
         const training = new Cycle("Ciclo de Ejercitacion",'exercise',3,1);
@@ -72,7 +73,7 @@ export default {
       }catch (e) {
         await alert(e);
       }
-      await router.push("/editRoutine");
+      await router.push(`/editRoutine/${data.id}`);
     }
   },
   created() {

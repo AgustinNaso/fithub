@@ -79,7 +79,7 @@ const routes = [
         component: EditProfile
     },
     {
-        path: "/editRoutine",
+        path: "/editRoutine/:id",
         name: "editRoutine",
         component: EditRoutine
     },

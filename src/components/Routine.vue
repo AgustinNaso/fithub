@@ -12,7 +12,7 @@
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playContainer">
-      <p>{{difficulty}}</p>
+      <p>{{difficultyToSpanish(difficulty)}}</p>
       <router-link :to="{ name: 'routine', params: {id: id } }">
         <div class="playBtn">
           <div class="triangle"/>
@@ -25,7 +25,7 @@
       </div>
       <div v-show="isMine" class="editing">
         <p @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
-        <p>Editar</p>
+        <router-link :to="{ name: 'editRoutine', params: {id: id } }"> <p>Editar</p> </router-link>
       </div>
     </div>
   </div>
@@ -33,6 +33,7 @@
 
 <script>
 import {FavouritesApi} from "@/backend/favourites";
+import {difficultyToSpanish} from "@/backend/utils";
 
 export default {
   name: "Routine",
@@ -71,6 +72,9 @@ export default {
         FavouritesApi.deleteFavourite(this.id);
         this.isFaved = false;
       }
+    },
+    difficultyToSpanish(difficulty){
+      return difficultyToSpanish(difficulty);
     }
   }
 }
@@ -211,7 +215,9 @@ h3{
   align-items: center;
 }
 
-p{
-  cursor: pointer;
+a{
+  text-decoration: none;
+  color: white;
+  text-shadow: #030b10 2px 2px 5px;
 }
 </style>
