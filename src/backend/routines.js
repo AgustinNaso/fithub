@@ -7,8 +7,12 @@ class RoutineApi {
         return `${Api.baseUrl}/routines`;
     }
 
-    static async getRoutines(controller) {
-        return await Api.get(`${RoutineApi.url}?page=0&size=9&orderBy=date&direction=asc`, false, controller);
+    static async getRoutines(pageNum, orderBy, direction, query, controller ) {
+        if (query.length >= 3) {
+            return await Api.get(`${RoutineApi.url}?search=${query}&page=${pageNum - 1}&size=9&orderBy=${orderBy}&direction=${direction}`, false, controller);
+        }else{
+            return await Api.get(`${RoutineApi.url}?page=${pageNum - 1}&size=9&orderBy=${orderBy}&direction=${direction}`, false, controller);
+        }
     }
 
     static async getUserRoutines(controller) {

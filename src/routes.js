@@ -50,7 +50,7 @@ const routes = [
         }
     },
     {
-        path: "/explore/:id",
+        path: "/explore",
         name:"explore",
         component: Main,
         props:{

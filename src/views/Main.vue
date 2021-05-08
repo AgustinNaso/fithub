@@ -5,13 +5,13 @@
     <Title to="" title-name="Explorar Rutinas"/>
     <div class="searchBar">
       <div class="searchBox">
-        <input name="search" type="text" class="searchInput"/>
-        <button name="search" class="searchBtn">Buscar!</button>
+        <input name="search" type="text" class="searchInput" v-model="query"/>
+        <button @click="search" name="search" class="searchBtn">Buscar!</button>
       </div>
       <div class="ordering">
         <div class="orderElement">
           <label class="textLabel">Ordenar por</label>
-          <select class="textInput" v-model="ordenarPor">
+          <select class="textInput" v-model="orderBy" @change="search">
             <option disabled value="" >Seleccione un criterio de ordenamiento</option>
             <option value="averageRating">Puntuación</option>
             <option value="difficulty">Dificultad</option>
@@ -21,7 +21,7 @@
         </div>
         <div class="orderElement">
           <label class="textLabel">Visualizar de forma</label>
-          <select class="textInput" v-model="orden">
+          <select class="textInput" v-model="direction" @change="search">
             <option disabled value="" >Seleccione una forma de visualización</option>
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-
+    <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
     <div class="routineContainer">
       <Routine
           class="routine"
@@ -46,9 +46,9 @@
     </div>
 
     <div class="paging">
-      <router-link :to="{path: '/explore/' + (pageNumber - 1)}" v-show="pageNumber > 1"><img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/></router-link>
+      <router-link :to="{path: '/explore/?page=' + (pageNumber - 1)}" v-show="pageNumber > 1"><img class="pageArrow" src="../assets/left-rounded-arrow.png" alt="página anterior"/></router-link>
       <p class="pageNumber">Página {{pageNumber}}</p>
-      <router-link :to="{path: '/explore/' + (pageNumber + 1)}" v-show="!lastPage"><img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/></router-link>
+      <router-link :to="{path: '/explore/?page=' + (pageNumber + 1)}" v-show="!lastPage"><img class="pageArrow" src="../assets/right-rounded-arrow.png" alt="página siguiente"/></router-link>
     </div>
 
   </div>
@@ -71,23 +71,32 @@ export default {
   },
   data() {
     return {
-      pageNumber: parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1,
-      ordenarPor:"averageRating",
-      orden:"desc",
+      pageNumber: this.$route.query.page && parseInt(this.$route.query.page) > 0 ? parseInt(this.$route.query.page) : 1,
+      orderBy:"averageRating",
+      direction:"desc",
+      query:"",
       lastPage: false,
-      routines: undefined
+      routines: undefined,
+      error:false,
     }
   },
   watch:{
     $route () {
-      this.pageNumber = parseInt(this.$route.params.id) > 0 ? parseInt(this.$route.params.id) : 1;
-    }
+      this.pageNumber = this.$route.query.page && parseInt(this.$route.query.page) > 0 ? parseInt(this.$route.query.page) : 1;
+      this.search();
+    },
   },
   created() {
-    RoutineApi.getRoutines().then((value) => {
-      this.routines = value.content;
-      this.lastPage = value.isLastPage;
-    });
+    this.search();
+  },
+  methods: {
+    search() {
+      this.error = !!(this.query && this.query.length < 3);
+      RoutineApi.getRoutines(this.pageNumber, this.orderBy, this.direction,this.query).then((value) => {
+        this.routines = value.content;
+        this.lastPage = value.isLastPage;
+      });
+    }
   }
 }
 </script>
@@ -228,6 +237,14 @@ h1{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error{
+  color: red;
+  margin-left: 140px;
+  margin-top: -12px;
+  font-weight: 500;
+  font-size:18px;
 }
 </style>
 
