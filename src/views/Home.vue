@@ -108,7 +108,7 @@ img{
 
 .butContainer {
   margin-top: 30px;
-  align-self: flex-start;
+  align-self: flex-end;
 }
 
 </style>

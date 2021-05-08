@@ -1,6 +1,6 @@
 <template>
 <div class="profileContainer">
-  <img class="userImg" :src="userImg" :alt="userName">
+  <router-link to="/userProfile"><img class="userImg" :src="userImg" :alt="userName"></router-link>
   <p>{{userName}}</p>
   <img  @click="isOpen = !isOpen" class="arrow" src="../assets/chevron_down_green.png" alt="arrow">
   <transition name="fade" appear>
@@ -59,7 +59,7 @@ p{
 .dropdown{
   position: absolute;
   background-color: #77c6a2;
-  top: calc(100%  + 12px);
+  top: calc(100%  + 9px);
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -98,5 +98,7 @@ li{
 
 a{
   text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 </style>
