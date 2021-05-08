@@ -49,8 +49,8 @@
         </div>
       </div>
       <div class="finalSection">
-        <button class="acceptBtn"> Registrar Cambios</button>
         <button class="cancelBtn"> Cancelar Cambios</button>
+        <button class="acceptBtn"> Registrar Cambios</button>
       </div>
     </div>
     <Footer/>

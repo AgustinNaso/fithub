@@ -32,6 +32,7 @@
     <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
     <div class="routineContainer">
       <Routine
+          is-public
           class="routine"
           v-for="(routine) in routines"
           :key="routine.id"

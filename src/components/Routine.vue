@@ -1,10 +1,15 @@
 <template>
   <div :class="{routineBg:true, green:isMine, purple:isFaved}">
     <div class="routineHead">
-      <h3>{{title}}</h3>
-      <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="fav"/>
-      <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="share"/>
-      <img class="buttonUpper" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
+      <div class="title">
+        <h3>{{title}}</h3>
+        <img v-show="isMine && !isPublic" src="../assets/lock_white.svg" alt="priv"/>
+      </div>
+      <div class="interaction">
+        <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="unfav"/>
+        <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="fav"/>
+        <img class="buttonUpper" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
+      </div>
     </div>
     <p class="description">{{description}}</p>
     <div class="ownerContainer">
@@ -44,9 +49,9 @@ export default {
     rating:Number,
     routineImg:String,
     isMine:Boolean,
-    isFeatured:Boolean,
     difficulty:String,
     id:Number,
+    isPublic:Boolean
   },
   data(){
     return{
@@ -71,7 +76,7 @@ export default {
         FavouritesApi.deleteFavourite(this.id);
         this.isFaved = false;
       }
-    }
+    },
   }
 }
 </script>
@@ -89,13 +94,20 @@ export default {
   justify-content: flex-start;
 }
 h3{
-  width: 80%;
   flex: 1;
   text-align: left;
   font-size: 32px;
   color: white;
   text-shadow: #030b10 3px 2px 7px;
 }
+
+.title{
+  display: flex;
+}
+.interaction{
+  display: flex;
+}
+
 .description{
   margin: 20px 0 0 0;
   padding-bottom: 8px;
