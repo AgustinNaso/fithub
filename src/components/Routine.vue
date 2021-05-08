@@ -1,9 +1,9 @@
 <template>
-  <div :class="{routineBg:true, green:isMine, purple:isFaved}">
+  <div :class="{routineBg:true, green:isMine, purple:isFaved,grey:!isPublic}">
     <div class="routineHead">
       <div class="title">
-        <h3>{{title}}</h3>
         <img v-show="isMine && !isPublic" src="../assets/lock_white.svg" alt="priv"/>
+        <h3>{{title}}</h3>
       </div>
       <div class="interaction">
         <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="unfav"/>
@@ -17,7 +17,7 @@
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playContainer">
-      <p>{{difficulty}}</p>
+      <p>{{difficultyToSpanish(difficulty)}}</p>
       <router-link :to="{ name: 'routine', params: {id: id } }">
         <div class="playBtn">
           <div class="triangle"/>
@@ -30,7 +30,7 @@
       </div>
       <div v-show="isMine" class="editing">
         <p @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
-        <p>Editar</p>
+        <router-link :to="{ name: 'editRoutine', params: {id: id } }"><p>Editar</p></router-link>
       </div>
     </div>
   </div>
@@ -38,6 +38,7 @@
 
 <script>
 import {FavouritesApi} from "@/backend/favourites";
+import {difficultyToSpanish} from "@/backend/utils";
 
 export default {
   name: "Routine",
@@ -77,6 +78,9 @@ export default {
         this.isFaved = false;
       }
     },
+    difficultyToSpanish(difficulty){
+      return difficultyToSpanish(difficulty);
+    }
   }
 }
 </script>
@@ -86,7 +90,7 @@ export default {
   background: rgb(160,128,224);
   background: linear-gradient(180deg, rgba(224,138,128,1) 0%, rgba(183,178,106,1) 100%);
   height: 480px;
-  width: 380px;
+  width: 420px;
   border-radius: 58px;
   display: flex;
   flex-direction: column;
@@ -96,13 +100,15 @@ export default {
 h3{
   flex: 1;
   text-align: left;
-  font-size: 32px;
+  font-size: 31px;
   color: white;
   text-shadow: #030b10 3px 2px 7px;
+  word-wrap: break-word;
 }
 
 .title{
   display: flex;
+  width: 80%;
 }
 .interaction{
   display: flex;
@@ -181,7 +187,7 @@ h3{
 
 .buttonUpper{
   margin-left: 12px;
-  width: 50px;
+  width: 40px;
   cursor: pointer;
 }
 
@@ -201,6 +207,11 @@ h3{
 
 .purple{
   background: linear-gradient(rgba(160,128,224,1) 0%, rgba(106,124,176,1) 100%);
+}
+
+.grey{
+  background: rgb(207,198,177);
+  background: linear-gradient(rgb(199, 193, 178) 0%, rgb(165, 160, 148) 100%);
 }
 
 .editing{
@@ -223,7 +234,9 @@ h3{
   align-items: center;
 }
 
-p{
-  cursor: pointer;
+
+a{
+  color: black;
+  text-decoration: none;
 }
 </style>
