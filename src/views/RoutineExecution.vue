@@ -7,8 +7,9 @@
         <div class="exerciseContainer">
           <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft">
           <ExerciseExecution
-              cycle
-              seconds
+              with-image
+              cooldown
+              repetitions
               title="Salto con Soga"
               duration="10"
           />
@@ -83,7 +84,7 @@ div{
 }
 
 .buttonContainer{
-  margin-top: 20px;
+  margin-top: 35px;
   display: flex;
   justify-content: space-evenly;
   width: 600px;
@@ -104,6 +105,7 @@ div{
   text-decoration: none;
   outline: none;
 }
+
 .pauseButton:hover{
   transition: 0.3s ease-in-out;
   background-color: #dbefe7;
