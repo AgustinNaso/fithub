@@ -31,6 +31,10 @@ const UserStore= {
 
     async saveName(firstName,lastName){
         await localStorage.setItem("fullName", firstName + " " + lastName);
+    },
+
+    async saveImg(img){
+        await localStorage.setItem("img", img);
     }
 }
 export default UserStore

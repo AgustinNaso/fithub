@@ -21,8 +21,9 @@
           </div>
         </div>
         <div class="userProf">
-          <img class="imgContainer" :src = "store.getImg()" alt="add image">
+          <img class="imgContainer" :src = "userData.avatarUrl" alt="add image">
           <img class="editImage" src="../assets/edit_picture.svg" alt="user image">
+          <input class="imageInput" v-model="userData.avatarUrl">
         </div>
       </div>
     </div>
@@ -37,28 +38,29 @@ import Footer from "../components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
 import {UserApi} from "@/backend/user";
-import {EditCredentials} from "../backend/user";
+import {EditCredentials} from "@/backend/user";
 
 export default {
   name: "EditProfile",
-  components: {Footer, Title,NavBar},
+  components: { Footer, Title,NavBar},
   data(){
     return {
       store: UserStore,
-      userData: {firstName:"",lastName:""}
+      userData: {firstName:"",lastName:"",avatarUrl:""}
     }
   },
   methods: {
     async saveEdit(){
       let editCred;
       try {
-        editCred = new EditCredentials(this.userData.firstName, this.userData.lastName);
+        editCred = new EditCredentials(this.userData.firstName, this.userData.lastName, this.userData.avatarUrl);
         await UserApi.saveEdits(editCred);
       }
       catch (e){
         alert(e.message);
       }
       await this.store.saveName(this.userData.firstName,this.userData.lastName);
+      await this.store.saveImg(this.userData.avatarUrl);
       await router.push('/userProfile');
     }
   },
@@ -160,10 +162,11 @@ export default {
 }
 
 .buttonContainer{
-  margin-top: 50px;
+  margin-top: 120px;
   margin-left: 20px;
   display: flex;
   justify-content: space-evenly;
+
 }
 
 .confirmButton{
@@ -212,6 +215,14 @@ export default {
   color: #950707;
 }
 
+.imageInput{
+  width: 80%;
+  height: 30px;
+  border-radius: 12px;
+  border: black 3px solid;
+  font-size: 18px;
+}
+
 .cancelButton:active {
   background: transparent;
 }
@@ -247,6 +258,10 @@ export default {
     width: 80%;
     align-items: center;
     justify-content: center;
+  }
+
+  .buttonContainer{
+    margin-top:50px;
   }
 
 }
