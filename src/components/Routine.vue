@@ -1,10 +1,15 @@
 <template>
   <div :class="{routineBg:true, green:isMine, purple:isFaved}">
     <div class="routineHead">
-      <h3>{{title}}</h3>
-      <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="fav"/>
-      <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="share"/>
-      <img class="buttonUpper" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
+      <div class="title">
+        <h3>{{title}}</h3>
+        <img v-show="isMine && !isPublic" src="../assets/lock_white.svg" alt="priv"/>
+      </div>
+      <div class="interaction">
+        <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="unfav"/>
+        <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="fav"/>
+        <img class="buttonUpper" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
+      </div>
     </div>
     <p class="description">{{description}}</p>
     <div class="ownerContainer">
@@ -12,7 +17,7 @@
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playContainer">
-      <p>{{difficultyToSpanish(difficulty)}}</p>
+      <p>{{difficulty}}</p>
       <router-link :to="{ name: 'routine', params: {id: id } }">
         <div class="playBtn">
           <div class="triangle"/>
@@ -25,7 +30,7 @@
       </div>
       <div v-show="isMine" class="editing">
         <p @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
-        <router-link :to="{ name: 'editRoutine', params: {id: id } }"> <p>Editar</p> </router-link>
+        <p>Editar</p>
       </div>
     </div>
   </div>
@@ -33,7 +38,6 @@
 
 <script>
 import {FavouritesApi} from "@/backend/favourites";
-import {difficultyToSpanish} from "@/backend/utils";
 
 export default {
   name: "Routine",
@@ -45,9 +49,9 @@ export default {
     rating:Number,
     routineImg:String,
     isMine:Boolean,
-    isFeatured:Boolean,
     difficulty:String,
     id:Number,
+    isPublic:Boolean
   },
   data(){
     return{
@@ -73,9 +77,6 @@ export default {
         this.isFaved = false;
       }
     },
-    difficultyToSpanish(difficulty){
-      return difficultyToSpanish(difficulty);
-    }
   }
 }
 </script>
@@ -93,13 +94,20 @@ export default {
   justify-content: flex-start;
 }
 h3{
-  width: 80%;
   flex: 1;
   text-align: left;
   font-size: 32px;
   color: white;
   text-shadow: #030b10 3px 2px 7px;
 }
+
+.title{
+  display: flex;
+}
+.interaction{
+  display: flex;
+}
+
 .description{
   margin: 20px 0 0 0;
   padding-bottom: 8px;
@@ -215,9 +223,7 @@ h3{
   align-items: center;
 }
 
-a{
-  text-decoration: none;
-  color: white;
-  text-shadow: #030b10 2px 2px 5px;
+p{
+  cursor: pointer;
 }
 </style>

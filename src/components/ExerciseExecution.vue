@@ -1,12 +1,14 @@
 <template>
-  <div :class="{exerciseBox:true, orange:warmUp, green:cycle, blue:cooldown}">
-    <div class="title">
-      <h3>{{title}}</h3>
+  <div :class="{exerciseBox:true, orange:warmUp, green:cycle, blue:cooldown, withImage:withImage}">
+    <div class="titleContainer">
+      <h3 class="title">{{title}}</h3>
     </div>
-    <img v-show="warmUp" class="warmUpIcon" src="../assets/warmup.png" alt="warmUpIcon"/>
-    <img v-show="cycle" class="cycleIcon" src="../assets/cycle.png" alt="cycleIcon"/>
-    <img v-show="cooldown" class="cooldownIcon" src="../assets/cooldown.png" alt="cooldownIcon"/>
-    <div class="duration">
+    <div class="imgContainer" v-show="withImage">
+      <img v-show="warmUp" class="warmUpIcon" src="../assets/warmup.png" alt="warmUpIcon"/>
+      <img v-show="cycle" class="cycleIcon" src="../assets/cycle.png" alt="cycleIcon"/>
+      <img v-show="cooldown" class="cooldownIcon" src="../assets/cooldown.png" alt="cooldownIcon"/>
+    </div>
+    <div class="durationCont">
       <p v-show="repetitions">{{duration}} repeticiones</p>
       <p v-show="seconds">{{duration}} segundos</p>
     </div>
@@ -24,7 +26,8 @@ export default {
     id:Number,
     duration:String,
     repetitions:Boolean,
-    seconds:Boolean
+    seconds:Boolean,
+    withImage:Boolean
   }
 }
 </script>
@@ -34,8 +37,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 450px;
+  justify-content: space-evenly;
+  height: 250px;
   width: 600px;
   border-radius: 100px;
 }
@@ -55,12 +58,12 @@ export default {
   background: linear-gradient(rgba(65,214,152,1) 0%, rgba(54,158,115,1) 100%);
 }
 
-.title{
+.titleContainer{
   display: flex;
   height: 65px;
 }
 
-h3{
+.title{
   flex: 1;
   text-align: center;
   font-size: 45px;
@@ -84,7 +87,7 @@ h3{
   height: 300px;
 }
 
-.duration{
+.durationCont{
   display: flex;
   height: 60px;
 }
@@ -96,6 +99,13 @@ p{
   font-size: 40px;
   color: white;
   font-weight: bold;
+  text-shadow: #030b10 3px 2px 7px;
+}
+
+.withImage{
+  height: 450px;
+  width: 600px;
+  justify-content: space-between;
 }
 
 </style>

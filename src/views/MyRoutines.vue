@@ -19,6 +19,7 @@
             :description="routine.detail"
             :difficulty="routine.difficulty"
             :id="routine.id"
+            :is-public="routine.isPublic"
             @deleteRoutine="deleteRoutine($event)"
         />
       </div>
