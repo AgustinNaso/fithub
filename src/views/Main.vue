@@ -1,6 +1,6 @@
 <template>
 <div class="mainContainer">
-  <NavBar :selected="featured?0:1"/>
+  <NavBar :selected="1"/>
   <div class="mainBg">
     <Title to="" title-name="Explorar Rutinas"/>
     <div class="searchBar">
