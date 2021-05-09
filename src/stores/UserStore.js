@@ -13,6 +13,7 @@ const UserStore= {
         const data =  await UserApi.getCurrentUser();
         this.saveName(data.firstName,data.lastName);
         await localStorage.setItem("img", data.avatarUrl);
+        await localStorage.setItem("id", data.id);
         return true;
     },
     async logOut(){
@@ -35,6 +36,9 @@ const UserStore= {
 
     async saveImg(img){
         await localStorage.setItem("img", img);
+    },
+     getUserId(){
+        return localStorage.getItem("id");
     }
 }
 export default UserStore

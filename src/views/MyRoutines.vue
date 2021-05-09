@@ -4,10 +4,10 @@
     <div class="mainBg">
       <div class="titleContainer">
         <Title title-name="Mis Rutinas" to="/main"/>
-        <router-link v-show="routines.length !== 0" to="createRoutine"><button>Crear Rutina</button></router-link>
+        <router-link v-show="routines && routines.length !== 0" to="createRoutine"><button>Crear Rutina</button></router-link>
       </div>
       <div class="routineContainer">
-        <div v-show="routines.length === 0" class="newRoutineAlarm">
+        <div v-show="routines && routines.length === 0" class="newRoutineAlarm">
           <h1>No tenes ninguna rutina todavia! </h1>
           <router-link class="large" to="createRoutine"><button class="large">Crear Rutina</button></router-link>
         </div>

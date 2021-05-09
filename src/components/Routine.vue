@@ -26,7 +26,7 @@
     </div>
     <div class="routineEnd">
       <div class="ratingWrap">
-        <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
+        <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="star">
       </div>
       <div v-show="isMine" class="editing">
         <p class="delete" @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
@@ -80,8 +80,15 @@ export default {
     },
     difficultyToSpanish(difficulty){
       return difficultyToSpanish(difficulty);
-    }
-  }
+    },
+    decideImg(i){
+      if (i <= this.rating){
+        return require("../assets/Video_Star.png");
+      }
+      return  require("../assets/empty-star.png");
+    },
+  },
+
 }
 </script>
 
@@ -89,7 +96,7 @@ export default {
 .routineBg{
   background: rgb(160,128,224);
   background: linear-gradient(180deg, rgba(224,138,128,1) 0%, rgba(183,178,106,1) 100%);
-  height: 480px;
+  height: 460px;
   width: 420px;
   border-radius: 58px;
   display: flex;

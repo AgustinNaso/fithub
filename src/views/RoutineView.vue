@@ -34,6 +34,14 @@
       <div class="finalSection">
         <button class="startRoutine">Iniciar Rutina</button>
         <div class="share">
+          <h2 class="shareTitle" v-show="!alreadyRated">Puntua esta rutina</h2>
+          <div class="ratingWrap" v-show="!alreadyRated">
+            <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="star" @mouseover="rating=n" @mouseleave="leaveHandle" @click="rate(n)">
+          </div>
+          <h2 class="shareTitle" v-show="alreadyRated">Ya puntuaste esta rutina!</h2>
+          <div class="ratingWrap" v-show="alreadyRated">
+            <img v-for="n in 5" class="star noclick" :key="n" :src="decideImg(n)" alt="star">
+          </div>
           <h2 class="shareTitle">Compartir Rutina</h2>
         </div>
       </div>
@@ -49,8 +57,9 @@ import Title from "../components/Title";
 import UserStore from "@/stores/UserStore";
 import router from "@/routes";
 import {RoutineApi} from "@/backend/routines";
-import {CycleApi} from "@/backend/cycles";
+// import {CycleApi} from "@/backend/cycles";
 import {difficultyToSpanish} from "@/backend/utils";
+import {ReviewsApi, Review} from "@/backend/reviews";
 
 export default {
   name: "RoutineView",
@@ -59,8 +68,9 @@ export default {
     if (!this.store.isLoggedIn()) {
       await router.push("/permissionDenied");
     }
+    this.routineId = this.$route.params.id;
     try{
-      const routine = await RoutineApi.getRoutineById(this.$route.params.id);
+      const routine = await RoutineApi.getRoutineById(this.routineId);
       this.routineName = routine.name;
       this.description = routine.detail;
       this.difficulty = routine.difficulty;
@@ -68,15 +78,30 @@ export default {
       //   await router.push("/permissionDenied");
       //   return;
       // }
-      const data = await RoutineApi.getCycles(this.$route.params.id);
+      const data = await RoutineApi.getCycles(this.routineId);
       for (const cycle of data.content) {
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;
           case 'exercise': this.cycles.push(cycle);break;
         }
-        console.log(await CycleApi.getCycleExercises(cycle.id));
+        // console.log(await CycleApi.getCycleExercises(cycle.id));
+
+
+        /////
       }
+
+      const reviews = await ReviewsApi.getReviews(this.routineId);
+      reviews.content.forEach((review) => {
+        if (review.user.id === parseInt(this.store.getUserId())){
+          this.rating = review.score;
+          this.alreadyRated = true;
+        }
+      })
+      // if (data.totalCount !== 0){
+      //   this.rating = data.content[0].score;
+      //   this.alreadyRated = true;
+      // }
     }catch (e){
       await router.push("/error");
     }
@@ -88,13 +113,33 @@ export default {
     difficulty:"",
     warmUp: {},
     cooldown: {},
-    cycles: []
+    cycles: [],
+    rating: 0,
+    alreadyRated: false,
+    routineId: -1
   }},
   methods:{
     difficultyToSpanish(difficulty){
       return difficultyToSpanish(difficulty);
+    },
+    decideImg(i){
+      if (i <= this.rating){
+        return require("../assets/Video_Star.png");
+      }
+      return  require("../assets/empty-star.png");
+    },
+    async rate(n){
+      const review = new Review(n);
+      await ReviewsApi.addReview(this.routineId,review);
+      this.alreadyRated = true;
+      this.rating = n;
+    },
+    leaveHandle(){
+      if(!this.alreadyRated){
+        this.rating = 0;
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -175,7 +220,7 @@ export default {
 }
 
 .share{
-  width:320px;
+  width:360px;
 }
 
 .shareTitle{
@@ -184,6 +229,23 @@ export default {
   font-size:30px;
   text-align: right;
   border-bottom: #030b10 3px solid;
+}
+
+.star{
+  width: 40px;
+  filter: drop-shadow(0.1rem 0.2rem 0.25rem rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+}
+.ratingWrap{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 5px 0 25px 0;
+
+}
+
+.noclick{
+  cursor: auto;
 }
 
 </style>
