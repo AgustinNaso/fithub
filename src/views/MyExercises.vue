@@ -4,9 +4,13 @@
     <div class="mainBg">
       <div class="titleContainer">
         <Title title-name="Mis Ejercicios" to="/main"/>
-        <router-link to="/createExercise"><button>Crear Ejercicio</button></router-link>
+        <router-link v-show="exercises.length !== 0" to="/createExercise"><button>Crear Ejercicio</button></router-link>
       </div>
       <div class="exerciseContainer">
+        <div v-show="exercises.length === 0" class="newRoutineAlarm">
+          <h1>No tenes ningun ejercicio todavia! </h1>
+          <router-link class="large" to="createExercise"><button class="large">Crear Ejercicio</button></router-link>
+        </div>
         <Exercise
             v-for="(exercise) in exercises"
             :id="exercise.id"
@@ -53,10 +57,10 @@ export default {
     deleteExercise: async function(id){
       try{
         await ExerciseApi.deleteExercise(id)
+        this.exercises.splice(this.exercises.findIndex(exercise => exercise.id === id), 1);
       }catch (e){
         alert(e);
       }
-      window.location.reload();
     }
   }
 }
@@ -122,5 +126,17 @@ button:hover{
 
 a{
   width: 360px;
+}
+
+.newRoutineAlarm{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+
+}
+.large{
+  width: 400px;
+  margin-top: 10px;
 }
 </style>

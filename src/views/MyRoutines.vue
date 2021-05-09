@@ -4,9 +4,13 @@
     <div class="mainBg">
       <div class="titleContainer">
         <Title title-name="Mis Rutinas" to="/main"/>
-        <router-link to="createRoutine"><button>Crear Rutina</button></router-link>
+        <router-link v-show="routines.length !== 0" to="createRoutine"><button>Crear Rutina</button></router-link>
       </div>
       <div class="routineContainer">
+        <div v-show="routines.length === 0" class="newRoutineAlarm">
+          <h1>No tenes ninguna rutina todavia! </h1>
+          <router-link class="large" to="createRoutine"><button class="large">Crear Rutina</button></router-link>
+        </div>
         <Routine
             is-mine
             class="routine"
@@ -56,11 +60,11 @@ export default {
   methods:{
     deleteRoutine: async function(id){
       try{
-        await RoutineApi.deleteRoutine(id)
+        await RoutineApi.deleteRoutine(id);
+        this.routines.splice(this.routines.findIndex(routine => routine.id === id), 1);
       }catch (e){
         alert(e);
       }
-      window.location.reload();
     }
   }
 
@@ -132,5 +136,16 @@ button:hover{
 
 a{
   width: 320px;
+}
+.newRoutineAlarm{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+
+}
+.large{
+  width: 400px;
+  margin-top: 10px;
 }
 </style>
