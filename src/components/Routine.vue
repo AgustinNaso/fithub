@@ -1,5 +1,5 @@
 <template>
-  <div :class="{routineBg:true, green:isMine, purple:isFaved,grey:!isPublic}">
+  <div :class="{routineBg:true, green:isMine, purple:purple,grey:!isPublic}">
     <div class="routineHead">
       <div class="title">
         <img v-show="isMine && !isPublic" src="../assets/lock_white.svg" alt="priv"/>
@@ -52,7 +52,8 @@ export default {
     isMine:Boolean,
     difficulty:String,
     id:Number,
-    isPublic:Boolean
+    isPublic:Boolean,
+    purple:Boolean,
   },
   data(){
     return{
@@ -76,6 +77,7 @@ export default {
       }else{
         FavouritesApi.deleteFavourite(this.id);
         this.isFaved = false;
+        this.$emit('unfav',this.id);
       }
     },
     difficultyToSpanish(difficulty){

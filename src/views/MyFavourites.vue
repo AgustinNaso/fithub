@@ -7,6 +7,7 @@
       </div>
       <div class="routineContainer">
         <Routine
+            purple
             is-mine
             class="routine"
             v-for="(routine) in routines"
@@ -20,6 +21,7 @@
             :id="routine.id"
             :is-public="routine.isPublic"
             @deleteRoutine="deleteRoutine($event)"
+            @unfav="unfav($event)"
         />
       </div>
     </div>
@@ -35,6 +37,7 @@ import Routine from "@/components/Routine";
 import {RoutineApi} from "@/backend/routines";
 import UserStore from "@/stores/UserStore";
 import router from "@/routes";
+import {FavouritesApi} from "@/backend/favourites";
 export default {
   name: "MyFavourites",
   components: {Routine, Title, Footer, NavBar},
@@ -48,18 +51,21 @@ export default {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
     }
-    // RoutineApi.getUserRoutines().then((value) => {
-    //   this.routines = value.content;
-    // });
+    FavouritesApi.getFavourites().then((value) => {
+      this.routines = value.content;
+    });
   },
   methods:{
     deleteRoutine: async function(id){
       try{
         await RoutineApi.deleteRoutine(id)
+        this.routines.splice(this.routines.findIndex(routine => routine.id === id), 1);
       }catch (e){
         alert(e);
       }
-      window.location.reload();
+    },
+    unfav(id){
+      this.routines.splice(this.routines.findIndex(routine => routine.id === id), 1);
     }
   }
 
