@@ -1,10 +1,10 @@
 <template>
 <div :class="{inputContainer: true, small: small}">
   <label :class="{light:light}">{{label}}</label>
-  <input :type="type" :name="name" :class="{light:light, error:error}"
+  <input :type="type" :name="name" :class="{light:light, error:errorMsg!==''}"
          :value="modelValue"
          @input="$emit('input', $event.target.value)"/>
-  <ErrorMsg v-show="error" :text="errorMsg"/>
+  <ErrorMsg v-show="errorMsg" :text="errorMsg"/>
 </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
     small:Boolean,
     name:String,
     label:String,
-    error:Boolean,
     light:Boolean,
     modelValue: String,
     errorMsg:String,

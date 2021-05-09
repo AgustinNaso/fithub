@@ -4,8 +4,8 @@
     <div class="loginBg">
       <h1 >Ingresar</h1>
       <form @submit.prevent>
-        <Input  v-model="name" type="text" name="email" label="Email*" :error="nameErr" :error-msg="nameErrMsg"/>
-        <Input  v-model="password" type="password" name="password" label="Contraseña*" :error="passErr" :error-msg="passErrMsg"/>
+        <Input  v-model="name" type="text" name="email" label="Email*" :error-msg="nameErrMsg"/>
+        <Input  v-model="password" type="password" name="password" label="Contraseña*" :error-msg="passErrMsg"/>
         <button class="clicker" @click="logIn">Ingresar</button>
         <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
       </form>
@@ -31,37 +31,38 @@ export default {
       store: UserStore,
       name:'',
       password:'',
-      nameErr:false,
-      passErr:false,
-      nameErrMsg:"",
-      passErrMsg:"",
+      nameErrMsg:'',
+      passErrMsg:'',
     }
   },
   methods:{
     async logIn() {
       //chequeos login
-      this.passErr = false;
-      this.nameErr = false;
+      this.passErrMsg = '';
+      this.nameErrMsg = '';
 
       if (!validateEmail(this.name) || isEmpty(this.name)){
-        this.nameErr = true;
         this.nameErrMsg = "El email ingresado no es valido.";
       }
       if (isEmpty(this.password)){
-        this.passErr = true;
         this.passErrMsg = "Debe ingresar una contraseña";
       }
 
-      if (this.nameErr || this.passErr){
+      if (this.nameErrMsg || this.passErrMsg){
         return;
       }
 
-      await this.store.logIn(this.name,this.password);
+      try {
+        await this.store.logIn(this.name, this.password);
+      }catch (e) {
+        this.nameErr = " ";
+        this.nameErrMsg = "No se encontro una cuenta con estas credenciales";
+        return;
+      }
       if(this.store.isLoggedIn()){
         await router.push("main");
       }else{
-        this.nameErr = true;
-        this.passErr = true;
+        this.nameErr = " ";
         this.nameErrMsg = "No se encontro una cuenta con estas credenciales";
       }
     }

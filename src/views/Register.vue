@@ -2,18 +2,20 @@
   <div class="outer">
     <NavBar logging></NavBar>
     <div class="loginBg">
-      <h1>Registrarse</h1>
-      <form @submit.prevent>
+      <h2 v-show="success">Registro Exitoso! Te mandamos un mail para que confirmes tu cuenta</h2>
+      <h1 v-show="!loading">Registrarse</h1>
+      <form @submit.prevent v-show="!loading">
         <div class="nameBox">
-          <Input v-model="name" type="text" name="name" label="Nombre*" small/>
-          <Input v-model="surname" type="text" name="surname" label="Apellido*" small/>
+          <Input v-model="name" type="text" name="name" label="Nombre*" small :error-msg="nameErrMsg"/>
+          <Input v-model="surname" type="text" name="surname" label="Apellido*" small :error-msg="surNameErrMsg"/>
         </div>
-        <Input v-model="email" type="email" name="email" label="Email*"/>
-        <Input v-model="password" type="password" name="password" label="Contraseña*"/>
-        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confirmar contraseña*"/>
+        <Input v-model="email" type="email" name="email" label="Email*" :error-msg="emailErrMsg"/>
+        <Input v-model="password" type="password" name="password" label="Contraseña*" :error-msg="passErrMsg"/>
+        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confirmar contraseña*" :error-msg="confPassErrMsg"/>
         <div  class="clicker" @click="register"><FormBtn text="Registrarse"/></div>
         <AltLink to="/login" text="Ya tienes una cuenta? Ingresar"/>
       </form>
+      <h3 v-show="loading">Evaluando tu registro...</h3>
     </div>
     <Footer/>
   </div>
@@ -28,6 +30,7 @@ import NavBar from "../components/NavBar";
 import UserStore from "@/stores/UserStore";
 import router from "@/routes";
 import {RegisterCredentials, UserApi} from "@/backend/user";
+import {isEmpty, validateEmail, matching} from "@/backend/checks";
 
 export default {
   name: "Login",
@@ -37,21 +40,66 @@ export default {
       store: UserStore,
       name:"",
       surname:"",
+      email:"",
       password:"",
       passwordConf:"",
-      email:"",
+      nameErrMsg:'',
+      surNameErrMsg:'',
+      emailErrMsg:'',
+      passErrMsg:'',
+      confPassErrMsg:'',
+      success:false,
+      loading:false,
     }
   },
   methods: {
-    register(){
+    async register(){
+      this.loading = true;
       let registerCred;
-      try {
-        registerCred = new RegisterCredentials(this.name, this.surname, this.password, this.email);
-        UserApi.register(registerCred);
+      this.passErrMsg = '';
+      this.nameErrMsg = '';
+      this.surNameErrMsg = '';
+      this.confPassErrMsg = '';
+      this.emailErrMsg = '';
 
+      if (!validateEmail(this.email) || isEmpty(this.email)){
+        this.emailErrMsg = "El email ingresado no es valido.";
+      }
+      if (isEmpty(this.name)){
+        this.nameErrMsg = "Campo vacio";
+      }
+      if (isEmpty(this.surname)){
+        this.surNameErrMsg = "Campo vacio";
+      }
+      if (isEmpty(this.password)){
+        this.passErrMsg = "Debe ingresar una contraseña";
+      }
+
+      if (!matching(this.password,this.passwordConf)){
+        this.passErrMsg = " ";
+        this.confPassErrMsg = "Las contraseñas deben coincidir"
+      }
+
+      if (this.nameErrMsg || this.surNameErrMsg || this.passErrMsg || this.confPassErrMsg || this.emailErrMsg){
+        this.loading = false;
+        return;
+      }
+
+      try {
+        registerCred = await new RegisterCredentials(this.name, this.surname, this.password, this.email);
+        await UserApi.register(registerCred);
+        this.name="";
+        this.surname="";
+        this.email="";
+        this.password="";
+        this.passwordConf="";
+        this.loading= false;
+        this.success = true;
       }
       catch (e){
-        alert(e.message);
+        this.loading= false;
+        this.emailErrMsg = "Ya se encuentra una cuenta con estas credenciales";
+
       }
     }
   },
@@ -95,4 +143,14 @@ form{
   width: 100%;
 }
 
+h2{
+  color: white;
+  margin-bottom: 30px;
+}
+
+h3{
+  margin-top:50px;
+  font-size: 80px;
+  color: #77c6a2;
+}
 </style>
