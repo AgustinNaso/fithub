@@ -43,6 +43,11 @@
             <img v-for="n in 5" class="star noclick" :key="n" :src="decideImg(n)" alt="star">
           </div>
           <h2 class="shareTitle">Compartir Rutina</h2>
+          <div class="shareWrap">
+            <input class="shareLink" disabled="disabled" type="text" :value="shareLink" />
+            <img class="copyClipboard" @click="copyLink" src="../assets/content_copy.svg">
+          </div>
+          <p class="clipboardMessage" v-show="copied">URL copiado al clipboard!</p>
         </div>
       </div>
     </div>
@@ -74,6 +79,7 @@ export default {
       this.routineName = routine.name;
       this.description = routine.detail;
       this.difficulty = routine.difficulty;
+      this.shareLink = window.location.href;
       // if (!routine.isPublic){
       //   await router.push("/permissionDenied");
       //   return;
@@ -116,7 +122,9 @@ export default {
     cycles: [],
     rating: 0,
     alreadyRated: false,
-    routineId: -1
+    routineId: -1,
+    shareLink:"",
+    copied: false
   }},
   methods:{
     difficultyToSpanish(difficulty){
@@ -138,6 +146,15 @@ export default {
       if(!this.alreadyRated){
         this.rating = 0;
       }
+    },
+    copyLink(){
+      const el = document.createElement('textarea');
+      el.value = window.location.href;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      this.copied = true;
     }
   },
 }
@@ -223,12 +240,43 @@ export default {
   width:360px;
 }
 
+.shareLink{
+  margin-top: 10px;
+  width:300px;
+  height:40px;
+  border: 2px solid black;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 550;
+  color: black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
 .shareTitle{
   color:black;
   width:100%;
   font-size:30px;
   text-align: right;
   border-bottom: #030b10 3px solid;
+}
+.shareWrap{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.copyClipboard{
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.clipboardMessage{
+  font-size: 18px;
+  font-weight: 550;
+  margin-left: 20px;
+  color: #5d6165;
 }
 
 .star{
