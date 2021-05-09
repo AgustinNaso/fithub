@@ -18,6 +18,7 @@ import CreateExercise from "@/views/CreateExercise";
 import MyExercises from "@/views/MyExercises";
 import EditExercise from "@/views/EditExercise";
 import RoutineExecution from "./views/RoutineExecution";
+import MyFavourites from "@/views/MyFavourites";
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ const routes = [
         path: "/myroutines",
         name:"myroutines",
         component: MyRoutines
+    },
+    {
+        path: "/myfavourites",
+        name:"myfavourites",
+        component: MyFavourites
     },
     {
         path: "/editProfile",

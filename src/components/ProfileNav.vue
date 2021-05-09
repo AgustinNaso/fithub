@@ -7,6 +7,7 @@
     <div v-if="isOpen" class="dropdown">
       <ul>
         <router-link to="/userProfile"><li>Mi Cuenta</li></router-link>
+        <router-link to="/myfavourites"><li>Mis Favoritos</li></router-link>
         <li @click="logOut" class="signOut">Cerrar Sesión</li>
       </ul>
     </div>
@@ -77,6 +78,7 @@ li{
   border-bottom: #5d6165 2px solid;
   max-width: 100%;
   text-shadow: 1px 1px 2px #111;
+  cursor: pointer;
 }
 
 .signOut{
