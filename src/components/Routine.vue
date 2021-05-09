@@ -29,7 +29,7 @@
         <img v-for="n in rating" class="star" :key="n" src="../assets/Video_Star.png" alt="star">
       </div>
       <div v-show="isMine" class="editing">
-        <p @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
+        <p class="delete" @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
         <router-link :to="{ name: 'editRoutine', params: {id: id } }"><p>Editar</p></router-link>
       </div>
     </div>
@@ -104,6 +104,7 @@ h3{
   color: white;
   text-shadow: #030b10 3px 2px 7px;
   word-wrap: break-word;
+  width: 80%;
 }
 
 .title{
@@ -234,6 +235,9 @@ h3{
   align-items: center;
 }
 
+.delete{
+  cursor: pointer
+}
 
 a{
   color: black;

@@ -5,7 +5,7 @@
     <div class="routineBg">
       <div class="routineIntro">
         <div class="titleDiv">
-          <Title to="" :title-name="routineName"/>
+          <EditableTitle to="/myroutines" v-model="routineName" :model-value="routineName"/>
           <textarea class="subtitle" v-model="description"></textarea>
         </div>
         <div class="dataDiv">
@@ -23,7 +23,7 @@
 
       <div class="mainSection">
 
-        <h2 class="sectionTitle" style="color: #DC9F28">{{ warmUp.name }} </h2>
+        <h2 @click="getMaxOrder" class="sectionTitle" style="color: #DC9F28">{{ warmUp.name }} - -  {{warmUp.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
 <!--          <div v-for="el in warmUp" :key="el.uuid">-->
 <!--            <EditableRoutineBlock orange :id="el.uuid" @removeExercise="removeExercise(warmUp,el.uuid)" :exercises="exercises"/>-->
@@ -34,8 +34,8 @@
         <div v-for="(cycle,index) in cycles" :key="cycle.id">
           <div class="cycleContainer">
             <div class="cycleHeader">
-            <h2 class="sectionTitle" style="color: #42b983"> {{cycle.name}}</h2>
-              <button class="removeCycleButton" @click="removeCycle(index)">Remover ciclo</button>
+            <h2 class="sectionTitle" style="color: #42b983"> {{cycle.name}} - -  {{cycle.repetitions}} set/s</h2>
+              <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
             </div>
             <div class="routineBlockDiv">
 <!--              <div v-for="el in cycles[index]" :key="el.uuid">-->
@@ -45,10 +45,9 @@
             </div>
           </div>
         </div>
-
         <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
 
-        <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> {{ coolDown.name }} </h2>
+        <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> {{ cooldown.name }} - -  {{cooldown.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
 <!--          <div v-for="el in coolDown" :key="el.uuid">-->
 <!--            <EditableRoutineBlock blue :id="el.uuid" @removeExercise="removeExercise(coolDown,el.uuid)" :exercises="exercises"/>-->
@@ -68,17 +67,17 @@
 <script>
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Title from "../components/Title";
 
 import UserStore from "@/stores/UserStore";
 import router from "../routes";
 import {ExerciseApi} from "@/backend/exercises";
-import {RoutineApi, RoutineBase} from "@/backend/routines";
+import {Cycle, RoutineApi, RoutineBase} from "@/backend/routines";
 import {CycleApi} from "@/backend/cycles";
+import EditableTitle from "@/components/editableComponent/EditableTitle";
 
 export default {
   name: "EditRoutine",
-  components: {  Title, Footer, NavBar},
+  components: {EditableTitle, Footer, NavBar},
   data() {
     return {
       store: UserStore,
@@ -94,9 +93,16 @@ export default {
     }
   },
   methods: {
-    addCycle() {
-      this.cycles.push([]);
-      this.cycleIdx++;
+    async addCycle() {
+      const cycle = new Cycle("Ciclo de Ejercitacion",'exercise',this.getMaxOrder()+1,1);
+      try {
+        const newCycle = await RoutineApi.addCycle(this.$route.params.id, cycle)
+        this.cycles.push(newCycle);
+        this.cycleIdx++;
+      }
+      catch (e) {
+        alert(e);
+      }
     },
     addExercise(cycle) {
       cycle.push({nombre: "Flexiones", reps: 10, secs: 30, uuid: new  Date().getTime()});
@@ -104,11 +110,22 @@ export default {
     removeExercise(array,key) {
           array.splice(array.findIndex(a => a.uuid === key), 1)
     },
-    removeCycle(idx){
-      this.cycles.splice(idx,1);
+    async removeCycle(id){
+      try{
+        await RoutineApi.deleteCycle(this.$route.params.id,id);
+        this.cycles.splice(this.cycles.findIndex(cycle => cycle.id === id), 1);
+      }
+      catch (e) {
+        alert(e);
+      }
     },
     getDateTime() {
       return new  Date().getTime();
+    },
+    getMaxOrder(){
+      let maxOrder = -1;
+      this.cycles.forEach((cycle) => maxOrder = cycle.order>maxOrder?cycle.order:maxOrder);
+      return maxOrder
     },
     async confirmChanges(){
       try{
