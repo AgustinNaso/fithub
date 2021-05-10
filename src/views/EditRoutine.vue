@@ -28,9 +28,12 @@
           <img src="../assets/editicon.png" class="editIcon" alt="edit">
         </div>
         <div class="routineBlockDiv">
-          <EditableRoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :orange="el.exercise.type === 'exercise'"
-                                :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration"
-                                :exercises="exercises"  @removeExercise="removeExercise(warmUp,el.exercise.id)"/>
+          <EditableRoutineBlock v-for="(el,idx) in warmUp.exercises" :key="`${el.exercise.id}-${idx}`" orange
+                                :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
+                                :exercises="exercises" :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                @removeExercise="removeExercise(warmUp,$event)"
+                                @confirmExercise="confirmExercise(warmUp,$event)"/>
+
           <img class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
         </div>
 
@@ -42,9 +45,11 @@
               <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
             </div>
             <div class="routineBlockDiv">
-              <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="el.exercise.id" :green="el.exercise.type === 'exercise'"
-                                    :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration"
-                                    :exercises="exercises"  @removeExercise="removeExercise(warmUp,el.exercise.id)"/>
+              <EditableRoutineBlock v-for="(el,idx) in cycles[index].exercises" :key="`${el.exercise.id}-${idx}`" green
+                                    :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
+                                    :exercises="exercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                    @removeExercise="removeExercise(cycle,el.exercise.id)"
+                                    @confirmExercise="confirmExercise(cycle,$event)"/>
               <img class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
           </div>
@@ -56,9 +61,11 @@
           <img src="../assets/editicon.png" class="editIcon" alt="edit">
         </div>
         <div class="routineBlockDiv">
-          <EditableRoutineBlock v-for="(el) in cooldown.exercises" :key="el.exercise.id" :blue="el.exercise.type === 'exercise'"
-                                :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration"
-                                :exercises="exercises"  @removeExercise="removeExercise(warmUp,el.exercise.id)"/>
+          <EditableRoutineBlock v-for="(el,idx) in cooldown.exercises" :key="`${el.exercise.id}-${idx}`" blue
+                                :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
+                                :exercises="exercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                @removeExercise="removeExercise(cooldown,el.exercise.id)"
+                                @confirmExercise="confirmExercise(cooldown,$event)"/>
           <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
       </div>
@@ -77,7 +84,7 @@ import Footer from "../components/Footer";
 
 import UserStore from "@/stores/UserStore";
 import router from "../routes";
-import {ExerciseApi} from "@/backend/exercises";
+import { ExerciseApi} from "@/backend/exercises";
 import {Cycle, RoutineApi, RoutineBase} from "@/backend/routines";
 import {CycleApi} from "@/backend/cycles";
 import EditableTitle from "@/components/editableComponent/EditableTitle";
@@ -105,6 +112,7 @@ export default {
       const cycle = new Cycle("Ciclo de Ejercitacion",'exercise',this.getMaxOrder()+1,1);
       try {
         const newCycle = await RoutineApi.addCycle(this.$route.params.id, cycle)
+        newCycle.exercises = [];
         this.cycles.push(newCycle);
         this.cycleIdx++;
       }
@@ -113,10 +121,33 @@ export default {
       }
     },
     addExercise(cycle) {
-      cycle.push({nombre: "Flexiones", reps: 10, secs: 30, uuid: new  Date().getTime()});
+      cycle.exercises.push({isCreating:true,isEditing:true,order:this.getMaxOrderFromCycle(cycle)+1 , repetitions: 0, duration: 0,exercises:this.exercises,
+        exercise:{id:this.getDateTime()}});
     },
-    removeExercise(array,key) {
-          array.splice(array.findIndex(a => a.uuid === key), 1)
+    async confirmExercise(cycle,data){
+      try{
+        if (data.isCreating){
+          await CycleApi.addCycleExercise(cycle.id,data.id,data.exToSend);
+        }else{
+          await CycleApi.removeCycleExercise(cycle.id,data.prevEx.id);
+          await CycleApi.addCycleExercise(cycle.id,data.id,data.exToSend);
+        }
+      }catch (e) {
+        console.log(e);
+      }
+    },
+    getMaxOrderFromCycle(cycle){
+      let maxOrder = 1;
+      cycle.exercises.forEach((ex) => maxOrder = ex.order>maxOrder?ex.order:maxOrder);
+      return maxOrder
+    },
+    async removeExercise(cycle,id) {
+          try{
+            await CycleApi.removeCycleExercise(cycle.id,id);
+          }catch(e){
+            console.log(e);
+          }
+          cycle.exercises.splice(cycle.exercises.findIndex(a => a.exercise.id === id), 1)
     },
     async removeCycle(id){
       try{
@@ -131,7 +162,7 @@ export default {
       return new  Date().getTime();
     },
     getMaxOrder(){
-      let maxOrder = -1;
+      let maxOrder = 1;
       this.cycles.forEach((cycle) => maxOrder = cycle.order>maxOrder?cycle.order:maxOrder);
       return maxOrder
     },
@@ -164,7 +195,6 @@ export default {
       for (const cycle of cycles.content) {
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
         cycle.exercises = exerciseObj.content;
-        console.log(cycle);
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;

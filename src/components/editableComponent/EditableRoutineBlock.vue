@@ -1,24 +1,24 @@
 <template>
   <div class="blockContainer">
     <div class="blockBg" :class="{orange:orange && currentEx.type === 'exercise', blue:blue && currentEx.type === 'exercise', green:green && currentEx.type === 'exercise'}">
-      <select v-show="isEditing" class="routineInput" v-model="currentEx">
+      <select v-show="dataIsEditing" class="routineInput" v-model="currentEx">
         <option v-for="exercise in exercises" :value="exercise" :key="exercise.id">{{exercise.name}}</option>
       </select>
-      <h4 v-show="!isEditing">{{currentEx.name}}</h4>
+      <h4 v-show="!dataIsEditing">{{currentEx.name}}</h4>
       <div class="valueFill">
-        <input  v-show="isEditing" type="number" class="numInput" name="reps" v-model.number="reps">
-        <p class="realVal" v-show="!isEditing && reps">{{reps}}</p>
-        <p v-show="isEditing || reps"> repetición/es</p>
+        <input  v-show="dataIsEditing" type="number" class="numInput" name="reps" v-model.number="dataReps">
+        <p class="realVal" v-show="!dataIsEditing && dataReps">{{dataReps}}</p>
+        <p v-show="dataIsEditing || dataReps"> repetición/es</p>
       </div>
       <div class="valueFill">
-        <input v-show="isEditing" type="number" class="numInput" name="secs" v-model.number="secs">
-        <p class="realVal" v-show="!isEditing && secs">{{secs}}</p>
-        <p v-show="isEditing || secs"> segundo/s</p>
+        <input v-show="dataIsEditing" type="number" class="numInput" name="secs" v-model.number="dataSecs">
+        <p class="realVal" v-show="!dataIsEditing && dataSecs">{{dataSecs}}</p>
+        <p v-show="dataIsEditing || dataSecs"> segundo/s</p>
       </div>
       <div class="icons">
-        <img v-show="!isEditing" @click="$emit('removeExercise',id)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
-        <img v-show="!isEditing" @click="handleEdit" class="edit" src="../../assets/editicon.png" alt="edit"/>
-        <div class="confirmChanges" v-show="isEditing"  @click="handleEdit">
+        <img v-show="!dataIsEditing" @click="$emit('removeExercise',currentEx.id)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
+        <img v-show="!dataIsEditing" @click="handleEdit" class="edit" src="../../assets/editicon.png" alt="edit"/>
+        <div class="confirmChanges" v-show="dataIsEditing"  @click="handleEdit">
           <p>Confirmar cambios</p>
           <img class="edit" src="../../assets/tick.png" alt="confirm"/>
         </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import {CycleExercise} from "@/backend/cycles";
+
 export default {
   name: "EditableRoutineBlock",
   props:{
@@ -39,21 +41,43 @@ export default {
     exercises: Array,
     reps: Number,
     secs: Number,
+    order:Number,
     exercise: Object,
-    isEditing: Boolean,
-    isCreating: Boolean
+    isCreating:Boolean,
+    isEditing:Boolean,
   },
   data(){
     return {
       currentEx : this.exercises[0],
+      dataIsCreating: true,
+      dataIsEditing:true,
+      dataReps : 0,
+      dataSecs : 0,
+      prevExercise: null,
     }
   },
   methods:{
-    handleEdit: function (){
-      this.isEditing = !this.isEditing;
+    async handleEdit(){
+      this.dataIsEditing = !this.dataIsEditing;
+      if (!this.dataIsEditing){
+        const exToSend = new CycleExercise(this.order,this.dataReps,this.dataSecs);
+        const data = {id: this.currentEx.id,isCreating:this.dataIsCreating,exToSend:exToSend, prevEx:this.prevExercise};
+        await this.$emit('confirmExercise',data);
+        this.prevExercise = this.currentEx;
+      }
+      this.dataIsCreating = false;
     }
   },created() {
-    this.currentEx = this.exercise?this.exercise:this.exercises[0];
+    if (!this.exercise || !this.exercise.type) {
+      this.currentEx = this.exercises[0];
+    }else{
+      this.currentEx = this.exercise;
+    }
+    this.dataIsCreating = this.isCreating?this.isCreating:false;
+    this.dataIsEditing = this.isEditing?this.isEditing:false;
+    this.dataReps = this.reps;
+    this.dataSecs = this.secs
+    this.prevExercise = this.currentEx;
   }
 }
 </script>
