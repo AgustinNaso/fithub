@@ -8,7 +8,6 @@
       <div class="interaction">
         <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="unfav"/>
         <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="fav"/>
-        <img class="buttonUpper" src="../assets/Sgare-White-Icon-PNG.png" alt="share"/>
       </div>
     </div>
     <p class="description">{{description}}</p>
