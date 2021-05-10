@@ -46,6 +46,7 @@ import Footer from "@/components/Footer";
 import {RoutineBase, RoutineApi, Cycle} from "@/backend/routines"
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
+import {ExerciseApi} from "@/backend/exercises";
 export default {
   name: "CreateRoutine",
   components: {Footer, NavBar, Title},
@@ -76,9 +77,13 @@ export default {
       await router.push(`/editRoutine/${data.id}`);
     }
   },
-  created() {
+  async created() {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
+    }
+    const ex = await ExerciseApi.getExercises();
+    if (ex.totalCount === 0){
+      await router.push("/createExercise/noEx")
     }
   }
 }

@@ -2,6 +2,7 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="bodyContainer">
+      <h1 v-show="noEx">Debes crear por lo menos un ejercicio antes de comenzar una rutina!</h1>
       <Title title-name="Crear Ejercicio" to="/myexercises"/>
       <div class="content">
         <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
@@ -41,6 +42,9 @@ import {ExerciseApi,Exercise} from "@/backend/exercises";
 export default {
   name: "CreateExercise",
   components: {Footer, NavBar, Title},
+  props:{
+    noEx:Boolean,
+  },
   data(){
     return{
       nombre:"",
@@ -64,6 +68,7 @@ export default {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
     }
+
   }
 }
 </script>
@@ -195,6 +200,12 @@ input[type="radio"]:checked + *::before {
   .mainImg{
     display: none;
   }
+}
+
+h1{
+  color: #d01212;
+  margin-left: 40px;
+  margin-bottom: 10px;
 }
 
 

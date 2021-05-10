@@ -105,6 +105,14 @@ const routes = [
         component: CreateExercise
     },
     {
+        path: "/createExercise/noEx",
+        name:"createExNoEx",
+        component: CreateExercise,
+        props:{
+            noEx:true
+        }
+    },
+    {
         path: "/editExercise/:id",
         name: "editExercise",
         component: EditExercise

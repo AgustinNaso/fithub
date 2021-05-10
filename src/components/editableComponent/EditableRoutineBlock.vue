@@ -6,12 +6,12 @@
       </select>
       <h4 v-show="!dataIsEditing">{{currentEx.name}}</h4>
       <div class="valueFill">
-        <input  v-show="dataIsEditing" type="number" class="numInput" name="reps" v-model.number="dataReps">
+        <input  v-show="dataIsEditing" type="number" class="numInput" name="reps" v-model.number="dataReps" min="0">
         <p class="realVal" v-show="!dataIsEditing && dataReps">{{dataReps}}</p>
         <p v-show="dataIsEditing || dataReps"> repetición/es</p>
       </div>
       <div class="valueFill">
-        <input v-show="dataIsEditing" type="number" class="numInput" name="secs" v-model.number="dataSecs">
+        <input v-show="dataIsEditing" type="number" class="numInput" name="secs" v-model.number="dataSecs" min="0">
         <p class="realVal" v-show="!dataIsEditing && dataSecs">{{dataSecs}}</p>
         <p v-show="dataIsEditing || dataSecs"> segundo/s</p>
       </div>
