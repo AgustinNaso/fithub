@@ -22,7 +22,7 @@
       </div>
 
       <div class="mainSection">
-        <SectionTitle :name="warmUp.name" :reps="warmUp.repetitions" style="color: #DC9F28" @editCycle="editCycle(warmUp,$event)"/>
+        <SectionTitle v-if="warmUp.name" :name="warmUp.name" :reps="warmUp.repetitions" style="color: #DC9F28" @editCycle="editCycle(warmUp,$event)"/>
         <div class="routineBlockDiv">
           <EditableRoutineBlock v-for="(el) in warmUp.exercises" :key="`${el.order}`" orange
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
@@ -51,7 +51,7 @@
         </div>
         <button class="cycleButton" @click="addCycle()">+ Agregar ciclo</button>
 
-        <SectionTitle :name="cooldown.name" :reps="cooldown.repetitions" style="color: rgba(78,100,188,0.8)" @editCycle="editCycle(cooldown,$event)"/>
+        <SectionTitle v-if="cooldown.name" :name="cooldown.name" :reps="cooldown.repetitions" style="color: rgba(78,100,188,0.8)" @editCycle="editCycle(cooldown,$event)"/>
         <div class="routineBlockDiv">
           <EditableRoutineBlock v-for="(el) in cooldown.exercises" :key="`${el.order}`" blue
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
