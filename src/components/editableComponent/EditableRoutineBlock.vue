@@ -36,20 +36,24 @@ export default {
     blue: Boolean,
     green: Boolean,
     id: Number,
-    exercises: Array
+    exercises: Array,
+    reps: Number,
+    secs: Number,
+    exercise: Object,
+    isEditing: Boolean,
+    isCreating: Boolean
   },
   data(){
     return {
       currentEx : this.exercises[0],
-      reps: 0,
-      secs: 0,
-      isEditing: true
     }
   },
   methods:{
     handleEdit: function (){
       this.isEditing = !this.isEditing;
     }
+  },created() {
+    this.currentEx = this.exercise?this.exercise:this.exercises[0];
   }
 }
 </script>

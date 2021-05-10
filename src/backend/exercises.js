@@ -14,6 +14,7 @@ class ExerciseApi {
     static async getExerciseById(id,controller) {
         return await Api.get(`${ExerciseApi.url}/${id}`, true, controller);
     }
+
     static async editExercise(exercise, id,controller) {
         await Api.put(`${ExerciseApi.url}/${id}`, true, exercise, controller);
     }

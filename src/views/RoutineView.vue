@@ -22,13 +22,13 @@
         <div v-for="cycle in cycles" :key="cycle.id">
           <h2 class="sectionTitle" style="color: #42b983">{{ cycle.name }} - -  {{cycle.repetitions}} set/s</h2>
           <div class="routineBlockDiv">
-            <RoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :green="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
+            <RoutineBlock v-for="(el) in cycle.exercises" :key="el.exercise.id" :green="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
           </div>
         </div>
 
         <h2 class="sectionTitle" style="color: #4D6DEB">{{cooldown.name }} - -  {{cooldown.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
-          <RoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :blue="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
+          <RoutineBlock v-for="(el) in cooldown.exercises" :key="el.exercise.id" :blue="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
         </div>
       </div>
       <div class="finalSection">
@@ -45,7 +45,7 @@
           <h2 class="shareTitle">Compartir Rutina</h2>
           <div class="shareWrap">
             <input class="shareLink" disabled="disabled" type="text" :value="shareLink" />
-            <img class="copyClipboard" @click="copyLink" src="../assets/content_copy.svg">
+            <img class="copyClipboard" @click="copyLink" src="../assets/content_copy.svg" alt="copyLink">
           </div>
           <p class="clipboardMessage" v-show="copied">URL copiado al clipboard!</p>
         </div>
@@ -297,6 +297,10 @@ export default {
 
 .noclick{
   cursor: auto;
+}
+
+.sectionTitle{
+  font-size: 28px;
 }
 
 </style>

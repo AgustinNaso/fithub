@@ -23,11 +23,14 @@
 
       <div class="mainSection">
 
-        <h2 @click="getMaxOrder" class="sectionTitle" style="color: #DC9F28">{{ warmUp.name }} - -  {{warmUp.repetitions}} set/s</h2>
+        <div class="cycleHeader">
+          <h2 class="sectionTitle" style="color: #DC9F28">{{ warmUp.name }} - -  {{warmUp.repetitions}} set/s</h2>
+          <img src="../assets/editicon.png" class="editIcon" alt="edit">
+        </div>
         <div class="routineBlockDiv">
-<!--          <div v-for="el in warmUp" :key="el.uuid">-->
-<!--            <EditableRoutineBlock orange :id="el.uuid" @removeExercise="removeExercise(warmUp,el.uuid)" :exercises="exercises"/>-->
-<!--          </div>-->
+          <EditableRoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :orange="el.exercise.type === 'exercise'"
+                                :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration"
+                                :exercises="exercises"  @removeExercise="removeExercise(warmUp,el.exercise.id)"/>
           <img class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
         </div>
 
@@ -35,23 +38,27 @@
           <div class="cycleContainer">
             <div class="cycleHeader">
             <h2 class="sectionTitle" style="color: #42b983"> {{cycle.name}} - -  {{cycle.repetitions}} set/s</h2>
+              <img src="../assets/editicon.png" class="editIcon" alt="edit">
               <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
             </div>
             <div class="routineBlockDiv">
-<!--              <div v-for="el in cycles[index]" :key="el.uuid">-->
-<!--                <EditableRoutineBlock green :id="el.uuid" @removeExercise="removeExercise(cycles[index],el.uuid)" :exercises="exercises"/>-->
-<!--              </div>-->
+              <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="el.exercise.id" :green="el.exercise.type === 'exercise'"
+                                    :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration"
+                                    :exercises="exercises"  @removeExercise="removeExercise(warmUp,el.exercise.id)"/>
               <img class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
           </div>
         </div>
-        <button class="cycleButton" @click="addCycle()">Agregar ciclo</button>
+        <button class="cycleButton" @click="addCycle()">+ Agregar ciclo</button>
 
-        <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> {{ cooldown.name }} - -  {{cooldown.repetitions}} set/s</h2>
+        <div class="cycleHeader">
+          <h2 class="sectionTitle" style="color: rgba(78,100,188,0.8)"> {{ cooldown.name }} - -  {{cooldown.repetitions}} set/s</h2>
+          <img src="../assets/editicon.png" class="editIcon" alt="edit">
+        </div>
         <div class="routineBlockDiv">
-<!--          <div v-for="el in coolDown" :key="el.uuid">-->
-<!--            <EditableRoutineBlock blue :id="el.uuid" @removeExercise="removeExercise(coolDown,el.uuid)" :exercises="exercises"/>-->
-<!--          </div>-->
+          <EditableRoutineBlock v-for="(el) in cooldown.exercises" :key="el.exercise.id" :blue="el.exercise.type === 'exercise'"
+                                :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration"
+                                :exercises="exercises"  @removeExercise="removeExercise(warmUp,el.exercise.id)"/>
           <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
       </div>
@@ -74,10 +81,11 @@ import {ExerciseApi} from "@/backend/exercises";
 import {Cycle, RoutineApi, RoutineBase} from "@/backend/routines";
 import {CycleApi} from "@/backend/cycles";
 import EditableTitle from "@/components/editableComponent/EditableTitle";
+import EditableRoutineBlock from "@/components/editableComponent/EditableRoutineBlock";
 
 export default {
   name: "EditRoutine",
-  components: {EditableTitle, Footer, NavBar},
+  components: {EditableRoutineBlock, EditableTitle, Footer, NavBar},
   data() {
     return {
       store: UserStore,
@@ -135,7 +143,7 @@ export default {
         await router.push('/error');
       }
 
-      await router.push('/myroutines')
+      await router.push(`/routine/${this.$route.params.id}`);
     }
   },
   async created() {
@@ -154,12 +162,14 @@ export default {
 
       const cycles = await RoutineApi.getCycles(this.$route.params.id);
       for (const cycle of cycles.content) {
+        const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
+        cycle.exercises = exerciseObj.content;
+        console.log(cycle);
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;
           case 'exercise': this.cycles.push(cycle);break;
         }
-        console.log(await CycleApi.getCycleExercises(cycle.id));
       }
 
     }catch (e) {
@@ -251,21 +261,21 @@ export default {
   text-decoration: none;
   outline: none;
   transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .cycleButton{
-  width: 300px;
-  font-size: 26px;
-  padding: 8px 35px 8px 35px;
+  width: 700px;
+  font-size: 30px;
+  padding: 8px 0 8px 0;
   margin-right: 10px;
-  margin-bottom: 10px;
-  margin-left: 35vw;
+  margin-bottom: 50px;
 }
 
 .acceptBtn{
-  width: 300px;
+  width: 500px;
   padding: 12px;
-  font-size: 26px;
+  font-size: 40px;
   cursor: pointer;
   color: #31ae7a;
   background-color: inherit;
@@ -325,6 +335,18 @@ export default {
   font-size: 20px;
   margin-left: 10px;
   padding:4px;
+  border-radius: 10px;
+  border: #31ae7a 2px solid;
+}
+
+.sectionTitle{
+  font-size: 28px;
+}
+
+.editIcon{
+  margin: 0 10px 0 20px;
+  height: 32px;
+  cursor: pointer;
 }
 
 </style>
