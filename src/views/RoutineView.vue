@@ -42,12 +42,12 @@
           <div class="ratingWrap" v-show="alreadyRated">
             <img v-for="n in 5" class="star noclick" :key="n" :src="decideImg(n)" alt="star">
           </div>
-          <h2 class="shareTitle">Compartir Rutina</h2>
-          <div class="shareWrap">
+          <h2 v-show="isPublic" class="shareTitle">Compartir Rutina</h2>
+          <div v-show="isPublic" class="shareWrap">
             <input class="shareLink" disabled="disabled" type="text" :value="shareLink" />
             <img class="copyClipboard" @click="copyLink" src="../assets/content_copy.svg" alt="copyLink">
           </div>
-          <p class="clipboardMessage" v-show="copied">URL copiado al clipboard!</p>
+          <p class="clipboardMessage" v-show="copied && isPublic">URL copiado al clipboard!</p>
         </div>
       </div>
     </div>
@@ -78,6 +78,7 @@ export default {
       this.description = routine.detail;
       this.difficulty = routine.difficulty;
       this.shareLink = window.location.href;
+      this.isPublic = routine.isPublic;
       // if (!routine.isPublic){
       //   await router.push("/permissionDenied");
       //   return;
@@ -124,7 +125,8 @@ export default {
     alreadyRated: false,
     routineId: -1,
     shareLink:"",
-    copied: false
+    copied: false,
+    isPublic: Boolean
   }},
   methods:{
     difficultyToSpanish(difficulty){
