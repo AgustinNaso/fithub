@@ -30,6 +30,9 @@ class RoutineApi {
     static async deleteCycle(routineId,cycleId,controller) {
         return await Api.delete(`${RoutineApi.url}/${routineId}/cycles/${cycleId}`, true, controller);
     }
+    static async editCycle(routineId,cycleId,cycle,controller) {
+        return await Api.put(`${RoutineApi.url}/${routineId}/cycles/${cycleId}`, true,cycle, controller);
+    }
 
     static async getCycles(routineId,controller) {
         return await Api.get(`${RoutineApi.url}/${routineId}/cycles`, true, controller);
