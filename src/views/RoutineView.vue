@@ -31,11 +31,11 @@
           <RoutineBlock v-for="(el) in cooldown.exercises" :key="el.exercise.id" :blue="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
         </div>
       </div>
-      <div class="finalSection">
-        <button class="startRoutine">Iniciar Rutina</button>
+      <div :class={finalSection:true,toLeft:!loggedIn}>
+        <button class="startRoutine" v-show="loggedIn">Iniciar Rutina</button>
         <div class="share">
-          <h2 class="shareTitle" v-show="!alreadyRated">Puntua esta rutina</h2>
-          <div class="ratingWrap" v-show="!alreadyRated">
+          <h2 class="shareTitle" v-show="!alreadyRated && loggedIn">Puntua esta rutina</h2>
+          <div class="ratingWrap" v-show="!alreadyRated && loggedIn">
             <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="star" @mouseover="rating=n" @mouseleave="leaveHandle" @click="rate(n)">
           </div>
           <h2 class="shareTitle" v-show="alreadyRated">Ya puntuaste esta rutina!</h2>
@@ -71,9 +71,6 @@ export default {
   name: "RoutineView",
   components: {  RoutineBlock, Title, Footer, NavBar},
   async created() {
-    if (!this.store.isLoggedIn()) {
-      await router.push("/permissionDenied");
-    }
     this.routineId = this.$route.params.id;
     try{
       const routine = await RoutineApi.getRoutineById(this.routineId);
@@ -160,6 +157,11 @@ export default {
       this.copied = true;
     }
   },
+  computed:{
+    loggedIn(){
+      return this.store.isLoggedIn();
+    }
+  }
 }
 </script>
 
@@ -226,21 +228,29 @@ export default {
   justify-content: space-between;
 }
 .startRoutine{
-  background-color: #77c6a2;
-  width: 460px;
-  color:white;
+  color: white;
+  border: none;
+  text-align: center;
+  background-color: #42b983;
+  border-radius: 25px;
   font-size: 36px;
-  border: white 3px solid;
-  padding: 10px;
-  margin-left: 100px;
-  border-radius: 30px;
   font-weight: 700;
-  box-shadow: 3px 3px 10px #111;
-  cursor:pointer;
+  margin-left: 100px;
+  text-decoration: none;
+  outline: none;
+  width: 400px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.startRoutine:hover{
+  background-color: #77c6a2;
+  transition: 0.2s ease-in-out;
 }
 
 .share{
   width:360px;
+  align-self: flex-end;
 }
 
 .shareLink{
@@ -268,6 +278,7 @@ export default {
 .shareWrap{
   display: flex;
   justify-content: space-evenly;
+
 }
 .share{
   width:400px;
@@ -305,4 +316,7 @@ export default {
   font-size: 28px;
 }
 
+.toLeft{
+  justify-content: flex-end;
+}
 </style>

@@ -17,7 +17,7 @@
     </div>
     <div class="playContainer">
       <p>{{difficultyToSpanish(difficulty)}}</p>
-      <router-link :to="{ name: 'routine', params: {id: id } }">
+      <router-link :to="{ name: 'routine', params: {id: this.id } }">
         <div class="playBtn">
           <div class="triangle"/>
         </div>

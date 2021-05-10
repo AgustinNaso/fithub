@@ -5,8 +5,7 @@
       <div class="homeSection">
         <h1>Entrena gratis, en cualquier lado.</h1>
         <p>
-          Con <b>FitHub</b> podes conectarte con otros xxxx de tu xxxx que
-          no se que escribir aca! <br />
+          Con <b>FitHub</b> podes conectarte crear tus rutinas y compartirlas con gente de todo el mundo! <br />
           <br />
           <b>Entrenamiento de persona a persona, sin intermediario.</b>
         </p>
