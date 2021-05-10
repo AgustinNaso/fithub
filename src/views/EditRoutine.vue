@@ -52,7 +52,7 @@
 <!--          <div v-for="el in coolDown" :key="el.uuid">-->
 <!--            <EditableRoutineBlock blue :id="el.uuid" @removeExercise="removeExercise(coolDown,el.uuid)" :exercises="exercises"/>-->
 <!--          </div>-->
-          <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(coolDown)" alt=""/>
+          <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
       </div>
 
@@ -86,7 +86,7 @@ export default {
       difficulty:"",
       isPublic:true,
       warmUp: {},
-      coolDown: {},
+      cooldown: {},
       cycles: [],
       exercises: [],
       cycleIdx: 0,

@@ -4,10 +4,10 @@
     <div class="mainBg">
       <div class="titleContainer">
         <Title title-name="Mis Ejercicios" to="/main"/>
-        <router-link v-show="exercises.length !== 0" to="/createExercise"><button>Crear Ejercicio</button></router-link>
+        <router-link v-show="exercises && exercises.length !== 0" to="/createExercise"><button>Crear Ejercicio</button></router-link>
       </div>
       <div class="exerciseContainer">
-        <div v-show="exercises.length === 0" class="newRoutineAlarm">
+        <div v-show="exercises && exercises.length === 0" class="newRoutineAlarm">
           <h1>No tenes ningun ejercicio todavia! </h1>
           <router-link class="large" to="createExercise"><button class="large">Crear Ejercicio</button></router-link>
         </div>

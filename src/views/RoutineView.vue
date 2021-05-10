@@ -16,19 +16,19 @@
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">{{warmUp.name}} - -  {{warmUp.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
-<!--          <RoutineBlock v-for="(rout,idx) in warmUp" :key="idx" :orange="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />-->
+          <RoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :orange="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
         </div>
 
         <div v-for="cycle in cycles" :key="cycle.id">
           <h2 class="sectionTitle" style="color: #42b983">{{ cycle.name }} - -  {{cycle.repetitions}} set/s</h2>
           <div class="routineBlockDiv">
-  <!--          <RoutineBlock v-for="(rout,idx) in cycle" :key="idx" :green="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />-->
+            <RoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :green="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
           </div>
         </div>
 
-        <h2 class="sectionTitle" style="color: #4D6DEB">{{ cooldown.name }} - -  {{cooldown.repetitions}} set/s</h2>
+        <h2 class="sectionTitle" style="color: #4D6DEB">{{cooldown.name }} - -  {{cooldown.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
-<!--          <RoutineBlock v-for="(rout,idx) in cooldown" :key="idx" :blue="rout.name !== 'Descanso'" :excercise-name="rout.name" :reps="rout.reps" :secs="rout.secs" />-->
+          <RoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :blue="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
         </div>
       </div>
       <div class="finalSection">
@@ -57,13 +57,14 @@ import Title from "../components/Title";
 import UserStore from "@/stores/UserStore";
 import router from "@/routes";
 import {RoutineApi} from "@/backend/routines";
-// import {CycleApi} from "@/backend/cycles";
+import {CycleApi} from "@/backend/cycles";
 import {difficultyToSpanish} from "@/backend/utils";
 import {ReviewsApi, Review} from "@/backend/reviews";
+import RoutineBlock from "@/components/RoutineBlock";
 
 export default {
   name: "RoutineView",
-  components: {  Title, Footer, NavBar},
+  components: {  RoutineBlock, Title, Footer, NavBar},
   async created() {
     if (!this.store.isLoggedIn()) {
       await router.push("/permissionDenied");
@@ -80,12 +81,14 @@ export default {
       // }
       const data = await RoutineApi.getCycles(this.routineId);
       for (const cycle of data.content) {
+        const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
+        cycle.exercises = exerciseObj.content;
+        console.log(cycle);
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;
           case 'exercise': this.cycles.push(cycle);break;
         }
-        // console.log(await CycleApi.getCycleExercises(cycle.id));
 
 
         /////
