@@ -30,11 +30,11 @@
         <div class="routineBlockDiv">
           <EditableRoutineBlock v-for="(el) in warmUp.exercises" :key="`${el.order}`" orange
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
-                                :exercises="exercises" :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                :exercises="warmUp.validExercises" :isCreating="el.isCreating" :isEditing="el.isEditing"
                                 @removeExercise="removeExercise(warmUp,$event)"
                                 @confirmExercise="confirmExercise(warmUp,$event)"/>
 
-          <img class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
+          <img v-show="warmUp.validExercises && warmUp.validExercises.length > 0" class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
         </div>
 
         <div v-for="(cycle,index) in cycles" :key="cycle.id">
@@ -47,10 +47,10 @@
             <div class="routineBlockDiv">
               <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="`${el.order}`" green
                                     :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
-                                    :exercises="exercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                    :exercises="cycle.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
                                     @removeExercise="removeExercise(cycle,$event)"
                                     @confirmExercise="confirmExercise(cycle,$event)"/>
-              <img class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
+              <img v-show="cycle.validExercises && cycle.validExercises.length > 0" class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
           </div>
         </div>
@@ -63,10 +63,10 @@
         <div class="routineBlockDiv">
           <EditableRoutineBlock v-for="(el) in cooldown.exercises" :key="`${el.order}`" blue
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
-                                :exercises="exercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                :exercises="cooldown.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
                                 @removeExercise="removeExercise(cooldown,$event)"
                                 @confirmExercise="confirmExercise(cooldown,$event)"/>
-          <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
+          <img v-show="cooldown.validExercises && cooldown.validExercises.length > 0" class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
       </div>
 
@@ -113,6 +113,7 @@ export default {
       try {
         const newCycle = await RoutineApi.addCycle(this.$route.params.id, cycle)
         newCycle.exercises = [];
+        newCycle.validExercises = this.exercises;
         this.cycles.push(newCycle);
         this.cycleIdx++;
       }
@@ -121,16 +122,19 @@ export default {
       }
     },
     addExercise(cycle) {
-      cycle.exercises.push({isCreating:true,isEditing:true,order:this.getMaxOrderFromCycle(cycle)+1 , repetitions: 0, duration: 0,exercises:this.exercises,
+      cycle.exercises.push({isCreating:true,isEditing:true,order:this.getMaxOrderFromCycle(cycle)+1 , repetitions: 0, duration: 0,exercises:cycle.validExercises,
         exercise:{id:this.getDateTime()}});
     },
     async confirmExercise(cycle,data){
       try{
         if (data.isCreating){
           await CycleApi.addCycleExercise(cycle.id,data.id,data.exToSend);
+          cycle.validExercises.splice(cycle.validExercises.findIndex(a => a.id === data.id), 1)
         }else{
           await CycleApi.removeCycleExercise(cycle.id,data.prevEx.id);
           await CycleApi.addCycleExercise(cycle.id,data.id,data.exToSend);
+          cycle.validExercises.push(data.prevEx);
+          cycle.validExercises.splice(cycle.validExercises.findIndex(a => a.id === data.id), 1);
         }
       }catch (e) {
         console.log(e);
@@ -141,13 +145,14 @@ export default {
       cycle.exercises.forEach((ex) => maxOrder = ex.order>maxOrder?ex.order:maxOrder);
       return maxOrder
     },
-    async removeExercise(cycle,id) {
+    async removeExercise(cycle,ex) {
           try{
-            await CycleApi.removeCycleExercise(cycle.id,id);
+            await CycleApi.removeCycleExercise(cycle.id,ex.id);
+            cycle.validExercises.push(ex);
           }catch(e){
             console.log(e);
           }
-          cycle.exercises.splice(cycle.exercises.findIndex(a => a.exercise.id === id), 1)
+          cycle.exercises.splice(cycle.exercises.findIndex(a => a.exercise.id === ex.id), 1)
     },
     async removeCycle(id){
       try{
@@ -195,6 +200,8 @@ export default {
       for (const cycle of cycles.content) {
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
         cycle.exercises = exerciseObj.content;
+        cycle.validExercises = [...this.exercises];
+        cycle.validExercises = cycle.validExercises.filter(a => !cycle.exercises.map(b=>b.exercise.id).includes(a.id));
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;
@@ -318,6 +325,7 @@ export default {
 .addButton {
   height: 150px;
   margin-bottom: 25px;
+  cursor: pointer;
 }
 
 .removeCycleButton{

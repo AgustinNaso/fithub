@@ -16,7 +16,7 @@
         <p v-show="dataIsEditing || dataSecs"> segundo/s</p>
       </div>
       <div class="icons">
-        <img v-show="!dataIsEditing" @click="$emit('removeExercise',currentEx.id)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
+        <img v-show="!dataIsEditing" @click="$emit('removeExercise',currentEx)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
         <img v-show="!dataIsEditing" @click="handleEdit" class="edit" src="../../assets/editicon.png" alt="edit"/>
         <div class="confirmChanges" v-show="dataIsEditing"  @click="handleEdit">
           <p>Confirmar cambios</p>

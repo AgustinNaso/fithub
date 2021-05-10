@@ -269,7 +269,9 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
-
+.share{
+  width:400px;
+}
 .copyClipboard{
   margin-top: 8px;
   cursor: pointer;
