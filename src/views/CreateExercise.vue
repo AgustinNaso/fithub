@@ -10,6 +10,7 @@
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
+            <p v-show="emptyName">El nombre no puede ser un valor vacio!</p>
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
@@ -38,6 +39,7 @@ import Footer from "@/components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
 import {ExerciseApi,Exercise} from "@/backend/exercises";
+import {isEmpty} from "@/backend/checks";
 
 export default {
   name: "CreateExercise",
@@ -50,18 +52,28 @@ export default {
       nombre:"",
       descripcion:"",
       actividad:"exercise",
-      store: UserStore
+      store: UserStore,
+      emptyName:false
     }
   },
   methods:{
     async createExercise(){
+      this.emptyName=false;
+      if (isEmpty(this.nombre)){
+        this.emptyName=true;
+        return;
+      }
       const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
       try{
         await ExerciseApi.addExercise(exercise);
       }catch (e) {
         await alert(e);
       }
-      await router.push("/myexercises");
+      if (this.noEx){
+        await router.push("/createRoutine");
+      }else {
+        await router.push("/myexercises");
+      }
     }
   },
   created() {
@@ -202,10 +214,16 @@ input[type="radio"]:checked + *::before {
   }
 }
 
-h1{
+h1 {
   color: #d01212;
   margin-left: 40px;
   margin-bottom: 10px;
+}
+
+p{
+  color: red;
+  font-weight: 700;
+  margin-left: -30px;
 }
 
 

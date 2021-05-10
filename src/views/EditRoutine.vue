@@ -162,7 +162,7 @@ export default {
       return new  Date().getTime();
     },
     getMaxOrder(){
-      let maxOrder = 1;
+      let maxOrder = 3;
       this.cycles.forEach((cycle) => maxOrder = cycle.order>maxOrder?cycle.order:maxOrder);
       return maxOrder
     },

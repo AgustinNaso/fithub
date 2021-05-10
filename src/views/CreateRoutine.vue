@@ -8,6 +8,7 @@
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
+            <p v-show="emptyName">El nombre no puede ser un valor vacio!</p>
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <label class="textLabel">Dificultad</label>
@@ -47,6 +48,7 @@ import {RoutineBase, RoutineApi, Cycle} from "@/backend/routines"
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
 import {ExerciseApi} from "@/backend/exercises";
+import {isEmpty} from "@/backend/checks";
 export default {
   name: "CreateRoutine",
   components: {Footer, NavBar, Title},
@@ -56,11 +58,17 @@ export default {
       descripcion:"",
       dificultad:"beginner",
       visibilidad:"public",
-      store: UserStore
+      store: UserStore,
+      emptyName:false,
     }
   },
   methods:{
     async createRoutine(){
+      this.emptyName=false;
+      if (isEmpty(this.nombre)){
+        this.emptyName=true;
+        return;
+      }
       const routineBase = new RoutineBase(this.nombre,this.descripcion,this.visibilidad === 'public',this.dificultad);
       let data;
       try{
@@ -209,7 +217,11 @@ input[type="radio"]:checked + *::before {
   width: 400px;
 }
 
-
+p{
+  color: red;
+  font-weight: 700;
+  margin-left: -30px;
+}
 @media (max-width: 1200px) {
   .mainImg{
     display: none;
