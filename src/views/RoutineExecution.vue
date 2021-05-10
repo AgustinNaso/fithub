@@ -2,22 +2,25 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="mainBg">
-      <Title :title-name="routineName"></Title>
+      <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
       <div class="executionContainer">
         <div class="exerciseContainer">
           <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft">
           <ExerciseExecution
+              v-if="cycles[0]"
               with-image
-              cooldown
-              repetitions
-              title="Salto con Soga"
-              duration="10"
+              :warm-up="cycles[0].type === 'warmup'"
+              :cooldown="cycles[0].type === 'cooldown'"
+              :cycle="cycles[0].type === 'exercise'"
+              :repetitions="cycles[0].exercises[0].repetitions"
+              :title="cycles[0].exercises[0].exercise.name"
+              :duration="cycles[0].exercises[0].duration"
           />
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight">
         </div>
         <div class="buttonContainer">
           <button type="button" class="pauseButton">Pausar</button>
-          <router-link to="/routine"><button type="button" class="finishButton">Terminar</button></router-link>
+          <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
     </div>
@@ -30,14 +33,45 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ExerciseExecution from "../components/ExerciseExecution";
 import Title from "../components/Title";
+import {RoutineApi} from "@/backend/routines";
+import {CycleApi} from "@/backend/cycles";
+import router from "@/routes";
+import UserStore from "@/stores/UserStore";
 export default {
   name: "RoutineExecution",
   components: {Title, ExerciseExecution, Footer, NavBar},
   data() {
     return {
-      routineName: "Rutina"
+      routineName: "Rutina",
+      description: "",
+      store: UserStore,
+      warmUp: {},
+      cooldown: {},
+      cycles: [],
+      routineId: -1,
     }
-  }
+  },
+  async created() {
+    this.routineId = this.$route.params.id;
+    try{
+      const routine = await RoutineApi.getRoutineById(this.routineId);
+      this.routineName = routine.name;
+      this.description = routine.detail;
+      const data = await RoutineApi.getCycles(this.routineId);
+      for (const cycle of data.content) {
+        const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
+        cycle.exercises = exerciseObj.content;
+        switch (cycle.type){
+          case 'warmup': this.warmUp = cycle; break;
+          case 'cooldown': this.cooldown = cycle;break;
+          case 'exercise': this.cycles.push(cycle);break;
+        }
+      }
+
+    }catch (e){
+      await router.push("/error");
+    }
+  },
 }
 </script>
 

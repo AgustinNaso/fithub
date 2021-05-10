@@ -32,7 +32,7 @@
         </div>
       </div>
       <div :class={finalSection:true,toLeft:!loggedIn}>
-        <button class="startRoutine" v-show="loggedIn">Iniciar Rutina</button>
+        <router-link :to="`/routineExecution/${routineId}`"><button class="startRoutine" v-show="loggedIn">Iniciar Rutina</button></router-link>
         <div class="share">
           <h2 class="shareTitle" v-show="!alreadyRated && loggedIn">Puntua esta rutina</h2>
           <div class="ratingWrap" v-show="!alreadyRated && loggedIn">

@@ -123,7 +123,7 @@ const routes = [
         component: MyExercises
     },
     {
-        path: "/routineExecution",
+        path: "/routineExecution/:id",
         name:"routineExecution",
         component: RoutineExecution
     },

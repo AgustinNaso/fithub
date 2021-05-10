@@ -9,8 +9,8 @@
       <img v-show="cooldown" class="cooldownIcon" src="../assets/cooldown.png" alt="cooldownIcon"/>
     </div>
     <div class="durationCont">
-      <p v-show="repetitions">{{duration}} repeticiones</p>
-      <p v-show="seconds">{{duration}} segundos</p>
+      <p v-show="repetitions!==0">{{repetitions}} repeticiones</p>
+      <p v-show="duration!==0">{{duration}} segundos</p>
     </div>
   </div>
 </template>
@@ -24,9 +24,8 @@ export default {
     cycle:Boolean,
     cooldown:Boolean,
     id:Number,
-    duration:String,
-    repetitions:Boolean,
-    seconds:Boolean,
+    duration:Number,
+    repetitions:Number,
     withImage:Boolean
   }
 }
@@ -38,8 +37,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 250px;
+  height: 600px;
   width: 600px;
+  padding: 30px;
   border-radius: 100px;
 }
 
@@ -89,7 +89,8 @@ export default {
 
 .durationCont{
   display: flex;
-  height: 60px;
+  height: 200px;
+  flex-direction: column;
 }
 
 p{
