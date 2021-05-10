@@ -28,7 +28,7 @@
           <img src="../assets/editicon.png" class="editIcon" alt="edit">
         </div>
         <div class="routineBlockDiv">
-          <EditableRoutineBlock v-for="(el,idx) in warmUp.exercises" :key="`${el.exercise.id}-${idx}`" orange
+          <EditableRoutineBlock v-for="(el) in warmUp.exercises" :key="`${el.order}`" orange
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                 :exercises="exercises" :isCreating="el.isCreating" :isEditing="el.isEditing"
                                 @removeExercise="removeExercise(warmUp,$event)"
@@ -45,10 +45,10 @@
               <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
             </div>
             <div class="routineBlockDiv">
-              <EditableRoutineBlock v-for="(el,idx) in cycles[index].exercises" :key="`${el.exercise.id}-${idx}`" green
+              <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="`${el.order}`" green
                                     :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                     :exercises="exercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
-                                    @removeExercise="removeExercise(cycle,el.exercise.id)"
+                                    @removeExercise="removeExercise(cycle,$event)"
                                     @confirmExercise="confirmExercise(cycle,$event)"/>
               <img class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
@@ -61,10 +61,10 @@
           <img src="../assets/editicon.png" class="editIcon" alt="edit">
         </div>
         <div class="routineBlockDiv">
-          <EditableRoutineBlock v-for="(el,idx) in cooldown.exercises" :key="`${el.exercise.id}-${idx}`" blue
+          <EditableRoutineBlock v-for="(el) in cooldown.exercises" :key="`${el.order}`" blue
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                 :exercises="exercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
-                                @removeExercise="removeExercise(cooldown,el.exercise.id)"
+                                @removeExercise="removeExercise(cooldown,$event)"
                                 @confirmExercise="confirmExercise(cooldown,$event)"/>
           <img class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
