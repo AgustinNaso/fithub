@@ -30,7 +30,8 @@
                                 @removeExercise="removeExercise(warmUp,$event)"
                                 @confirmExercise="confirmExercise(warmUp,$event)"
                                 @editing="warmUp.editCount++"
-                                @release="warmUp.editCount--"/>
+                                @release="warmUp.editCount--"
+                                @setId="el.exercise.id = $event"/>
 
           <img v-show="warmUp.validExercises && warmUp.validExercises.length > 0 && warmUp.editCount === 0" class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
         </div>
@@ -48,7 +49,8 @@
                                     @removeExercise="removeExercise(cycle,$event)"
                                     @confirmExercise="confirmExercise(cycle,$event)"
                                     @editing="cycle.editCount++"
-                                    @release="cycle.editCount--"/>
+                                    @release="cycle.editCount--"
+                                    @setId="el.exercise.id = $event"/>
               <img v-show="cycle.validExercises && cycle.validExercises.length > 0 && cycle.editCount === 0" class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
           </div>
@@ -63,7 +65,8 @@
                                 @removeExercise="removeExercise(cooldown,$event)"
                                 @confirmExercise="confirmExercise(cooldown,$event)"
                                 @editing="cooldown.editCount++"
-                                @release="cooldown.editCount--"/>
+                                @release="cooldown.editCount--"
+                                @setId="el.exercise.id = $event"/>
           <img v-show="cooldown.validExercises && cooldown.validExercises.length > 0 && cooldown.editCount === 0" class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
       </div>
@@ -151,6 +154,8 @@ export default {
           }catch(e){
             console.log(e);
           }
+          console.log(cycle.exercises);
+          console.log(ex);
           cycle.exercises.splice(cycle.exercises.findIndex(a => a.exercise.id === ex.id), 1)
     },
     async removeCycle(id){

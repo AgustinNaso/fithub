@@ -64,6 +64,7 @@ export default {
         const exToSend = new CycleExercise(this.order,this.dataReps,this.dataSecs);
         const data = {id: this.currentEx.id,isCreating:this.dataIsCreating,exToSend:exToSend, prevEx:this.prevExercise};
         await this.$emit('confirmExercise',data);
+        this.$emit('setId',this.currentEx.id);
         this.$emit('release');
         this.prevExercise = this.currentEx;
         if (this.toRemove){
