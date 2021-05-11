@@ -28,9 +28,11 @@
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                 :exercises="warmUp.validExercises" :isCreating="el.isCreating" :isEditing="el.isEditing"
                                 @removeExercise="removeExercise(warmUp,$event)"
-                                @confirmExercise="confirmExercise(warmUp,$event)"/>
+                                @confirmExercise="confirmExercise(warmUp,$event)"
+                                @editing="warmUp.editCount++"
+                                @release="warmUp.editCount--"/>
 
-          <img v-show="warmUp.validExercises && warmUp.validExercises.length > 0" class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
+          <img v-show="warmUp.validExercises && warmUp.validExercises.length > 0 && warmUp.editCount === 0" class="addButton" src="../assets/add-button-yellow.png"  @click="addExercise(warmUp)" alt=""/>
         </div>
 
         <div v-for="(cycle,index) in cycles" :key="cycle.id">
@@ -44,8 +46,10 @@
                                     :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                     :exercises="cycle.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
                                     @removeExercise="removeExercise(cycle,$event)"
-                                    @confirmExercise="confirmExercise(cycle,$event)"/>
-              <img v-show="cycle.validExercises && cycle.validExercises.length > 0" class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
+                                    @confirmExercise="confirmExercise(cycle,$event)"
+                                    @editing="cycle.editCount++"
+                                    @release="cycle.editCount--"/>
+              <img v-show="cycle.validExercises && cycle.validExercises.length > 0 && cycle.editCount === 0" class="addButton" src="../assets/add-button-green.png" @click="addExercise(cycles[index])"  alt=""/>
             </div>
           </div>
         </div>
@@ -57,8 +61,10 @@
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                 :exercises="cooldown.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
                                 @removeExercise="removeExercise(cooldown,$event)"
-                                @confirmExercise="confirmExercise(cooldown,$event)"/>
-          <img v-show="cooldown.validExercises && cooldown.validExercises.length > 0" class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
+                                @confirmExercise="confirmExercise(cooldown,$event)"
+                                @editing="cooldown.editCount++"
+                                @release="cooldown.editCount--"/>
+          <img v-show="cooldown.validExercises && cooldown.validExercises.length > 0 && cooldown.editCount === 0" class="addButton" src="../assets/add-button-blue.png" @click="addExercise(cooldown)" alt=""/>
         </div>
       </div>
 
@@ -181,7 +187,8 @@ export default {
       }
 
       await router.push(`/routine/${this.$route.params.id}`);
-    }
+    },
+
   },
   async created() {
     if (!this.store.isLoggedIn()) {
@@ -203,6 +210,7 @@ export default {
         cycle.exercises = exerciseObj.content;
         cycle.validExercises = [...this.exercises];
         cycle.validExercises = cycle.validExercises.filter(a => !cycle.exercises.map(b=>b.exercise.id).includes(a.id));
+        cycle.editCount = 0;
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;

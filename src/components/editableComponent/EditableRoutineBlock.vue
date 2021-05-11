@@ -64,11 +64,13 @@ export default {
         const exToSend = new CycleExercise(this.order,this.dataReps,this.dataSecs);
         const data = {id: this.currentEx.id,isCreating:this.dataIsCreating,exToSend:exToSend, prevEx:this.prevExercise};
         await this.$emit('confirmExercise',data);
+        this.$emit('release');
         this.prevExercise = this.currentEx;
         if (this.toRemove){
           this.exercises.splice(this.exercises.findIndex(a => a.id === data.id), 1);
         }
       }else{
+        this.$emit('editing');
         this.toRemove= false;
         if (!this.exercises.includes(this.currentEx)){
           this.exercises.push(this.currentEx);
@@ -78,6 +80,9 @@ export default {
       this.dataIsCreating = false;
     }
   },created() {
+    if (this.isCreating) {
+      this.$emit('editing');
+    }
     if (!this.exercise || !this.exercise.type) {
       this.currentEx = this.exercises[0];
     }else{
