@@ -8,35 +8,43 @@ module.exports = {
         password: 'vqsngAXzHTMZA862gH'
     },
     registerVerification: {
-        from: 'Exercise <noreply@exercise.com>',
+        from: 'Fithub-DevTeam <noreply@fithub.com>',
         subject: 'Confirmación de Cuenta Fithub',
         htmlBodyTemplate:
             `<div>
                 <h1 style="text-align: center;">
-                    <strong>Bienvenido a <span style="color: #42b983;">FitHub</span></strong>
+                    <strong>Bienvenido a <span style="color: #42b983; font-weight: 700; font-size: 35px;">Fithub</span></strong>
                 </h1>
-                <p>
+                <p style="text-align: center; font-size: 18px; font-weight: 700;">
                    Usted a creado una cuenta en FitHub correctamente.<br>
                    ¡Muchas gracias por registrarse!<br>
                    Por razones de seguridad, se requiere que usted verifique su email antes de continuar.<br>
                 </p>
-                <p>
-                    <span>Valido hasta <%EXPIRATION_DATE%></span>
-                </p>
-                <div>
-                    <button>
-                    <a href="<%CONFIRM_LINK%>">VERIFIQUE SU EMAIL</a>
-                    </button>
-                <div>
-                <h1 style="text-align: center;">
-                    <strong>(Esto se borra desps mepa) Your code is <span style="color: #fc987e;"><%CODE%></span></strong>
-                </h1>
-                <p>
-                   Con energía lo esperamos para entrenar juntos,<br>
-                   El Equipo de Fithub.
-                </p>
-            </div>`,
-        confirmationLink: 'http://localhost:4000/verify?email=<%USER_ID%>&code=<%CODE%>',
+                <div style="display: flex; justify-content: center;">
+                    <button style="color: white;
+                            border: none;
+                            text-align: center;
+                            background-color: #42b983;
+                            border-radius: 25px;
+                            font-size: 24px;
+                            font-weight: 400;
+                            text-decoration: none;
+                            outline: none;
+                            width: 300px;
+                            height: 70px;
+                            cursor: pointer;">
+                        <a href="<%CONFIRM_LINK%>" style="color: white; text-decoration: none;" >VERIFIQUE SU EMAIL</a>
+                     </button>
+                </div>
+                     <p style="text-align: center; font-size: 18px; font-weight: 700;">
+                       Con energía lo esperamos para entrenar juntos,<br>
+                       El Equipo de Fithub.
+                     </p>
+                     <p style="text-align: center; font-size: 12px; font-weight: 700;">
+                        <span>Valido hasta <%EXPIRATION_DATE%></span>
+                     </p>
+              </div>`,
+        confirmationLink: 'http://localhost:4000/verify?email=<%EMAIL%>&code=<%CODE%>',
         codeExpirationInterval: 24 * 60 * 60 * 1000
     }
 }
