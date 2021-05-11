@@ -54,6 +54,7 @@ export default {
       dataReps : 0,
       dataSecs : 0,
       prevExercise: null,
+      toRemove:false,
     }
   },
   methods:{
@@ -64,9 +65,14 @@ export default {
         const data = {id: this.currentEx.id,isCreating:this.dataIsCreating,exToSend:exToSend, prevEx:this.prevExercise};
         await this.$emit('confirmExercise',data);
         this.prevExercise = this.currentEx;
+        if (this.toRemove){
+          this.exercises.splice(this.exercises.findIndex(a => a.id === data.id), 1);
+        }
       }else{
+        this.toRemove= false;
         if (!this.exercises.includes(this.currentEx)){
           this.exercises.push(this.currentEx);
+          this.toRemove = true;
         }
       }
       this.dataIsCreating = false;

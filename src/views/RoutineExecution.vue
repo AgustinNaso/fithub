@@ -3,26 +3,36 @@
     <NavBar/>
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
-      <div class="executionContainer">
+      <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
+      <h1 class="readySub" v-show="!started">¡Busca una botella de agua para mantenerte hidratado!</h1>
+      <button @click="started = !started" v-show="!started" class="startBtn">Comenzar</button>
+      <div class="executionContainer" v-show="started && !finished">
+        <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
+         green:totalEx[currentIdx].cycle.type ==='exercise', blue:totalEx[currentIdx].cycle.type === 'cooldown'}">
+          Ciclo actual: {{totalEx[currentIdx].cycle.name}}<br> (Set {{totalEx[currentIdx].currSet}} de {{totalEx[currentIdx].totalSets}})</h2>
         <div class="exerciseContainer">
           <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft" @click="findPrev"  v-show="currentIdx!==0">
           <ExerciseExecution
               v-if="totalEx[currentIdx]"
               with-image
-              :warm-up="totalEx[currentIdx].cycleType === 'warmup'"
-              :cooldown="totalEx[currentIdx].cycleType === 'cooldown'"
-              :cycle="totalEx[currentIdx].cycleType === 'exercise'"
+              :warm-up="totalEx[currentIdx].cycle.type === 'warmup'"
+              :cooldown="totalEx[currentIdx].cycle.type === 'cooldown'"
+              :cycle="totalEx[currentIdx].cycle.type === 'exercise'"
               :repetitions="totalEx[currentIdx].repetitions"
               :title="totalEx[currentIdx].exercise.name"
               :duration="totalEx[currentIdx].duration"
+              :is-first="currentIdx === 0"
           />
-          <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" v-show="currentIdx < totalSize - 1">
+          <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
           <button type="button" class="pauseButton">Pausar</button>
           <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
+      <h1 class="ready" v-show="finished">¡Ya terminaste,{{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
+      <h1 class="readySub" v-show="finished">Es momento que te tomes tu tan merecido descanso.</h1>
+      <router-link :to="`/routine/${routineId}`"><button v-show="finished" class="startBtn">Volver</button></router-link>
     </div>
     <Footer/>
   </div>
@@ -51,6 +61,8 @@ export default {
       currentIdx:0,
       firstEx:undefined,
       finished:false,
+      started:false,
+      currSet:1,
     }
   },
   async created() {
@@ -63,18 +75,24 @@ export default {
       for (const cycle of data.content) {
         if (cycle.type === 'cooldown') continue;
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
-        for (const exercise of exerciseObj.content){
-          this.totalEx.push({...exercise,cycleType:cycle.type});
-          this.totalSize+=1;
+        let rep = 1;
+        for (rep=1;rep<= cycle.repetitions;rep++) {
+          for (const exercise of exerciseObj.content) {
+            this.totalEx.push({...exercise, cycle: cycle, currSet:rep, totalSets:cycle.repetitions});
+            this.totalSize += 1;
+          }
         }
       }
 
       for (const cycle of data.content) {
         if (cycle.type !== 'cooldown') continue;
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
-        for (const exercise of exerciseObj.content){
-          this.totalEx.push({...exercise,cycleType:cycle.type});
-          this.totalSize+=1;
+        let rep = 1;
+        for (rep=1;rep<= cycle.repetitions;rep++) {
+          for (const exercise of exerciseObj.content){
+            this.totalEx.push({...exercise,cycle:cycle,currSet:rep, totalSets:cycle.repetitions});
+            this.totalSize+=1;
+          }
         }
       }
 
@@ -201,5 +219,66 @@ div{
 
 .finishButton:active {
   background: transparent;
+}
+
+.ready{
+  color: black;
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.readySub{
+  font-size: 32px;
+  color:#42B983;
+  margin-top: 12px;  text-align: center;
+  width: 100%;
+
+}
+
+.startBtn{
+  color: white;
+  border: none;
+  text-align: center;
+  align-self: center;
+  margin-top:40px;
+  background-color: #42b983;
+  border-radius: 25px;
+  font-size: 32px;
+  font-weight: 700;
+  text-decoration: none;
+  outline: none;
+  width: 400px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.startBtn:hover{
+  background-color: #77c6a2;
+  transition: 0.2s ease-in-out;
+}
+
+a{
+  align-self: center;
+}
+
+.cycleName{
+  font-size: 40px;
+  margin: 20px 0 -20px 0;
+  text-align: center;
+}
+
+
+.orange{
+  color: rgb(236,169,39);
+}
+
+.blue{
+  color: rgb(133,158,255);
+}
+
+.green{
+  color: rgb(65,214,152);
 }
 </style>

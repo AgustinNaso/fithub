@@ -1,5 +1,5 @@
 <template>
-  <div :class="{exerciseBox:true, orange:warmUp, green:cycle, blue:cooldown}">
+  <div :class="{exerciseBox:true, orange:warmUp, green:cycle, blue:cooldown,first:isFirst}">
     <div class="titleContainer">
       <h3 class="title">{{title}}</h3>
     </div>
@@ -24,7 +24,9 @@ export default {
     id:Number,
     duration:Number,
     repetitions:Number,
-    withImage:Boolean
+    withImage:Boolean,
+    isFirst:Boolean,
+    isLast:Boolean
   },
 
 }
@@ -90,6 +92,11 @@ p{
   font-weight: bold;
   text-shadow: #030b10 3px 2px 7px;
 }
+
+.first{
+  margin-left: 240px;
+}
+
 
 
 </style>
