@@ -5,18 +5,18 @@
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
       <div class="executionContainer">
         <div class="exerciseContainer">
-          <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft">
+          <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft" @click="findPrev"  v-show="currentIdx!==0">
           <ExerciseExecution
-              v-if="cycles[0]"
+              v-if="totalEx[currentIdx]"
               with-image
-              :warm-up="cycles[0].type === 'warmup'"
-              :cooldown="cycles[0].type === 'cooldown'"
-              :cycle="cycles[0].type === 'exercise'"
-              :repetitions="cycles[0].exercises[0].repetitions"
-              :title="cycles[0].exercises[0].exercise.name"
-              :duration="cycles[0].exercises[0].duration"
+              :warm-up="totalEx[currentIdx].cycleType === 'warmup'"
+              :cooldown="totalEx[currentIdx].cycleType === 'cooldown'"
+              :cycle="totalEx[currentIdx].cycleType === 'exercise'"
+              :repetitions="totalEx[currentIdx].repetitions"
+              :title="totalEx[currentIdx].exercise.name"
+              :duration="totalEx[currentIdx].duration"
           />
-          <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight">
+          <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" v-show="currentIdx < totalSize - 1">
         </div>
         <div class="buttonContainer">
           <button type="button" class="pauseButton">Pausar</button>
@@ -45,10 +45,12 @@ export default {
       routineName: "Rutina",
       description: "",
       store: UserStore,
-      warmUp: {},
-      cooldown: {},
-      cycles: [],
+      totalEx: [],
+      totalSize:0,
       routineId: -1,
+      currentIdx:0,
+      firstEx:undefined,
+      finished:false,
     }
   },
   async created() {
@@ -59,12 +61,20 @@ export default {
       this.description = routine.detail;
       const data = await RoutineApi.getCycles(this.routineId);
       for (const cycle of data.content) {
+        if (cycle.type === 'cooldown') continue;
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
-        cycle.exercises = exerciseObj.content;
-        switch (cycle.type){
-          case 'warmup': this.warmUp = cycle; break;
-          case 'cooldown': this.cooldown = cycle;break;
-          case 'exercise': this.cycles.push(cycle);break;
+        for (const exercise of exerciseObj.content){
+          this.totalEx.push({...exercise,cycleType:cycle.type});
+          this.totalSize+=1;
+        }
+      }
+
+      for (const cycle of data.content) {
+        if (cycle.type !== 'cooldown') continue;
+        const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
+        for (const exercise of exerciseObj.content){
+          this.totalEx.push({...exercise,cycleType:cycle.type});
+          this.totalSize+=1;
         }
       }
 
@@ -72,6 +82,21 @@ export default {
       await router.push("/error");
     }
   },
+  methods:{
+    findNext() {
+      if (this.currentIdx + 1 === this.totalSize){
+        this.finished = true;
+        return;
+      }
+      this.currentIdx++;
+    },
+    findPrev() {
+      if (this.currentIdx - 1 >= 0){
+        this.currentIdx--;
+      }
+    }
+
+  }
 }
 </script>
 
@@ -105,16 +130,18 @@ div{
 .exerciseContainer{
   margin-top: 10px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  height: 600px;
   width: 100%;
 }
 
 .arrowBtn{
   height: 100px;
   width: 100px;
-  margin-bottom: 5px;
+  margin: 0 70px 5px 70px;
   cursor: pointer;
+
 }
 
 .buttonContainer{

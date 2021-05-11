@@ -1,13 +1,11 @@
 <template>
-  <div :class="{exerciseBox:true, orange:warmUp, green:cycle, blue:cooldown, withImage:withImage}">
+  <div :class="{exerciseBox:true, orange:warmUp, green:cycle, blue:cooldown}">
     <div class="titleContainer">
       <h3 class="title">{{title}}</h3>
     </div>
-    <div class="imgContainer" v-show="withImage">
-      <img v-show="warmUp" class="warmUpIcon" src="../assets/warmup.png" alt="warmUpIcon"/>
-      <img v-show="cycle" class="cycleIcon" src="../assets/cycle.png" alt="cycleIcon"/>
-      <img v-show="cooldown" class="cooldownIcon" src="../assets/cooldown.png" alt="cooldownIcon"/>
-    </div>
+    <img v-show="warmUp" class="icon" src="../assets/warmup.png" alt="warmUpIcon"/>
+    <img v-show="cycle" class="icon" src="../assets/cycle.png" alt="cycleIcon"/>
+    <img v-show="cooldown" class="icon" src="../assets/cooldown.png" alt="cooldownIcon"/>
     <div class="durationCont">
       <p v-show="repetitions!==0">{{repetitions}} repeticiones</p>
       <p v-show="duration!==0">{{duration}} segundos</p>
@@ -27,7 +25,8 @@ export default {
     duration:Number,
     repetitions:Number,
     withImage:Boolean
-  }
+  },
+
 }
 </script>
 
@@ -37,7 +36,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 600px;
+  height: 480px;
   width: 600px;
   padding: 30px;
   border-radius: 100px;
@@ -67,23 +66,12 @@ export default {
   flex: 1;
   text-align: center;
   font-size: 45px;
-  height: 35px;
+  height: 120px;
   color: white;
   text-shadow: #030b10 3px 2px 7px;
 }
 
-.warmUpIcon{
-  width: 325px;
-  height: 325px;
-}
-
-.cycleIcon{
-  width: 300px;
-  height: 300px;
-}
-
-.cooldownIcon{
-  width: 300px;
+.icon{
   height: 300px;
 }
 
@@ -103,10 +91,5 @@ p{
   text-shadow: #030b10 3px 2px 7px;
 }
 
-.withImage{
-  height: 450px;
-  width: 600px;
-  justify-content: space-between;
-}
 
 </style>
