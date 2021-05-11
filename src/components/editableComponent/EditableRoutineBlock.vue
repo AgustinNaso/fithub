@@ -64,6 +64,10 @@ export default {
         const data = {id: this.currentEx.id,isCreating:this.dataIsCreating,exToSend:exToSend, prevEx:this.prevExercise};
         await this.$emit('confirmExercise',data);
         this.prevExercise = this.currentEx;
+      }else{
+        if (!this.exercises.includes(this.currentEx)){
+          this.exercises.push(this.currentEx);
+        }
       }
       this.dataIsCreating = false;
     }

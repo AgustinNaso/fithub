@@ -158,7 +158,6 @@ export default {
     },
     async editCycle(cycle,data){
       const toSend = new Cycle(data.name,cycle.type,cycle.order,data.repetitions);
-      console.log(toSend);
       try{
         await RoutineApi.editCycle(this.$route.params.id,cycle.id,toSend);
       }catch (e){
@@ -209,7 +208,6 @@ export default {
           case 'cooldown': this.cooldown = cycle;break;
           case 'exercise': this.cycles.push(cycle);break;
         }
-        console.log(this.warmUp);
       }
 
     }catch (e) {

@@ -96,6 +96,7 @@ export default {
       RoutineApi.getRoutines(this.pageNumber, this.orderBy, this.direction,this.query).then((value) => {
         this.routines = value.content;
         this.lastPage = value.isLastPage;
+        console.log(this.routines);
       });
     }
   }
