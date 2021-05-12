@@ -8,11 +8,12 @@ class RoutineApi {
     }
 
     static async getRoutines(pageNum, orderBy, direction, query, controller ) {
+        let finalUrl = `${RoutineApi.url}?page=${pageNum - 1}&size=9&orderBy=${orderBy}&direction=${direction}`
         if (query.length >= 3) {
-            return await Api.get(`${RoutineApi.url}?search=${query}&page=${pageNum - 1}&size=9&orderBy=${orderBy}&direction=${direction}`, false, controller);
-        }else{
-            return await Api.get(`${RoutineApi.url}?page=${pageNum - 1}&size=9&orderBy=${orderBy}&direction=${direction}`, false, controller);
+            finalUrl+= `&search=${query}`
         }
+        console.log(finalUrl);
+        return await Api.get(finalUrl, false, controller);
     }
 
     static async getUserRoutines(controller) {

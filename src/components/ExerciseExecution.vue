@@ -73,11 +73,11 @@ export default {
 }
 
 .icon{
-  height: 100%;
+  height: 330px;
   width:460px;
   object-fit:cover;
   border-radius: 20px;
-  border: black 2px solid;
+  border: white 5px solid;
 }
 
 .durationCont{
