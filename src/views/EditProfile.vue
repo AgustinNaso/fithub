@@ -6,13 +6,13 @@
       <div class="userContainer">
         <div class="userData">
           <div class="dataContainer">
-            <p class="dataType">Nombre</p>
-            <input v-model="userData.firstName" class="dataInfo" type="text">
+            <label for="fName" class="dataType">Nombre</label>
+            <input id="fName" v-model="userData.firstName" class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
           <div class="dataContainer">
-            <p class="dataType">Apellido</p>
-            <input v-model="userData.lastName" class="dataInfo" type="text">
+            <label for="lName" class="dataType">Apellido</label>
+            <input id="lName" v-model="userData.lastName" class="dataInfo" type="text">
           </div>
           <div class="infoUnderline"/>
           <div class="buttonContainer">
@@ -22,8 +22,13 @@
         </div>
         <div class="userProf">
           <img class="imgContainer" :src = "userData.avatarUrl" alt="add image">
-          <img class="editImage" src="../assets/edit_picture.svg" alt="user image">
-          <input class="imageInput" v-model="userData.avatarUrl">
+          <div class="inputWrap">
+            <div class="labelWrap">
+              <img class="editImage" src="../assets/edit_picture.svg" alt="user image">
+              <label for="image" style="color: black;">Imagen del usario</label>
+            </div>
+            <input id="image" class="imageInput" v-model="userData.avatarUrl">
+          </div>
         </div>
       </div>
     </div>
@@ -83,7 +88,7 @@ export default {
 }
 
 .dataType{
-  color: #31ae7a;
+  color:  #399c70;
   font-weight: 700;
   font-size: 25px;
 }
@@ -133,7 +138,7 @@ export default {
 }
 
 .editImage {
-  height: 50px;
+  height: 30px;
   width: auto;
 }
 
@@ -173,11 +178,11 @@ export default {
   width: 350px;
   border-radius: 25px;
   padding:10px;
-  border: 4px solid #42b983;
+  border: 4px solid  #399c70;
   background: transparent;
   font-size: 26px;
   font-weight: 700;
-  color: #42b983;
+  color:  #399c70;
   cursor: pointer;
   text-align: center;
   transition: 0.3s ease-in-out;
@@ -227,6 +232,20 @@ export default {
   background: transparent;
 }
 
+.labelWrap{
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.inputWrap{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
 @media (max-width: 1200px) {
 
   .userContainer{
@@ -262,6 +281,13 @@ export default {
 
   .buttonContainer{
     margin-top:50px;
+  }
+
+  .inputWrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
 }

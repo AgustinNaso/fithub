@@ -6,10 +6,10 @@
     <div class="searchBar">
       <div class="errWrap">
       <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
-        <div class="searchBox">
+        <form class="searchBox" @submit.prevent>
           <input name="search" type="text" class="searchInput" v-model="query"/>
           <button @click="search" name="search" class="searchBtn">Buscar!</button>
-        </div>
+        </form>
       </div>
       <div class="ordering">
         <div class="orderElement">
@@ -154,7 +154,7 @@ div{
   padding: 30px 35px 90px 35px;
   display: flex;
   flex-direction: column;
-  color: #42b983;
+  color:  #399c70;
 }
 
 .routineContainer{
@@ -196,9 +196,10 @@ h1{
   font-size: 24px;
   padding: 5px;
   border-radius: 12px 0 0 12px;
-  color: #0a2118;
+  color:  #399c70;
   outline: none;
-  border: #31ae7a 2px solid;
+  border:  #399c70 2px solid;
+
 }
 
 .searchBtn{
@@ -207,7 +208,7 @@ h1{
   font-size: 24px;
   border-radius: 0 12px 12px 0;
   padding: 7px 22px 7px 7px;
-  background: #31ae7a;
+  background:  #399c70;
   border:none;
   cursor: pointer;
   color: white;
@@ -215,7 +216,7 @@ h1{
 }
 
 .searchBtn:hover{
-  background-color: #42c18c;
+  background-color: #4aa87e;
   transition: 0.2s ease-in-out;
 }
 
@@ -239,18 +240,18 @@ h1{
 }
 
 .textInput{
-  border: solid 3px #42b983;
+  border: solid 3px  #399c70;
   border-radius: 20px;
   font-size: 18px;
   padding: 10px;
   resize: none;
   outline: none;
-  color: #42b983;
+  color: black;
   width: 210px;
 }
 
 .textLabel {
-  color: #42b983;
+  color:  #399c70;
   font-size: 20px;
   font-weight: 700;
   margin-left: 12px;

@@ -50,7 +50,7 @@ h1 {
   font-size: 35px;
   line-height: 1;
   padding: 10px 0 10px 0;
-  color: #42b983;
+  color: #399c70;
   font-weight: 700;
 }
 .withArrow{

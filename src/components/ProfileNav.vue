@@ -1,8 +1,8 @@
 <template>
 <div class="profileContainer">
-  <router-link to="/userProfile"><img class="userImg" :src="userImg" :alt="userName"></router-link>
+  <router-link to="/userProfile"><img class="userImg" :src="userImg" alt="Ir al perfil"></router-link>
   <p>{{userName}}</p>
-  <img  @click="isOpen = !isOpen" class="arrow" src="../assets/chevron_down_green.png" alt="arrow">
+  <img  @click="isOpen = !isOpen" class="arrow" src="../assets/chevron_down_green.png" alt="">
   <transition name="fade" appear>
     <div v-if="isOpen" class="dropdown">
       <ul>

@@ -27,7 +27,7 @@
 
           </div>
           <div class="userProf">
-              <img class="imgContainer" :src = "store.getImg()" alt="user image">
+              <img class="imgContainer" :src = "store.getImg()" alt="">
             <div class="nameContainer">{{ store.getName() }}</div>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default {
 }
 
 .dataType {
-  color: #31ae7a;
+  color: #399c70;
   font-weight: 700;
   font-size: 25px;
 }
@@ -139,11 +139,11 @@ export default {
   width: 270px;
   border-radius: 25px;
   padding:10px;
-  border: 4px solid #42b983;
+  border: 4px solid #399c70;
   background: transparent;
   font-size: 26px;
   font-weight: 700;
-  color: #42b983;
+  color: #399c70;
   cursor: pointer;
   text-align: center;
   transition: 0.3s ease-in-out;

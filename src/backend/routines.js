@@ -19,7 +19,7 @@ class RoutineApi {
     }
 
     static async getUserRoutines(controller) {
-        return await Api.get(`${Api.baseUrl}/users/current/routines/?page=0&size=9&orderBy=date&direction=asc`, true, controller);
+        return await Api.get(`${Api.baseUrl}/users/current/routines/?page=0&size=20&orderBy=date&direction=asc`, true, controller);
     }
 
     static async createRoutine(routineBase,controller) {

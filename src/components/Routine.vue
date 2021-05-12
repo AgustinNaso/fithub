@@ -12,11 +12,11 @@
     </div>
     <p class="description">{{description}}</p>
     <div class="ownerContainer">
-      <img class="ownerImg" :src="ownerImg" :alt="owner"/>
+      <img class="ownerImg" :src="ownerImg" alt=""/>
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playContainer">
-      <p>{{difficultyToSpanish(difficulty)}}</p>
+      <h4>{{difficultyToSpanish(difficulty)}}</h4>
       <router-link :to="{ name: 'routine', params: {id: this.id } }">
         <div class="playBtn">
           <div class="triangle"/>
@@ -25,16 +25,16 @@
     </div>
     <div class="routineEnd">
       <div class="ratingWrap">
-        <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="star">
+        <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="">
       </div>
       <div v-show="isMine" class="editing">
         <div class="iconFlex" @click="$emit('deleteRoutine',id)" >
-          <img class="trash" src="../assets/basuraicon.png" alt="delete"/>
+          <img class="trash" src="../assets/basuraicon.png" alt=""/>
           <p class="delete">Eliminar</p>
         </div>
         <router-link :to="{ name: 'editRoutine', params: {id: id } }">
         <div class="iconFlex">
-          <img class="edit" src="../assets/editicon.png" alt="edit"/>
+          <img class="edit" src="../assets/editicon.png" alt=""/>
           <p>Editar</p>
         </div>
         </router-link>

@@ -1,7 +1,7 @@
 <template>
   <div :class="{exerciseBox:true, green:isActivity, blue:!isActivity}">
     <div class="textContainer">
-      <h3>{{title}}</h3>
+      <h2>{{title}}</h2>
       <p class="description">{{description}}</p>
     </div>
     <div class="buttonContainer">
@@ -50,7 +50,7 @@ export default {
   width: 85%;
 }
 
-h3{
+h2{
   width: 800px;
   flex: 1;
   text-align: left;
