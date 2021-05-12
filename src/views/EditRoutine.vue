@@ -40,7 +40,7 @@
           <div class="cycleContainer">
             <div class="cycleHeader">
               <SectionTitle :name="cycle.name" :reps="cycle.repetitions" style="color: #42b983" @editCycle="editCycle(cycle,$event)"/>
-              <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
+              <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover Ciclo</button>
             </div>
             <div class="routineBlockDiv" v-show="cycle.validExercises">
               <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="`${el.order}`" green
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <button class="cycleButton" @click="addCycle()">+ Agregar ciclo</button>
+        <button class="cycleButton" @click="addCycle()">+ Agregar Ciclo</button>
 
         <SectionTitle v-if="cooldown.name" :name="cooldown.name" :reps="cooldown.repetitions" style="color: rgba(78,100,188,0.8)" @editCycle="editCycle(cooldown,$event)"/>
         <div class="routineBlockDiv">

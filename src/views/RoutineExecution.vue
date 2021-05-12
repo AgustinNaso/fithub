@@ -4,8 +4,8 @@
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
       {{this.countDown}}
-      <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
-      <h1 class="readySub" v-show="!started">¡Busca una botella de agua para mantenerte hidratado!</h1>
+      <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estás listo para comenzar tu entrenamiento?</h1>
+      <h1 class="readySub" v-show="!started">¡Recordá siempre mantenerte hidratado!</h1>
       <button @click="started = !started" v-show="!started" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
@@ -33,7 +33,7 @@
         </div>
       </div>
       <h1 class="ready" v-show="finished">¡Ya terminaste, {{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
-      <h1 class="readySub" v-show="finished">Es momento que te tomes tu tan merecido descanso.</h1>
+      <h1 class="readySub" v-show="finished">Es momento de que te tomes tu tan merecido descanso.</h1>
       <router-link :to="`/routine/${routineId}`"><button v-show="finished" class="startBtn">Volver</button></router-link>
     </div>
     <Footer/>
