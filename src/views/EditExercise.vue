@@ -32,7 +32,6 @@
             <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
           </div>
         </div>
-        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -206,6 +205,12 @@ input[type="radio"] {
   display: none;
 }
 
+p{
+  color: red;
+  font-weight: 700;
+  margin-left: -30px;
+}
+
 input[type="radio"] + *::before {
   content: "";
   display: inline-block;
@@ -237,17 +242,6 @@ input[type="radio"]:checked + *::before {
   width: 230px;
   height: 40px;
   cursor: pointer;
-}
-
-
-
-.mainImg {
-  width: 400px;
-}
-@media (max-width: 1200px) {
-  .mainImg{
-    display: none;
-  }
 }
 
 .imgDiv{

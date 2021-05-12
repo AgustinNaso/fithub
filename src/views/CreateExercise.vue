@@ -33,7 +33,6 @@
             <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
           </div>
         </div>
-        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
