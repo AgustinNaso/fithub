@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     async addCycle() {
-      const cycle = new Cycle("Ciclo de Ejercitacion",'exercise',this.getMaxOrder()+1,1);
+      const cycle = new Cycle("Ciclo de Ejercitación",'exercise',this.getMaxOrder()+1,1);
       try {
         const newCycle = await RoutineApi.addCycle(this.$route.params.id, cycle)
         newCycle.exercises = [];

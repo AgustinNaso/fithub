@@ -8,7 +8,7 @@
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
-            <p v-show="emptyName">El nombre no puede ser un valor vacio!</p>
+            <p v-show="emptyName">¡El nombre no puede ser un valor vacío!</p>
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <label class="textLabel">Dificultad</label>
