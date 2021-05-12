@@ -42,7 +42,7 @@
               <SectionTitle :name="cycle.name" :reps="cycle.repetitions" style="color: #42b983" @editCycle="editCycle(cycle,$event)"/>
               <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
             </div>
-            <div class="routineBlockDiv">
+            <div class="routineBlockDiv" v-show="cycle.validExercises">
               <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="`${el.order}`" green
                                     :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                     :exercises="cycle.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
@@ -115,7 +115,8 @@ export default {
       try {
         const newCycle = await RoutineApi.addCycle(this.$route.params.id, cycle)
         newCycle.exercises = [];
-        newCycle.validExercises = this.exercises;
+        newCycle.validExercises = [...this.exercises];
+        newCycle.editCount = 0;
         this.cycles.push(newCycle);
         this.cycleIdx++;
       }

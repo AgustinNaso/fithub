@@ -89,7 +89,7 @@ export default {
       })
 
 
-      if (!routine.isPublic){
+      if (!routine.isPublic && !this.isMine){
         await router.push("/permissionDenied");
         return;
       }
