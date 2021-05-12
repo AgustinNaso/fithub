@@ -263,8 +263,9 @@ p{
 .inputImg{
   border: #31ae7a 3px solid;
   border-radius: 15px;
-  width: 400px;
-  height: 300px;
+  width: 300px;
+  height: 220px;
+  padding: 50px;
   margin-top: 30px;
   object-fit:cover;
 }
