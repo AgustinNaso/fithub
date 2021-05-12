@@ -51,7 +51,7 @@ export default {
   background-color: #f3f9f9;
   padding: 30px 35px 90px 35px;
   display: flex;
-  color: #42b983;
+  color: #399c70;
   justify-content: space-evenly;
   align-items: center;
 }

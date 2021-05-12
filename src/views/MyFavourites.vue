@@ -99,7 +99,7 @@ div{
   padding: 30px 35px 90px 35px;
   display: flex;
   flex-direction: column;
-  color: #42b983;
+  color: #399c70;
 }
 
 .routineContainer{
@@ -125,7 +125,7 @@ button{
   text-align: center;
   padding: 8px 35px 8px 35px;
   background-color: inherit;
-  border: 4px solid #42b983;
+  border: 4px solid #399c70;
   border-radius: 25px;
   font-size: 26px;
   font-weight: 700;

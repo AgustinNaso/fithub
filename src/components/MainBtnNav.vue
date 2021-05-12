@@ -18,7 +18,7 @@ export default {
   height: 100%;
   background: none;
   border: none;
-  color: #42b983;
+  color: #399c70;
   width: 170px;
   font-size: 18px;
   font-weight: 700;
@@ -29,7 +29,7 @@ export default {
 }
 
 .selected {
-  border-bottom: 5px solid #42b983;
+  border-bottom: 5px solid #399c70;
   height: 100%;
 }
 

@@ -19,7 +19,7 @@ p{
   text-align: right;
   text-decoration: none;
   margin-top: 10px;
-  color:#42b983;
+  color:#399c70;
 }
 a{
   width: 100%;

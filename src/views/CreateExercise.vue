@@ -131,7 +131,7 @@ div{
   background-color: #f3f9f9;
   padding: 30px 35px 90px 35px;
   display: flex;
-  color: #42b983;
+  color: #399c70;
   width: auto;
   flex-direction: column;
 }
@@ -151,7 +151,7 @@ div{
 }
 
 .textLabel {
-  color: #42b983;
+  color: #399c70;
   font-size: 25px;
   font-weight: 700;
   width: 100%;
@@ -169,13 +169,13 @@ form {
 textarea {
   width: 100%;
   margin-left: 10px;
-  border: solid 3px #42b983;
+  border: solid 3px #399c70;
   border-radius: 20px;
   font-size: 20px;
   padding: 10px;
   resize: none;
   outline: none;
-  color: #42b983;
+  color: #399c70;
 }
 
 .checkbox {
@@ -187,7 +187,7 @@ textarea {
 
 .pBox {
   width: 140px;
-  color: #42b983;
+  color: #399c70;
   font-size: 18px;
   font-weight: 700;
 }
@@ -202,23 +202,23 @@ input[type="radio"] + *::before {
   vertical-align: bottom;
   width: 1rem;
   height: 1rem;
-  border-color: #42b983;
+  border-color: #399c70;
   border-radius: 50%;
   border-style: solid;
   margin-right: 0.3rem;
 }
 
 input[type="radio"]:checked + *::before {
-  /*background: radial-gradient(#42b983 0%, #42b983 40%, transparent 50%, transparent);*/
-  background-color: #42b983;
-  border-color: #42b983;
+  /*background: radial-gradient(#399c70 0%, #399c70 40%, transparent 50%, transparent);*/
+  background-color: #399c70;
+  border-color: #399c70;
 }
 
 .createbtn {
   color: white;
   border: none;
   text-align: center;
-  background-color: #42b983;
+  background-color: #399c70;
   border-radius: 25px;
   font-size: 24px;
   font-weight: 400;

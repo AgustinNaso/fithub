@@ -21,7 +21,7 @@
         </div>
 
         <div v-for="cycle in cycles" :key="cycle.id">
-          <h2 class="sectionTitle" style="color: #42b983">{{ cycle.name }} - -  {{cycle.repetitions}} set/s</h2>
+          <h2 class="sectionTitle" style="color: #399c70">{{ cycle.name }} - -  {{cycle.repetitions}} set/s</h2>
           <div class="routineBlockDiv">
             <RoutineBlock v-for="(el) in cycle.exercises" :key="el.exercise.id" :green="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
           </div>
@@ -190,7 +190,7 @@ export default {
   background-color: #f3f9f9;
   padding: 30px 35px 90px 35px;
   display: flex;
-  color: #42b983;
+  color: #399c70;
   flex-direction: column;
 }
 
@@ -245,7 +245,7 @@ export default {
   color: white;
   border: none;
   text-align: center;
-  background-color: #42b983;
+  background-color: #399c70;
   border-radius: 25px;
   font-size: 36px;
   font-weight: 700;

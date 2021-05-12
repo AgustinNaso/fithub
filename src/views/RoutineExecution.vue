@@ -182,7 +182,7 @@ div{
   padding: 30px 35px 90px 35px;
   display: flex;
   flex-direction: column;
-  color: #42b983;
+  color: #399c70;
 }
 
 .executionContainer{
@@ -218,11 +218,11 @@ div{
   width: 200px;
   border-radius: 25px;
   padding:10px;
-  border: 4px solid #42b983;
+  border: 4px solid #399c70;
   background: transparent;
   font-size: 26px;
   font-weight: 700;
-  color: #42b983;
+  color: #399c70;
   cursor: pointer;
   text-align: center;
   transition: 0.3s ease-in-out;
@@ -302,7 +302,7 @@ div{
 
 .readySub{
   font-size: 32px;
-  color:#42B983;
+  color:#399c70;
   margin-top: 12px;  text-align: center;
   width: 100%;
 
@@ -314,7 +314,7 @@ div{
   text-align: center;
   align-self: center;
   margin-top:40px;
-  background-color: #42b983;
+  background-color: #399c70;
   border-radius: 25px;
   font-size: 32px;
   font-weight: 700;

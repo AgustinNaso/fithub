@@ -46,7 +46,7 @@ export default {
   background-color: #f3f9f9;
   padding: 30px 35px 90px 35px;
   display: flex;
-  color: #42b983;
+  color:  #399c70;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
@@ -83,12 +83,12 @@ img{
 }
 
 .explorebtn {
-  color: #35a371;
+  color:  #399c70;
   margin-right: 10px;
   text-align: center;
   padding: 8px 35px 8px 35px;
   background-color: inherit;
-  border: 4px solid #42b983;
+  border: 4px solid  #399c70;
   border-radius: 25px;
   font-size: 26px;
   font-weight: 700;

@@ -92,7 +92,7 @@ div{
   padding: 30px 35px 90px 35px;
   display: flex;
   flex-direction: column;
-  color: #42b983;
+  color: #399c70;
 }
 
 .routineContainer{

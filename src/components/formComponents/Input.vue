@@ -1,7 +1,7 @@
 <template>
 <div :class="{inputContainer: true, small: small}">
-  <label :class="{light:light}">{{label}}</label>
-  <input :type="type" :name="name" :class="{light:light, error:errorMsg!==''}"
+  <label :for="name" :class="{light:light}">{{label}}</label>
+  <input :id="name" :type="type" :name="name" :class="{light:light, error:errorMsg!==''}"
          :value="modelValue"
          @input="$emit('input', $event.target.value)"/>
   <ErrorMsg v-show="errorMsg" :text="errorMsg"/>
@@ -29,7 +29,7 @@ export default {
 <style scoped>
 .inputContainer{
   width: 400px;
-  color: #42b983;
+  color: #399c70;
   height: 45px;
   margin-bottom: 45px;
   display: flex;
@@ -50,7 +50,7 @@ input {
   border: solid 2px #333;
   border-radius: 12px;
   padding: 12px 30px 12px 30px;
-  color: #42b983;
+  color: #399c70;
 }
 
 input:hover {
@@ -60,7 +60,7 @@ input:hover {
 
 input:focus {
    transition: 0.2s ease-in-out;
-   border: solid 2px #42b983;
+   border: solid 2px #399c70;
    outline: none;
 }
 .light{

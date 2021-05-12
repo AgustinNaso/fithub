@@ -122,7 +122,7 @@ export default {
   flex:1;
   background-color: #030b10;
   display: flex;
-  color: #42b983;
+  color: #399c70;
   align-items: center;
   flex-direction: column;
 }

@@ -48,7 +48,7 @@ export default {
   height: 50px;
   margin-right: 16px;
   object-fit:cover;
-  border: 3px solid #42b983;
+  border: 3px solid #399c70;
 }
 p{
   font-size: 22px;

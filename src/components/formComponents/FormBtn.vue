@@ -18,7 +18,7 @@ button{
   border-radius: 12px;
   font-size: 22px;
   font-weight: 400;
-  background: #42b983;
+  background: #399c70;
   color: #030b10;
   border: none;
   outline: none;

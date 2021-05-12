@@ -53,7 +53,7 @@ export default {
   border: #77c6a2 3px solid;
   border-radius: 12px;
   padding: 10px 0 10px 10px;
-  color: #42b983;
+  color: #399c70;
   font-weight: 700;
 }
 .withArrow{
