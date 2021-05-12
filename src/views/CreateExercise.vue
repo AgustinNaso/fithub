@@ -26,7 +26,7 @@
           </form>
         </div>
         <div class="imgDiv">
-          <img class="inputImg" :src="actualImg" alt="activityTracker"/>
+          <img class="inputImg" :src="actualImg" alt="activityTracker" @error="actualImg='https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png'"/>
           <p class="inputText">Incluye una imagen para tu ejercicio!</p>
           <div class="inputContainer">
             <input class="inputForImg" type="text" v-model="img">
