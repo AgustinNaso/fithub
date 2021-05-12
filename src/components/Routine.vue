@@ -28,8 +28,16 @@
         <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="star">
       </div>
       <div v-show="isMine" class="editing">
-        <p class="delete" @click="$emit('deleteRoutine',id)" style="color:#FF3344">Eliminar</p>
-        <router-link :to="{ name: 'editRoutine', params: {id: id } }"><p>Editar</p></router-link>
+        <div class="iconFlex" @click="$emit('deleteRoutine',id)" >
+          <img class="trash" src="../assets/basuraicon.png" alt="delete"/>
+          <p class="delete">Eliminar</p>
+        </div>
+        <router-link :to="{ name: 'editRoutine', params: {id: id } }">
+        <div class="iconFlex">
+          <img class="edit" src="../assets/editicon.png" alt="edit"/>
+          <p>Editar</p>
+        </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -244,11 +252,31 @@ h3{
 }
 
 .delete{
-  cursor: pointer
+  cursor: pointer;
+  color: black;
 }
 
 a{
   color: black;
   text-decoration: none;
+}
+
+.trash{
+  height: 28px;
+  width: 28px;
+  cursor: pointer;
+}
+
+.edit{
+  height: 28px;
+  width: 28px;
+  cursor: pointer;
+}
+
+.iconFlex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

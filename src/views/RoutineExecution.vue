@@ -21,6 +21,7 @@
               :repetitions="totalEx[currentIdx].repetitions"
               :title="totalEx[currentIdx].exercise.name"
               :duration="totalEx[currentIdx].duration"
+              :img="totalEx[currentIdx].exercise.img? totalEx[currentIdx].exercise.img.url: 'https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png'"
               :is-first="currentIdx === 0"
           />
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
@@ -30,7 +31,7 @@
           <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
-      <h1 class="ready" v-show="finished">¡Ya terminaste,{{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
+      <h1 class="ready" v-show="finished">¡Ya terminaste, {{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
       <h1 class="readySub" v-show="finished">Es momento que te tomes tu tan merecido descanso.</h1>
       <router-link :to="`/routine/${routineId}`"><button v-show="finished" class="startBtn">Volver</button></router-link>
     </div>
@@ -45,6 +46,7 @@ import ExerciseExecution from "../components/ExerciseExecution";
 import Title from "../components/Title";
 import {RoutineApi} from "@/backend/routines";
 import {CycleApi} from "@/backend/cycles";
+import {ExerciseApi} from "@/backend/exercises";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
 export default {
@@ -75,6 +77,12 @@ export default {
       for (const cycle of data.content) {
         if (cycle.type === 'cooldown') continue;
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
+        for (const exercise of exerciseObj.content){
+          const ret =  await ExerciseApi.getImgs(exercise.exercise.id);
+          if (ret.content.length > 0) {
+            exercise.exercise.img = ret.content[0]
+          }
+        }
         let rep = 1;
         for (rep=1;rep<= cycle.repetitions;rep++) {
           for (const exercise of exerciseObj.content) {
@@ -87,6 +95,12 @@ export default {
       for (const cycle of data.content) {
         if (cycle.type !== 'cooldown') continue;
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
+        for (const exercise of exerciseObj.content){
+          const ret =  await ExerciseApi.getImgs(exercise.exercise.id);
+          if (ret.content.length > 0) {
+            exercise.exercise.img = ret.content[0]
+          }
+        }
         let rep = 1;
         for (rep=1;rep<= cycle.repetitions;rep++) {
           for (const exercise of exerciseObj.content){

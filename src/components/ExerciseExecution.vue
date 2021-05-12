@@ -3,10 +3,8 @@
     <div class="titleContainer">
       <h3 class="title">{{title}}</h3>
     </div>
-    <img v-show="warmUp" class="icon" src="../assets/warmup.png" alt="warmUpIcon"/>
-    <img v-show="cycle" class="icon" src="../assets/cycle.png" alt="cycleIcon"/>
-    <img v-show="cooldown" class="icon" src="../assets/cooldown.png" alt="cooldownIcon"/>
-    <div class="durationCont">
+      <img v-show="img" class="icon" :src="img" alt="warmUpIcon"/>
+    <div class="durationCont" v-show="repetitions || duration">
       <p v-show="repetitions!==0">{{repetitions}} repeticiones</p>
       <p v-show="duration!==0">{{duration}} segundos</p>
     </div>
@@ -26,7 +24,8 @@ export default {
     repetitions:Number,
     withImage:Boolean,
     isFirst:Boolean,
-    isLast:Boolean
+    isLast:Boolean,
+    img:String
   },
 
 }
@@ -74,7 +73,11 @@ export default {
 }
 
 .icon{
-  height: 300px;
+  height: 100%;
+  width:460px;
+  object-fit:cover;
+  border-radius: 20px;
+  border: black 2px solid;
 }
 
 .durationCont{

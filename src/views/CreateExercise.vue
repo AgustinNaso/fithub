@@ -5,7 +5,6 @@
       <h1 v-show="noEx">Debes crear por lo menos un ejercicio antes de comenzar una rutina!</h1>
       <Title title-name="Crear Ejercicio" to="/myexercises"/>
       <div class="content">
-        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
         <div class="completeInfo">
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
@@ -26,6 +25,15 @@
             <div class="clicker" @click="createExercise"><button class="createbtn">Crear Ejercicio</button></div>
           </form>
         </div>
+        <div class="imgDiv">
+          <img class="inputImg" :src="actualImg" alt="activityTracker"/>
+          <p class="inputText">Incluye una imagen para tu ejercicio!</p>
+          <div class="inputContainer">
+            <input class="inputForImg" type="text" v-model="img">
+            <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
+          </div>
+        </div>
+        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -38,12 +46,12 @@ import Title from "../components/Title";
 import Footer from "@/components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
-import {ExerciseApi,Exercise} from "@/backend/exercises";
+import {ExerciseApi,Exercise, Img} from "@/backend/exercises";
 import {isEmpty} from "@/backend/checks";
 
 export default {
   name: "CreateExercise",
-  components: {Footer, NavBar, Title},
+  components: { Footer, NavBar, Title},
   props:{
     noEx:Boolean,
   },
@@ -53,7 +61,19 @@ export default {
       descripcion:"",
       actividad:"exercise",
       store: UserStore,
-      emptyName:false
+      emptyName:false,
+      img:"",
+      actualImg:"https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"
+    }
+  },
+  watch:{
+    img: function (){
+      if (this.img !== ""){
+        this.actualImg = this.img;
+      }
+      else {
+        this.actualImg = 'https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png';
+      }
     }
   },
   methods:{
@@ -65,7 +85,11 @@ export default {
       }
       const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
       try{
-        await ExerciseApi.addExercise(exercise);
+        const newEx = await ExerciseApi.addExercise(exercise);
+        if (this.actualImg !== "https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"){
+          const img = new Img(this.actualImg);
+          await ExerciseApi.addImg(newEx.id,img);
+        }
       }catch (e) {
         await alert(e);
       }
@@ -225,7 +249,47 @@ p{
   font-weight: 700;
   margin-left: -30px;
 }
+.imgDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.inputImg{
+  border: #31ae7a 3px solid;
+  border-radius: 15px;
+  width: 400px;
+  height: 300px;
+  margin-top: 30px;
+  object-fit:cover;
+}
 
+.inputForImg{
+  width: 80%;
+  height: 30px;
+  border: #31ae7a 3px solid;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+.inputText{
+  margin-top: 12px;
+  margin-bottom: 2px;
+  color: #31ae7a;
+  margin-right: 20px;
+  outline: none;
+  text-align: center;
+}
+
+.inputText:focus{
+  outline: none;
+}
+
+.inputContainer{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
 
 </style>

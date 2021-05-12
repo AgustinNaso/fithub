@@ -29,6 +29,7 @@
         </div>
       </div>
     </div>
+    <hr class="hrMine"/>
     <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
     <div class="routineContainer">
       <Routine
@@ -142,7 +143,6 @@ h1{
 }
 
 .searchBar{
-  padding-left: 100px;
   display: flex;
   justify-content: space-evenly;
   margin: -2px 0 10px 0;
@@ -248,5 +248,9 @@ h1{
   font-weight: 500;
   font-size:18px;
 }
+.hrMine{
+  border-top: #aeb3b1 3px dotted ;
+}
+
 </style>
 
