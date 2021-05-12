@@ -3,8 +3,9 @@
     <div class="titleContainer">
       <h3 class="title">{{title}}</h3>
     </div>
-      <img v-show="img" class="icon" :src="img" alt="warmUpIcon"/>
-    <div class="durationCont" v-show="repetitions || duration">
+    <img v-show="img" class="icon" :src="img" alt="Imagen de rutina"/>
+    <hr>
+    <div class="durationCont">
       <p v-show="repetitions!==0">{{repetitions}} repeticiones</p>
       <p v-show="duration!==0">{{duration}} segundos</p>
     </div>
@@ -37,7 +38,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 480px;
+  height: 460px;
   width: 600px;
   padding: 30px;
   border-radius: 100px;
@@ -66,15 +67,17 @@ export default {
 .title{
   flex: 1;
   text-align: center;
-  font-size: 45px;
+  font-size: 40px;
   height: 120px;
   color: white;
   text-shadow: #030b10 3px 2px 7px;
 }
 
 .icon{
-  height: 330px;
-  width:460px;
+  min-height: 290px;
+  min-width:460px;
+  max-height: 290px;
+  max-width:460px;
   object-fit:cover;
   border-radius: 20px;
   border: white 5px solid;
@@ -82,7 +85,7 @@ export default {
 
 .durationCont{
   display: flex;
-  height: 200px;
+  height: 60px;
   flex-direction: column;
 }
 
@@ -90,7 +93,7 @@ p{
   flex: 1;
   text-align: center;
   justify-content: flex-end;
-  font-size: 40px;
+  font-size: 28px;
   color: white;
   font-weight: bold;
   text-shadow: #030b10 3px 2px 7px;
@@ -100,6 +103,9 @@ p{
   margin-left: 240px;
 }
 
-
+hr{
+  width: 90%;
+  margin-top: 10px;
+}
 
 </style>
