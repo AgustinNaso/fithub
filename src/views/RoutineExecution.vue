@@ -28,9 +28,9 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
+          <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
           <button v-show="!paused" type="button" class="pauseButton" @click="handlePause">Pausar</button>
           <button v-show="paused" type="button" class="pausedButton" @click="handlePause">Despausar</button>
-          <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
       <h1 class="ready" v-show="finished">¡Ya terminaste, {{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
