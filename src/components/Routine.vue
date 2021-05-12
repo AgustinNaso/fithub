@@ -6,8 +6,8 @@
         <h3>{{title}}</h3>
       </div>
       <div class="interaction">
-        <img v-show="isMine && isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="unfav"/>
-        <img v-show="isMine && !isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="fav"/>
+        <img v-show="isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite.svg" alt="unfav"/>
+        <img v-show="!isFaved" @click="changeFavedState" class="buttonUpper" src="../assets/favorite_border.svg" alt="fav"/>
       </div>
     </div>
     <p class="description">{{description}}</p>
@@ -68,13 +68,11 @@ export default {
     }
   },
   async created() {
-    if (this.isMine){
-      const data = await FavouritesApi.getFavourites();
-      data.content.forEach(element =>{
-        if (element.id === this.id)
-          this.isFaved = true;
-      })
-    }
+    const data = await FavouritesApi.getFavourites();
+    data.content.forEach(element =>{
+      if (element.id === this.id)
+        this.isFaved = true;
+    })
   },
   methods:{
     changeFavedState(){

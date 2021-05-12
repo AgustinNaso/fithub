@@ -5,7 +5,7 @@
       <div class="titleContainer">
         <Title title-name="Mis Favoritos" to="/main"/>
       </div>
-      <div class="routineContainer">
+      <div v-if="ready" class="routineContainer">
         <Routine
             purple
             is-mine
@@ -14,8 +14,8 @@
             :key="routine.id"
             :title="routine.name"
             :rating="routine.averageRating"
-            :owner="store.getName()"
-            :owner-img="store.getImg()"
+            :owner="routine.user.username"
+            :owner-img="routine.user.avatarUrl"
             :description="routine.detail"
             :difficulty="routine.difficulty"
             :id="routine.id"
@@ -44,16 +44,22 @@ export default {
   data() {
     return {
       store: UserStore,
-      routines: undefined
+      routines: undefined,
+      ready:false
     }
   },
-  created() {
+  async created() {
     if (!this.store.isLoggedIn()) {
       router.push("/permissionDenied");
     }
-    FavouritesApi.getFavourites().then((value) => {
-      this.routines = value.content;
-    });
+    const data = await FavouritesApi.getFavourites();
+    this.routines = data.content;
+    for (let routine of this.routines){
+      const newRoutine = await RoutineApi.getRoutineById(routine.id);
+      routine.user = newRoutine.user;
+    }
+    this.ready = true
+
   },
   methods:{
     deleteRoutine: async function(id){

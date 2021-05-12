@@ -4,9 +4,12 @@
   <div class="mainBg">
     <Title to="" title-name="Explorar Rutinas"/>
     <div class="searchBar">
-      <div class="searchBox">
-        <input name="search" type="text" class="searchInput" v-model="query"/>
-        <button @click="search" name="search" class="searchBtn">Buscar!</button>
+      <div class="errWrap">
+      <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
+        <div class="searchBox">
+          <input name="search" type="text" class="searchInput" v-model="query"/>
+          <button @click="search" name="search" class="searchBtn">Buscar!</button>
+        </div>
       </div>
       <div class="ordering">
         <div class="orderElement">
@@ -44,7 +47,6 @@
       </div>
     </div>
     <hr class="hrMine"/>
-    <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
     <div class="routineContainer">
       <Routine
           is-public
@@ -170,7 +172,7 @@ h1{
   display: flex;
   justify-content: space-evenly;
   margin: -2px 0 10px 0;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 @media (max-width: 1200px){
@@ -251,29 +253,39 @@ h1{
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  width: 230px;
 }
 
 .searchBox{
   display: flex;
   height: 40px;
   margin-bottom: 6px;
+  margin-top: 30px;
 }
 
 .ordering{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  width: 600px;
 }
 
 .error{
   color: red;
-  margin-left: 140px;
-  margin-top: -12px;
   font-weight: 500;
   font-size:18px;
+  margin-bottom: -24px;
 }
 .hrMine{
   border-top: #aeb3b1 3px dotted ;
+}
+
+.errWrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 </style>

@@ -1,5 +1,5 @@
 const filterTypes = [
-    {filterName:"Nada",
+    {filterName:"---",
         filterValues: [],
         displayValues: []},
     {filterName:"Dificultad",
