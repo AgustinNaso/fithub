@@ -3,10 +3,9 @@
     <NavBar/>
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
-      {{this.countDown}}
       <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
       <h1 class="readySub" v-show="!started">¡Busca una botella de agua para mantenerte hidratado!</h1>
-      <button @click="started = !started" v-show="!started" class="startBtn">Comenzar</button>
+      <button @click="()=>{this.started = !this.started;this.countDownTimer()}" v-show="!started" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
          green:totalEx[currentIdx].cycle.type ==='exercise', blue:totalEx[currentIdx].cycle.type === 'cooldown'}">
@@ -21,7 +20,7 @@
               :cycle="totalEx[currentIdx].cycle.type === 'exercise'"
               :repetitions="totalEx[currentIdx].repetitions"
               :title="totalEx[currentIdx].exercise.name"
-              :duration="totalEx[currentIdx].duration"
+              :duration="countDown"
               :img="totalEx[currentIdx].exercise.img? totalEx[currentIdx].exercise.img.url: 'https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png'"
               :is-first="currentIdx === 0"
           />
@@ -110,6 +109,12 @@ export default {
             this.totalSize+=1;
           }
         }
+
+        if (this.totalEx.length > 0){
+          this.countDown = this.totalEx[0].duration;
+        }else{
+          this.finished = true;
+        }
       }
 
     }catch (e){
@@ -124,15 +129,13 @@ export default {
       }
       this.currentIdx++;
       this.countDown = this.totalEx[this.currentIdx].duration;
-      this.countDownTimer();
 
     },
     findPrev() {
       if (this.currentIdx - 1 >= 0){
         this.currentIdx--;
+        this.countDown = this.totalEx[this.currentIdx].duration;
       }
-      this.countDown = this.totalEx[this.currentIdx].duration;
-      this.countDownTimer();
     },
     countDownTimer() {
       if(this.countDown > 0) {
@@ -140,6 +143,10 @@ export default {
           this.countDown -= 1
           this.countDownTimer()
         }, 1000)
+      }
+      if (this.countDown === 0){
+        this.findNext();
+        this.countDownTimer();
       }
     }
 
