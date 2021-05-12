@@ -3,9 +3,9 @@
     <NavBar/>
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
-      <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
-      <h1 class="readySub" v-show="!started">¡Busca una botella de agua para mantenerte hidratado!</h1>
-      <button @click="()=>{this.started = !this.started;this.countDownTimer()}" v-show="!started" class="startBtn">Comenzar</button>
+      <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
+      <h1 class="readySub" v-show="!started && !finished">¡Busca una botella de agua para mantenerte hidratado!</h1>
+      <button @click="()=>{this.started = !this.started;this.countDownTimer()}" v-show="!started && !finished" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
          green:totalEx[currentIdx].cycle.type ==='exercise', blue:totalEx[currentIdx].cycle.type === 'cooldown'}">
@@ -116,6 +116,7 @@ export default {
           this.countDown = this.totalEx[0].duration;
         }else{
           this.finished = true;
+          this.started = true;
         }
       }
 
@@ -126,6 +127,7 @@ export default {
   methods:{
     findNext() {
       if (this.currentIdx + 1 === this.totalSize){
+        this.started = true;
         this.finished = true;
         return;
       }
