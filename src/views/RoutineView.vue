@@ -8,11 +8,12 @@
           <Title to="" :title-name="routineName"/>
           <p class="subtitle">{{description}}</p>
         </div>
-
         <div class="dataDiv">
           Dificultad: {{ difficultyToSpanish(difficulty)}}
         </div>
       </div>
+      <router-link :to="`/editRoutine/${routineId}`"><button class="editRoutine" v-show="isMine">Editar Rutina</button></router-link>
+      <hr class="hrMine"/>
       <div class="mainSection">
         <h2 class="sectionTitle" style="color: #DC9F28">{{warmUp.name}} - -  {{warmUp.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
@@ -79,15 +80,25 @@ export default {
       this.difficulty = routine.difficulty;
       this.shareLink = window.location.href;
       this.isPublic = routine.isPublic;
-      // if (!routine.isPublic){
-      //   await router.push("/permissionDenied");
-      //   return;
-      // }
+
+      const userRoutines = await RoutineApi.getUserRoutines();
+      userRoutines.content.forEach((rout) => {
+        if (rout.id === routine.id){
+          this.isMine = true;
+        }
+      })
+
+
+      if (!routine.isPublic){
+        await router.push("/permissionDenied");
+        return;
+      }
+
+
       const data = await RoutineApi.getCycles(this.routineId);
       for (const cycle of data.content) {
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
         cycle.exercises = exerciseObj.content;
-        console.log(cycle);
         switch (cycle.type){
           case 'warmup': this.warmUp = cycle; break;
           case 'cooldown': this.cooldown = cycle;break;
@@ -126,7 +137,8 @@ export default {
     routineId: -1,
     shareLink:"",
     copied: false,
-    isPublic: Boolean
+    isPublic: false,
+    isMine: false
   }},
   methods:{
     difficultyToSpanish(difficulty){
@@ -321,4 +333,34 @@ export default {
 .toLeft{
   justify-content: flex-end;
 }
+
+
+.editRoutine{
+  width: 200px;
+  border-radius: 25px;
+  padding: 10px;
+  border: 4px solid #848484;
+  background: transparent;
+  font-size: 26px;
+  font-weight: 700;
+  color: #848484;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
+  margin: -30px 0 10px 50px;
+}
+
+.editRoutine:hover{
+  background-color: #d0d0d0;
+  transition: 0.3s ease-in-out;
+  color: #616161;
+}
+
+.hrMine{
+  border-top: #aeb3b1 3px dotted ;
+  margin-bottom: 20px;
+}
+
 </style>
