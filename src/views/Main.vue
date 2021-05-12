@@ -27,6 +27,20 @@
             <option value="desc">Descendente</option>
           </select>
         </div>
+        <div class="orderElement">
+          <label class="textLabel">Filtrar por</label>
+          <select class="textInput" v-model="filter" @change="changeFilterFirstVal">
+            <option disabled value="" >Seleccione una filtro</option>
+            <option v-for="(filter,idx) in filterTypes" :value="filter" :key="idx">{{ filter.filterName }}</option>
+          </select>
+        </div>
+        <div v-if="this.filter" class="orderElement">
+          <label class="textLabel">en base a</label>
+          <select class="textInput" v-model="filterValue">
+            <option disabled value="" >Seleccione un valor</option>
+            <option v-for="(value,idx) in this.filter.filterValues" :value="value" :key="idx">{{ filter.displayValues[idx]}}</option>
+          </select>
+        </div>
       </div>
     </div>
     <hr class="hrMine"/>
@@ -64,6 +78,7 @@ import Footer from "@/components/Footer";
 import Title from "@/components/Title";
 import Routine from "@/components/Routine";
 import {RoutineApi} from "@/backend/routines"
+import filterTypes from "@/backend/filter"
 
 export default {
   name: "Main",
@@ -77,9 +92,12 @@ export default {
       orderBy:"averageRating",
       direction:"desc",
       query:"",
+      filter:filterTypes[0],
+      filterValue:null,
       lastPage: false,
       routines: undefined,
       error:false,
+      filterTypes: filterTypes
     }
   },
   watch:{
@@ -89,6 +107,7 @@ export default {
     },
   },
   created() {
+    this.changeFilterFirstVal();
     this.search();
   },
   methods: {
@@ -99,6 +118,11 @@ export default {
         this.lastPage = value.isLastPage;
         console.log(this.routines);
       });
+    },
+    changeFilterFirstVal(){
+      if (this.filter.filterValues.length > 0){
+        this.filterValue = this.filter.filterValues[0];
+      }
     }
   }
 }
