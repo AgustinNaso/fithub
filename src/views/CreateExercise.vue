@@ -9,7 +9,7 @@
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
-            <p v-show="emptyName">El nombre no puede ser un valor vacio!</p>
+            <p v-show="emptyName">El nombre no puede ser un valor vacío!</p>
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
@@ -27,13 +27,12 @@
         </div>
         <div class="imgDiv">
           <img class="inputImg" :src="actualImg" alt="activityTracker" @error="actualImg='https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png'"/>
-          <p class="inputText">Incluye una imagen para tu ejercicio!</p>
+          <p class="inputText">¡Incluye una imágen para tu ejercicio!</p>
           <div class="inputContainer">
             <input class="inputForImg" type="text" v-model="img">
             <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
           </div>
         </div>
-        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -263,8 +262,9 @@ p{
 .inputImg{
   border: #31ae7a 3px solid;
   border-radius: 15px;
-  width: 400px;
-  height: 300px;
+  width: 300px;
+  height: 220px;
+  padding: 50px;
   margin-top: 30px;
   object-fit:cover;
 }

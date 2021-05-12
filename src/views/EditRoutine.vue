@@ -39,8 +39,8 @@
         <div v-for="(cycle,index) in cycles" :key="cycle.id">
           <div class="cycleContainer">
             <div class="cycleHeader">
-              <SectionTitle :name="cycle.name" :reps="cycle.repetitions" style="color: #399c70" @editCycle="editCycle(cycle,$event)"/>
-              <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover ciclo</button>
+              <SectionTitle :name="cycle.name" :reps="cycle.repetitions" style="color: #42b983" @editCycle="editCycle(cycle,$event)"/>
+              <button class="removeCycleButton" @click="removeCycle(cycle.id)">Remover Ciclo</button>
             </div>
             <div class="routineBlockDiv" v-show="cycle.validExercises">
               <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="`${el.order}`" green
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <button class="cycleButton" @click="addCycle()">+ Agregar ciclo</button>
+        <button class="cycleButton" @click="addCycle()">+ Agregar Ciclo</button>
 
         <SectionTitle v-if="cooldown.name" :name="cooldown.name" :reps="cooldown.repetitions" style="color: rgba(78,100,188,0.8)" @editCycle="editCycle(cooldown,$event)"/>
         <div class="routineBlockDiv">
@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     async addCycle() {
-      const cycle = new Cycle("Ciclo de Ejercitacion",'exercise',this.getMaxOrder()+1,1);
+      const cycle = new Cycle("Ciclo de Ejercitación",'exercise',this.getMaxOrder()+1,1);
       try {
         const newCycle = await RoutineApi.addCycle(this.$route.params.id, cycle)
         newCycle.exercises = [];
@@ -242,7 +242,7 @@ export default {
   background-color: #f3f9f9;
   padding: 30px 35px 90px 35px;
   display: flex;
-  color: #399c70;
+  color: #42b983;
   flex-direction: column;
 }
 
@@ -253,7 +253,7 @@ export default {
   resize: none;
   width: 500px;
   height: 120px;
-  border: solid 3px #399c70;
+  border: solid 3px #42b983;
   border-radius: 20px;
   padding: 10px;
   outline: none;
@@ -307,7 +307,7 @@ export default {
   color: #35a371;
   text-align: center;
   background-color: inherit;
-  border: 4px solid #399c70;
+  border: 4px solid #42b983;
   border-radius: 25px;
   font-weight: 700;
   text-decoration: none;

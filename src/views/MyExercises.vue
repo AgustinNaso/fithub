@@ -8,7 +8,7 @@
       </div>
       <div class="exerciseContainer">
         <div v-show="exercises && exercises.length === 0" class="newRoutineAlarm">
-          <h1>No tenes ningun ejercicio todavia! </h1>
+          <h1>¡No tiene ningún ejercicio todavía!</h1>
           <router-link class="large" to="createExercise"><button class="large">Crear Ejercicio</button></router-link>
         </div>
         <Exercise

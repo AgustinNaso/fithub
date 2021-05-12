@@ -35,20 +35,19 @@
       <div :class={finalSection:true,toLeft:!loggedIn}>
         <router-link :to="`/routineExecution/${routineId}`"><button class="startRoutine" v-show="loggedIn">Iniciar Rutina</button></router-link>
         <div class="share">
-          <h2 class="shareTitle" v-show="!alreadyRated && loggedIn">Puntua esta rutina</h2>
+          <h2 class="shareTitle" v-show="!alreadyRated && loggedIn">Puntuar Rutina</h2>
           <div class="ratingWrap" v-show="!alreadyRated && loggedIn">
             <img v-for="n in 5" class="star" :key="n" :src="decideImg(n)" alt="star" @mouseover="rating=n" @mouseleave="leaveHandle" @click="rate(n)">
           </div>
-          <h2 class="shareTitle" v-show="alreadyRated">Ya puntuaste esta rutina!</h2>
+          <h2 class="shareTitle" v-show="alreadyRated">¡Ya Puntuaste Esta Rutina!</h2>
           <div class="ratingWrap" v-show="alreadyRated">
             <img v-for="n in 5" class="star noclick" :key="n" :src="decideImg(n)" alt="star">
           </div>
           <h2 v-show="isPublic" class="shareTitle">Compartir Rutina</h2>
-          <div v-show="isPublic" class="shareWrap">
-            <input class="shareLink" disabled="disabled" type="text" :value="shareLink" />
-            <img class="copyClipboard" @click="copyLink" src="../assets/content_copy.svg" alt="copyLink">
+          <div class="shareWrap">
+            <button class="shareBtn" v-show="isPublic" @click="copyLink">Compartir Enlace</button>
+            <p class="clipboardMessage" v-show="copied && isPublic">¡URL copiado al clipboard!</p>
           </div>
-          <p class="clipboardMessage" v-show="copied && isPublic">URL copiado al clipboard!</p>
         </div>
       </div>
     </div>
@@ -262,26 +261,6 @@ export default {
   transition: 0.2s ease-in-out;
 }
 
-.share{
-  width:360px;
-  align-self: flex-end;
-}
-
-.shareLink{
-  margin-top: 10px;
-  width:300px;
-  height:40px;
-  border: 2px solid black;
-  background: transparent;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: 550;
-  color: black;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
-
 .shareTitle{
   color:black;
   width:100%;
@@ -289,23 +268,46 @@ export default {
   text-align: right;
   border-bottom: #030b10 3px solid;
 }
-.shareWrap{
-  display: flex;
-  justify-content: space-evenly;
-
-}
 .share{
   width:400px;
 }
-.copyClipboard{
-  margin-top: 8px;
+
+.shareWrap{
+  display: flex;
+  margin-left: 60px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 80%;
+  margin-top: 10px;
+}
+
+.shareBtn{
+  color: #35a371;
+  margin-right: 10px;
+  text-align: center;
+  padding: 8px 35px 8px 35px;
+  background-color: inherit;
+  border: 4px solid #42b983;
+  border-radius: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  text-decoration: none;
+  outline: none;
+  transition: 0.3s ease-in-out;
+  margin-bottom: 10px;
   cursor: pointer;
+}
+
+.shareBtn:hover{
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
 }
 
 .clipboardMessage{
   font-size: 18px;
   font-weight: 550;
-  margin-left: 20px;
+  margin-left: 40px;
   color: #5d6165;
 }
 
@@ -319,7 +321,6 @@ export default {
   justify-content: space-evenly;
   width: 100%;
   margin: 5px 0 25px 0;
-
 }
 
 .noclick{

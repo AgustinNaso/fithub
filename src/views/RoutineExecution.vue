@@ -3,8 +3,9 @@
     <NavBar/>
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
-      <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
-      <h1 class="readySub" v-show="!started && !finished">¡Busca una botella de agua para mantenerte hidratado!</h1>
+      {{this.countDown}}
+      <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, ¿Estás listo para comenzar tu entrenamiento?</h1>
+      <h1 class="readySub" v-show="!started && !finished">¡Recordá siempre mantenerte hidratado!</h1>
       <button @click="()=>{this.started = !this.started;this.countDownTimer()}" v-show="!started && !finished" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
@@ -27,13 +28,13 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
+          <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
           <button v-show="!paused" type="button" class="pauseButton" @click="handlePause">Pausar</button>
           <button v-show="paused" type="button" class="pausedButton" @click="handlePause">Despausar</button>
-          <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
       <h1 class="ready" v-show="finished">¡Ya terminaste, {{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
-      <h1 class="readySub" v-show="finished">Es momento que te tomes tu tan merecido descanso.</h1>
+      <h1 class="readySub" v-show="finished">Es momento de que te tomes tu tan merecido descanso.</h1>
       <router-link :to="`/routine/${routineId}`"><button v-show="finished" class="startBtn">Volver</button></router-link>
     </div>
     <Footer/>
