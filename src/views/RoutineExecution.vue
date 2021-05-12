@@ -27,7 +27,8 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
-          <button type="button" class="pauseButton">Pausar</button>
+          <button v-show="!paused" type="button" class="pauseButton" @click="handlePause">Pausar</button>
+          <button v-show="paused" type="button" class="pausedButton" @click="handlePause">Despausar</button>
           <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
@@ -66,6 +67,7 @@ export default {
       started:false,
       currSet:1,
       countDown:30,
+      paused:false
     }
   },
   async created() {
@@ -138,14 +140,20 @@ export default {
       }
     },
     countDownTimer() {
-      if(this.countDown > 0) {
+      if(this.countDown > 0 && !this.paused) {
         setTimeout(() => {
           this.countDown -= 1
           this.countDownTimer()
         }, 1000)
       }
-      if (this.countDown === 0){
+      if (this.countDown === 0 && !this.paused){
         this.findNext();
+        this.countDownTimer();
+      }
+    },
+    handlePause(){
+      this.paused = !this.paused
+      if (!this.paused){
         this.countDownTimer();
       }
     }
@@ -227,6 +235,32 @@ div{
 }
 
 .pauseButton:active {
+  background: transparent;
+}
+
+.pausedButton{
+  width: 200px;
+  border-radius: 25px;
+  padding:10px;
+  border: 4px solid #7f7f7f;
+  background: transparent;
+  font-size: 26px;
+  font-weight: 700;
+  color: #7f7f7f;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
+}
+
+.pausedButton:hover{
+  transition: 0.3s ease-in-out;
+  background-color: #d5d5d5;
+  color: #7f7f7f;
+}
+
+.pausedButton:active {
   background: transparent;
 }
 
