@@ -39,7 +39,7 @@
         </div>
         <div v-if="this.filter" class="orderElement">
           <label class="textLabel">en base a</label>
-          <select class="textInput" v-model="filterValue">
+          <select class="textInput" v-model="filterValue" @change="search">
             <option disabled value="" >Seleccione un valor</option>
             <option v-for="(value,idx) in this.filter.filterValues" :value="value" :key="idx">{{ filter.displayValues[idx]}}</option>
           </select>
@@ -115,15 +115,17 @@ export default {
   methods: {
     search() {
       this.error = !!(this.query && this.query.length < 3);
-      RoutineApi.getRoutines(this.pageNumber, this.orderBy, this.direction,this.query).then((value) => {
+      RoutineApi.getRoutines(this.pageNumber, this.orderBy, this.direction,this.query,this.filter,this.filterValue).then((value) => {
         this.routines = value.content;
         this.lastPage = value.isLastPage;
       });
+      this.query = "";
     },
     changeFilterFirstVal(){
       if (this.filter.filterValues.length > 0){
         this.filterValue = this.filter.filterValues[0];
       }
+      this.search();
     }
   }
 }

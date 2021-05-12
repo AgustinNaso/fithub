@@ -7,10 +7,13 @@ class RoutineApi {
         return `${Api.baseUrl}/routines`;
     }
 
-    static async getRoutines(pageNum, orderBy, direction, query, controller ) {
+    static async getRoutines(pageNum, orderBy, direction, query, filter, filterVal, controller ) {
         let finalUrl = `${RoutineApi.url}?page=${pageNum - 1}&size=9&orderBy=${orderBy}&direction=${direction}`
         if (query.length >= 3) {
-            finalUrl+= `&search=${query}`
+            finalUrl+= `&search=${query}`;
+        }
+        if (filter.filterActualName){
+            finalUrl+= `&${filter.filterActualName}=${filterVal}`;
         }
         console.log(finalUrl);
         return await Api.get(finalUrl, false, controller);
