@@ -61,7 +61,7 @@ export default {
     async handleEdit(){
       this.dataIsEditing = !this.dataIsEditing;
       if (!this.dataIsEditing){
-        const exToSend = new CycleExercise(this.order,this.dataReps,this.dataSecs);
+        const exToSend = new CycleExercise(this.order,this.dataSecs,this.dataReps);
         const data = {id: this.currentEx.id,isCreating:this.dataIsCreating,exToSend:exToSend, prevEx:this.prevExercise};
         await this.$emit('confirmExercise',data);
         this.$emit('setId',this.currentEx.id);
