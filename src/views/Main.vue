@@ -14,7 +14,7 @@
       <div class="ordering">
         <div class="orderElement">
           <label class="textLabel">Ordenar por</label>
-          <select class="textInput" v-model="orderBy" @change="search">
+          <select class="textInput" v-model="orderBy" @change="search(true)">
             <option disabled value="" >Seleccione un criterio de ordenamiento</option>
             <option value="averageRating">Puntuación</option>
             <option value="difficulty">Dificultad</option>
@@ -24,7 +24,7 @@
         </div>
         <div class="orderElement">
           <label class="textLabel">Visualizar de forma</label>
-          <select class="textInput" v-model="direction" @change="search">
+          <select class="textInput" v-model="direction" @change="search(true)">
             <option disabled value="" >Seleccione una forma de visualización</option>
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
@@ -39,7 +39,7 @@
         </div>
         <div v-if="this.filter" class="orderElement">
           <label class="textLabel">en base a</label>
-          <select class="textInput" v-model="filterValue" @change="search">
+          <select class="textInput" v-model="filterValue" @change="search(true)">
             <option disabled value="" >Seleccione un valor</option>
             <option v-for="(value,idx) in this.filter.filterValues" :value="value" :key="idx">{{ filter.displayValues[idx]}}</option>
           </select>
@@ -81,6 +81,7 @@ import Title from "@/components/Title";
 import Routine from "@/components/Routine";
 import {RoutineApi} from "@/backend/routines"
 import filterTypes from "@/backend/filter"
+import router from "@/routes";
 
 export default {
   name: "Main",
@@ -105,21 +106,26 @@ export default {
   watch:{
     $route () {
       this.pageNumber = this.$route.query.page && parseInt(this.$route.query.page) > 0 ? parseInt(this.$route.query.page) : 1;
-      this.search();
+      this.search(false);
     },
   },
   created() {
     this.changeFilterFirstVal();
-    this.search();
+    this.search(false);
   },
   methods: {
-    search() {
+    search(goBack) {
+
+      if(goBack){
+        this.pageNumber = 1;
+      }
       this.error = !!(this.query && this.query.length < 3);
       RoutineApi.getRoutines(this.pageNumber, this.orderBy, this.direction,this.query,this.filter,this.filterValue).then((value) => {
         this.routines = value.content;
         this.lastPage = value.isLastPage;
       });
       this.query = "";
+      router.push(`/explore/?page=${this.pageNumber}`)
     },
     changeFilterFirstVal(){
       if (this.filter.filterValues.length > 0){
