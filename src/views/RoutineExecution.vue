@@ -4,9 +4,9 @@
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
       {{this.countDown}}
-      <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estás listo para comenzar tu entrenamiento?</h1>
-      <h1 class="readySub" v-show="!started">¡Recordá siempre mantenerte hidratado!</h1>
-      <button @click="started = !started" v-show="!started" class="startBtn">Comenzar</button>
+      <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, ¿Estás listo para comenzar tu entrenamiento?</h1>
+      <h1 class="readySub" v-show="!started && !finished">¡Recordá siempre mantenerte hidratado!</h1>
+      <button @click="()=>{this.started = !this.started;this.countDownTimer()}" v-show="!started && !finished" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
          green:totalEx[currentIdx].cycle.type ==='exercise', blue:totalEx[currentIdx].cycle.type === 'cooldown'}">
@@ -21,14 +21,15 @@
               :cycle="totalEx[currentIdx].cycle.type === 'exercise'"
               :repetitions="totalEx[currentIdx].repetitions"
               :title="totalEx[currentIdx].exercise.name"
-              :duration="totalEx[currentIdx].duration"
+              :duration="countDown"
               :img="totalEx[currentIdx].exercise.img? totalEx[currentIdx].exercise.img.url: 'https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png'"
               :is-first="currentIdx === 0"
           />
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
-          <button type="button" class="pauseButton">Pausar</button>
+          <button v-show="!paused" type="button" class="pauseButton" @click="handlePause">Pausar</button>
+          <button v-show="paused" type="button" class="pausedButton" @click="handlePause">Despausar</button>
           <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
         </div>
       </div>
@@ -67,6 +68,7 @@ export default {
       started:false,
       currSet:1,
       countDown:30,
+      paused:false
     }
   },
   async created() {
@@ -110,6 +112,13 @@ export default {
             this.totalSize+=1;
           }
         }
+
+        if (this.totalEx.length > 0){
+          this.countDown = this.totalEx[0].duration;
+        }else{
+          this.finished = true;
+          this.started = true;
+        }
       }
 
     }catch (e){
@@ -119,27 +128,36 @@ export default {
   methods:{
     findNext() {
       if (this.currentIdx + 1 === this.totalSize){
+        this.started = true;
         this.finished = true;
         return;
       }
       this.currentIdx++;
       this.countDown = this.totalEx[this.currentIdx].duration;
-      this.countDownTimer();
 
     },
     findPrev() {
       if (this.currentIdx - 1 >= 0){
         this.currentIdx--;
+        this.countDown = this.totalEx[this.currentIdx].duration;
       }
-      this.countDown = this.totalEx[this.currentIdx].duration;
-      this.countDownTimer();
     },
     countDownTimer() {
-      if(this.countDown > 0) {
+      if(this.countDown > 0 && !this.paused) {
         setTimeout(() => {
           this.countDown -= 1
           this.countDownTimer()
         }, 1000)
+      }
+      if (this.countDown === 0 && !this.paused){
+        this.findNext();
+        this.countDownTimer();
+      }
+    },
+    handlePause(){
+      this.paused = !this.paused
+      if (!this.paused){
+        this.countDownTimer();
       }
     }
 
@@ -220,6 +238,32 @@ div{
 }
 
 .pauseButton:active {
+  background: transparent;
+}
+
+.pausedButton{
+  width: 200px;
+  border-radius: 25px;
+  padding:10px;
+  border: 4px solid #7f7f7f;
+  background: transparent;
+  font-size: 26px;
+  font-weight: 700;
+  color: #7f7f7f;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  outline: none;
+}
+
+.pausedButton:hover{
+  transition: 0.3s ease-in-out;
+  background-color: #d5d5d5;
+  color: #7f7f7f;
+}
+
+.pausedButton:active {
   background: transparent;
 }
 
