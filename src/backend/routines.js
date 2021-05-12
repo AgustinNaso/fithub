@@ -15,7 +15,6 @@ class RoutineApi {
         if (filter.filterActualName){
             finalUrl+= `&${filter.filterActualName}=${filterVal}`;
         }
-        console.log(finalUrl);
         return await Api.get(finalUrl, false, controller);
     }
 

@@ -3,6 +3,7 @@
     <NavBar/>
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
+      {{this.countDown}}
       <h1 class="ready" v-show="!started">{{store.getName().split(" ")[0]}}, ¿estas listo para comenzar tu entrenamiento?</h1>
       <h1 class="readySub" v-show="!started">¡Busca una botella de agua para mantenerte hidratado!</h1>
       <button @click="started = !started" v-show="!started" class="startBtn">Comenzar</button>
@@ -65,6 +66,7 @@ export default {
       finished:false,
       started:false,
       currSet:1,
+      countDown:30,
     }
   },
   async created() {
@@ -121,10 +123,23 @@ export default {
         return;
       }
       this.currentIdx++;
+      this.countDown = this.totalEx[this.currentIdx].duration;
+      this.countDownTimer();
+
     },
     findPrev() {
       if (this.currentIdx - 1 >= 0){
         this.currentIdx--;
+      }
+      this.countDown = this.totalEx[this.currentIdx].duration;
+      this.countDownTimer();
+    },
+    countDownTimer() {
+      if(this.countDown > 0) {
+        setTimeout(() => {
+          this.countDown -= 1
+          this.countDownTimer()
+        }, 1000)
       }
     }
 
@@ -177,7 +192,6 @@ div{
 }
 
 .buttonContainer{
-  margin-top: 35px;
   display: flex;
   justify-content: space-evenly;
   width: 600px;

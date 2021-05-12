@@ -125,7 +125,7 @@ export default {
         this.lastPage = value.isLastPage;
       });
       this.query = "";
-      router.push(`/explore/?page=${this.pageNumber}`)
+      router.push(`/explore/?page=${this.pageNumber}`).catch(()=>{});
     },
     changeFilterFirstVal(){
       if (this.filter.filterValues.length > 0){
