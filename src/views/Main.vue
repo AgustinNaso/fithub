@@ -33,12 +33,12 @@
         <div class="orderElement">
           <label class="textLabel">Filtrar por</label>
           <select class="textInput" v-model="filter" @change="changeFilterFirstVal">
-            <option disabled value="" >Seleccione una filtro</option>
+            <option disabled value="" >Seleccione un filtro</option>
             <option v-for="(filter,idx) in filterTypes" :value="filter" :key="idx">{{ filter.filterName }}</option>
           </select>
         </div>
         <div v-if="this.filter" class="orderElement">
-          <label class="textLabel">en base a</label>
+          <label class="textLabel">En base a</label>
           <select class="textInput" v-model="filterValue" @change="search(true)">
             <option disabled value="" >Seleccione un valor</option>
             <option v-for="(value,idx) in this.filter.filterValues" :value="value" :key="idx">{{ filter.displayValues[idx]}}</option>
