@@ -6,7 +6,7 @@
       {{this.countDown}}
       <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, ¿Estás listo para comenzar tu entrenamiento?</h1>
       <h1 class="readySub" v-show="!started && !finished">¡Recordá siempre mantenerte hidratado!</h1>
-      <button @click="()=>{this.started = !this.started;this.countDownTimer()}" v-show="!started && !finished" class="startBtn">Comenzar</button>
+      <button @click="start" v-show="!started && !finished" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
          green:totalEx[currentIdx].cycle.type ==='exercise', blue:totalEx[currentIdx].cycle.type === 'cooldown'}">
@@ -71,6 +71,21 @@ export default {
       paused:false
     }
   },
+  watch: {
+    countDown: {
+      handler(value) {
+        if (value > 0 && !this.paused) {
+          setTimeout(() => {
+            this.countDown--;
+          }, 1000);
+        }
+        if (this.countDown === 0 && !this.paused && this.totalEx[this.currentIdx].duration > 0){
+          this.findNext();
+        }
+      },
+      immediate: true // This ensures the watcher is triggered upon creation
+    }
+  },
   async created() {
     this.routineId = this.$route.params.id;
     try{
@@ -95,7 +110,6 @@ export default {
           }
         }
       }
-
       for (const cycle of data.content) {
         if (cycle.type !== 'cooldown') continue;
         const exerciseObj = await CycleApi.getCycleExercises(cycle.id);
@@ -113,12 +127,6 @@ export default {
           }
         }
 
-        if (this.totalEx.length > 0){
-          this.countDown = this.totalEx[0].duration;
-        }else{
-          this.finished = true;
-          this.started = true;
-        }
       }
 
     }catch (e){
@@ -142,25 +150,17 @@ export default {
         this.countDown = this.totalEx[this.currentIdx].duration;
       }
     },
-    countDownTimer() {
-      if(this.countDown > 0 && !this.paused) {
-        setTimeout(() => {
-          this.countDown -= 1
-          this.countDownTimer()
-        }, 1000)
-      }
-      if (this.countDown === 0 && !this.paused){
-        this.findNext();
-        this.countDownTimer();
-      }
-    },
     handlePause(){
       this.paused = !this.paused
-      if (!this.paused){
-        this.countDownTimer();
+    },
+    start(){
+      this.started = true;
+      if (this.totalEx.length > 0){
+        this.countDown = this.totalEx[0].duration;
+      }else{
+        this.finished = true;
       }
     }
-
   }
 }
 </script>

@@ -7,7 +7,7 @@
     <hr>
     <div class="durationCont">
       <p v-show="repetitions!==0">{{repetitions}} repeticiones</p>
-      <p v-show="duration!==0">{{duration}} segundos</p>
+      <p v-show="duration>0">{{duration}} segundos</p>
     </div>
   </div>
 </template>
