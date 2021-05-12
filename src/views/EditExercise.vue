@@ -4,11 +4,11 @@
     <div class="bodyContainer">
       <Title title-name="Editar Ejercicio" to="/myexercises"/>
       <div class="content">
-        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
         <div class="completeInfo">
           <form @submit.prevent>
             <label class="textLabel">Nombre</label>
             <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
+            <p v-show="emptyName">El nombre no puede ser un valor vacio!</p>
             <label class="textLabel">Descripción</label>
             <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
@@ -24,6 +24,15 @@
             <div class="clicker" @click="editExercise"><button class="createbtn">Confirmar cambios</button></div>
           </form>
         </div>
+        <div class="imgDiv">
+          <img class="inputImg" :src="actualImg" alt="activityTracker" @error="actualImg='https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png'"/>
+          <p class="inputText">Incluye una imagen para tu ejercicio!</p>
+          <div class="inputContainer">
+            <input class="inputForImg" type="text" v-model="img">
+            <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
+          </div>
+        </div>
+        <img class="mainImg" src="../assets/undraw_workout_gcgu.svg" alt="activityTracker"/>
       </div>
     </div>
     <Footer/>
@@ -36,7 +45,8 @@ import Title from "../components/Title";
 import Footer from "@/components/Footer";
 import router from "@/routes";
 import UserStore from "@/stores/UserStore";
-import {ExerciseApi, Exercise} from "@/backend/exercises";
+import {ExerciseApi, Exercise, Img} from "@/backend/exercises";
+import {isEmpty} from "@/backend/checks";
 
 export default {
   name: "EditExercise",
@@ -46,14 +56,43 @@ export default {
       nombre:"",
       descripcion:"",
       actividad:"",
-      store: UserStore
+      store: UserStore,
+      emptyName:false,
+      img:"",
+      actualImg:"https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png",
+      imgId:-1,
+    }
+  },
+  watch:{
+    img: function (){
+      if (this.img !== ""){
+        this.actualImg = this.img;
+      }
+      else {
+        this.actualImg = 'https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png';
+      }
     }
   },
   methods:{
     async editExercise(){
+
+      this.emptyName=false;
+      if (isEmpty(this.nombre)){
+        this.emptyName=true;
+        return;
+      }
+
       const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
       try{
         await ExerciseApi.editExercise(exercise,this.$route.params.id);
+        let img;
+        if (this.actualImg === "https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"){
+          img = new Img('https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png');
+        }
+        else{
+          img = new Img(this.actualImg);
+        }
+        await ExerciseApi.changeImg(this.$route.params.id,this.imgId,img);
       }catch (e) {
         await alert(e);
       }
@@ -69,6 +108,14 @@ export default {
       this.nombre = data.name;
       this.descripcion = data.detail;
       this.actividad = data.type;
+      const ret =  await ExerciseApi.getImgs(data.id);
+      if (ret.content.length > 0) {
+        this.img = ret.content[0].url
+        this.imgId = ret.content[0].id;
+      }
+      if (this.img === "https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png"){
+        this.img = "";
+      }
     }catch (e){
       await router.push("/error");
     }
@@ -203,4 +250,46 @@ input[type="radio"]:checked + *::before {
   }
 }
 
+.imgDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputImg{
+  border: #31ae7a 3px solid;
+  border-radius: 15px;
+  width: 400px;
+  height: 300px;
+  margin-top: 30px;
+  object-fit:cover;
+}
+
+.inputForImg{
+  width: 80%;
+  height: 30px;
+  border: #31ae7a 3px solid;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+.inputText{
+  margin-top: 12px;
+  margin-bottom: 2px;
+  color: #31ae7a;
+  margin-right: 20px;
+  outline: none;
+  text-align: center;
+}
+
+.inputText:focus{
+  outline: none;
+}
+
+.inputContainer{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
 </style>

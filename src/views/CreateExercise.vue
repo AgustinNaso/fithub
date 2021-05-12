@@ -86,10 +86,14 @@ export default {
       const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
       try{
         const newEx = await ExerciseApi.addExercise(exercise);
-        if (this.actualImg !== "https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"){
-          const img = new Img(this.actualImg);
-          await ExerciseApi.addImg(newEx.id,img);
+        let img;
+        if (this.actualImg === "https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"){
+          img = new Img('https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png');
         }
+        else{
+          img = new Img(this.actualImg);
+        }
+        await ExerciseApi.addImg(newEx.id,img);
       }catch (e) {
         await alert(e);
       }
