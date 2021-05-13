@@ -6,14 +6,14 @@
       </select>
       <h4 v-show="!dataIsEditing">{{currentEx.name}}</h4>
       <div class="valueFill">
-        <input  v-show="dataIsEditing" type="number" class="numInput" name="reps" v-model.number="dataReps" min="0">
+        <input :id="`reps-${this.order}-${this.cycleId}`" v-show="dataIsEditing" type="number" class="numInput" name="reps" v-model.number="dataReps" min="0">
         <p class="realVal" v-show="!dataIsEditing && dataReps">{{dataReps}}</p>
-        <p v-show="dataIsEditing || dataReps"> repetición/es</p>
+        <label :for="`reps-${this.order}-${this.cycleId}`" v-show="dataIsEditing || dataReps"> repetición/es</label>
       </div>
       <div class="valueFill">
-        <input v-show="dataIsEditing" type="number" class="numInput" name="secs" v-model.number="dataSecs" min="0">
+        <input :id="`secs-${this.order}-${this.cycleId}`" v-show="dataIsEditing" type="number" class="numInput" name="secs" v-model.number="dataSecs" min="0">
         <p class="realVal" v-show="!dataIsEditing && dataSecs">{{dataSecs}}</p>
-        <p v-show="dataIsEditing || dataSecs"> segundo/s</p>
+        <label :for="`secs-${this.order}-${this.cycleId}`" v-show="dataIsEditing || dataSecs"> segundo/s</label>
       </div>
       <div class="icons">
         <img v-show="!dataIsEditing" @click="$emit('removeExercise',currentEx)" class="trash" src="../../assets/basuraicon.png" alt="delete"/>
@@ -45,6 +45,7 @@ export default {
     exercise: Object,
     isCreating:Boolean,
     isEditing:Boolean,
+    cycleId:Number,
   },
   data(){
     return {

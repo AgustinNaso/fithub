@@ -25,7 +25,7 @@
           <div class="inputWrap">
             <div class="labelWrap">
               <img class="editImage" src="../assets/edit_picture.svg" alt="user image">
-              <label for="image" style="color: black;">Imagen del usario</label>
+              <label class="labelForImg" for="image" style="color: black;">Imagen del usario</label>
             </div>
             <input id="image" class="imageInput" v-model="userData.avatarUrl">
           </div>
@@ -288,6 +288,17 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .labelWrap{
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .labelForImg{
+    margin-top: 20px;
   }
 
 }

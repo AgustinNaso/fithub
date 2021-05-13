@@ -342,14 +342,14 @@ a{
 
 
 .orange{
-  color: rgb(236,169,39);
+  color: rgb(180, 132, 37);
 }
 
 .blue{
-  color: rgb(133,158,255);
+  color: rgb(103, 127, 220);
 }
 
 .green{
-  color: rgb(65,214,152);
+  color: #399c70
 }
 </style>

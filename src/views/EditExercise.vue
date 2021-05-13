@@ -6,11 +6,11 @@
       <div class="content">
         <div class="completeInfo">
           <form @submit.prevent>
-            <label class="textLabel">Nombre</label>
-            <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
+            <label for="name" class="textLabel">Nombre</label>
+            <input id="name" class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
             <p v-show="emptyName">¡El nombre no puede ser un valor vacío!</p>
-            <label class="textLabel">Descripción</label>
-            <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
+            <label for="desc" class="textLabel">Descripción</label>
+            <textarea id="desc" class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
               <div class="pBox">
                 <input class="checkBtn" type="radio" id="exercise" value="exercise" v-model="actividad">
@@ -26,9 +26,9 @@
         </div>
         <div class="imgDiv">
           <img class="inputImg" :src="actualImg" alt="activityTracker" @error="actualImg='https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png'"/>
-          <p class="inputText">¡Incluye una imágen para tu ejercicio!</p>
+          <label for="img" class="inputText">¡Incluye una imágen para tu ejercicio!</label>
           <div class="inputContainer">
-            <input class="inputForImg" type="text" v-model="img">
+            <input id="img" class="inputForImg" type="text" v-model="img">
             <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
           </div>
         </div>
@@ -185,6 +185,7 @@ textarea {
   resize: none;
   outline: none;
   color: #399c70;
+  font-weight: 700;
 }
 
 .checkbox {
@@ -197,18 +198,12 @@ textarea {
 .pBox {
   width: 140px;
   color: #399c70;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 input[type="radio"] {
   display: none;
-}
-
-p{
-  color: red;
-  font-weight: 700;
-  margin-left: -30px;
 }
 
 input[type="radio"] + *::before {
@@ -244,6 +239,30 @@ input[type="radio"]:checked + *::before {
   cursor: pointer;
 }
 
+
+
+.mainImg {
+  width: 400px;
+}
+
+
+@media (max-width: 1200px) {
+  .mainImg{
+    display: none;
+  }
+}
+
+h1 {
+  color: #d01212;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+p{
+  color: red;
+  font-weight: 700;
+  margin-left: -30px;
+}
 .imgDiv{
   display: flex;
   flex-direction: column;
@@ -252,7 +271,7 @@ input[type="radio"]:checked + *::before {
 }
 
 .inputImg{
-  border: #31ae7a 3px solid;
+  border:  #399c70 3px solid;
   border-radius: 15px;
   width: 300px;
   height: 220px;
@@ -264,7 +283,7 @@ input[type="radio"]:checked + *::before {
 .inputForImg{
   width: 80%;
   height: 30px;
-  border: #31ae7a 3px solid;
+  border:  #399c70 3px solid;
   border-radius: 15px;
   font-size: 18px;
 }
@@ -272,7 +291,9 @@ input[type="radio"]:checked + *::before {
 .inputText{
   margin-top: 12px;
   margin-bottom: 2px;
-  color: #31ae7a;
+  color: #2e7153;
+  font-size: 16px;
+  font-weight: 700;
   margin-right: 20px;
   outline: none;
   text-align: center;
@@ -287,4 +308,5 @@ input[type="radio"]:checked + *::before {
   width: 100%;
   justify-content: space-evenly;
 }
+
 </style>

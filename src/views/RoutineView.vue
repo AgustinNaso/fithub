@@ -15,7 +15,7 @@
       <router-link :to="`/editRoutine/${routineId}`"><button class="editRoutine" v-show="isMine">Editar Rutina</button></router-link>
       <hr class="hrMine"/>
       <div class="mainSection">
-        <h2 class="sectionTitle" style="color: #DC9F28">{{warmUp.name}} - -  {{warmUp.repetitions}} set/s</h2>
+        <h2 class="sectionTitle" style="color: #b88625">{{warmUp.name}} - -  {{warmUp.repetitions}} set/s</h2>
         <div class="routineBlockDiv">
           <RoutineBlock v-for="(el) in warmUp.exercises" :key="el.exercise.id" :orange="el.exercise.type === 'exercise'" :excercise-name="el.exercise.name" :reps="el.repetitions" :secs="el.duration" />
         </div>
@@ -45,7 +45,7 @@
           </div>
           <h2 v-show="isPublic" class="shareTitle">Compartir Rutina</h2>
           <div class="shareWrap">
-            <button class="shareBtn" v-show="isPublic" @click="copyLink">Compartir Enlace</button>
+            <button class="shareBtn" v-show="isPublic" @click="copyLink">Copiar Enlace</button>
             <p class="clipboardMessage" v-show="copied && isPublic">¡URL copiado al clipboard!</p>
           </div>
         </div>
@@ -282,12 +282,12 @@ export default {
 }
 
 .shareBtn{
-  color: #35a371;
+  color: #7f7f7f;
   margin-right: 10px;
   text-align: center;
   padding: 8px 35px 8px 35px;
   background-color: inherit;
-  border: 4px solid #399c70;
+  border: 4px solid #7f7f7f;
   border-radius: 25px;
   font-size: 26px;
   font-weight: 700;
@@ -300,8 +300,8 @@ export default {
 
 .shareBtn:hover{
   transition: 0.3s ease-in-out;
-  background-color: #dbefe7;
-  color: #156844;
+  background-color: #e7e7e7;
+  color: #a0a0a0;
 }
 
 .clipboardMessage{

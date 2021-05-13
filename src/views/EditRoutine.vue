@@ -22,11 +22,12 @@
       </div>
 
       <div class="mainSection">
-        <SectionTitle v-if="warmUp.name" :name="warmUp.name" :reps="warmUp.repetitions" style="color: #DC9F28" @editCycle="editCycle(warmUp,$event)"/>
+        <SectionTitle v-if="warmUp.name" :name="warmUp.name" :reps="warmUp.repetitions" style="color: #b88625" @editCycle="editCycle(warmUp,$event)"/>
         <div class="routineBlockDiv">
           <EditableRoutineBlock v-for="(el) in warmUp.exercises" :key="`${el.order}`" orange
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                 :exercises="warmUp.validExercises" :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                :cycle-id="warmUp.id"
                                 @removeExercise="removeExercise(warmUp,$event)"
                                 @confirmExercise="confirmExercise(warmUp,$event)"
                                 @editing="warmUp.editCount++"
@@ -46,6 +47,7 @@
               <EditableRoutineBlock v-for="(el) in cycles[index].exercises" :key="`${el.order}`" green
                                     :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                     :exercises="cycle.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                    :cycle-id="cycle.id"
                                     @removeExercise="removeExercise(cycle,$event)"
                                     @confirmExercise="confirmExercise(cycle,$event)"
                                     @editing="cycle.editCount++"
@@ -62,6 +64,7 @@
           <EditableRoutineBlock v-for="(el) in cooldown.exercises" :key="`${el.order}`" blue
                                 :exercise="el.exercise" :reps="el.repetitions" :secs="el.duration" :order="el.order"
                                 :exercises="cooldown.validExercises"  :isCreating="el.isCreating" :isEditing="el.isEditing"
+                                :cycle-id="cooldown.id"
                                 @removeExercise="removeExercise(cooldown,$event)"
                                 @confirmExercise="confirmExercise(cooldown,$event)"
                                 @editing="cooldown.editCount++"
@@ -322,6 +325,7 @@ export default {
   padding: 8px 0 8px 0;
   margin-right: 10px;
   margin-bottom: 50px;
+  color:#399c70;
 }
 
 .acceptBtn{
@@ -329,9 +333,9 @@ export default {
   padding: 12px;
   font-size: 40px;
   cursor: pointer;
-  color: #31ae7a;
+  color: #399c70;
   background-color: inherit;
-  border-color: #31ae7a ;
+  border-color: #399c70 ;
   transition: 0.3s ease-in-out;
 }
 

@@ -6,11 +6,11 @@
       <div class="content">
         <div class="completeInfo">
           <form @submit.prevent>
-            <label class="textLabel">Nombre</label>
-            <input class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
+            <label for="name" class="textLabel">Nombre</label>
+            <input id="name" class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
             <p v-show="emptyName">¡El nombre no puede ser un valor vacío!</p>
-            <label class="textLabel">Descripción</label>
-            <textarea class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
+            <label for="desc" class="textLabel">Descripción</label>
+            <textarea id="desc" class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <label class="textLabel">Dificultad</label>
             <select class="textInput" v-model="dificultad">
               <option disabled value="" >Seleccione una dificultad</option>
@@ -154,6 +154,7 @@ textarea {
   width: 100%;
   margin-left: 10px;
   border: solid 3px #399c70;
+  font-weight: 700;
   border-radius: 20px;
   font-size: 20px;
   padding: 10px;
@@ -171,7 +172,7 @@ textarea {
 
 .pBox {
   width: 140px;
-  color: #399c70;
+  color:  #399c70;
   font-size: 18px;
   font-weight: 700;
 }
