@@ -15,9 +15,9 @@
           <ExerciseExecution
               v-if="totalEx[currentIdx]"
               with-image
-              :warm-up="totalEx[currentIdx].cycle.type === 'warmup'"
-              :cooldown="totalEx[currentIdx].cycle.type === 'cooldown'"
-              :cycle="totalEx[currentIdx].cycle.type === 'exercise'"
+              :warm-up="totalEx[currentIdx].cycle.type === 'warmup' && totalEx[currentIdx].exercise.type !== 'rest'"
+              :cooldown="totalEx[currentIdx].cycle.type === 'cooldown' && totalEx[currentIdx].exercise.type !== 'rest'"
+              :cycle="totalEx[currentIdx].cycle.type === 'exercise' && totalEx[currentIdx].exercise.type !== 'rest'"
               :repetitions="totalEx[currentIdx].repetitions"
               :title="totalEx[currentIdx].exercise.name"
               :duration="countDown"

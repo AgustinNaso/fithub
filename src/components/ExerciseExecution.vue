@@ -42,6 +42,8 @@ export default {
   width: 600px;
   padding: 30px;
   border-radius: 100px;
+  background: rgb(207,198,177);
+  background: linear-gradient(rgba(207,198,177,1) 0%, rgba(173,168,156,1) 100%);
 }
 
 .orange{
