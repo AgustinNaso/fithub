@@ -86,7 +86,7 @@ export default {
         await ExerciseApi.editExercise(exercise,this.$route.params.id);
         let img;
         if (this.actualImg === "https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"){
-          img = new Img('https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png');
+          img = new Img('https://cdn3.iconfinder.com/data/icons/vacation-4/32/vacation_18-512.png');
         }
         else{
           img = new Img(this.actualImg);
@@ -112,7 +112,7 @@ export default {
         this.img = ret.content[0].url
         this.imgId = ret.content[0].id;
       }
-      if (this.img === "https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png"){
+      if (this.img === "https://cdn3.iconfinder.com/data/icons/vacation-4/32/vacation_18-512.png"){
         this.img = "";
       }
     }catch (e){
@@ -240,17 +240,6 @@ input[type="radio"]:checked + *::before {
 }
 
 
-
-.mainImg {
-  width: 400px;
-}
-
-
-@media (max-width: 1200px) {
-  .mainImg{
-    display: none;
-  }
-}
 
 h1 {
   color: #d01212;

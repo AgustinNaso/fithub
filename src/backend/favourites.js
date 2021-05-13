@@ -8,7 +8,7 @@ class FavouritesApi {
     }
 
     static async getFavourites(controller) {
-        return await Api.get(`${FavouritesApi.url}`, true, controller);
+        return await Api.get(`${FavouritesApi.url}?size=30`, true, controller);
     }
 
     static async setFavourite(id,controller) {

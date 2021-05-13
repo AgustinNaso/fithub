@@ -21,7 +21,7 @@
               :repetitions="totalEx[currentIdx].repetitions"
               :title="totalEx[currentIdx].exercise.name"
               :duration="countDown"
-              :img="totalEx[currentIdx].exercise.img? totalEx[currentIdx].exercise.img.url: 'https://cdn.iconscout.com/icon/free/png-512/physical-exercise-33-1104205.png'"
+              :img="totalEx[currentIdx].exercise.img? totalEx[currentIdx].exercise.img.url: 'https://cdn3.iconfinder.com/data/icons/vacation-4/32/vacation_18-512.png'"
               :is-first="currentIdx === 0"
           />
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
