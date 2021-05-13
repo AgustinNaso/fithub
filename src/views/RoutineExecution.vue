@@ -27,7 +27,7 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
-          <button v-show="this.countDown > 0 && !timerStarted" type="button" class="pausedButton" @click="handlePause">Comenzar ejercicio</button>
+          <button v-show="this.countDown > 0 && !timerStarted" type="button" class="pausedButton" @click="handlePause">Comenzar Ejercicio</button>
           <button v-show="!paused && this.countDown > 0 && timerStarted" type="button" class="pauseButton" @click="handlePause">Pausar</button>
           <button v-show="paused && this.countDown > 0 && timerStarted" type="button" class="pausedButton" @click="handlePause">Reanudar</button>
         </div>
