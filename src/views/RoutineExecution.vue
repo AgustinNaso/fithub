@@ -129,9 +129,11 @@ export default {
             this.totalSize+=1;
           }
         }
+        this.timeOutSet = true;
         setTimeout(() => {
           if (!this.paused && this.timerStarted) {
             this.countDown--;
+            this.timeOutSet = false;
           }
         }, 1000);
       }
@@ -166,9 +168,11 @@ export default {
       }else{
         this.paused = !this.paused
       }
+      this.timeOutSet = true;
       setTimeout(() => {
         if (!this.paused && this.timerStarted) {
           this.countDown--;
+          this.timeOutSet = false;
         }
       }, 1000);
     },

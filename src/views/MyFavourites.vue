@@ -8,7 +8,7 @@
       <div v-if="ready" class="routineContainer">
         <Routine
             purple
-            is-mine
+            :is-mine="routine.user.id.toString() === store.getUserId()"
             class="routine"
             v-for="(routine) in routines"
             :key="routine.id"
