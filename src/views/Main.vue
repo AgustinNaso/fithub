@@ -8,7 +8,7 @@
         <p class="error" v-show="error">¡La busqueda debe ser mayor a 2 caracteres para efectuarse!</p>
         <form class="searchBox" @submit.prevent>
           <input name="search" type="text" class="searchInput" v-model="query"/>
-          <button @click="search" name="search" class="searchBtn">Buscar!</button>
+          <button @click="search" name="search" class="searchBtn">Buscar</button>
         </form>
       </div>
       <div class="ordering">
