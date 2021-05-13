@@ -27,7 +27,7 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
-          <button v-show="this.countDown > 0 && !timerStarted" type="button" class="pauseButton" @click="beginTimer">Comenzar</button>
+          <button v-show="this.countDown > 0 && !timerStarted" type="button" class="pausedButton" @click="handlePause">Comenzar ejercicio</button>
           <button v-show="!paused && this.countDown > 0 && timerStarted" type="button" class="pauseButton" @click="handlePause">Pausar</button>
           <button v-show="paused && this.countDown > 0 && timerStarted" type="button" class="pausedButton" @click="handlePause">Reanudar</button>
         </div>
@@ -75,7 +75,7 @@ export default {
   watch: {
     countDown: {
       handler(value) {
-        if (value > 0 && !this.paused && !this.timeOutSet) {
+        if (value > 0 && !this.paused && !this.timeOutSet && this.timerStarted) {
           this.timeOutSet = true;
           setTimeout(() => {
             this.countDown--;
@@ -130,7 +130,7 @@ export default {
           }
         }
         setTimeout(() => {
-          if (!this.paused) {
+          if (!this.paused && this.timerStarted) {
             this.countDown--;
           }
         }, 1000);
@@ -161,10 +161,16 @@ export default {
       }
     },
     handlePause(){
-      this.paused = !this.paused
-    },
-    beginTimer(){
-      this.timerStarted = true;
+      if (!this.timerStarted){
+        this.timerStarted = true
+      }else{
+        this.paused = !this.paused
+      }
+      setTimeout(() => {
+        if (!this.paused && this.timerStarted) {
+          this.countDown--;
+        }
+      }, 1000);
     },
     start(){
       this.started = true;
@@ -228,8 +234,9 @@ div{
   width: 600px;
 }
 
-.pauseButton{
-  width: 200px;
+.pausedButton{
+  min-width: 200px;
+  max-width: 300px;
   border-radius: 25px;
   padding:10px;
   border: 4px solid #399c70;
@@ -244,17 +251,17 @@ div{
   outline: none;
 }
 
-.pauseButton:hover{
+.pausedButton:hover{
   transition: 0.3s ease-in-out;
   background-color: #dbefe7;
   color: #156844;
 }
 
-.pauseButton:active {
+.pausedButton:active {
   background: transparent;
 }
 
-.pausedButton{
+.pauseButton{
   width: 200px;
   border-radius: 25px;
   padding:10px;
@@ -270,13 +277,13 @@ div{
   outline: none;
 }
 
-.pausedButton:hover{
+.pauseButton:hover{
   transition: 0.3s ease-in-out;
   background-color: #d5d5d5;
   color: #7f7f7f;
 }
 
-.pausedButton:active {
+.pauseButton:active {
   background: transparent;
 }
 
