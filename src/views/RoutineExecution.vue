@@ -27,9 +27,9 @@
           <img class="arrowBtn" src="../assets/arrowRight.png" alt="arrowRight" @click="findNext" >
         </div>
         <div class="buttonContainer">
-          <router-link :to="{ name: 'routine', params: {id: this.routineId }}"><button type="button" class="finishButton">Terminar</button></router-link>
-          <button v-show="!paused" type="button" class="pauseButton" @click="handlePause">Pausar</button>
-          <button v-show="paused" type="button" class="pausedButton" @click="handlePause">Despausar</button>
+          <button v-show="this.countDown > 0 && !timerStarted" type="button" class="pauseButton" @click="beginTimer">Comenzar</button>
+          <button v-show="!paused && this.countDown > 0 && timerStarted" type="button" class="pauseButton" @click="handlePause">Pausar</button>
+          <button v-show="paused && this.countDown > 0 && timerStarted" type="button" class="pausedButton" @click="handlePause">Reanudar</button>
         </div>
       </div>
       <h1 class="ready" v-show="finished">¡Ya terminaste, {{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
@@ -67,8 +67,9 @@ export default {
       started:false,
       currSet:1,
       countDown:30,
-      paused:false,
       timeOutSet:false,
+      paused:false,
+      timerStarted: false
     }
   },
   watch: {
@@ -149,17 +150,21 @@ export default {
       this.currentIdx++;
       this.countDown = this.totalEx[this.currentIdx].duration;
       this.paused=false;
-
+      this.timerStarted = false;
     },
     findPrev() {
-      if (this.currentIdx - 1 >= 0){
+      if (this.currentIdx - 1 >= 0) {
         this.currentIdx--;
         this.countDown = this.totalEx[this.currentIdx].duration;
-        this.paused=false;
+        this.paused = false;
+        this.timerStarted = false;
       }
     },
     handlePause(){
       this.paused = !this.paused
+    },
+    beginTimer(){
+      this.timerStarted = true;
     },
     start(){
       this.started = true;
@@ -272,32 +277,6 @@ div{
 }
 
 .pausedButton:active {
-  background: transparent;
-}
-
-.finishButton{
-  width: 200px;
-  border-radius: 25px;
-  padding: 10px;
-  border: 4px solid #d01212;
-  background: transparent;
-  font-size: 26px;
-  font-weight: 700;
-  color: #d01212;
-  cursor: pointer;
-  text-align: center;
-  transition: 0.3s ease-in-out;
-  text-decoration: none;
-  outline: none;
-}
-
-.finishButton:hover{
-  background-color: #f7a6a6;
-  transition: 0.3s ease-in-out;
-  color: #950707;
-}
-
-.finishButton:active {
   background: transparent;
 }
 
