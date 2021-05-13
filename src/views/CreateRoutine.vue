@@ -75,7 +75,7 @@ export default {
         data = await RoutineApi.createRoutine(routineBase);
         const warmUp = new Cycle("Entrada en Calor",'warmup',1,1);
         const coolDown = new Cycle("Enfriamiento",'cooldown',2,1);
-        const training = new Cycle("Ciclo de Ejercitacion",'exercise',3,1);
+        const training = new Cycle("Ciclo de Ejercitación",'exercise',3,1);
         await RoutineApi.addCycle(data.id,warmUp);
         await RoutineApi.addCycle(data.id,coolDown);
         await RoutineApi.addCycle(data.id,training);
