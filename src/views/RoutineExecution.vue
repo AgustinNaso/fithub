@@ -141,12 +141,14 @@ export default {
       }
       this.currentIdx++;
       this.countDown = this.totalEx[this.currentIdx].duration;
+      this.paused=false;
 
     },
     findPrev() {
       if (this.currentIdx - 1 >= 0){
         this.currentIdx--;
         this.countDown = this.totalEx[this.currentIdx].duration;
+        this.paused=false;
       }
     },
     handlePause(){
