@@ -5,7 +5,7 @@
     <Title to="" title-name="Explorar Rutinas"/>
     <div class="searchBar">
       <div class="errWrap">
-      <p class="error" v-show="error">La busqueda debes ser mayor a 3 caracteres para efectuarse!</p>
+        <p class="error" v-show="error">¡La busqueda debe ser mayor a 2 caracteres para efectuarse!</p>
         <form class="searchBox" @submit.prevent>
           <input name="search" type="text" class="searchInput" v-model="query"/>
           <button @click="search" name="search" class="searchBtn">Buscar!</button>
@@ -47,6 +47,7 @@
       </div>
     </div>
     <hr class="hrMine"/>
+    <p class="notFound" v-show="this.routines && this.routines.length === 0">¡No se encontraron resultados para su busqueda!</p>
     <div class="routineContainer">
       <Routine
           is-public
@@ -115,7 +116,6 @@ export default {
   },
   methods: {
     search(goBack) {
-
       if(goBack){
         this.pageNumber = 1;
       }
@@ -281,10 +281,20 @@ h1{
 
 .error{
   color: red;
-  font-weight: 500;
+  font-weight: 700;
   font-size:18px;
   margin-bottom: -24px;
 }
+
+.notFound{
+  color: #399c70;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 25px;
+  width: 100%;
+  font-size:25px;
+}
+
 .hrMine{
   border-top: #aeb3b1 3px dotted ;
 }
