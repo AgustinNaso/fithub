@@ -2,7 +2,7 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="bodyContainer">
-      <h1 v-show="noEx">Debes crear por lo menos un ejercicio antes de comenzar una rutina!</h1>
+      <h1 v-show="noEx">¡Debe crear por lo menos un ejercicio antes de crear una rutina!</h1>
       <Title title-name="Crear Ejercicio" to="/myexercises"/>
       <div class="content">
         <div class="completeInfo">
