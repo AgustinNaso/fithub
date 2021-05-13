@@ -67,15 +67,18 @@ export default {
       started:false,
       currSet:1,
       countDown:30,
-      paused:false
+      paused:false,
+      timeOutSet:false,
     }
   },
   watch: {
     countDown: {
       handler(value) {
-        if (value > 0 && !this.paused) {
+        if (value > 0 && !this.paused && !this.timeOutSet) {
+          this.timeOutSet = true;
           setTimeout(() => {
             this.countDown--;
+            this.timeOutSet = false;
           }, 1000);
         }
         if (this.countDown === 0 && !this.paused && this.totalEx[this.currentIdx].duration > 0){
@@ -125,7 +128,11 @@ export default {
             this.totalSize+=1;
           }
         }
-
+        setTimeout(() => {
+          if (!this.paused) {
+            this.countDown--;
+          }
+        }, 1000);
       }
 
     }catch (e){
