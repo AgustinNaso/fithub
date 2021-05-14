@@ -2,7 +2,7 @@
   <div class="outer">
     <NavBar/>
     <div class="mainBg">
-      <Title title-name="Mi cuenta" to="./userProfile"/>
+      <Title title-name="Mi Cuenta" to="./userProfile"/>
       <div class="userContainer">
         <div class="userData">
           <div class="dataContainer">
