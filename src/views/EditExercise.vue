@@ -8,7 +8,7 @@
           <form @submit.prevent>
             <label for="name" class="textLabel">Nombre</label>
             <input id="name" class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
-            <p v-show="emptyName">¡El nombre no puede ser un valor vacío!</p>
+            <p v-show="emptyName">{{emptyNameMsg}}</p>
             <label for="desc" class="textLabel">Descripción</label>
             <textarea id="desc" class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
@@ -60,6 +60,7 @@ export default {
       img:"",
       actualImg:"https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png",
       imgId:-1,
+      emptyNameMsg: ""
     }
   },
   watch:{
@@ -78,6 +79,7 @@ export default {
       this.emptyName=false;
       if (isEmpty(this.nombre)){
         this.emptyName=true;
+        this.emptyNameMsg = "¡El nombre no puede ser un valor vacío!"
         return;
       }
 
@@ -92,10 +94,12 @@ export default {
           img = new Img(this.actualImg);
         }
         await ExerciseApi.changeImg(this.$route.params.id,this.imgId,img);
+        await router.push("/myexercises");
       }catch (e) {
-        await alert(e);
+        this.emptyName=true;
+        this.emptyNameMsg = "El nombre de este ejercicio ya existe!";
       }
-      await router.push("/myexercises");
+
     }
   },
   async created() {

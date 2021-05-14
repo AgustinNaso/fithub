@@ -2,14 +2,14 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="bodyContainer">
-      <h1 v-show="noEx">Debes crear por lo menos un ejercicio antes de comenzar una rutina!</h1>
+      <h1 v-show="this.returnAdd && this.returnAdd === '/createRoutine'">Debes crear por lo menos un ejercicio antes de comenzar una rutina!</h1>
       <Title title-name="Crear Ejercicio" to="/myexercises"/>
       <div class="content">
         <div class="completeInfo">
           <form @submit.prevent>
             <label for="name" class="textLabel">Nombre</label>
             <input id="name" class="textInput" type="text" name="name" v-model="nombre" maxlength="25">
-            <p v-show="emptyName">El nombre no puede ser un valor vacío!</p>
+            <p v-show="emptyName">{{emptyNameMsg}}</p>
             <label for="desc" class="textLabel">Descripción</label>
             <textarea id="desc" class="descBox" cols="30" rows="4" v-model="descripcion" maxlength="100"></textarea>
             <div class="checkbox">
@@ -52,7 +52,7 @@ export default {
   name: "CreateExercise",
   components: { Footer, NavBar, Title},
   props:{
-    noEx:Boolean,
+    returnAdd: String
   },
   data(){
     return{
@@ -62,7 +62,8 @@ export default {
       store: UserStore,
       emptyName:false,
       img:"",
-      actualImg:"https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png"
+      actualImg:"https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png",
+      emptyNameMsg:"",
     }
   },
   watch:{
@@ -80,6 +81,7 @@ export default {
       this.emptyName=false;
       if (isEmpty(this.nombre)){
         this.emptyName=true;
+        this.emptyNameMsg = "¡El nombre no puede ser un valor vacío! ";
         return;
       }
       const exercise = new Exercise(this.nombre,this.descripcion,this.actividad);
@@ -93,13 +95,14 @@ export default {
           img = new Img(this.actualImg);
         }
         await ExerciseApi.addImg(newEx.id,img);
+        if (this.returnAdd){
+          await router.push(this.returnAdd);
+        }else {
+          await router.push("/myexercises");
+        }
       }catch (e) {
-        await alert(e);
-      }
-      if (this.noEx){
-        await router.push("/createRoutine");
-      }else {
-        await router.push("/myexercises");
+        this.emptyName=true;
+        this.emptyNameMsg = "El nombre de este ejercicio ya existe!";
       }
     }
   },

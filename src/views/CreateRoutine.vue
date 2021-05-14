@@ -91,10 +91,12 @@ export default {
     }
     const ex = await ExerciseApi.getExercises();
     if (ex.totalCount === 0){
-      await router.push("/createExercise/noEx")
+      await router.push({ name: 'createExercise', params: {returnAdd: "/createRoutine" } })
     }
   }
 }
+
+
 </script>
 
 <style scoped>

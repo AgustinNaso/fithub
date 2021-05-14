@@ -28,6 +28,10 @@
               <option :value="false">Privada</option>
             </select>
           </div>
+          <div class="newExDiv">
+            <p class="newExTag">¿Te olvidaste de algun ejercicio?</p>
+            <router-link :to="{ name: 'createExercise', params: {returnAdd: `editRoutine/${this.$route.params.id}` } }"><button class="createEx">Crear Ejercicio</button></router-link>
+          </div>
         </div>
       </div>
 
@@ -410,6 +414,56 @@ export default {
 
 .visibility{
   margin-top: 10px;
+}
+
+.newExDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 25px;
+  height: 120px;
+  background-color: #e0e0e0;
+  padding: 5px;
+  border-radius: 12px;
+  border: #535353 3px solid;
+}
+
+.createEx{
+  color: #399c70;
+  margin-right: 10px;
+  text-align: center;
+  padding: 8px 35px 8px 35px;
+  background-color: inherit;
+  border: 4px solid #399c70;
+  border-radius: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  text-decoration: none;
+  outline: none;
+  transition: 0.3s ease-in-out;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.createEx:hover{
+  transition: 0.3s ease-in-out;
+  background-color: #dbefe7;
+  color: #156844;
+}
+
+@media (max-width: 1200px) {
+  .routineIntro{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dataDiv{
+    margin-left: 60px;
+  }
+
+
+
 }
 
 </style>
