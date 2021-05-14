@@ -12,7 +12,7 @@
     </div>
     <p class="description">{{description}}</p>
     <div class="ownerContainer">
-      <img class="ownerImg" :src="ownerImg" alt=""/>
+      <img class="ownerImg" :src="ownerImg" alt="Profile Image"/>
       <p class="owner">{{owner}}</p>
     </div>
     <div class="playContainer">
