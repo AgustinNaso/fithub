@@ -9,7 +9,7 @@
       <div class="executionContainer" v-show="started && !finished">
         <h2 v-if="totalEx[currentIdx]" :class="{cycleName:true, orange:totalEx[currentIdx].cycle.type ==='warmup',
          green:totalEx[currentIdx].cycle.type ==='exercise', blue:totalEx[currentIdx].cycle.type === 'cooldown'}">
-          Ciclo actual: {{totalEx[currentIdx].cycle.name}}<br> (Set {{totalEx[currentIdx].currSet}} de {{totalEx[currentIdx].totalSets}})</h2>
+          {{totalEx[currentIdx].cycle.name}} ({{totalEx[currentIdx].currSet}} set de {{totalEx[currentIdx].totalSets}})</h2>
         <div class="exerciseContainer">
           <img class="arrowBtn" src="../assets/arrowLeft.png" alt="arrowLeft" @click="findPrev"  v-show="currentIdx!==0">
           <ExerciseExecution
@@ -35,6 +35,10 @@
       <h1 class="ready" v-show="finished">¡Ya terminaste, {{store.getName().split(" ")[0]}}! ¡Excelente entrenamiento!</h1>
       <h1 class="readySub" v-show="finished">Es momento de que te tomes tu tan merecido descanso.</h1>
       <router-link :to="`/routine/${routineId}`"><button v-show="finished" class="startBtn">Volver</button></router-link>
+      <div class="progressCont" v-show="started && !finished">
+        <p class="progressLabel">Progreso de la rutina</p>
+        <div :style="`--width: ${((currentIdx+1)/totalEx.length)*100}`" class="progress" />
+      </div>
     </div>
     <Footer/>
   </div>
@@ -189,6 +193,7 @@ export default {
 </script>
 
 <style scoped>
+
 div{
   overflow-x: hidden
 }
@@ -334,7 +339,7 @@ a{
 }
 
 .cycleName{
-  font-size: 40px;
+  font-size: 32px;
   margin: 20px 0 -20px 0;
   text-align: center;
 }
@@ -350,5 +355,50 @@ a{
 
 .green{
   color: #399c70
+}
+
+.progress{
+  margin-top: 5px;
+  box-sizing: border-box;
+  position: relative;
+  background: #555555;
+  width: 100%;
+  height: 30px;
+  border-radius: 1em;
+}
+
+.progress::before{
+  box-sizing: border-box;
+  content: "";
+  font-size: 10px;
+  font-weight: 600;
+  position: absolute;
+  display: flex;
+  color: black;
+  align-items: center;
+  left: .5em;
+  top: .5em;
+  bottom: .5em;
+  width: calc(var(--width,0) * 1%);
+  min-width: 2rem;
+  max-width: calc(100% - 1em);
+  background: #31ae7a;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.progressCont{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  align-self: center;
+}
+
+.progressLabel{
+  margin-left: 15px;
+  font-weight: 700;
+  font-size: 16px;
 }
 </style>
