@@ -2,7 +2,7 @@
   <div class="titleContainer">
     <div class="createBox">
       <router-link :to="to" v-show="to!==''"><img class="backArrow" src="../../assets/chevron_left_grey.png" alt="backArrow"/></router-link>
-      <input type="text" class="titleInput" :value="modelValue" @input="$emit('input', $event.target.value)" :class="{withArrow:to}"/>
+      <input type="text" class="titleInput" :value="modelValue" @input="$emit('input', $event.target.value)" :class="{withArrow:to}" maxlength="25"/>
     </div>
     <div class="underline"/>
   </div>

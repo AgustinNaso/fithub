@@ -6,7 +6,7 @@
       <div class="routineIntro">
         <div class="titleDiv">
           <EditableTitle to="/myroutines" v-model="routineName" :model-value="routineName"/>
-          <textarea class="subtitle" v-model="description"></textarea>
+          <textarea class="subtitle" v-model="description" maxlength="100"></textarea>
         </div>
         <div class="dataDiv">
           <div class="difficulty">
