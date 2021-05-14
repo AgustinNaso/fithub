@@ -140,6 +140,43 @@ h3{
   border-bottom: white solid 3px;
   word-wrap: break-word;
 }
+
+/* width */
+::-webkit-scrollbar {
+  background-clip: content-box;
+  width: 10px;
+  height: 30px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-clip: content-box;
+  background: transparent;
+  height: 50px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7b7a7a;
+  border-radius: 10px;
+  height: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8b8b8b;
+}
+
+::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 45px;
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 45px;
+}
+
 .owner{
   margin-left: 10px;
   font-size: 20px;
