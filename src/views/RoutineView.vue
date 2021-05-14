@@ -91,6 +91,8 @@ export default {
         }
       })
 
+      this.isMine = this.isMine && this.store.isLoggedIn();
+
 
       if (!routine.isPublic && !this.isMine){
         await router.push("/permissionDenied");
@@ -201,6 +203,7 @@ export default {
   font-size: 24px;
   color: #606360;
   margin-left:60px;
+  word-break: break-word;
 }
 
 .mainSection{
