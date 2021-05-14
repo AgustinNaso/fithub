@@ -423,10 +423,14 @@ export default {
   justify-content: space-evenly;
   margin-top: 25px;
   height: 120px;
-  background-color: #e0e0e0;
-  padding: 5px;
+  background-color: white;
+  padding: 8px;
   border-radius: 12px;
-  border: #535353 3px solid;
+  border: #399c70 3px solid;
+}
+
+.newExTag{
+  color: #399c70;
 }
 
 .createEx{
