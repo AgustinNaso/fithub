@@ -9,15 +9,25 @@
           <textarea class="subtitle" v-model="description"></textarea>
         </div>
         <div class="dataDiv">
-          Dificultad:
-          <select class="difficultyInput" v-model="difficulty">
-            <option disabled value="" >Seleccione una dificultad</option>
-            <option value="rookie">Novato</option>
-            <option value="beginner">Principiante</option>
-            <option value="intermediate">Intermedio</option>
-            <option value="advanced">Avanzado</option>
-            <option value="expert">Experto</option>
-          </select>
+          <div class="difficulty">
+            Dificultad:
+            <select class="difficultyInput" v-model="difficulty">
+              <option disabled value="" >Seleccione una dificultad</option>
+              <option value="rookie">Novato</option>
+              <option value="beginner">Principiante</option>
+              <option value="intermediate">Intermedio</option>
+              <option value="advanced">Avanzado</option>
+              <option value="expert">Experto</option>
+            </select>
+          </div>
+          <div class="visibility">
+            Visibilidad:
+            <select class="difficultyInput" v-model="isPublic">
+              <option disabled value="" >Seleccione la visibilidad</option>
+              <option :value="true">Pública</option>
+              <option :value="false">Privada</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -296,6 +306,8 @@ export default {
   margin-right: 20px;
   margin-top: 20px;
   font-weight:700;
+  display: flex;
+  flex-direction: column;
 }
 
 .finalSection{
@@ -396,6 +408,8 @@ export default {
   border: #31ae7a 2px solid;
 }
 
-
+.visibility{
+  margin-top: 10px;
+}
 
 </style>

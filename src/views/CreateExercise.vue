@@ -2,7 +2,7 @@
   <div class="mainContainer">
     <NavBar/>
     <div class="bodyContainer">
-      <h1 v-show="noEx">Debes crear por lo menos un ejercicio antes de comenzar una rutina!</h1>
+      <h1 v-show="noEx">¡Debe crear por lo menos un ejercicio antes de crear una rutina!</h1>
       <Title title-name="Crear Ejercicio" to="/myexercises"/>
       <div class="content">
         <div class="completeInfo">
@@ -27,7 +27,7 @@
         </div>
         <div class="imgDiv">
           <img class="inputImg" :src="actualImg" alt="activityTracker" @error="actualImg='https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png'"/>
-          <label for="img" class="inputText">¡Incluye una imágen para tu ejercicio!</label>
+          <label for="img" class="inputText">¡Incluye una imagen para tu ejercicio!</label>
           <div class="inputContainer">
             <input id="img" class="inputForImg" type="text" v-model="img">
             <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
@@ -275,7 +275,7 @@ p{
   color: #2e7153;
   font-size: 16px;
   font-weight: 700;
-  margin-right: 20px;
+  margin-right: 45px;
   outline: none;
   text-align: center;
 }

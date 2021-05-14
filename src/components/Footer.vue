@@ -1,5 +1,5 @@
 <template>
-  <footer>© {{new Date().getFullYear()}} FitHub - All rights reserved.</footer>
+  <footer>© {{new Date().getFullYear()}} Fithub - Todos los derechos reservados.</footer>
 </template>
 
 <script>
