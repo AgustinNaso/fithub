@@ -29,7 +29,7 @@
             </select>
           </div>
           <div class="newExDiv">
-            <p class="newExTag">¿Te olvidaste de algun ejercicio?</p>
+            <p class="newExTag">¿Te olvidaste de algún ejercicio?</p>
             <router-link :to="{ name: 'createExercise', params: {returnAdd: `editRoutine/${this.$route.params.id}` } }"><button class="createEx">Crear Ejercicio</button></router-link>
           </div>
         </div>

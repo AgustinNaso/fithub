@@ -10,6 +10,10 @@
         </div>
         <div class="dataDiv">
           Dificultad: {{ difficultyToSpanish(difficulty)}}
+          <div class="visibility" v-show="!isPublic">
+            Rutina Privada
+            <img class="lock" src="../assets/lock_black.svg" alt="Privada">
+          </div>
         </div>
       </div>
       <router-link :to="`/editRoutine/${routineId}`"><button class="editRoutine" v-show="isMine">Editar Rutina</button></router-link>
@@ -365,6 +369,17 @@ export default {
 .hrMine{
   border-top: #aeb3b1 3px dotted ;
   margin-bottom: 20px;
+}
+
+.lock{
+  height: 25px;
+  width: auto;
+}
+
+.visibility{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
 }
 
 </style>
