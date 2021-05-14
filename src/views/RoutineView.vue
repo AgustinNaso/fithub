@@ -87,6 +87,8 @@ export default {
         }
       })
 
+      this.isMine = this.isMine && this.store.isLoggedIn();
+
 
       if (!routine.isPublic && !this.isMine){
         await router.push("/permissionDenied");
