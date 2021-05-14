@@ -10,7 +10,7 @@ const filterTypes = [
     {filterName:"Puntuación",
         filterActualName: "averageRating",
         filterValues: [1,2,3,4,5],
-        displayValues: ["1 estrella","2 estrellas","3 estrellas","4 estrellas","5 estrellas"]},
+        displayValues: ["1 Estrella","2 Estrellas","3 Estrellas","4 Estrellas","5 Estrellas"]},
 ]
 
 export default filterTypes
