@@ -109,7 +109,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 h3{
   flex: 1;
@@ -247,7 +247,7 @@ h3{
   color:white;
   font-size:24px;
   display: flex;
-  width: 100%;
+  width: 70%;
   justify-content: space-evenly;
   align-items:center;
   margin-top:20px
