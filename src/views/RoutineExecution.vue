@@ -3,7 +3,7 @@
     <NavBar/>
     <div class="mainBg">
       <Title :to="`/routine/${routineId}`" :title-name="routineName"></Title>
-      <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, ¿Estás listo para comenzar tu entrenamiento?</h1>
+      <h1 class="ready" v-show="!started && !finished">{{store.getName().split(" ")[0]}}, tu entrenamiento esta a punto de comenzar.</h1>
       <h1 class="readySub" v-show="!started && !finished">¡Recordá siempre mantenerte hidratado!</h1>
       <button @click="start" v-show="!started && !finished" class="startBtn">Comenzar</button>
       <div class="executionContainer" v-show="started && !finished">
