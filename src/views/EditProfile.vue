@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     async saveEdit(){
-      if (this.userData.avatarUrl === "" || this.userData.avatarUrl.match(/\.(jpeg|jpg|gif|png)$/) === null){
+      if (this.userData.avatarUrl === "" || this.userData.avatarUrl.match(/\.(jpeg|jpg|gif|png|svg)$/) === null){
         this.userData.avatarUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTap79kn13Sgurfpg09M7HmNKOeD-KXh2c-qsaJ15lI3K4-LlZM0SQxJKocKembu_N1tEA&usqp=CAU"
       }
       let editCred;

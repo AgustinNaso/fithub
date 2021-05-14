@@ -64,7 +64,7 @@ export default {
   },
   watch:{
     img: function (){
-      if (this.img !== ""){
+      if (this.img !== ""  && this.img.match(/\.(jpeg|jpg|gif|png|svg)$/) != null){
         this.actualImg = this.img;
       }
       else {
