@@ -26,7 +26,7 @@
         </div>
         <div class="imgDiv">
           <img class="inputImg" :src="actualImg" alt="activityTracker" @error="actualImg='https://static.vecteezy.com/system/resources/previews/001/198/677/original/camera-png.png'"/>
-          <label for="img" class="inputText">¡Incluye una imágen para tu ejercicio!</label>
+          <label for="img" class="inputText">¡Incluye una imagen para tu ejercicio!</label>
           <div class="inputContainer">
             <input id="img" class="inputForImg" type="text" v-model="img">
             <img class="editImage" src="../assets/edit_picture.svg" alt="edit image">
@@ -65,7 +65,7 @@ export default {
   },
   watch:{
     img: function (){
-      if (this.img !== ""){
+      if (this.img !== ""  && this.img.match(/\.(jpeg|jpg|gif|png|svg)$/) != null){
         this.actualImg = this.img;
       }
       else {
@@ -287,7 +287,7 @@ p{
   color: #2e7153;
   font-size: 16px;
   font-weight: 700;
-  margin-right: 20px;
+  margin-right: 45px;
   outline: none;
   text-align: center;
 }

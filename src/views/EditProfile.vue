@@ -25,7 +25,7 @@
           <div class="inputWrap">
             <div class="labelWrap">
               <img class="editImage" src="../assets/edit_picture.svg" alt="user image">
-              <label class="labelForImg" for="image" style="color: black;">Imagen del usario</label>
+              <label class="labelForImg" for="image" style="color: black;font-size: 16px;font-weight: 700;">¡Incluya una foto de perfil!</label>
             </div>
             <input id="image" class="imageInput" v-model="userData.avatarUrl">
           </div>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     async saveEdit(){
-      if (this.userData.avatarUrl === "" || this.userData.avatarUrl.match(/\.(jpeg|jpg|gif|png)$/) === null){
+      if (this.userData.avatarUrl === "" || this.userData.avatarUrl.match(/\.(jpeg|jpg|gif|png|svg)$/) === null){
         this.userData.avatarUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTap79kn13Sgurfpg09M7HmNKOeD-KXh2c-qsaJ15lI3K4-LlZM0SQxJKocKembu_N1tEA&usqp=CAU"
       }
       let editCred;
@@ -238,17 +238,22 @@ export default {
 
 .labelWrap{
   display: flex;
-  width: 50%;
-  justify-content: space-evenly;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 10px;
   align-items: center;
 }
 
 .inputWrap{
   display: flex;
-  flex-direction: column;
   width: 100%;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+}
+
+.labelForImg{
+  margin-left: 5px;
 }
 @media (max-width: 1200px) {
 
@@ -289,6 +294,7 @@ export default {
 
   .inputWrap{
     display: flex;
+    width: 85%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -303,6 +309,7 @@ export default {
 
   .labelForImg{
     margin-top: 20px;
+    margin-left: 5px;
   }
 
 }
