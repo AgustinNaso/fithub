@@ -23,11 +23,11 @@
             <div class="checkbox">
               <div class="pBox">
                 <input class="checkBtn" type="radio" id="public" value="public" v-model="visibilidad">
-                <label for="public">Pública</label>
+                <label style="font-size: 20px" for="public">Pública</label>
               </div>
               <div class="pBox">
                 <input class="checkBtn" type="radio" id="private" value="private" v-model="visibilidad">
-                <label for="private">Privada</label>
+                <label style="font-size: 20px" for="private">Privada</label>
               </div>
             </div>
             <div  class="clicker" @click="createRoutine"><button class="createbtn">Crear Rutina</button></div>
