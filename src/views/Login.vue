@@ -7,7 +7,7 @@
         <Input  v-model="name" type="text" name="email" label="Email*" :error-msg="nameErrMsg"/>
         <Input  v-model="password" type="password" name="password" label="Contraseña*" :error-msg="passErrMsg"/>
         <button class="clicker" @click="logIn">Ingresar</button>
-        <AltLink to="/register" text="No tienes una cuenta? Registrarte"/>
+        <AltLink to="/register" text="¿No tienes una cuenta? Registrate"/>
       </form>
     </div>
     <Footer/>

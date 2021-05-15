@@ -3,7 +3,7 @@
     <NavBar/>
     <div class="mainBg">
       <div class="errorMsg">
-        <h1>Enhorabuena!</h1>
+        <h1>¡Enhorabuena!</h1>
         <div class="verified" v-show="verified">Su cuenta ha sido verificada correctamente</div>
       </div>
       <img src="../assets/undraw_done.svg" alt="Cuenta verificada">

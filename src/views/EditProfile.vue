@@ -7,12 +7,12 @@
         <div class="userData">
           <div class="dataContainer">
             <label for="fName" class="dataType">Nombre</label>
-            <input id="fName" v-model="userData.firstName" class="dataInfo" type="text">
+            <input id="fName" v-model="userData.firstName" class="dataInfo" type="text" maxlength="12">
           </div>
           <div class="infoUnderline"/>
           <div class="dataContainer">
             <label for="lName" class="dataType">Apellido</label>
-            <input id="lName" v-model="userData.lastName" class="dataInfo" type="text">
+            <input id="lName" v-model="userData.lastName" class="dataInfo" type="text" maxlength="12">
           </div>
           <div class="infoUnderline"/>
           <div class="buttonContainer">

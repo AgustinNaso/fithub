@@ -3,10 +3,10 @@
     <NavBar/>
     <div class="mainBg">
       <div class="errorMsg">
-        <h1>Whoops!</h1>
-        <p>Tuvimos problemas encontrando la pagina que buscabas</p>
+        <h1>¡Whoops!</h1>
+        <p>Tuvimos problemas encontrando la página que buscabas</p>
       </div>
-      <img src="../assets/not_found.svg" alt="Pagina no encontrada">
+      <img src="../assets/not_found.svg" alt="Página no encontrada">
     </div>
     <Footer/>
   </div>

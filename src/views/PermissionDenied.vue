@@ -3,7 +3,7 @@
     <NavBar/>
     <div class="mainBg">
       <div class="errorMsg">
-        <h1>Whoops!</h1>
+        <h1>¡Whoops!</h1>
         <p>No tiene los permisos requeridos para visualizar esta página</p>
       </div>
       <img src="../assets/undraw_cancel_u1it.svg" alt="No dispone de los permisos requeridos">

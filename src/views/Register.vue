@@ -2,18 +2,18 @@
   <div class="outer">
     <NavBar logging></NavBar>
     <div class="loginBg">
-      <h2 v-show="success">Registro Exitoso! Te mandamos un mail para que confirmes tu cuenta</h2>
+      <h2 v-show="success">¡Registro exitoso! Te mandamos un email para que confirmes tu cuenta</h2>
       <h1 v-show="!loading">Registrarse</h1>
       <form @submit.prevent v-show="!loading">
         <div class="nameBox">
-          <Input v-model="name" type="text" name="name" label="Nombre*" small :error-msg="nameErrMsg"/>
-          <Input v-model="surname" type="text" name="surname" label="Apellido*" small :error-msg="surNameErrMsg"/>
+          <Input v-model="name" type="text" name="name" label="Nombre*" small :error-msg="nameErrMsg" maxlength="12"/>
+          <Input v-model="surname" type="text" name="surname" label="Apellido*" small :error-msg="surNameErrMsg" maxlength="12"/>
         </div>
         <Input v-model="email" type="email" name="email" label="Email*" :error-msg="emailErrMsg"/>
         <Input v-model="password" type="password" name="password" label="Contraseña*" :error-msg="passErrMsg"/>
-        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confirmar contraseña*" :error-msg="confPassErrMsg"/>
+        <Input v-model="passwordConf"  type="password" name="passwordConf" label="Confirmar Contraseña*" :error-msg="confPassErrMsg"/>
         <div  class="clicker" @click="register"><FormBtn text="Registrarse"/></div>
-        <AltLink to="/login" text="Ya tienes una cuenta? Ingresar"/>
+        <AltLink to="/login" text="¿Ya tienes una cuenta? Ingresar"/>
       </form>
       <h3 v-show="loading">Evaluando tu registro...</h3>
     </div>
