@@ -1,5 +1,5 @@
 <template>
-<div :class="{inputContainer: true, small: small}">
+  <div :class="{inputContainer: true, small: small}">
   <label :for="name" :class="{light:light}">{{label}}</label>
   <input :id="name" :type="type" :name="name" :class="{light:light, error:errorMsg!==''}"
          :value="modelValue"
