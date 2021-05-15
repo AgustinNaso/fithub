@@ -41,6 +41,7 @@ export default {
   display: flex;
   align-items: center;
   position: relative;
+  max-width: 300px;
 }
 .userImg{
   border-radius: 50%;

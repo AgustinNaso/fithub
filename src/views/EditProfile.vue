@@ -7,7 +7,7 @@
         <div class="userData">
           <div class="dataContainer">
             <label for="fName" class="dataType">Nombre</label>
-            <input id="fName" v-model="userData.firstName" class="dataInfo" type="text" maxlength="12">
+            <input id="fName" v-model="userData.firstName" class="dataInfo" type="text" maxlength="15">
           </div>
           <div class="infoUnderline"/>
           <div class="dataContainer">
